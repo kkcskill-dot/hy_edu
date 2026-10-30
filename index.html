@@ -5,69 +5,92 @@
   <title>2026 세브란스 간호사 3급 승진고시 공식 학습 센터</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  <!-- 단일 표준 Vue 테마만 사용 (themeable과 충돌 제거) -->
+  
+  <!-- Pretendard 공식 CDN (Full weights) -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+  
+  <!-- Docsify Vue Base -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  
   <style>
-    /* --------------------------------------------------
-       2026 YUHS Professional LMS Design System
-       - 완벽한 중앙 정렬 (화면 쏠림 해결)
-       - 글자 색상 대비 100% 가독성 보장
-       - 단어 단위 줄바꿈 (word-break: keep-all)
-    -------------------------------------------------- */
+    /* ==================================================
+       Apple Store Inspired Design System (apple.com/store)
+       - Primary: #1d1d1f (Apple Black)
+       - Secondary: #6e6e73 / #86868b (Apple Slate Gray)
+       - Accent: #0071e3 (Apple Signature Blue)
+       - Background: #f5f5f7 (Apple Light Canvas)
+       - Font: Pretendard
+       - Word-break: keep-all (한글 단어 단위 줄바꿈)
+    ================================================== */
     :root {
-      --theme-color: #003876;
+      --theme-color: #0071e3;
+      --apple-bg: #f5f5f7;
+      --apple-card-bg: #ffffff;
+      --apple-text: #1d1d1f;
+      --apple-subtext: #6e6e73;
+      --apple-border: rgba(0, 0, 0, 0.08);
+      --apple-blue: #0071e3;
+      --apple-blue-hover: #0077ed;
+      --apple-radius: 20px;
     }
 
-    /* 전역 한국어 단어 단위 줄바꿈: "안녕하/세요" 방지 */
+    /* 전역 Pretendard 폰트 및 단어 단위 줄바꿈 */
     *, *::before, *::after {
       box-sizing: border-box;
+      font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif !important;
       word-break: keep-all !important;
       overflow-wrap: break-word !important;
+      letter-spacing: -0.025em;
     }
 
     html, body {
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      letter-spacing: -0.025em;
-      background-color: #f8fafc;
-      color: #1f2937;
-      line-height: 1.8;
+      background-color: var(--apple-bg) !important;
+      color: var(--apple-text) !important;
+      line-height: 1.7;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
     }
 
     /* ==================================================
-       1. Top Global Navigation Bar (상단 고정 헤더)
+       1. Apple Frosted Glass Top Navigation Bar
     ================================================== */
     .global-header {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      height: 54px;
-      background: #003876;
-      color: #ffffff;
+      height: 48px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--apple-border);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 24px;
+      padding: 0 28px;
       z-index: 999;
-      box-shadow: 0 2px 10px rgba(0, 40, 85, 0.2);
     }
     .header-logo {
       display: flex;
       align-items: center;
-      gap: 10px;
-      font-weight: 800;
-      font-size: 16px;
-      color: #ffffff !important;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--apple-text) !important;
       text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .header-logo:hover {
+      opacity: 0.7;
     }
     .header-badge {
-      background: #fde047;
-      color: #002855;
+      background: rgba(0, 113, 227, 0.1);
+      color: var(--apple-blue);
       font-size: 11px;
-      font-weight: 800;
-      padding: 3px 8px;
+      font-weight: 700;
+      padding: 2px 8px;
       border-radius: 12px;
       white-space: nowrap;
     }
@@ -78,361 +101,504 @@
       gap: 12px;
     }
     .progress-pill {
-      background: rgba(255, 255, 255, 0.16);
-      color: #ffffff;
-      padding: 5px 14px;
-      border-radius: 16px;
+      background: rgba(0, 0, 0, 0.05);
+      color: var(--apple-subtext);
+      padding: 4px 12px;
+      border-radius: 14px;
       font-weight: 600;
       white-space: nowrap;
+      font-size: 12px;
     }
 
     /* ==================================================
-       2. Sidebar Styling (좌측 목차)
+       2. Apple Style Minimal Sidebar
     ================================================== */
     .sidebar {
-      top: 54px !important;
-      height: calc(100vh - 54px) !important;
-      background-color: #ffffff !important;
-      border-right: 1px solid #e2e8f0 !important;
-      width: 320px !important;
-      padding: 20px 14px 60px !important;
-      box-shadow: 2px 0 6px rgba(0,0,0,0.02);
+      top: 48px !important;
+      height: calc(100vh - 48px) !important;
+      background-color: var(--apple-bg) !important;
+      border-right: 1px solid var(--apple-border) !important;
+      width: 300px !important;
+      padding: 24px 16px 80px !important;
     }
     .app-name-link {
-      font-size: 17px !important;
-      font-weight: 800 !important;
-      color: #003876 !important;
-      padding: 10px 0 !important;
+      font-size: 16px !important;
+      font-weight: 700 !important;
+      color: var(--apple-text) !important;
+      padding: 8px 0 16px !important;
       display: block !important;
       text-align: center;
+      border-bottom: 1px solid var(--apple-border);
+      margin-bottom: 12px !important;
     }
-    .sidebar-nav ul {
+    .search {
+      margin-bottom: 16px !important;
+    }
+    .search input {
+      background: #ffffff !important;
+      border: 1px solid var(--apple-border) !important;
+      border-radius: 10px !important;
+      padding: 8px 12px !important;
+      font-size: 13.5px !important;
+      color: var(--apple-text) !important;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02) !important;
+    }
+    .search input:focus {
+      border-color: var(--apple-blue) !important;
+      box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15) !important;
+    }
+    .sidebar-nav > ul {
       padding-left: 0 !important;
       margin: 0 !important;
     }
+    .sidebar-nav ul ul {
+      padding-left: 14px !important;
+      margin: 4px 0 8px !important;
+      border-left: 1.5px solid rgba(0, 0, 0, 0.08) !important;
+    }
+    .sidebar-nav ul ul li {
+      font-size: 12.5px !important;
+      margin: 2px 0 !important;
+    }
+    .sidebar-nav ul ul a {
+      padding: 5px 8px !important;
+      color: var(--apple-subtext) !important;
+      font-size: 12.5px !important;
+      font-weight: 500 !important;
+    }
+    .sidebar-nav ul ul a:hover {
+      color: var(--apple-blue) !important;
+      background: rgba(0, 113, 227, 0.05) !important;
+    }
     .sidebar-nav li {
-      margin: 4px 0 !important;
-      font-size: 14px !important;
-      line-height: 1.5 !important;
+      margin: 3px 0 !important;
+      font-size: 13.5px !important;
+      line-height: 1.45 !important;
     }
     .sidebar-nav strong {
       display: block !important;
-      margin-top: 22px !important;
+      margin-top: 24px !important;
       margin-bottom: 8px !important;
-      font-size: 12px !important;
-      color: #003876 !important;
-      font-weight: 800 !important;
-      letter-spacing: 0.02em !important;
-      padding-left: 8px !important;
-      border-left: 3px solid #003876;
+      font-size: 11px !important;
+      color: var(--apple-subtext) !important;
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.05em !important;
+      padding-left: 10px !important;
     }
     .sidebar-nav a {
-      border-radius: 6px !important;
+      border-radius: 10px !important;
       padding: 8px 12px !important;
-      transition: all 0.15s ease !important;
-      color: #334155 !important;
+      transition: all 0.2s cubic-bezier(0, 0, 0.5, 1) !important;
+      color: #333336 !important;
       display: block !important;
       text-decoration: none !important;
+      font-weight: 500 !important;
     }
     .sidebar-nav a:hover {
-      background-color: #f1f5f9 !important;
-      color: #003876 !important;
-      font-weight: 600 !important;
+      background-color: rgba(0, 0, 0, 0.04) !important;
+      color: var(--apple-blue) !important;
     }
     .sidebar-nav li.active > a {
-      background-color: #e0ecf8 !important;
-      color: #003876 !important;
-      font-weight: 800 !important;
-      border-left: 3px solid #003876 !important;
+      background-color: #ffffff !important;
+      color: var(--apple-blue) !important;
+      font-weight: 700 !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+    }
+
+    /* Sidebar Toggle (Hidden on Desktop, Floating on Mobile) */
+    .sidebar-toggle {
+      display: none !important;
     }
 
     /* ==================================================
-       3. Main Content Layout (★ 완벽한 중앙 정렬)
+       3. Main Content Layout (Centered Apple Canvas)
     ================================================== */
     .content {
-      top: 54px !important;
-      left: 320px !important;
+      top: 48px !important;
+      left: 300px !important;
       right: 0 !important;
       position: absolute !important;
-      min-height: calc(100vh - 54px) !important;
-      background-color: #f8fafc !important;
-      padding: 30px 40px 100px !important;
+      min-height: calc(100vh - 48px) !important;
+      background-color: var(--apple-bg) !important;
+      padding: 36px 48px 120px !important;
     }
 
-    /* 컨텐츠 박스를 화면 중앙에 배치 */
+    /* 중앙 카드 컨테이너 */
     .markdown-section {
-      max-width: 960px !important;
+      max-width: 980px !important;
       margin: 0 auto !important;
-      padding: 36px 44px !important;
-      background: #ffffff !important;
-      border-radius: 14px !important;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
-      border: 1px solid #e2e8f0 !important;
+      padding: 48px 56px !important;
+      background: var(--apple-card-bg) !important;
+      border-radius: 24px !important;
+      box-shadow: 0 4px 28px rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid var(--apple-border) !important;
+    }
+
+    /* Typography: Apple Store Style */
+    .markdown-section h1 {
+      font-size: 32px !important;
+      font-weight: 700 !important;
+      color: var(--apple-text) !important;
+      letter-spacing: -0.03em !important;
+      margin-top: 10px !important;
+      margin-bottom: 24px !important;
+      border-bottom: 1px solid var(--apple-border) !important;
+      padding-bottom: 16px !important;
+      line-height: 1.25 !important;
+    }
+    .markdown-section h2 {
+      font-size: 24px !important;
+      font-weight: 700 !important;
+      color: var(--apple-text) !important;
+      letter-spacing: -0.025em !important;
+      margin-top: 52px !important;
+      margin-bottom: 20px !important;
+      border-bottom: 1px solid var(--apple-border) !important;
+      padding-bottom: 10px !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+    .markdown-section h3 {
+      font-size: 19px !important;
+      font-weight: 700 !important;
+      color: var(--apple-text) !important;
+      letter-spacing: -0.02em !important;
+      margin-top: 36px !important;
+      margin-bottom: 14px !important;
+    }
+    .markdown-section p, 
+    .markdown-section li {
+      font-size: 16px !important;
+      line-height: 1.8 !important;
+      color: #333336 !important;
     }
 
     /* ==================================================
-       4. Text Visibility Fix (★ 글씨 색상 100% 해결)
+       4. Apple Store Hero Banner
     ================================================== */
-    /* 강의 상단 히어로 박스 */
+    .apple-hero {
+      padding: 36px 0 24px;
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--apple-border);
+    }
+    .apple-hero-eyebrow {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--apple-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 10px;
+    }
+    .apple-hero-title {
+      font-size: 38px;
+      font-weight: 700;
+      color: var(--apple-text);
+      letter-spacing: -0.035em;
+      line-height: 1.2;
+      margin: 0 0 14px 0;
+    }
+    .apple-hero-title span {
+      color: var(--apple-subtext);
+    }
+    .apple-hero-desc {
+      font-size: 17px;
+      color: var(--apple-subtext);
+      line-height: 1.6;
+      margin: 0;
+      max-width: 820px;
+    }
+
+    /* Lecture Header Card (각 강의 상단 박스) */
     .lecture-header-box {
-      background: linear-gradient(135deg, #002855 0%, #004b99 100%) !important;
-      color: #ffffff !important;
-      padding: 28px 32px !important;
-      border-radius: 12px !important;
-      margin-bottom: 32px !important;
-      box-shadow: 0 6px 18px rgba(0, 40, 85, 0.16) !important;
+      background: #fbfbfd !important;
+      border: 1px solid var(--apple-border) !important;
+      color: var(--apple-text) !important;
+      padding: 32px 36px !important;
+      border-radius: var(--apple-radius) !important;
+      margin-bottom: 36px !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02) !important;
     }
     .lecture-header-box * {
-      color: #ffffff !important; /* 모든 자식 요소 흰색 강제 */
+      color: var(--apple-text) !important;
     }
     .lecture-header-box .lecture-badge {
       display: inline-block !important;
-      background: #fde047 !important;
-      color: #002855 !important;
+      background: rgba(0, 113, 227, 0.08) !important;
+      color: var(--apple-blue) !important;
       font-size: 12px !important;
-      font-weight: 800 !important;
+      font-weight: 700 !important;
       padding: 4px 10px !important;
-      border-radius: 6px !important;
+      border-radius: 8px !important;
       margin-bottom: 12px !important;
     }
     .lecture-header-box h2 {
-      color: #ffffff !important;
+      color: var(--apple-text) !important;
       border: none !important;
-      margin: 0 0 12px 0 !important;
+      margin: 0 0 10px 0 !important;
       padding: 0 !important;
-      font-size: 24px !important;
-      font-weight: 800 !important;
+      font-size: 26px !important;
+      font-weight: 700 !important;
+      letter-spacing: -0.03em !important;
     }
     .lecture-header-box p {
-      color: #f1f5f9 !important;
-      font-size: 15px !important;
+      color: var(--apple-subtext) !important;
+      font-size: 15.5px !important;
       margin: 0 !important;
       line-height: 1.65 !important;
     }
     .lecture-header-box strong {
-      color: #fde047 !important; /* 강조 볼드는 선명한 골드 옐로우 */
-      font-weight: 800 !important;
+      color: var(--apple-blue) !important;
+      font-weight: 700 !important;
     }
 
     /* ==================================================
-       5. Step Roadmap Cards (아스키 아트 박스 대체)
+       5. Apple Store Product Cards (Course Grid)
     ================================================== */
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 22px;
+      margin: 28px 0 50px;
+    }
+    .course-card {
+      background: #fbfbfd !important;
+      border: 1px solid var(--apple-border) !important;
+      border-radius: var(--apple-radius) !important;
+      padding: 28px 24px 22px !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02) !important;
+      transition: all 0.3s cubic-bezier(0, 0, 0.5, 1) !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: space-between !important;
+      text-decoration: none !important;
+      color: inherit !important;
+    }
+    .course-card:hover {
+      transform: translateY(-4px) scale(1.01) !important;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08) !important;
+      background: #ffffff !important;
+      border-color: rgba(0, 113, 227, 0.3) !important;
+    }
+    .course-card .card-tag {
+      font-size: 11.5px !important;
+      font-weight: 700 !important;
+      color: var(--apple-blue) !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.04em !important;
+      display: inline-block !important;
+      margin-bottom: 12px !important;
+    }
+    .course-card h4 {
+      font-size: 18px !important;
+      font-weight: 700 !important;
+      color: var(--apple-text) !important;
+      margin: 0 0 10px 0 !important;
+      line-height: 1.35 !important;
+      letter-spacing: -0.025em !important;
+    }
+    .course-card p {
+      font-size: 14px !important;
+      color: var(--apple-subtext) !important;
+      margin: 0 0 20px 0 !important;
+      line-height: 1.6 !important;
+    }
+    .course-card .card-footer {
+      font-size: 13px !important;
+      font-weight: 600 !important;
+      color: var(--apple-blue) !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      border-top: 1px solid var(--apple-border) !important;
+      padding-top: 14px !important;
+      margin-top: auto !important;
+    }
+    .course-card:hover .card-footer {
+      color: var(--apple-blue-hover) !important;
+    }
+
+    /* Apple Step Roadmap Cards */
     .step-container {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      margin: 24px 0 36px;
+      gap: 16px;
+      margin: 28px 0 44px;
       flex-wrap: wrap;
     }
     .step-card {
       flex: 1;
       min-width: 220px;
-      background: #ffffff;
-      border: 1.5px solid #cbd5e1;
-      border-top: 4px solid #003876;
-      border-radius: 10px;
-      padding: 18px 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      background: #fbfbfd;
+      border: 1px solid var(--apple-border);
+      border-radius: var(--apple-radius);
+      padding: 24px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.02);
       text-align: center;
+      transition: all 0.3s;
+    }
+    .step-card:hover {
+      background: #ffffff;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
     }
     .step-num {
       display: inline-block;
-      background: #e0ecf8;
-      color: #003876;
+      background: rgba(0, 113, 227, 0.08);
+      color: var(--apple-blue);
       font-size: 11.5px;
-      font-weight: 800;
+      font-weight: 700;
       padding: 3px 10px;
       border-radius: 12px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
     .step-title {
-      font-size: 16px;
+      font-size: 16.5px;
       font-weight: 700;
-      color: #0f172a;
+      color: var(--apple-text);
       margin-bottom: 6px;
+      letter-spacing: -0.02em;
     }
     .step-desc {
-      font-size: 13px;
-      color: #64748b;
-      line-height: 1.4;
+      font-size: 13.5px;
+      color: var(--apple-subtext);
+      line-height: 1.5;
     }
     .step-arrow {
-      font-size: 20px;
-      color: #94a3b8;
-      font-weight: 800;
+      font-size: 18px;
+      color: #b0b0b5;
+      font-weight: 700;
     }
 
     /* ==================================================
-       6. Course Cards Grid (인터랙티브 과목 카드)
-    ================================================== */
-    .course-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
-      margin: 24px 0 45px;
-    }
-    .course-card {
-      background: #ffffff;
-      border: 1.5px solid #e2e8f0;
-      border-top: 4px solid #003876;
-      border-radius: 12px;
-      padding: 22px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-      transition: all 0.2s ease;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      text-decoration: none !important;
-      color: inherit !important;
-    }
-    .course-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 24px rgba(0, 56, 118, 0.12);
-      border-color: #003876;
-    }
-    .course-card .card-tag {
-      font-size: 11.5px;
-      font-weight: 800;
-      color: #003876;
-      background: #eef4fb;
-      padding: 4px 9px;
-      border-radius: 4px;
-      display: inline-block;
-      margin-bottom: 12px;
-    }
-    .course-card h4 {
-      font-size: 17px;
-      font-weight: 700;
-      color: #0f172a;
-      margin: 0 0 10px 0;
-      line-height: 1.4;
-    }
-    .course-card p {
-      font-size: 13.5px;
-      color: #475569;
-      margin: 0 0 18px 0;
-      line-height: 1.6;
-    }
-    .course-card .card-footer {
-      font-size: 12.5px;
-      font-weight: 700;
-      color: #003876;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-top: 1px solid #f1f5f9;
-      padding-top: 12px;
-      margin-top: auto;
-    }
-
-    /* ==================================================
-       7. Tables & Callouts
+       6. Apple Style Data Tables & Elements
     ================================================== */
     table {
       width: 100% !important;
       border-collapse: separate !important;
       border-spacing: 0 !important;
-      margin: 24px 0 !important;
-      border: 1px solid #cbd5e1 !important;
-      border-radius: 8px !important;
+      margin: 28px 0 !important;
+      border: 1px solid var(--apple-border) !important;
+      border-radius: 14px !important;
       overflow: hidden !important;
       font-size: 14.5px !important;
+      background: #ffffff !important;
     }
     th {
-      background: #f1f5f9 !important;
-      color: #002855 !important;
+      background: #f5f5f7 !important;
+      color: var(--apple-text) !important;
       font-weight: 700 !important;
       text-align: center !important;
-      padding: 12px 14px !important;
-      border-bottom: 1.5px solid #cbd5e1 !important;
+      padding: 14px 16px !important;
+      border-bottom: 1px solid var(--apple-border) !important;
     }
     td {
-      padding: 11px 14px !important;
-      border-bottom: 1px solid #e2e8f0 !important;
-      line-height: 1.6 !important;
+      padding: 12px 16px !important;
+      border-bottom: 1px solid var(--apple-border) !important;
+      line-height: 1.65 !important;
+      color: #333336 !important;
     }
     tr:last-child td {
       border-bottom: none !important;
     }
-    tr:nth-child(even) td {
-      background-color: #f8fafc !important;
-    }
     tr:hover td {
-      background-color: #f1f5f9 !important;
+      background-color: #fbfbfd !important;
     }
 
     blockquote {
-      background: #f8fafc !important;
-      border-left: 4.5px solid #003876 !important;
-      padding: 14px 20px !important;
-      margin: 20px 0 !important;
-      border-radius: 0 8px 8px 0 !important;
-      color: #334155 !important;
+      background: #f5f5f7 !important;
+      border-left: 4px solid var(--apple-blue) !important;
+      padding: 16px 22px !important;
+      margin: 24px 0 !important;
+      border-radius: 0 12px 12px 0 !important;
+      color: #333336 !important;
     }
 
     /* Interactive Quiz Details */
     details {
-      background: #f8fafc !important;
-      border: 1.5px solid #cbd5e1 !important;
-      border-radius: 8px !important;
-      padding: 14px 18px !important;
-      margin: 16px 0 24px !important;
+      background: #fbfbfd !important;
+      border: 1px solid var(--apple-border) !important;
+      border-radius: 14px !important;
+      padding: 16px 20px !important;
+      margin: 18px 0 26px !important;
       transition: all 0.2s ease !important;
     }
     details[open] {
-      background: #eff6ff !important;
-      border-color: #3b82f6 !important;
+      background: #ffffff !important;
+      border-color: rgba(0, 113, 227, 0.4) !important;
+      box-shadow: 0 4px 16px rgba(0, 113, 227, 0.06) !important;
     }
     summary {
       font-weight: 700 !important;
-      color: #1d4ed8 !important;
+      color: var(--apple-blue) !important;
       cursor: pointer !important;
       user-select: none !important;
       outline: none !important;
+      font-size: 15px !important;
+    }
+    summary:hover {
+      color: var(--apple-blue-hover) !important;
     }
 
-    /* Lesson Footer Navigation Bar */
+    /* Apple Blue CTA Buttons (Lesson Footer Nav) */
     .lesson-footer-nav {
-      margin-top: 50px;
-      padding-top: 25px;
-      border-top: 1.5px solid #e2e8f0;
+      margin-top: 60px;
+      padding-top: 28px;
+      border-top: 1px solid var(--apple-border);
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 14px;
     }
     .complete-btn {
-      background: #003876;
+      background: var(--apple-blue);
       color: #ffffff !important;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-weight: 700;
+      padding: 10px 22px;
+      border-radius: 20px;
+      font-weight: 600;
       font-size: 14px;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      box-shadow: 0 2px 6px rgba(0, 56, 118, 0.2);
-      transition: all 0.2s;
+      transition: all 0.2s cubic-bezier(0, 0, 0.5, 1);
+      box-shadow: 0 2px 8px rgba(0, 113, 227, 0.25);
     }
     .complete-btn:hover {
-      background: #002855;
-      transform: translateY(-1px);
+      background: var(--apple-blue-hover);
+      transform: scale(1.02);
+      box-shadow: 0 4px 12px rgba(0, 113, 227, 0.35);
+    }
+    .complete-btn.secondary {
+      background: #f5f5f7;
+      color: var(--apple-text) !important;
+      box-shadow: none;
+    }
+    .complete-btn.secondary:hover {
+      background: #e8e8ed;
+      color: var(--apple-text) !important;
     }
 
-    /* Mobile adjustments */
+    /* Mobile Responsive */
     @media (max-width: 900px) {
       .sidebar {
-        left: -320px;
+        left: -300px;
       }
       .content {
         left: 0 !important;
         padding: 20px 16px 80px !important;
       }
       .markdown-section {
-        padding: 24px 20px !important;
+        padding: 28px 20px !important;
+        border-radius: 16px !important;
+      }
+      .apple-hero-title {
+        font-size: 28px;
+      }
+      .course-grid {
+        grid-template-columns: 1fr;
       }
       .step-arrow {
         display: none;
@@ -443,11 +609,59 @@
       .step-card {
         width: 100%;
       }
+      .lesson-footer-nav {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .complete-btn {
+        justify-content: center;
+      }
+      .sidebar-toggle {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        position: fixed !important;
+        bottom: 24px !important;
+        right: 20px !important;
+        left: auto !important;
+        top: auto !important;
+        width: 48px !important;
+        height: 48px !important;
+        background: #0071e3 !important;
+        border-radius: 50% !important;
+        box-shadow: 0 4px 16px rgba(0, 113, 227, 0.4) !important;
+        z-index: 1000 !important;
+        cursor: pointer !important;
+        padding: 0 !important;
+      }
+      .sidebar-toggle span {
+        background-color: #ffffff !important;
+        height: 2px !important;
+        width: 20px !important;
+        margin: 4px auto !important;
+        display: block !important;
+      }
+      .global-header {
+        padding: 0 16px;
+      }
+      .header-logo span:nth-child(2) {
+        font-size: 13.5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 230px;
+      }
+      .header-badge {
+        display: none;
+      }
+      .header-stats {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Top Global Header -->
+  <!-- Apple Top Glass Header -->
   <header class="global-header">
     <a class="header-logo" href="#/">
       <span>🏥 YUHS</span>

@@ -1,22 +1,21 @@
-<div class="lecture-header-box">
-  <span class="lecture-badge">2026 YUHS L.M.S. OFFICIAL</span>
-  <h2>🏥 2026 세브란스 간호사 3급 승진시험 올패스 러닝센터</h2>
-  <p>
-    본 학습 센터는 <strong>2026년도 연세대학교 의료원 일반직(간호직) 3급 승진고시 공식 출제 범위</strong>인 
-    <strong>승진교육 7대 교본 교재</strong>와 <strong>2026년 연세의료원 소식지(제977호~제994호 전 분량)</strong>를 
-    완벽하게 반영하여 단기간에 최고 득점으로 합격할 수 있도록 설계된 전문 온라인 교육 플랫폼입니다.
+<div class="apple-hero">
+  <div class="apple-hero-eyebrow">2026 연세대학교 의료원 일반직 간호사 3급 승진고시</div>
+  <h1 class="apple-hero-title">합격을 향한 가장 확실한 길.<br><span>공식 교본 7대 단원 & 2026 소식지 전 권 완벽 마스터.</span></h1>
+  <p class="apple-hero-desc">
+    인사팀 공식 출제 범위인 7대 교본과 2026년 연세의료원 소식지(제977호~제994호)의 모든 사실을 단 한 곳에 집약했습니다. 기출 패턴 분석부터 실전 모의고사까지 빈틈없이 학습하세요.
   </p>
 </div>
 
----
-
-## 🎯 3단계 초단기 합격 로드맵
+<div style="margin: 40px 0 20px;">
+  <div style="font-size: 12.5px; font-weight: 700; color: var(--apple-blue); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">LEARNING ROADMAP</div>
+  <h2 style="margin: 0; border: none; font-size: 26px; font-weight: 700; letter-spacing: -0.025em;">3단계 초단기 합격 로드맵. <span style="color: var(--apple-subtext); font-weight: 500;">체계적인 고득점 완성.</span></h2>
+</div>
 
 <div class="step-container">
   <div class="step-card">
     <span class="step-num">STEP 1</span>
     <div class="step-title">정규 7대 코스 수강</div>
-    <div class="step-desc">2026 공식 교본 핵심 완독 및 이해</div>
+    <div class="step-desc">2026 공식 교본 핵심 완독 및 완벽한 개념 정립</div>
   </div>
   <div class="step-arrow">➔</div>
   <div class="step-card">
@@ -28,15 +27,15 @@
   <div class="step-card">
     <span class="step-num">STEP 3</span>
     <div class="step-title">실전 모의고사 30제</div>
-    <div class="step-desc">실전 30문항 즉시 채점 및 해설 확인</div>
+    <div class="step-desc">실전 30문항 즉시 풀이 및 상세 해설 확인</div>
   </div>
 </div>
 
----
-
-## 📚 2026 공식 출제범위 전과정 커리큘럼 (Course Catalog)
-
-아래 과목 카드를 클릭하시면 각 강의의 핵심 개념, 빈출 함정 분석, 실전 문제를 즉시 학습하실 수 있습니다.
+<div style="margin: 50px 0 20px;">
+  <div style="font-size: 12.5px; font-weight: 700; color: var(--apple-blue); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">COURSE CATALOG</div>
+  <h2 style="margin: 0; border: none; font-size: 26px; font-weight: 700; letter-spacing: -0.025em;">2026 공식 출제범위 전과정. <span style="color: var(--apple-subtext); font-weight: 500;">핵심 8대 코스 카탈로그.</span></h2>
+  <p style="color: var(--apple-subtext); margin-top: 8px; font-size: 15px; margin-bottom: 0;">아래 과목 카드를 클릭하시면 핵심 개념, 빈출 함정 분석, 실전 문제를 즉시 학습하실 수 있습니다.</p>
+</div>
 
 <div class="course-grid">
 
@@ -162,13 +161,25 @@
 
 </div>
 
----
+<div style="margin: 50px 0 20px;">
+  <div style="font-size: 12.5px; font-weight: 700; color: var(--apple-blue); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">SMART LEARNING FEATURES</div>
+  <h2 style="margin: 0; border: none; font-size: 26px; font-weight: 700; letter-spacing: -0.025em;">수험생을 위한 스마트 학습 기능. <span style="color: var(--apple-subtext); font-weight: 500;">시간 대비 효율 극대화.</span></h2>
+</div>
 
-## 💡 수험생을 위한 스마트 학습 기능 안내
-
-1. **상단 통합 검색창 활용**:
-   - 상단 돋보기 아이콘을 누르고 `15%`, `70%`, `보존연한`, `정직`, `CCTV`, `P4P`, `중입자` 등 키워드를 치면 관련 강의 및 조항으로 1초 만에 점프합니다.
-2. **모바일 최적화**:
-   - 출퇴근 셔틀버스나 병동 휴게실에서 스마트폰으로 좌측 메뉴를 열고 닫으며 손쉽게 암기할 수 있습니다.
-3. **출제 근거 100% 투명 공개**:
-   - 모든 요약 문장은 인사팀 공식 교본 및 2026 소식지 원문 텍스트에 기반하여 작성되었으며, 좌측 `[ARCHIVE] 공식 출제 원본 교재실`에서 원문 전문 및 PDF를 직접 확인하실 수 있습니다.
+<div class="step-container" style="margin-top: 20px;">
+  <div class="step-card" style="text-align: left; padding: 24px 28px;">
+    <div style="font-size: 24px; margin-bottom: 12px;">🔍</div>
+    <div class="step-title" style="font-size: 17px; margin-bottom: 8px;">실시간 키워드 스마트 검색</div>
+    <div class="step-desc">상단 검색창에 <code>15%</code>, <code>70%</code>, <code>보존연한</code>, <code>정직</code>, <code>CCTV</code> 등 핵심 키워드를 입력하면 관련 조항으로 1초 만에 즉시 점프합니다.</div>
+  </div>
+  <div class="step-card" style="text-align: left; padding: 24px 28px;">
+    <div style="font-size: 24px; margin-bottom: 12px;">📱</div>
+    <div class="step-title" style="font-size: 17px; margin-bottom: 8px;">완벽한 모바일 최적화</div>
+    <div class="step-desc">출퇴근 셔틀버스나 병동 교대 근무 전후 휴게실에서 스마트폰으로 좌측 메뉴를 열고 닫으며 부담 없이 이동 중 암기가 가능합니다.</div>
+  </div>
+  <div class="step-card" style="text-align: left; padding: 24px 28px;">
+    <div style="font-size: 24px; margin-bottom: 12px;">🛡️</div>
+    <div class="step-title" style="font-size: 17px; margin-bottom: 8px;">100% 공식 출제 근거 공개</div>
+    <div class="step-desc">모든 요약 문항은 인사팀 공식 교본 및 2026 소식지 원문에 기반하며, 좌측 원본 교재실에서 원문 전문 및 PDF를 직접 대조·확인할 수 있습니다.</div>
+  </div>
+</div>
