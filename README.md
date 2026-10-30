@@ -7,31 +7,6 @@
 </div>
 
 <div style="margin: 40px 0 20px;">
-  <div style="font-size: 12.5px; font-weight: 700; color: var(--apple-blue); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">LEARNING ROADMAP</div>
-  <h2 style="margin: 0; border: none; font-size: 26px; font-weight: 700; letter-spacing: -0.025em;">3단계 초단기 합격 로드맵. <span style="color: var(--apple-subtext); font-weight: 500;">체계적인 고득점 완성.</span></h2>
-</div>
-
-<div class="step-container">
-  <div class="step-card">
-    <span class="step-num">STEP 1</span>
-    <div class="step-title">정규 7대 코스 수강</div>
-    <div class="step-desc">2026 교본 핵심 완독 및 완벽한 개념 정립</div>
-  </div>
-  <div class="step-arrow">➔</div>
-  <div class="step-card">
-    <span class="step-num">STEP 2</span>
-    <div class="step-title">5대 빈출 트랩 숙지</div>
-    <div class="step-desc">선배 합격자가 꼽은 오답 함정 & 숫자비교표 암기</div>
-  </div>
-  <div class="step-arrow">➔</div>
-  <div class="step-card">
-    <span class="step-num">STEP 3</span>
-    <div class="step-title">실전 모의고사 30제</div>
-    <div class="step-desc">실전 30문항 즉시 풀이 및 상세 해설 확인</div>
-  </div>
-</div>
-
-<div style="margin: 50px 0 20px;">
   <div style="font-size: 12.5px; font-weight: 700; color: var(--apple-blue); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">COURSE CATALOG</div>
   <h2 style="margin: 0; border: none; font-size: 26px; font-weight: 700; letter-spacing: -0.025em;">2026 출제범위 전과정. <span style="color: var(--apple-subtext); font-weight: 500;">핵심 8대 코스 카탈로그.</span></h2>
   <p style="color: var(--apple-subtext); margin-top: 8px; font-size: 15px; margin-bottom: 0;">아래 과목 카드를 클릭하시면 핵심 개념, 빈출 함정 분석, 실전 문제를 즉시 학습하실 수 있습니다.</p>
@@ -171,6 +146,31 @@
     </div>
   </a>
 
+</div>
+
+<div style="margin: 50px 0 20px;">
+  <div style="font-size: 12.5px; font-weight: 700; color: var(--apple-blue); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">LEARNING ROADMAP</div>
+  <h2 style="margin: 0; border: none; font-size: 26px; font-weight: 700; letter-spacing: -0.025em;">3단계 초단기 합격 로드맵. <span style="color: var(--apple-subtext); font-weight: 500;">체계적인 고득점 완성.</span></h2>
+</div>
+
+<div class="step-container">
+  <div class="step-card">
+    <span class="step-num">STEP 1</span>
+    <div class="step-title">정규 7대 코스 수강</div>
+    <div class="step-desc">2026 교본 핵심 완독 및 완벽한 개념 정립</div>
+  </div>
+  <div class="step-arrow">➔</div>
+  <div class="step-card">
+    <span class="step-num">STEP 2</span>
+    <div class="step-title">5대 빈출 트랩 숙지</div>
+    <div class="step-desc">선배 합격자가 꼽은 오답 함정 & 숫자비교표 암기</div>
+  </div>
+  <div class="step-arrow">➔</div>
+  <div class="step-card">
+    <span class="step-num">STEP 3</span>
+    <div class="step-title">실전 모의고사 30제</div>
+    <div class="step-desc">실전 30문항 즉시 풀이 및 상세 해설 확인</div>
+  </div>
 </div>
 
 <div style="margin: 50px 0 20px;">
