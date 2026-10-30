@@ -2,34 +2,43 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>2026 세브란스 간호사 승진시험 온라인 러닝 센터</title>
+  <title>2026 세브란스 간호사 3급 승진고시 공식 학습 센터</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
   <style>
     /* --------------------------------------------------
-       2026 YUHS E-Learning Design System
-       Primary Brand: Yonsei Royal Navy (#003876)
-       Accent Brand: Severance Gold (#b38e44) & Blue (#0066cc)
+       2026 YUHS Professional E-Learning Design System
+       - 단어 단위 줄바꿈(word-break: keep-all) 전면 적용
+       - 단어가 음절 중간에서 짤리지 않고 한 덩어리로 다음 줄 이동
     -------------------------------------------------- */
     :root {
       --theme-color: #003876;
-      --base-color: #24292f;
+      --base-color: #1f2937;
       --heading-color: #002855;
       --sidebar-width: 320px;
       --sidebar-nav-link-color: #374151;
       --sidebar-nav-link-color--active: #003876;
       --sidebar-nav-link-font-weight--active: 700;
       --sidebar-background: #f8fafc;
-      --content-max-width: 1020px;
+      --content-max-width: 1040px;
+    }
+
+    /* 전역 단어 단위 줄바꿈: "안녕하/세요" 방지 */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      word-break: keep-all !important;
+      overflow-wrap: break-word !important;
     }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.025em;
       background-color: #ffffff;
       color: #1f2937;
+      line-height: 1.8;
+      word-break: keep-all !important;
     }
 
     /* Top Global Header Bar */
@@ -47,6 +56,7 @@
       padding: 0 24px;
       z-index: 100;
       box-shadow: 0 2px 8px rgba(0, 40, 85, 0.15);
+      word-break: keep-all !important;
     }
     .header-logo {
       display: flex;
@@ -55,6 +65,7 @@
       font-weight: 800;
       font-size: 16px;
       letter-spacing: -0.01em;
+      word-break: keep-all !important;
     }
     .header-badge {
       background: #e0ac24;
@@ -64,6 +75,7 @@
       padding: 2px 8px;
       border-radius: 12px;
       text-transform: uppercase;
+      white-space: nowrap;
     }
     .header-stats {
       font-size: 13px;
@@ -79,6 +91,7 @@
       align-items: center;
       gap: 6px;
       font-weight: 600;
+      white-space: nowrap;
     }
 
     /* Sidebar Refinement */
@@ -88,6 +101,7 @@
       background-color: #f8fafc;
       border-right: 1px solid #e5e7eb;
       padding-top: 15px;
+      word-break: keep-all !important;
     }
     .sidebar-nav ul {
       padding-left: 0 !important;
@@ -95,6 +109,7 @@
     .sidebar-nav li {
       margin: 4px 0;
       font-size: 14px;
+      word-break: keep-all !important;
     }
     .sidebar-nav strong {
       display: block;
@@ -105,14 +120,17 @@
       text-transform: uppercase;
       letter-spacing: 0.05em;
       padding-left: 12px;
+      word-break: keep-all !important;
     }
     .sidebar-nav a {
       border-radius: 6px;
-      padding: 6px 12px !important;
+      padding: 7px 12px !important;
       transition: all 0.15s ease;
       color: #374151;
       display: block;
       text-decoration: none;
+      line-height: 1.5;
+      word-break: keep-all !important;
     }
     .sidebar-nav a:hover {
       background-color: #eef2f6;
@@ -132,10 +150,21 @@
       padding-top: 20px;
     }
     .markdown-section {
-      max-width: 980px;
+      max-width: 1000px;
       padding: 30px 40px 80px;
       font-size: 16px;
       line-height: 1.85;
+      word-break: keep-all !important;
+    }
+
+    /* Paragraphs and Lists: Keep-all */
+    .markdown-section p,
+    .markdown-section li,
+    .markdown-section blockquote,
+    .markdown-section span,
+    .markdown-section div {
+      word-break: keep-all !important;
+      overflow-wrap: break-word !important;
     }
 
     /* Typography */
@@ -147,6 +176,7 @@
       margin-bottom: 24px;
       border-bottom: 2px solid #003876;
       padding-bottom: 14px;
+      word-break: keep-all !important;
     }
     .markdown-section h2 {
       font-size: 22px;
@@ -159,6 +189,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      word-break: keep-all !important;
     }
     .markdown-section h3 {
       font-size: 18px;
@@ -166,9 +197,10 @@
       color: #1e3a8a;
       margin-top: 32px;
       margin-bottom: 12px;
+      word-break: keep-all !important;
     }
 
-    /* LMS Education Component: Lecture Hero Box */
+    /* Lecture Header Hero Box */
     .lecture-header-box {
       background: linear-gradient(135deg, #002855 0%, #004b99 100%);
       color: #ffffff;
@@ -176,6 +208,7 @@
       border-radius: 12px;
       margin-bottom: 32px;
       box-shadow: 0 4px 14px rgba(0, 40, 85, 0.12);
+      word-break: keep-all !important;
     }
     .lecture-header-box .lecture-badge {
       display: inline-block;
@@ -186,6 +219,7 @@
       padding: 3px 10px;
       border-radius: 6px;
       margin-bottom: 10px;
+      white-space: nowrap;
     }
     .lecture-header-box h2 {
       color: #ffffff !important;
@@ -193,50 +227,14 @@
       margin: 0 0 10px 0 !important;
       padding: 0 !important;
       font-size: 24px !important;
+      word-break: keep-all !important;
     }
     .lecture-header-box p {
       color: #e2e8f0;
       font-size: 14.5px;
       margin: 0;
       line-height: 1.6;
-    }
-
-    /* LMS Education Component: Exam Trap Box (함정 주의보) */
-    .exam-trap-box {
-      background: #fff7ed;
-      border: 1.5px solid #fed7aa;
-      border-left: 5px solid #ea580c;
-      padding: 16px 20px;
-      border-radius: 8px;
-      margin: 24px 0;
-    }
-    .exam-trap-box .trap-title {
-      font-weight: 700;
-      color: #9a3412;
-      font-size: 15px;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    /* LMS Education Component: Key Takeaways Card (핵심 요약 카드) */
-    .takeaways-card {
-      background: #f0fdf4;
-      border: 1.5px solid #bbf7d0;
-      border-left: 5px solid #16a34a;
-      padding: 18px 22px;
-      border-radius: 8px;
-      margin: 24px 0;
-    }
-    .takeaways-card .card-title {
-      font-weight: 700;
-      color: #166534;
-      font-size: 15px;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      word-break: keep-all !important;
     }
 
     /* Course Cards on Dashboard */
@@ -259,6 +257,7 @@
       text-decoration: none !important;
       color: inherit !important;
       border-top: 4px solid #003876;
+      word-break: keep-all !important;
     }
     .course-card:hover {
       transform: translateY(-4px);
@@ -274,6 +273,7 @@
       border-radius: 4px;
       display: inline-block;
       margin-bottom: 10px;
+      white-space: nowrap;
     }
     .course-card h4 {
       font-size: 17px;
@@ -281,12 +281,14 @@
       color: #111827;
       margin: 0 0 8px 0;
       line-height: 1.4;
+      word-break: keep-all !important;
     }
     .course-card p {
       font-size: 13.5px;
       color: #4b5563;
       margin: 0 0 16px 0;
-      line-height: 1.5;
+      line-height: 1.55;
+      word-break: keep-all !important;
     }
     .course-card .card-footer {
       font-size: 12.5px;
@@ -298,9 +300,10 @@
       border-top: 1px solid #f3f4f6;
       padding-top: 12px;
       margin-top: auto;
+      white-space: nowrap;
     }
 
-    /* Enhanced Data Tables */
+    /* Enhanced Data Tables with Keep-all */
     table {
       width: 100%;
       border-collapse: separate;
@@ -310,6 +313,7 @@
       border-radius: 8px;
       overflow: hidden;
       font-size: 14.5px;
+      word-break: keep-all !important;
     }
     th {
       background: #f1f5f9;
@@ -318,11 +322,13 @@
       text-align: center;
       padding: 12px 14px;
       border-bottom: 1.5px solid #cbd5e1;
+      word-break: keep-all !important;
     }
     td {
       padding: 11px 14px;
       border-bottom: 1px solid #e2e8f0;
       line-height: 1.6;
+      word-break: keep-all !important;
     }
     tr:last-child td {
       border-bottom: none;
@@ -342,6 +348,7 @@
       padding: 14px 18px;
       margin: 16px 0 24px;
       transition: all 0.2s ease;
+      word-break: keep-all !important;
     }
     details[open] {
       background: #eff6ff;
@@ -353,13 +360,14 @@
       cursor: pointer;
       user-select: none;
       outline: none;
+      word-break: keep-all !important;
     }
     summary:hover {
       color: #1e40af;
       text-decoration: underline;
     }
 
-    /* Bottom Complete Button */
+    /* Bottom Navigation Bar */
     .lesson-footer-nav {
       margin-top: 60px;
       padding-top: 25px;
@@ -369,6 +377,7 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 15px;
+      word-break: keep-all !important;
     }
     .complete-btn {
       background: #003876;
@@ -383,6 +392,7 @@
       gap: 8px;
       box-shadow: 0 2px 6px rgba(0, 56, 118, 0.2);
       transition: all 0.2s;
+      white-space: nowrap;
     }
     .complete-btn:hover {
       background: #002855;
@@ -403,6 +413,13 @@
       .course-grid {
         grid-template-columns: 1fr;
       }
+      .lesson-footer-nav {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .complete-btn {
+        justify-content: center;
+      }
     }
   </style>
 </head>
@@ -411,7 +428,7 @@
   <header class="global-header">
     <div class="header-logo">
       <span>🏥 YUHS</span>
-      <span>2026 간호사 3급 승진고시 올패스</span>
+      <span>2026 간호사 3급 승진고시 공식 학습 센터</span>
       <span class="header-badge">공식 기출범위</span>
     </div>
     <div class="header-stats">
@@ -424,7 +441,7 @@
     </div>
   </header>
 
-  <div id="app">🏥 2026 연세의료원 간호사 승급시험 학습 플랫폼을 불러오는 중입니다...</div>
+  <div id="app">🏥 세브란스 간호사 3급 승진고시 공식 학습 센터를 불러오는 중입니다...</div>
 
   <script>
     window.$docsify = {
