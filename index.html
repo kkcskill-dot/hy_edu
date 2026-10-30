@@ -2,81 +2,124 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>2026 연세의료원 3급 승진교육 학습 센터</title>
+  <title>2026 연세의료원 간호사 승급시험 스마트 학습 센터</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   <style>
     :root {
       --theme-color: #003876;
+      --heading-color: #002855;
     }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #24292f;
     }
     .sidebar {
-      font-size: 15px;
+      font-size: 14.5px;
       line-height: 1.6;
+      border-right: 1px solid #e1e4e8;
     }
     .app-name-link {
-      font-weight: 700;
+      font-weight: 800;
       color: #003876 !important;
+      font-size: 18px;
     }
     .markdown-section {
-      max-width: 950px;
+      max-width: 980px;
       line-height: 1.85;
-      font-size: 16px;
+      font-size: 15.5px;
+      padding: 30px 25px 60px;
     }
     .markdown-section h1 {
       color: #003876;
-      border-bottom: 2px solid #003876;
-      padding-bottom: 10px;
+      border-bottom: 2.5px solid #003876;
+      padding-bottom: 12px;
+      font-size: 26px;
+      font-weight: 800;
     }
     .markdown-section h2 {
-      color: #1a4f8b;
-      margin-top: 36px;
-      border-bottom: 1px solid #e1e4e8;
-      padding-bottom: 8px;
+      color: #004b99;
+      margin-top: 40px;
+      border-bottom: 1.5px solid #eaecef;
+      padding-bottom: 10px;
+      font-size: 21px;
+      font-weight: 700;
     }
     .markdown-section h3 {
-      color: #2b5f9e;
-      margin-top: 26px;
+      color: #1a5ca6;
+      margin-top: 28px;
+      font-size: 18px;
+      font-weight: 600;
     }
     table {
       display: table !important;
       width: 100%;
-      margin: 18px 0;
+      margin: 20px 0;
       border-collapse: collapse;
+      font-size: 14.5px;
     }
     th {
-      background-color: #f1f4f8;
+      background-color: #f0f4f9;
       color: #003876;
-      font-weight: bold;
-    }
-    th, td {
-      border: 1px solid #d0d7de !important;
+      font-weight: 700;
+      text-align: center;
       padding: 10px 14px !important;
+      border: 1px solid #d0d7de !important;
+    }
+    td {
+      border: 1px solid #d0d7de !important;
+      padding: 9px 12px !important;
     }
     tr:nth-child(even) {
-      background-color: #fafbfc;
+      background-color: #f8fafc;
     }
     blockquote {
-      background-color: #f6f8fa;
-      border-left: 4px solid #003876;
+      background-color: #f4f7fb;
+      border-left: 4.5px solid #003876;
       padding: 12px 18px;
-      color: #333;
-      margin: 16px 0;
+      color: #2e3a47;
+      margin: 18px 0;
+      border-radius: 0 6px 6px 0;
+    }
+    details {
+      background: #fdfdfe;
+      border: 1.5px solid #c9d8eb;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 14px 0 22px;
+      transition: all 0.2s ease;
+    }
+    details[open] {
+      background: #f4f8ff;
+      border-color: #003876;
+    }
+    summary {
+      cursor: pointer;
+      color: #003876;
+      font-weight: 600;
+      user-select: none;
+      outline: none;
+    }
+    summary:hover {
+      text-decoration: underline;
     }
     .search input {
-      border-radius: 4px;
+      border-radius: 6px;
       padding: 8px 12px;
+      border: 1.5px solid #d0d7de;
+    }
+    .search input:focus {
+      border-color: #003876;
     }
   </style>
 </head>
 <body>
-  <div id="app">로딩 중... 잠시만 기다려주세요.</div>
+  <div id="app">🏥 2026 연세의료원 간호사 승급시험 학습 센터를 로딩 중입니다...</div>
   <script>
     window.$docsify = {
-      name: '🏛️ 2026 승진교육',
+      name: '🏛️ 연세의료원 승급시험',
+      repo: '',
       loadSidebar: true,
       subMaxLevel: 3,
       auto2top: true,
