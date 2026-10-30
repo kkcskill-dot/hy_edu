@@ -1,8 +1,8 @@
 <div class="apple-hero">
   <div class="apple-hero-eyebrow">2026 연세대학교 의료원 일반직 간호사 3급 승진고시</div>
-  <h1 class="apple-hero-title">합격을 향한 가장 확실한 길.<br><span>공식 교본 7대 단원 & 2026 소식지 전 권 완벽 마스터.</span></h1>
+  <h1 class="apple-hero-title">합격을 향한 가장 확실한 길.<br><span>교본 7대 단원 & 2026 소식지 전 권 완벽 마스터.</span></h1>
   <p class="apple-hero-desc">
-    인사팀 공식 출제 범위인 7대 교본과 2026년 연세의료원 소식지(제977호~제994호)의 모든 사실을 단 한 곳에 집약했습니다. 기출 패턴 분석부터 실전 모의고사까지 빈틈없이 학습하세요.
+    인사팀 출제 범위인 7대 교본과 2026년 연세의료원 소식지(제977호~제994호)의 모든 사실을 단 한 곳에 집약했습니다. 기출 패턴 분석부터 실전 모의고사까지 빈틈없이 학습하세요.
   </p>
 </div>
 
@@ -15,7 +15,7 @@
   <div class="step-card">
     <span class="step-num">STEP 1</span>
     <div class="step-title">정규 7대 코스 수강</div>
-    <div class="step-desc">2026 공식 교본 핵심 완독 및 완벽한 개념 정립</div>
+    <div class="step-desc">2026 교본 핵심 완독 및 완벽한 개념 정립</div>
   </div>
   <div class="step-arrow">➔</div>
   <div class="step-card">
@@ -33,7 +33,7 @@
 
 <div style="margin: 50px 0 20px;">
   <div style="font-size: 12.5px; font-weight: 700; color: var(--apple-blue); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">COURSE CATALOG</div>
-  <h2 style="margin: 0; border: none; font-size: 26px; font-weight: 700; letter-spacing: -0.025em;">2026 공식 출제범위 전과정. <span style="color: var(--apple-subtext); font-weight: 500;">핵심 8대 코스 카탈로그.</span></h2>
+  <h2 style="margin: 0; border: none; font-size: 26px; font-weight: 700; letter-spacing: -0.025em;">2026 출제범위 전과정. <span style="color: var(--apple-subtext); font-weight: 500;">핵심 8대 코스 카탈로그.</span></h2>
   <p style="color: var(--apple-subtext); margin-top: 8px; font-size: 15px; margin-bottom: 0;">아래 과목 카드를 클릭하시면 핵심 개념, 빈출 함정 분석, 실전 문제를 즉시 학습하실 수 있습니다.</p>
 </div>
 
@@ -139,7 +139,7 @@
     <div>
       <span class="card-tag">특별 특강 • 킬러 문항 대비</span>
       <h4>🗞️ 2026 연세의료원 소식지 전 권(18개 호) 색인</h4>
-      <p>977호~994호 발행일, 공식 온라인 웹진 링크, 보도 기사 전수 색인 (중입자, 로봇수술, 간호사 주4일제 등)</p>
+      <p>977호~994호 발행일, 온라인 웹진 링크, 보도 기사 전수 색인 (중입자, 로봇수술, 간호사 주4일제 등)</p>
     </div>
     <div class="card-footer">
       <span>⏱️ 학습시간: 20분</span>
@@ -156,6 +156,18 @@
     <div class="card-footer">
       <span>⏱️ 학습시간: 30분</span>
       <span>모의고사 응시 ➔</span>
+    </div>
+  </a>
+
+  <a class="course-card" href="#/mock/01_실전모의고사_1회.md">
+    <div>
+      <span class="card-tag">실전 모의고사 • 채점</span>
+      <h4>📝 실전 모의고사 1·2·3회 (회당 20문항)</h4>
+      <p>교본 7개 단원에서 출제 · 채점 후 점수, 단원별 정답 수, 문항별 교본 원문 근거(쪽수) 확인</p>
+    </div>
+    <div class="card-footer">
+      <span>⏱️ 회당 20문항</span>
+      <span>응시하기 ➔</span>
     </div>
   </a>
 
@@ -179,7 +191,7 @@
   </div>
   <div class="step-card" style="text-align: left; padding: 24px 28px;">
     <div style="font-size: 24px; margin-bottom: 12px;">🛡️</div>
-    <div class="step-title" style="font-size: 17px; margin-bottom: 8px;">100% 공식 출제 근거 공개</div>
-    <div class="step-desc">모든 요약 문항은 인사팀 공식 교본 및 2026 소식지 원문에 기반하며, 좌측 원본 교재실에서 원문 전문 및 PDF를 직접 대조·확인할 수 있습니다.</div>
+    <div class="step-title" style="font-size: 17px; margin-bottom: 8px;">100% 출제 근거 공개</div>
+    <div class="step-desc">모든 요약 문항은 인사팀 교본 및 2026 소식지 원문에 기반하며, 좌측 원본 교재실에서 원문 전문 및 PDF를 직접 대조·확인할 수 있습니다.</div>
   </div>
 </div>

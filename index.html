@@ -2,25 +2,24 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>2026 세브란스 간호사 3급 승진고시 공식 학습 센터</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  
-  <!-- Pretendard 공식 CDN (Full weights) -->
+  <title>세브란스 간호사 승진시험 개인 학습노트</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- iOS가 '02-2228-1281', '1,000,000' 같은 숫자를 전화번호 링크로 바꾸지 않도록 -->
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#f5f5f7">
+
+  <!-- Pretendard CDN (Full weights) -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
-  
-  <!-- Docsify Vue Base -->
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-  
+
+  <!-- Docsify Vue Base (4.13.1 고정: 버전을 비우면 플러그인이 v5로 섞여 로드됨) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4.13.1/lib/themes/vue.css">
+
   <style>
     /* ==================================================
-       Apple Store Inspired Design System (apple.com/store)
-       - Primary: #1d1d1f (Apple Black)
-       - Secondary: #6e6e73 / #86868b (Apple Slate Gray)
-       - Accent: #0071e3 (Apple Signature Blue)
-       - Background: #f5f5f7 (Apple Light Canvas)
-       - Font: Pretendard
-       - Word-break: keep-all (한글 단어 단위 줄바꿈)
+       Apple Store Inspired Design System — Mobile First
+       - 기준 화면: iPhone(~430px) → iPad 세로(640~1023px) → iPad 가로/PC(1024px~)
+       - Primary: #1d1d1f / Secondary: #6e6e73 / Accent: #0071e3 / Background: #f5f5f7
+       - Font: Pretendard, 한글 단어 단위 줄바꿈(word-break: keep-all)
     ================================================== */
     :root {
       --theme-color: #0071e3;
@@ -31,7 +30,15 @@
       --apple-border: rgba(0, 0, 0, 0.08);
       --apple-blue: #0071e3;
       --apple-blue-hover: #0077ed;
+      --apple-green: #1a7f37;
+      --apple-red: #d70015;
       --apple-radius: 20px;
+      --header-h: 52px;
+      --sidebar-w: 300px;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-right: env(safe-area-inset-right, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-left: env(safe-area-inset-left, 0px);
     }
 
     /* 전역 Pretendard 폰트 및 단어 단위 줄바꿈 */
@@ -43,6 +50,10 @@
       letter-spacing: -0.025em;
     }
 
+    html {
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
     html, body {
       margin: 0;
       padding: 0;
@@ -52,27 +63,70 @@
       font-size: 16px;
       -webkit-font-smoothing: antialiased;
     }
+    body.drawer-open {
+      overflow: hidden;
+    }
+    a, button, summary, label {
+      -webkit-tap-highlight-color: rgba(0, 113, 227, 0.12);
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
 
     /* ==================================================
-       1. Apple Frosted Glass Top Navigation Bar
+       1. Frosted Glass Top Header (모바일: 메뉴 버튼 + 1줄 타이틀)
     ================================================== */
     .global-header {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      height: 48px;
-      background: rgba(255, 255, 255, 0.85);
+      height: calc(var(--header-h) + var(--safe-top));
+      padding: var(--safe-top) calc(12px + var(--safe-right)) 0 calc(8px + var(--safe-left));
+      background: rgba(255, 255, 255, 0.86);
       backdrop-filter: saturate(180%) blur(20px);
       -webkit-backdrop-filter: saturate(180%) blur(20px);
       border-bottom: 1px solid var(--apple-border);
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 0 28px;
-      z-index: 999;
+      gap: 4px;
+      /* 드로어(1200)·배경(1100)보다 위 → 열린 상태에서도 ✕ 버튼이 보임 */
+      z-index: 1300;
     }
+    .menu-btn {
+      flex: 0 0 auto;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 12px;
+      background: transparent;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+      padding: 0;
+    }
+    .menu-btn span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--apple-text);
+      transition: transform 0.25s ease, opacity 0.2s ease;
+    }
+    .menu-btn:active {
+      background: rgba(0, 0, 0, 0.06);
+    }
+    body.drawer-open .menu-btn span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    body.drawer-open .menu-btn span:nth-child(2) { opacity: 0; }
+    body.drawer-open .menu-btn span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
     .header-logo {
+      flex: 1 1 auto;
+      min-width: 0;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -80,12 +134,18 @@
       font-size: 15px;
       color: var(--apple-text) !important;
       text-decoration: none;
-      transition: opacity 0.2s;
     }
-    .header-logo:hover {
-      opacity: 0.7;
+    .header-icon {
+      flex: 0 0 auto;
+    }
+    .header-title {
+      min-width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .header-badge {
+      display: none;
       background: rgba(0, 113, 227, 0.1);
       color: var(--apple-blue);
       font-size: 11px;
@@ -95,8 +155,8 @@
       white-space: nowrap;
     }
     .header-stats {
+      display: none;
       font-size: 13px;
-      display: flex;
       align-items: center;
       gap: 12px;
     }
@@ -111,15 +171,50 @@
     }
 
     /* ==================================================
-       2. Apple Style Minimal Sidebar
+       2. Sidebar → 모바일/아이패드 세로: 완전 분리형 드로어
     ================================================== */
+    .sidebar-toggle {
+      display: none !important;
+    }
     .sidebar {
-      top: 48px !important;
-      height: calc(100vh - 48px) !important;
+      position: fixed !important;
+      top: calc(var(--header-h) + var(--safe-top)) !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      height: auto !important;
+      width: min(86vw, 320px) !important;
+      padding: 16px 14px calc(40px + var(--safe-bottom)) calc(14px + var(--safe-left)) !important;
       background-color: var(--apple-bg) !important;
       border-right: 1px solid var(--apple-border) !important;
-      width: 300px !important;
-      padding: 24px 16px 80px !important;
+      overflow-y: auto !important;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+      transform: translateX(-105%) !important;
+      visibility: hidden;
+      transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1), visibility 0.3s, box-shadow 0.3s !important;
+      z-index: 1200 !important;
+    }
+    body.drawer-open .sidebar {
+      transform: none !important;
+      visibility: visible;
+      box-shadow: 0 0 48px rgba(0, 0, 0, 0.18);
+    }
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.32);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 1100;
+    }
+    body.drawer-open .drawer-backdrop {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .sidebar > h1 {
+      margin: 0 !important;
     }
     .app-name-link {
       font-size: 16px !important;
@@ -130,16 +225,20 @@
       text-align: center;
       border-bottom: 1px solid var(--apple-border);
       margin-bottom: 12px !important;
+      line-height: 1.4;
     }
     .search {
       margin-bottom: 16px !important;
+      padding: 0 !important;
+      border-bottom: none !important;
     }
     .search input {
       background: #ffffff !important;
       border: 1px solid var(--apple-border) !important;
       border-radius: 10px !important;
-      padding: 8px 12px !important;
-      font-size: 13.5px !important;
+      padding: 10px 12px !important;
+      /* 16px 미만이면 iOS가 입력 시 화면을 확대함 */
+      font-size: 16px !important;
       color: var(--apple-text) !important;
       box-shadow: 0 1px 3px rgba(0,0,0,0.02) !important;
     }
@@ -147,38 +246,33 @@
       border-color: var(--apple-blue) !important;
       box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15) !important;
     }
+    .search .results-panel p {
+      font-size: 13.5px !important;
+    }
     .sidebar-nav > ul {
       padding-left: 0 !important;
       margin: 0 !important;
     }
+    .sidebar ul {
+      margin: 0 !important;
+    }
     .sidebar-nav ul ul {
-      padding-left: 14px !important;
+      padding-left: 12px !important;
       margin: 4px 0 8px !important;
       border-left: 1.5px solid rgba(0, 0, 0, 0.08) !important;
     }
-    .sidebar-nav ul ul li {
-      font-size: 12.5px !important;
-      margin: 2px 0 !important;
-    }
-    .sidebar-nav ul ul a {
-      padding: 5px 8px !important;
-      color: var(--apple-subtext) !important;
-      font-size: 12.5px !important;
-      font-weight: 500 !important;
-    }
-    .sidebar-nav ul ul a:hover {
-      color: var(--apple-blue) !important;
-      background: rgba(0, 113, 227, 0.05) !important;
-    }
     .sidebar-nav li {
-      margin: 3px 0 !important;
-      font-size: 13.5px !important;
+      margin: 2px 0 !important;
+      font-size: 14px !important;
       line-height: 1.45 !important;
+    }
+    .sidebar-nav ul ul li {
+      font-size: 13px !important;
     }
     .sidebar-nav strong {
       display: block !important;
-      margin-top: 24px !important;
-      margin-bottom: 8px !important;
+      margin-top: 22px !important;
+      margin-bottom: 6px !important;
       font-size: 11px !important;
       color: var(--apple-subtext) !important;
       font-weight: 700 !important;
@@ -186,126 +280,166 @@
       letter-spacing: 0.05em !important;
       padding-left: 10px !important;
     }
+    .sidebar ul li a,
     .sidebar-nav a {
       border-radius: 10px !important;
-      padding: 8px 12px !important;
-      transition: all 0.2s cubic-bezier(0, 0, 0.5, 1) !important;
+      padding: 10px 12px !important;
       color: #333336 !important;
       display: block !important;
       text-decoration: none !important;
       font-weight: 500 !important;
+      /* docsify 기본값(nowrap + 말줄임)이면 긴 강의명이 잘림 */
+      white-space: normal !important;
+      overflow: visible !important;
+      text-overflow: clip !important;
+      transition: background-color 0.2s, color 0.2s !important;
     }
-    .sidebar-nav a:hover {
-      background-color: rgba(0, 0, 0, 0.04) !important;
-      color: var(--apple-blue) !important;
+    .sidebar-nav ul ul a {
+      padding: 7px 10px !important;
+      color: var(--apple-subtext) !important;
+      font-size: 13px !important;
     }
-    .sidebar-nav li.active > a {
+    .sidebar-nav a:active {
+      background-color: rgba(0, 0, 0, 0.06) !important;
+    }
+    .sidebar ul li.active > a {
+      border-right: none !important;
       background-color: #ffffff !important;
       color: var(--apple-blue) !important;
       font-weight: 700 !important;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
     }
-
-    /* Sidebar Toggle (Hidden on Desktop, Floating on Mobile) */
-    .sidebar-toggle {
-      display: none !important;
+    .app-sub-sidebar li:before {
+      content: none !important;
     }
 
     /* ==================================================
-       3. Main Content Layout (Centered Apple Canvas)
+       3. Main Content (모바일: 화면 폭 100% 리딩 뷰)
     ================================================== */
+    main {
+      width: 100% !important;
+      height: auto !important;
+      /* vue.css의 z-index:0은 새 쌓임 맥락을 만들어 드로어가 배경 아래로 깔림 */
+      z-index: auto !important;
+      /* vue.css의 overflow-x:hidden은 position:sticky(채점 바)를 막음 */
+      overflow: visible !important;
+    }
     .content {
-      top: 48px !important;
-      left: 300px !important;
-      right: 0 !important;
-      position: absolute !important;
-      min-height: calc(100vh - 48px) !important;
-      background-color: var(--apple-bg) !important;
-      padding: 36px 48px 120px !important;
+      position: relative !important;
+      top: auto !important;
+      right: auto !important;
+      bottom: auto !important;
+      left: auto !important;
+      max-width: none !important;
+      transform: none !important;
+      transition: none !important;
+      min-height: 100vh;
+      padding: calc(var(--header-h) + var(--safe-top)) 0 calc(40px + var(--safe-bottom)) !important;
+      background-color: var(--apple-card-bg);
     }
-
-    /* 중앙 카드 컨테이너 */
     .markdown-section {
-      max-width: 980px !important;
-      margin: 0 auto !important;
-      padding: 48px 56px !important;
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 24px calc(18px + var(--safe-right)) 40px calc(18px + var(--safe-left)) !important;
       background: var(--apple-card-bg) !important;
-      border-radius: 24px !important;
-      box-shadow: 0 4px 28px rgba(0, 0, 0, 0.04) !important;
-      border: 1px solid var(--apple-border) !important;
+      border: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      overflow-x: clip;
     }
 
-    /* Typography: Apple Store Style */
+    /* Typography */
     .markdown-section h1 {
-      font-size: 32px !important;
+      font-size: 25px !important;
       font-weight: 700 !important;
       color: var(--apple-text) !important;
       letter-spacing: -0.03em !important;
-      margin-top: 10px !important;
-      margin-bottom: 24px !important;
+      margin-top: 8px !important;
+      margin-bottom: 20px !important;
       border-bottom: 1px solid var(--apple-border) !important;
-      padding-bottom: 16px !important;
-      line-height: 1.25 !important;
+      padding-bottom: 14px !important;
+      line-height: 1.3 !important;
     }
     .markdown-section h2 {
-      font-size: 24px !important;
+      font-size: 21px !important;
       font-weight: 700 !important;
       color: var(--apple-text) !important;
       letter-spacing: -0.025em !important;
-      margin-top: 52px !important;
-      margin-bottom: 20px !important;
+      margin-top: 44px !important;
+      margin-bottom: 16px !important;
       border-bottom: 1px solid var(--apple-border) !important;
       padding-bottom: 10px !important;
-      display: flex !important;
-      align-items: center !important;
-      gap: 8px !important;
+      line-height: 1.35 !important;
     }
     .markdown-section h3 {
-      font-size: 19px !important;
+      font-size: 18px !important;
       font-weight: 700 !important;
       color: var(--apple-text) !important;
       letter-spacing: -0.02em !important;
-      margin-top: 36px !important;
-      margin-bottom: 14px !important;
+      margin-top: 32px !important;
+      margin-bottom: 12px !important;
+      line-height: 1.4 !important;
     }
-    .markdown-section p, 
+    .markdown-section h1 a, .markdown-section h2 a, .markdown-section h3 a, .markdown-section h4 a,
+    .markdown-section .anchor span {
+      color: inherit !important;
+    }
+    .markdown-section h1 code, .markdown-section h2 code, .markdown-section h3 code, .markdown-section h4 code {
+      font-size: 0.66em !important;
+      font-weight: 600;
+      vertical-align: 0.1em;
+    }
+    .markdown-section p,
     .markdown-section li {
       font-size: 16px !important;
-      line-height: 1.8 !important;
+      line-height: 1.75 !important;
       color: #333336 !important;
+    }
+    .markdown-section strong {
+      color: var(--apple-text);
+    }
+    .markdown-section ul, .markdown-section ol {
+      padding-left: 1.3em;
+    }
+    .markdown-section pre {
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     /* ==================================================
-       4. Apple Store Hero Banner
+       4. Hero Banner
     ================================================== */
     .apple-hero {
-      padding: 36px 0 24px;
-      margin-bottom: 32px;
+      padding: 20px 0 22px;
+      margin-bottom: 28px;
       border-bottom: 1px solid var(--apple-border);
     }
     .apple-hero-eyebrow {
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 700;
       color: var(--apple-blue);
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.04em;
       margin-bottom: 10px;
     }
     .apple-hero-title {
-      font-size: 38px;
+      font-size: 28px;
       font-weight: 700;
       color: var(--apple-text);
       letter-spacing: -0.035em;
-      line-height: 1.2;
+      line-height: 1.25;
       margin: 0 0 14px 0;
+      border: none !important;
+      padding: 0 !important;
     }
     .apple-hero-title span {
       color: var(--apple-subtext);
     }
     .apple-hero-desc {
-      font-size: 17px;
+      font-size: 16px;
       color: var(--apple-subtext);
-      line-height: 1.6;
+      line-height: 1.65;
       margin: 0;
       max-width: 820px;
     }
@@ -315,9 +449,9 @@
       background: #fbfbfd !important;
       border: 1px solid var(--apple-border) !important;
       color: var(--apple-text) !important;
-      padding: 32px 36px !important;
-      border-radius: var(--apple-radius) !important;
-      margin-bottom: 36px !important;
+      padding: 22px 20px !important;
+      border-radius: 18px !important;
+      margin-bottom: 28px !important;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02) !important;
     }
     .lecture-header-box * {
@@ -338,13 +472,14 @@
       border: none !important;
       margin: 0 0 10px 0 !important;
       padding: 0 !important;
-      font-size: 26px !important;
+      font-size: 22px !important;
       font-weight: 700 !important;
       letter-spacing: -0.03em !important;
+      display: block !important;
     }
     .lecture-header-box p {
       color: var(--apple-subtext) !important;
-      font-size: 15.5px !important;
+      font-size: 15px !important;
       margin: 0 !important;
       line-height: 1.65 !important;
     }
@@ -354,32 +489,31 @@
     }
 
     /* ==================================================
-       5. Apple Store Product Cards (Course Grid)
+       5. Course Grid / Step Cards
     ================================================== */
     .course-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 22px;
-      margin: 28px 0 50px;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin: 24px 0 44px;
     }
     .course-card {
       background: #fbfbfd !important;
       border: 1px solid var(--apple-border) !important;
-      border-radius: var(--apple-radius) !important;
-      padding: 28px 24px 22px !important;
+      border-radius: 18px !important;
+      padding: 22px 20px 18px !important;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02) !important;
-      transition: all 0.3s cubic-bezier(0, 0, 0.5, 1) !important;
+      transition: transform 0.2s cubic-bezier(0, 0, 0.5, 1), box-shadow 0.3s, background-color 0.3s !important;
       display: flex !important;
       flex-direction: column !important;
       justify-content: space-between !important;
       text-decoration: none !important;
       color: inherit !important;
+      -webkit-tap-highlight-color: transparent;
     }
-    .course-card:hover {
-      transform: translateY(-4px) scale(1.01) !important;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08) !important;
+    .course-card:active {
+      transform: scale(0.985) !important;
       background: #ffffff !important;
-      border-color: rgba(0, 113, 227, 0.3) !important;
     }
     .course-card .card-tag {
       font-size: 11.5px !important;
@@ -388,20 +522,20 @@
       text-transform: uppercase !important;
       letter-spacing: 0.04em !important;
       display: inline-block !important;
-      margin-bottom: 12px !important;
+      margin-bottom: 10px !important;
     }
     .course-card h4 {
-      font-size: 18px !important;
+      font-size: 17.5px !important;
       font-weight: 700 !important;
       color: var(--apple-text) !important;
-      margin: 0 0 10px 0 !important;
-      line-height: 1.35 !important;
+      margin: 0 0 8px 0 !important;
+      line-height: 1.4 !important;
       letter-spacing: -0.025em !important;
     }
     .course-card p {
-      font-size: 14px !important;
+      font-size: 14.5px !important;
       color: var(--apple-subtext) !important;
-      margin: 0 0 20px 0 !important;
+      margin: 0 0 16px 0 !important;
       line-height: 1.6 !important;
     }
     .course-card .card-footer {
@@ -411,37 +545,27 @@
       display: flex !important;
       align-items: center !important;
       justify-content: space-between !important;
+      gap: 8px;
       border-top: 1px solid var(--apple-border) !important;
-      padding-top: 14px !important;
+      padding-top: 12px !important;
       margin-top: auto !important;
     }
-    .course-card:hover .card-footer {
-      color: var(--apple-blue-hover) !important;
-    }
 
-    /* Apple Step Roadmap Cards */
     .step-container {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin: 28px 0 44px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+      margin: 24px 0 40px;
     }
     .step-card {
       flex: 1;
-      min-width: 220px;
       background: #fbfbfd;
       border: 1px solid var(--apple-border);
-      border-radius: var(--apple-radius);
-      padding: 24px;
+      border-radius: 18px;
+      padding: 20px;
       box-shadow: 0 4px 16px rgba(0,0,0,0.02);
       text-align: center;
-      transition: all 0.3s;
-    }
-    .step-card:hover {
-      background: #ffffff;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
     }
     .step-num {
       display: inline-block;
@@ -461,212 +585,528 @@
       letter-spacing: -0.02em;
     }
     .step-desc {
-      font-size: 13.5px;
+      font-size: 14px;
       color: var(--apple-subtext);
-      line-height: 1.5;
+      line-height: 1.55;
     }
     .step-arrow {
+      display: none;
       font-size: 18px;
       color: #b0b0b5;
       font-weight: 700;
     }
 
     /* ==================================================
-       6. Apple Style Data Tables & Elements
+       6. Tables (가로 스크롤 래퍼) & Elements
     ================================================== */
-    table {
+    .markdown-section .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 22px 0;
+      border: 1px solid var(--apple-border);
+      border-radius: 14px;
+      background: #ffffff;
+    }
+    .markdown-section table {
+      display: table !important;
       width: 100% !important;
       border-collapse: separate !important;
       border-spacing: 0 !important;
-      margin: 28px 0 !important;
+      margin: 22px 0 !important;
       border: 1px solid var(--apple-border) !important;
       border-radius: 14px !important;
-      overflow: hidden !important;
-      font-size: 14.5px !important;
+      font-size: 14px !important;
       background: #ffffff !important;
+      overflow: visible !important;
     }
-    th {
+    .markdown-section .table-wrap > table {
+      margin: 0 !important;
+      border: none !important;
+      border-radius: 0 !important;
+    }
+    .markdown-section th {
       background: #f5f5f7 !important;
       color: var(--apple-text) !important;
       font-weight: 700 !important;
       text-align: center !important;
-      padding: 14px 16px !important;
+      padding: 11px 12px !important;
+      border: none !important;
       border-bottom: 1px solid var(--apple-border) !important;
+      line-height: 1.5 !important;
+      min-width: 4.5em;
     }
-    td {
-      padding: 12px 16px !important;
+    .markdown-section td {
+      padding: 10px 12px !important;
+      border: none !important;
       border-bottom: 1px solid var(--apple-border) !important;
-      line-height: 1.65 !important;
+      line-height: 1.6 !important;
       color: #333336 !important;
+      vertical-align: top;
     }
-    tr:last-child td {
+    .markdown-section td + td,
+    .markdown-section th + th {
+      border-left: 1px solid var(--apple-border) !important;
+    }
+    .markdown-section tr {
+      border-top: none !important;
+      background: transparent !important;
+    }
+    .markdown-section tr:last-child td {
       border-bottom: none !important;
     }
-    tr:hover td {
-      background-color: #fbfbfd !important;
-    }
 
-    blockquote {
+    .markdown-section blockquote {
       background: #f5f5f7 !important;
       border-left: 4px solid var(--apple-blue) !important;
-      padding: 16px 22px !important;
-      margin: 24px 0 !important;
+      padding: 14px 18px !important;
+      margin: 22px 0 !important;
       border-radius: 0 12px 12px 0 !important;
       color: #333336 !important;
     }
+    .markdown-section blockquote p {
+      font-weight: 500 !important;
+    }
 
-    /* Interactive Quiz Details */
-    details {
+    /* Interactive Quiz Details (기존 30제) */
+    .markdown-section details {
       background: #fbfbfd !important;
       border: 1px solid var(--apple-border) !important;
       border-radius: 14px !important;
-      padding: 16px 20px !important;
-      margin: 18px 0 26px !important;
-      transition: all 0.2s ease !important;
+      padding: 0 18px !important;
+      margin: 14px 0 24px !important;
     }
-    details[open] {
+    .markdown-section details[open] {
       background: #ffffff !important;
       border-color: rgba(0, 113, 227, 0.4) !important;
       box-shadow: 0 4px 16px rgba(0, 113, 227, 0.06) !important;
+      padding-bottom: 12px !important;
     }
-    summary {
+    .markdown-section summary {
       font-weight: 700 !important;
       color: var(--apple-blue) !important;
       cursor: pointer !important;
       user-select: none !important;
+      -webkit-user-select: none !important;
       outline: none !important;
       font-size: 15px !important;
-    }
-    summary:hover {
-      color: var(--apple-blue-hover) !important;
+      padding: 14px 0 !important;
     }
 
-    /* Apple Blue CTA Buttons (Lesson Footer Nav) */
+    /* Lesson Footer Nav (CTA Buttons) */
     .lesson-footer-nav {
-      margin-top: 60px;
-      padding-top: 28px;
+      margin-top: 52px;
+      padding-top: 24px;
       border-top: 1px solid var(--apple-border);
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 14px;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
     }
     .complete-btn {
       background: var(--apple-blue);
       color: #ffffff !important;
-      padding: 10px 22px;
-      border-radius: 20px;
-      font-weight: 600;
-      font-size: 14px;
-      text-decoration: none;
+      min-height: 48px;
+      padding: 12px 20px;
+      border-radius: 24px;
+      font-weight: 600 !important;
+      font-size: 15px;
+      text-decoration: none !important;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
+      text-align: center;
       gap: 6px;
-      transition: all 0.2s cubic-bezier(0, 0, 0.5, 1);
+      transition: transform 0.15s cubic-bezier(0, 0, 0.5, 1), background-color 0.2s;
       box-shadow: 0 2px 8px rgba(0, 113, 227, 0.25);
+      -webkit-tap-highlight-color: transparent;
     }
-    .complete-btn:hover {
-      background: var(--apple-blue-hover);
-      transform: scale(1.02);
-      box-shadow: 0 4px 12px rgba(0, 113, 227, 0.35);
+    .complete-btn:active {
+      transform: scale(0.98);
     }
     .complete-btn.secondary {
       background: #f5f5f7;
       color: var(--apple-text) !important;
       box-shadow: none;
     }
-    .complete-btn.secondary:hover {
-      background: #e8e8ed;
+
+    /* ==================================================
+       7. 실전 모의고사 + 채점 (mock-exam)
+    ================================================== */
+    .mx-loading, .mx-error {
+      color: var(--apple-subtext) !important;
+      text-align: center;
+      padding: 32px 0;
+    }
+    .mx-list {
+      list-style: none;
+      padding: 0 !important;
+      margin: 0;
+    }
+    .mx-q {
+      background: #fbfbfd;
+      border: 1px solid var(--apple-border);
+      border-radius: 18px;
+      padding: 18px 16px 16px;
+      margin: 0 0 16px !important;
+      scroll-margin-top: calc(var(--header-h) + var(--safe-top) + 16px);
+    }
+    .mx-q-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .mx-num {
+      font-weight: 800;
+      font-size: 15px;
+      color: var(--apple-text);
+    }
+    .mx-unit {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--apple-blue);
+      background: rgba(0, 113, 227, 0.08);
+      padding: 2px 8px;
+      border-radius: 8px;
+    }
+    .mx-state {
+      margin-left: auto;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .mx-q.is-correct .mx-state { color: var(--apple-green); }
+    .mx-q.is-wrong .mx-state { color: var(--apple-red); }
+    .markdown-section .mx-q-text {
+      font-size: 16.5px !important;
+      font-weight: 600;
       color: var(--apple-text) !important;
+      line-height: 1.65 !important;
+      margin: 0 0 12px !important;
+    }
+    .mx-choices {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .mx-choice {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      min-height: 48px;
+      padding: 12px 14px;
+      border: 1.5px solid rgba(0, 0, 0, 0.1);
+      border-radius: 14px;
+      background: #ffffff;
+      cursor: pointer;
+      font-size: 15.5px;
+      line-height: 1.55;
+      color: #333336;
+      transition: border-color 0.15s, background-color 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .mx-choice input {
+      position: absolute;
+      opacity: 0;
+      width: 1px;
+      height: 1px;
+      pointer-events: none;
+    }
+    .mx-mark {
+      flex: 0 0 auto;
+      font-weight: 700;
+      color: var(--apple-subtext);
+    }
+    .mx-text {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    .mx-choice.is-selected {
+      border-color: var(--apple-blue);
+      background: rgba(0, 113, 227, 0.06);
+    }
+    .mx-choice.is-selected .mx-mark {
+      color: var(--apple-blue);
+    }
+    .mx-choice:focus-within {
+      box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.18);
+    }
+    .mx-graded .mx-choice {
+      cursor: default;
+    }
+    .mx-choice.is-answer {
+      border-color: var(--apple-green);
+      background: rgba(26, 127, 55, 0.07);
+    }
+    .mx-choice.is-answer .mx-mark { color: var(--apple-green); }
+    .mx-choice.is-picked-wrong {
+      border-color: var(--apple-red);
+      background: rgba(215, 0, 21, 0.05);
+      text-decoration: line-through;
+      text-decoration-color: rgba(215, 0, 21, 0.5);
+    }
+    .mx-choice.is-picked-wrong .mx-mark { color: var(--apple-red); }
+    .mx-fb {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(0, 0, 0, 0.12);
+    }
+    .mx-fb-head {
+      font-weight: 800;
+      font-size: 14.5px;
+      margin-bottom: 6px;
+    }
+    .mx-fb-head.ok { color: var(--apple-green); }
+    .mx-fb-head.ng { color: var(--apple-red); }
+    .markdown-section .mx-fb-explain {
+      font-size: 15px !important;
+      margin: 0 0 8px !important;
+    }
+    .markdown-section .mx-fb-quote {
+      margin: 8px 0 0 !important;
+      padding: 10px 14px !important;
+      font-size: 14.5px;
+    }
+    .markdown-section .mx-fb-quote p {
+      font-size: 14.5px !important;
+      margin: 0 0 6px !important;
+      white-space: pre-line;
+    }
+    .mx-fb-quote cite {
+      display: block;
+      font-style: normal;
+      font-size: 13px;
+      color: var(--apple-subtext);
+    }
+    .mx-wrong-only .mx-q.is-correct {
+      display: none;
     }
 
-    /* Mobile Responsive */
-    @media (max-width: 900px) {
-      .sidebar {
-        left: -300px;
+    .mx-bar {
+      position: sticky;
+      bottom: 0;
+      z-index: 5;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin: 8px -6px 0;
+      padding: 10px 6px calc(10px + var(--safe-bottom));
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: saturate(180%) blur(16px);
+      -webkit-backdrop-filter: saturate(180%) blur(16px);
+      border-top: 1px solid var(--apple-border);
+    }
+    .mx-bar button, .mx-actions button {
+      min-height: 48px;
+      border-radius: 24px;
+      border: 0;
+      font-size: 15.5px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 0 18px;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform 0.15s;
+    }
+    .mx-bar button:active, .mx-actions button:active {
+      transform: scale(0.98);
+    }
+    .mx-progress {
+      flex: 1 1 auto;
+      background: #f5f5f7;
+      color: var(--apple-text);
+    }
+    .mx-submit, .mx-primary {
+      flex: 1 1 auto;
+      background: var(--apple-blue);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(0, 113, 227, 0.25);
+    }
+    .mx-secondary {
+      background: #f5f5f7;
+      color: var(--apple-text);
+    }
+
+    .mx-result {
+      background: #ffffff;
+      border: 1.5px solid rgba(0, 113, 227, 0.35);
+      border-radius: 20px;
+      padding: 22px 18px 18px;
+      margin: 0 0 24px;
+      box-shadow: 0 6px 24px rgba(0, 113, 227, 0.08);
+      scroll-margin-top: calc(var(--header-h) + var(--safe-top) + 16px);
+    }
+    .mx-score {
+      text-align: center;
+      font-size: 15px;
+      color: var(--apple-subtext);
+      font-weight: 600;
+    }
+    .mx-score b {
+      display: block;
+      font-size: 52px;
+      line-height: 1.1;
+      font-weight: 800;
+      color: var(--apple-text);
+      letter-spacing: -0.04em;
+    }
+    .mx-units {
+      list-style: none;
+      padding: 0 !important;
+      margin: 18px 0 16px !important;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .markdown-section .mx-units li {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2px 10px;
+      align-items: center;
+      font-size: 14px !important;
+      line-height: 1.45 !important;
+      margin: 0 !important;
+    }
+    .mx-units .mx-u-bar {
+      grid-column: 1 / -1;
+      height: 6px;
+      border-radius: 3px;
+      background: #ececf0;
+      overflow: hidden;
+    }
+    .mx-units .mx-u-bar i {
+      display: block;
+      height: 100%;
+      background: var(--apple-blue);
+      border-radius: 3px;
+    }
+    .mx-units .mx-u-score {
+      font-weight: 700;
+      color: var(--apple-text);
+      white-space: nowrap;
+    }
+    .mx-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .mx-actions button {
+      flex: 1 1 140px;
+    }
+    .markdown-section .mx-history {
+      margin: 14px 0 0 !important;
+      font-size: 13px !important;
+      color: var(--apple-subtext) !important;
+      text-align: center;
+    }
+
+    /* ==================================================
+       8. Breakpoints
+    ================================================== */
+    /* hover가 되는 기기(PC/트랙패드)에서만 hover 효과 — iOS 탭 후 눌린 채로 남는 현상 방지 */
+    @media (hover: hover) and (pointer: fine) {
+      .menu-btn:hover { background: rgba(0, 0, 0, 0.05); }
+      .sidebar-nav a:hover {
+        background-color: rgba(0, 0, 0, 0.04) !important;
+        color: var(--apple-blue) !important;
       }
+      .course-card:hover {
+        transform: translateY(-4px) !important;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08) !important;
+        background: #ffffff !important;
+        border-color: rgba(0, 113, 227, 0.3) !important;
+      }
+      .complete-btn:hover { background: var(--apple-blue-hover); }
+      .complete-btn.secondary:hover { background: #e8e8ed; }
+      .mx-graded .mx-choice:hover { border-color: inherit; }
+      .mx-choice:hover { border-color: rgba(0, 113, 227, 0.5); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* 아이패드 세로 · 큰 폰 가로 */
+    @media (min-width: 640px) {
+      .header-logo { font-size: 15.5px; }
+      .header-badge { display: inline-block; }
       .content {
-        left: 0 !important;
-        padding: 20px 16px 80px !important;
+        padding: calc(var(--header-h) + var(--safe-top) + 24px) calc(24px + var(--safe-right)) calc(80px + var(--safe-bottom)) calc(24px + var(--safe-left)) !important;
+        background-color: var(--apple-bg);
       }
       .markdown-section {
-        padding: 28px 20px !important;
-        border-radius: 16px !important;
+        max-width: 900px !important;
+        margin: 0 auto !important;
+        padding: 40px 40px 48px !important;
+        border: 1px solid var(--apple-border) !important;
+        border-radius: 24px !important;
+        box-shadow: 0 4px 28px rgba(0, 0, 0, 0.04) !important;
       }
-      .apple-hero-title {
-        font-size: 28px;
+      .markdown-section h1 { font-size: 30px !important; }
+      .markdown-section h2 { font-size: 23px !important; margin-top: 50px !important; }
+      .markdown-section h3 { font-size: 19px !important; }
+      .apple-hero { padding: 28px 0 24px; }
+      .apple-hero-title { font-size: 34px; }
+      .apple-hero-desc { font-size: 17px; }
+      .lecture-header-box { padding: 30px 32px !important; }
+      .lecture-header-box h2 { font-size: 25px !important; }
+      .course-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+      .step-container { flex-direction: row; flex-wrap: wrap; }
+      .step-card { min-width: 200px; }
+      .markdown-section table { font-size: 14.5px !important; }
+      .markdown-section th { padding: 13px 16px !important; }
+      .markdown-section td { padding: 12px 16px !important; }
+      .lesson-footer-nav { flex-direction: row; flex-wrap: wrap; justify-content: space-between; align-items: center; }
+      .mx-q { padding: 22px 22px 20px; }
+      .mx-result { padding: 26px 26px 22px; }
+      .mx-bar { margin: 8px -12px 0; padding-left: 12px; padding-right: 12px; }
+    }
+
+    /* 아이패드 가로 · PC: 사이드바 고정 */
+    @media (min-width: 1024px) {
+      .menu-btn, .drawer-backdrop { display: none !important; }
+      .global-header { padding-left: calc(24px + var(--safe-left)); padding-right: calc(24px + var(--safe-right)); }
+      .header-stats { display: flex; }
+      .sidebar {
+        top: calc(var(--header-h) + var(--safe-top)) !important;
+        width: var(--sidebar-w) !important;
+        padding: 22px 16px 80px calc(16px + var(--safe-left)) !important;
+        transform: none !important;
+        visibility: visible;
+        box-shadow: none !important;
+        z-index: 10 !important;
       }
-      .course-grid {
-        grid-template-columns: 1fr;
+      body.drawer-open { overflow: auto; }
+      .content {
+        margin-left: var(--sidebar-w) !important;
+        padding: calc(var(--header-h) + var(--safe-top) + 32px) calc(40px + var(--safe-right)) 120px 40px !important;
       }
-      .step-arrow {
-        display: none;
+      .markdown-section {
+        max-width: 940px !important;
+        padding: 48px 52px !important;
       }
-      .step-container {
-        flex-direction: column;
-      }
-      .step-card {
-        width: 100%;
-      }
-      .lesson-footer-nav {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .complete-btn {
-        justify-content: center;
-      }
-      .sidebar-toggle {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        position: fixed !important;
-        bottom: 24px !important;
-        right: 20px !important;
-        left: auto !important;
-        top: auto !important;
-        width: 48px !important;
-        height: 48px !important;
-        background: #0071e3 !important;
-        border-radius: 50% !important;
-        box-shadow: 0 4px 16px rgba(0, 113, 227, 0.4) !important;
-        z-index: 1000 !important;
-        cursor: pointer !important;
-        padding: 0 !important;
-      }
-      .sidebar-toggle span {
-        background-color: #ffffff !important;
-        height: 2px !important;
-        width: 20px !important;
-        margin: 4px auto !important;
-        display: block !important;
-      }
-      .global-header {
-        padding: 0 16px;
-      }
-      .header-logo span:nth-child(2) {
-        font-size: 13.5px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 230px;
-      }
-      .header-badge {
-        display: none;
-      }
-      .header-stats {
-        display: none;
-      }
+      .markdown-section h1 { font-size: 32px !important; }
+      .markdown-section h2 { font-size: 24px !important; }
+      .apple-hero-title { font-size: 38px; }
+      .course-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 22px; }
+      .step-container { flex-wrap: nowrap; align-items: center; }
+      .step-arrow { display: block; }
     }
   </style>
 </head>
 <body>
-  <!-- Apple Top Glass Header -->
+  <!-- Top Glass Header -->
   <header class="global-header">
+    <button class="menu-btn" type="button" aria-label="목차 열기" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
     <a class="header-logo" href="#/">
-      <span>🏥 YUHS</span>
-      <span>2026 간호사 3급 승진고시 공식 학습 센터</span>
-      <span class="header-badge">공식 기출범위</span>
+      <span class="header-icon">📒</span>
+      <span class="header-title">세브란스 간호사 승진시험 개인 학습노트</span>
+      <span class="header-badge">시험범위 핵심정리</span>
     </a>
     <div class="header-stats">
       <div class="progress-pill">
@@ -677,18 +1117,301 @@
       </div>
     </div>
   </header>
+  <div class="drawer-backdrop" aria-hidden="true"></div>
 
-  <div id="app">🏥 세브란스 간호사 3급 승진고시 공식 학습 센터를 불러오는 중입니다...</div>
+  <div id="app">세브란스 간호사 승진시험 개인 학습노트를 불러오는 중입니다...</div>
 
   <script>
+    // 배포할 때마다 바꾸면 브라우저에 남은 이전 검색 색인이 무시됨 (web_builder.py가 자동 갱신)
+    var BUILD = '20261031-0023';
+
+    /* ---------- 드로어(모바일·아이패드 세로 목차) ---------- */
+    (function () {
+      var desktop = window.matchMedia('(min-width: 1024px)');
+
+      function setDrawer(open) {
+        document.body.classList.toggle('drawer-open', open);
+        var btn = document.querySelector('.menu-btn');
+        if (btn) {
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+          btn.setAttribute('aria-label', open ? '목차 닫기' : '목차 열기');
+        }
+      }
+      window.hyeduSetDrawer = setDrawer;
+
+      document.addEventListener('click', function (e) {
+        var t = e.target;
+        if (!t || !t.closest) return;
+        if (t.closest('.menu-btn')) {
+          setDrawer(!document.body.classList.contains('drawer-open'));
+        } else if (t.closest('.drawer-backdrop')) {
+          setDrawer(false);
+        } else if (!desktop.matches && t.closest('.sidebar a[href]')) {
+          setDrawer(false);
+        }
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setDrawer(false);
+      });
+      var onChange = function () { if (desktop.matches) setDrawer(false); };
+      if (desktop.addEventListener) desktop.addEventListener('change', onChange);
+      else if (desktop.addListener) desktop.addListener(onChange);
+    })();
+
+    /* ---------- 표: 좁은 화면에서 표만 가로 스크롤 ---------- */
+    function layoutPlugin(hook) {
+      hook.doneEach(function () {
+        var tables = document.querySelectorAll('.markdown-section table');
+        Array.prototype.forEach.call(tables, function (table) {
+          var parent = table.parentNode;
+          if (parent.classList && parent.classList.contains('table-wrap')) return;
+          var wrap = document.createElement('div');
+          wrap.className = 'table-wrap';
+          parent.insertBefore(wrap, table);
+          wrap.appendChild(table);
+        });
+        window.hyeduSetDrawer(false);
+      });
+    }
+
+    /* ---------- 실전 모의고사 + 채점 ---------- */
+    var MX_UNITS = [
+      null,
+      { title: '연세대학교 의료원 현황 및 주요 현안', doc: 'original/01_교본원본_의료원현황.md' },
+      { title: '연세대학교 의료원 역사 및 가치', doc: 'original/02_교본원본_역사및가치.md' },
+      { title: '보건의료 정책 변화', doc: 'original/03_교본원본_보건의료정책.md' },
+      { title: '인사규정 및 상벌규정', doc: 'original/04_교본원본_인사상벌규정.md' },
+      { title: '자산관리규정', doc: 'original/05_교본원본_자산관리규정.md' },
+      { title: '의료법', doc: 'original/06_교본원본_의료법.md' },
+      { title: '국민건강보험법 및 요양급여기준', doc: 'original/07_교본원본_국민건강보험법.md' }
+    ];
+    var MX_MARKS = ['①', '②', '③', '④', '⑤'];
+
+    function mxEsc(s) {
+      return String(s).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+    function mxFmt(s) {
+      return mxEsc(s).replace(/\*\*([\s\S]+?)\*\*/g, '<strong>$1</strong>');
+    }
+    function mxLoad(id) {
+      try { return JSON.parse(localStorage.getItem('hyedu.mock.' + id)) || {}; } catch (e) { return {}; }
+    }
+    function mxSave(id, state) {
+      try { localStorage.setItem('hyedu.mock.' + id, JSON.stringify(state)); } catch (e) {}
+    }
+    function mxScrollTo(el) {
+      var top = el.getBoundingClientRect().top + window.pageYOffset - 68;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    }
+
+    function mxBuild(root, data) {
+      var id = data.id;
+      var qs = data.questions;
+      var state = mxLoad(id);
+      state.answers = state.answers || {};
+      state.history = state.history || [];
+
+      var html = '<div class="mx-result" hidden></div><ol class="mx-list">';
+      qs.forEach(function (q, i) {
+        var n = i + 1;
+        html += '<li class="mx-q" data-n="' + n + '">' +
+          '<div class="mx-q-meta"><span class="mx-num">문 ' + n + '</span>' +
+          '<span class="mx-unit">제' + q.unit + '단원</span><span class="mx-state"></span></div>' +
+          '<p class="mx-q-text">' + mxFmt(q.q) + '</p>' +
+          '<div class="mx-choices" role="radiogroup" aria-label="문 ' + n + ' 보기">';
+        q.choices.forEach(function (c, j) {
+          var v = j + 1;
+          var sel = state.answers[n] === v;
+          html += '<label class="mx-choice' + (sel ? ' is-selected' : '') + '">' +
+            '<input type="radio" name="' + id + '-q' + n + '" value="' + v + '"' + (sel ? ' checked' : '') + '>' +
+            '<span class="mx-mark">' + MX_MARKS[j] + '</span><span class="mx-text">' + mxFmt(c) + '</span></label>';
+        });
+        html += '</div><div class="mx-fb" hidden></div></li>';
+      });
+      html += '</ol><div class="mx-bar"><button type="button" class="mx-progress"></button>' +
+        '<button type="button" class="mx-submit">채점하기</button></div>';
+      root.innerHTML = html;
+
+      var items = root.querySelectorAll('.mx-q');
+      var bar = root.querySelector('.mx-bar');
+      var result = root.querySelector('.mx-result');
+
+      function answeredCount() {
+        var c = 0;
+        for (var k in state.answers) if (state.answers[k]) c++;
+        return c;
+      }
+      function firstUnanswered() {
+        for (var i = 0; i < qs.length; i++) if (!state.answers[i + 1]) return items[i];
+        return null;
+      }
+      function updateBar() {
+        var p = root.querySelector('.mx-progress');
+        var s = root.querySelector('.mx-submit');
+        if (state.graded) {
+          p.textContent = '결과 보기';
+          s.textContent = '다시 풀기';
+        } else {
+          var c = answeredCount();
+          p.textContent = (c < qs.length ? '미응답 ' + (qs.length - c) + ' · ' : '') + '응답 ' + c + ' / ' + qs.length;
+          s.textContent = '채점하기';
+        }
+      }
+
+      function grade() {
+        var correct = 0;
+        var byUnit = {};
+        qs.forEach(function (q, i) {
+          var n = i + 1;
+          var li = items[i];
+          var picked = state.answers[n];
+          var ok = picked === q.answer;
+          if (ok) correct++;
+          var u = byUnit[q.unit] || (byUnit[q.unit] = { total: 0, ok: 0 });
+          u.total++;
+          if (ok) u.ok++;
+          li.classList.remove('is-correct', 'is-wrong');
+          li.classList.add(ok ? 'is-correct' : 'is-wrong');
+          li.querySelector('.mx-state').textContent = ok ? '⭕ 정답' : (picked ? '❌ 오답' : '⚠️ 미응답');
+          Array.prototype.forEach.call(li.querySelectorAll('.mx-choice'), function (label, j) {
+            var v = j + 1;
+            label.classList.toggle('is-answer', v === q.answer);
+            label.classList.toggle('is-picked-wrong', v === picked && !ok);
+            label.querySelector('input').disabled = true;
+          });
+          var unit = MX_UNITS[q.unit];
+          var fb = li.querySelector('.mx-fb');
+          fb.innerHTML = '<div class="mx-fb-head ' + (ok ? 'ok' : 'ng') + '">정답 ' + MX_MARKS[q.answer - 1] +
+            (picked && !ok ? ' · 내 답 ' + MX_MARKS[picked - 1] : '') + '</div>' +
+            (q.explain ? '<p class="mx-fb-explain">' + mxFmt(q.explain) + '</p>' : '') +
+            '<blockquote class="mx-fb-quote"><p>' + mxFmt(q.quote) + '</p>' +
+            '<cite>근거: ' + mxEsc(q.source) + ' · <a href="#/' + unit.doc + '">교본 원문 보기</a></cite></blockquote>';
+          fb.hidden = false;
+        });
+        root.classList.add('mx-graded');
+        return { correct: correct, byUnit: byUnit, score: Math.round(correct / qs.length * 100) };
+      }
+
+      function showResult(r) {
+        var units = '';
+        Object.keys(r.byUnit).sort().forEach(function (k) {
+          var u = r.byUnit[k];
+          units += '<li><span>제' + k + '단원 ' + mxEsc(MX_UNITS[k].title) + '</span>' +
+            '<span class="mx-u-score">' + u.ok + ' / ' + u.total + '</span>' +
+            '<span class="mx-u-bar"><i style="width:' + Math.round(u.ok / u.total * 100) + '%"></i></span></li>';
+        });
+        var hist = state.history.slice(-5).reverse().map(function (h) {
+          var d = new Date(h.t);
+          return (d.getMonth() + 1) + '/' + d.getDate() + ' ' + h.score + '점';
+        }).join(' · ');
+        var wrong = qs.length - r.correct;
+        result.innerHTML = '<div class="mx-score"><b>' + r.score + '<small style="font-size:22px">점</small></b>' +
+          qs.length + '문항 중 ' + r.correct + '문항 정답</div>' +
+          '<ul class="mx-units">' + units + '</ul>' +
+          '<div class="mx-actions">' +
+          (wrong ? '<button type="button" class="mx-only-wrong mx-primary">틀린 문제만 보기 (' + wrong + ')</button>' : '') +
+          '<button type="button" class="mx-retry mx-secondary">다시 풀기</button></div>' +
+          (hist ? '<p class="mx-history">최근 기록 · ' + hist + '</p>' : '');
+        result.hidden = false;
+      }
+
+      function submit() {
+        var left = qs.length - answeredCount();
+        if (left > 0 && !window.confirm('미응답 ' + left + '문항이 있습니다. 미응답은 오답으로 처리됩니다. 채점할까요?')) {
+          var target = firstUnanswered();
+          if (target) mxScrollTo(target);
+          return;
+        }
+        var r = grade();
+        state.graded = true;
+        state.history.push({ t: Date.now(), score: r.score, correct: r.correct, total: qs.length });
+        state.history = state.history.slice(-20);
+        mxSave(id, state);
+        showResult(r);
+        updateBar();
+        mxScrollTo(result);
+      }
+
+      function reset() {
+        if (!window.confirm('고른 답과 채점 결과를 지우고 처음부터 다시 풀까요? (점수 기록은 남습니다)')) return;
+        state.answers = {};
+        state.graded = false;
+        mxSave(id, state);
+        // 리스너가 중복으로 붙지 않도록 빈 노드로 교체 후 다시 그림
+        var fresh = root.cloneNode(false);
+        fresh.classList.remove('mx-graded', 'mx-wrong-only');
+        root.parentNode.replaceChild(fresh, root);
+        mxBuild(fresh, data);
+        mxScrollTo(fresh);
+      }
+
+      root.addEventListener('change', function (e) {
+        var input = e.target;
+        if (!input || input.type !== 'radio' || state.graded) return;
+        var li = input.closest('.mx-q');
+        var n = Number(li.getAttribute('data-n'));
+        state.answers[n] = Number(input.value);
+        mxSave(id, state);
+        Array.prototype.forEach.call(li.querySelectorAll('.mx-choice'), function (label) {
+          label.classList.toggle('is-selected', label.querySelector('input').checked);
+        });
+        updateBar();
+      });
+
+      root.addEventListener('click', function (e) {
+        var t = e.target.closest ? e.target.closest('button') : null;
+        if (!t || !root.contains(t)) return;
+        if (t.classList.contains('mx-submit')) {
+          if (state.graded) reset(); else submit();
+        } else if (t.classList.contains('mx-progress')) {
+          var target = state.graded ? result : firstUnanswered();
+          if (target) mxScrollTo(target);
+        } else if (t.classList.contains('mx-retry')) {
+          reset();
+        } else if (t.classList.contains('mx-only-wrong')) {
+          var on = root.classList.toggle('mx-wrong-only');
+          t.textContent = on ? '전체 문제 보기' : '틀린 문제만 보기 (' + (qs.length - root.querySelectorAll('.mx-q.is-correct').length) + ')';
+        }
+      });
+
+      if (state.graded) showResult(grade());
+      updateBar();
+    }
+
+    function mockExamPlugin(hook) {
+      hook.doneEach(function () {
+        var roots = document.querySelectorAll('.markdown-section .mock-exam[data-src]');
+        Array.prototype.forEach.call(roots, function (root) {
+          root.innerHTML = '<p class="mx-loading">문항을 불러오는 중입니다…</p>';
+          fetch(root.getAttribute('data-src') + '?v=' + BUILD, { cache: 'no-cache' })
+            .then(function (res) {
+              if (!res.ok) throw new Error(res.status);
+              return res.json();
+            })
+            .then(function (data) { mxBuild(root, data); })
+            .catch(function () {
+              root.innerHTML = '<p class="mx-error">문항을 불러오지 못했습니다. 새로고침 해 주세요.</p>';
+            });
+        });
+      });
+    }
+
     window.$docsify = {
-      name: '🏛️ 2026 승진고시 올패스',
+      name: '세브란스 간호사 승진시험 개인 학습노트',
       loadSidebar: true,
       subMaxLevel: 3,
       auto2top: true,
+      topMargin: 68,
       homepage: 'README.md',
+      // GitHub Pages 캐시(최대 10분) 때문에 이전 문서가 보이는 것을 줄임
+      requestHeaders: {
+        'cache-control': 'max-age=0'
+      },
       search: {
-        maxAge: 86400000,
+        maxAge: 3600000,
+        namespace: 'hy-edu-' + BUILD,
         paths: 'auto',
         placeholder: '🔍 규정, 조항, 빈출 키워드 검색',
         noData: '일치하는 학습 내용이 없습니다.',
@@ -698,12 +1421,33 @@
         buttonText : '복사',
         errorText  : '오류',
         successText: '복사 완료'
-      }
-    }
+      },
+      markdown: function (marked, renderer) {
+        var tokenizer = new marked.Tokenizer();
+        var baseStrong = tokenizer.strong;
+
+        // GFM 기본 규칙은 '~' 한 개도 취소선으로 읽어 "50~80문항 / 50~60분"의 가운데가 지워짐 → '~~'만 취소선
+        tokenizer.del = function (src) {
+          var cap = /^~~(?=[^\s~])([\s\S]*?[^\s~])~~(?!~)/.exec(src);
+          if (cap) return { type: 'del', raw: cap[0], text: cap[1] };
+        };
+
+        // CommonMark 규칙은 **제중원(濟衆院)**으로 처럼 닫는 ** 뒤에 한글 조사가 붙으면 굵게를 닫지 못함
+        tokenizer.strong = function (src, maskedSrc, prevChar) {
+          var cap = /^\*\*(?=[^\s*])([\s\S]*?\S)\*\*(?!\*)/.exec(src);
+          if (cap) return { type: 'strong', raw: cap[0], text: cap[1] };
+          return baseStrong.call(this, src, maskedSrc, prevChar);
+        };
+
+        marked.setOptions({ renderer: renderer, tokenizer: tokenizer });
+        return marked;
+      },
+      plugins: [layoutPlugin, mockExamPlugin]
+    };
   </script>
-  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
-  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4.13.1/lib/docsify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4.13.1/lib/plugins/search.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code@2.1.1/dist/docsify-copy-code.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4.13.1/lib/plugins/zoom-image.min.js"></script>
 </body>
 </html>

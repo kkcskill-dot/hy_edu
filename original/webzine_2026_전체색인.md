@@ -1,13 +1,13 @@
 # 📰 2026년 연세의료원 소식지(제977호 ~ 제994호) 전 권 색인 및 주요 보도
 
-> **안내**: 2026년 연세의료원 소식지(격주 발행, 총 18개 호)의 발행일자, 공식 웹진 링크, 주요 보도 기사 및 핵심 표제 색인입니다.
+> **안내**: 2026년 연세의료원 소식지(격주 발행, 총 18개 호)의 발행일자, 웹진 링크, 주요 보도 기사 및 핵심 표제 색인입니다.
 > 간호사 승급시험 및 의료원 현안 파악에 필요한 최신 팩트를 신속하게 찾아보실 수 있습니다.
 
 ---
 
 ## Ⅰ. 2026년 소식지 전체 호별 요약 일람표
 
-| 호수 | 발행일자 | 표지 및 1면 주요 테마 / 헤드라인 | 공식 웹진 링크 |
+| 호수 | 발행일자 | 표지 및 1면 주요 테마 / 헤드라인 | 웹진 링크 |
 | :---: | :---: | :--- | :---: |
 | **제977호** | 2026-01-05 | 2026 의료원장 신년사 - NEXT SEVERANCE: 미래 100년을 여는 새로운 출발<br>• 재단법인 작은나무 5억원 세브란스 사회사업후원금<br>• 세브란스병원, 수막척수류 필리핀 소녀 치료 | [웹진 보기](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=128251) |
 | **제978호** | 2026-01-19 | 난치성 IDH-돌연변이 신경교종, ‘정상 판정 뇌조직’에서 시작<br>• 복잡한 관상동맥 병변에서 OCT 기반 스텐트 최적화가 안전성 높여<br>• 국내 최초 펄스장 절제술 500례 돌파 | [웹진 보기](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=128421) |
@@ -33,7 +33,7 @@
 ## Ⅱ. 호별 주요 수록 기사 상세 목차
 
 ### 📌 제977호 (2026-01-05)
-- **공식 온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=128251](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=128251)
+- **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=128251](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=128251)
 - **주요 기사 목록**:
   - 2026 의료원장 신년사 - NEXT SEVERANCE: 미래 100년을 여는 새로운 출발
   - 재단법인 작은나무 5억원 세브란스 사회사업후원금
@@ -50,7 +50,7 @@
   - *외 23건의 기사 및 후원 소식*
 
 ### 📌 제978호 (2026-01-19)
-- **공식 온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=128421](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=128421)
+- **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=128421](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=128421)
 - **주요 기사 목록**:
   - 난치성 IDH-돌연변이 신경교종, ‘정상 판정 뇌조직’에서 시작
   - 복잡한 관상동맥 병변에서 OCT 기반 스텐트 최적화가 안전성 높여
@@ -67,7 +67,7 @@
   - *외 24건의 기사 및 후원 소식*
 
 ### 📌 제979호 (2026-02-09)
-- **공식 온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=128644](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=128644)
+- **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=128644](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=128644)
 - **주요 기사 목록**:
   - 의대 김승업 교수, 제19회 아산의학상 수상
   - 박현남 성호전자 회장 10억원
@@ -84,7 +84,7 @@
   - *외 27건의 기사 및 후원 소식*
 
 ### 📌 제980호 (2026-03-02)
-- **공식 온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=128891](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=128891)
+- **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=128891](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=128891)
 - **주요 기사 목록**:
   - 최정상급 논문 발표 증가…의대 학술 경쟁력 ‘껑충’
   - 준오헤어 강윤선 의장 10억원
@@ -101,7 +101,7 @@
   - *외 25건의 기사 및 후원 소식*
 
 ### 📌 제981호 (2026-03-23)
-- **공식 온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129094](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129094)
+- **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129094](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129094)
 - **주요 기사 목록**:
   - 김형범 교수, 임성기연구자상 대상 수상
   - 연세대 간호전문대학원 봉헌
@@ -118,7 +118,7 @@
   - *외 27건의 기사 및 후원 소식*
 
 ### 📌 제982호 (2026-04-06)
-- **공식 온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129245](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129245)
+- **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129245](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129245)
 - **주요 기사 목록**:
   - 2025년 기부금 830억원 돌파, 역대 최고액
   - LDL 콜레스테롤 55mg/dL 미만 치료, 심혈관 사건 감소 입증
@@ -135,7 +135,7 @@
   - *외 25건의 기사 및 후원 소식*
 
 ### 📌 제983호 (2026-04-20)
-- **공식 온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129373](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129373)
+- **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129373](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129373)
 - **주요 기사 목록**:
   - 제중원 141주년 기념 예배
   - 면역항암제 고티스토바트 전이성 편평 비소세포폐암 생존율 개선
@@ -152,7 +152,7 @@
   - *외 25건의 기사 및 후원 소식*
 
 ### 📌 제984호 (2026-05-04)
-- **공식 온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129556](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129556)
+- **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129556](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129556)
 - **주요 기사 목록**:
   - 세브란스병원, 세계 첫 로봇수술 5만례
   - 근적외선 인식 인공망막 장치 개발
@@ -169,7 +169,7 @@
   - *외 19건의 기사 및 후원 소식*
 
 ### 📌 제985호 (2026-05-18)
-- **공식 온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129689](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129689)
+- **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129689](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129689)
 - **주요 기사 목록**:
   - "변치 않는 사명으로 세상을 변화시킨다" 후원행사 'I AM SEVERANCE' 개최
   - 세월을 넘어 다시 만난 의·치·간호대 동문들
@@ -186,7 +186,7 @@
   - *외 23건의 기사 및 후원 소식*
 
 ### 📌 제986호 (2026-06-01)
-- **공식 온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129799](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129799)
+- **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129799](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129799)
 - **주요 기사 목록**:
   - 세브란스병원, 자체 평가팀 ‘세븐팀’ 운영
   - 의료원, 2026년도 우수관리자 및 모범직원 시상식
@@ -203,7 +203,7 @@
   - *외 28건의 기사 및 후원 소식*
 
 ### 📌 제987호 (2026-06-22)
-- **공식 온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130019](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130019)
+- **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130019](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130019)
 - **주요 기사 목록**:
   - 국산 수술로봇 글로벌 경쟁력 강화 나선다
   - 의대 이준원 교수, 차세대 역노화 치료제 개발 착수
@@ -220,7 +220,7 @@
   - *외 33건의 기사 및 후원 소식*
 
 ### 📌 제988호 (2026-07-06)
-- **공식 온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130148](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130148)
+- **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130148](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130148)
 - **주요 기사 목록**:
   - 전영한 하님 회장 7억원 기부, 누적 기부금 45억원 넘어서
   - 세브란스 어린이병원, 개원 20주년 맞아
@@ -237,7 +237,7 @@
   - *외 34건의 기사 및 후원 소식*
 
 ### 📌 제989호 (2026-07-20)
-- **공식 온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130271](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130271)
+- **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130271](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130271)
 - **주요 기사 목록**:
   - 생후 14일·3.14kg 신생아 ‘로봇 카사이 수술’ 성공
   - 임상시험센터, 개소 20주년 맞아 발자취 돌아보고 비전 공유하는 자리 가져
@@ -254,7 +254,7 @@
   - *외 31건의 기사 및 후원 소식*
 
 ### 📌 제990호 (2026-08-10)
-- **공식 온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130519](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130519)
+- **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130519](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130519)
 - **주요 기사 목록**:
   - 신종 감염병 치료제 개발 위한 AI 전임상 플랫폼 구축
   - 자립준비 여성청년 대상, ‘가다실 9가’ 접종 지원
@@ -271,7 +271,7 @@
   - *외 35건의 기사 및 후원 소식*
 
 ### 📌 제991호 (2026-09-07)
-- **공식 온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130794](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130794)
+- **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130794](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130794)
 - **주요 기사 목록**:
   - 중입자치료, 두경부암·육종·재발성 직장암까지 확대
   - 전이 없는 삼중음성유방암 백금계열 항암제 병용이 생존율 높여
@@ -288,7 +288,7 @@
   - *외 33건의 기사 및 후원 소식*
 
 ### 📌 제992호 (2026-09-21)
-- **공식 온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130911](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130911)
+- **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130911](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130911)
 - **주요 기사 목록**:
   - 뇌졸중 위험 높지 않은 시망세동도 항응고제 치료가 합병증 낮춰
   - 연세간호 120년, 세계와 미래를 잇다
@@ -305,7 +305,7 @@
   - *외 32건의 기사 및 후원 소식*
 
 ### 📌 제993호 (2026-10-12)
-- **공식 온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=131065](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=131065)
+- **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=131065](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=131065)
 - **주요 기사 목록**:
   - 고위험 스텐트 환자, 항혈소판 치료 시 허혈·출혈 위험 함께 고려해야
   - HER2 양성 담도암에서 표적·면역항암제 병용 효과 우수
@@ -322,7 +322,7 @@
   - *외 29건의 기사 및 후원 소식*
 
 ### 📌 제994호 (2026-10-26)
-- **공식 온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=131186](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=131186)
+- **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=131186](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=131186)
 - **주요 기사 목록**:
   - 필라델피아에서 되새긴 세브란스 뿌리와 우정
   - 11월 '의료선교의 달' 사랑과 나눔 실천
