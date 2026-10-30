@@ -12,12 +12,25 @@
 
 ## 🎯 3단계 초단기 합격 로드맵
 
-```
-┌─────────────────────────┐    ┌─────────────────────────┐    ┌─────────────────────────┐
-│   [STEP 1] 정규 강의 수강  │ ➔ │  [STEP 2] 빈출 트랩 숙지 │ ➔ │  [STEP 3] 실전 모의고사  │
-│ 교본 7대 핵심과정 완독   │    │ 5대 함정 & 숫자비교표 암기│    │ 30문항 인터랙티브 풀이  │
-└─────────────────────────┘    └─────────────────────────┘    └─────────────────────────┘
-```
+<div class="step-container">
+  <div class="step-card">
+    <span class="step-num">STEP 1</span>
+    <div class="step-title">정규 7대 코스 수강</div>
+    <div class="step-desc">2026 공식 교본 핵심 완독 및 이해</div>
+  </div>
+  <div class="step-arrow">➔</div>
+  <div class="step-card">
+    <span class="step-num">STEP 2</span>
+    <div class="step-title">5대 빈출 트랩 숙지</div>
+    <div class="step-desc">선배 합격자가 꼽은 오답 함정 & 숫자비교표 암기</div>
+  </div>
+  <div class="step-arrow">➔</div>
+  <div class="step-card">
+    <span class="step-num">STEP 3</span>
+    <div class="step-title">실전 모의고사 30제</div>
+    <div class="step-desc">실전 30문항 즉시 채점 및 해설 확인</div>
+  </div>
+</div>
 
 ---
 
