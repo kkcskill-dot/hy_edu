@@ -9,6 +9,9 @@ import re
 from pathlib import Path
 
 from kichul_build import UNIT_PAGES, load_sources, norm
+from collections import Counter
+
+from quiz_auto import items_for
 from quiz_items import IMG_OK, OCR_FIX, QUIZ
 
 UNIT_TITLES = {
@@ -40,10 +43,36 @@ def missing(pages, doc, p, text):
     return [seg for seg in SEP.split(text) if norm(seg) and norm(seg) not in src_n and norm(seg) not in ok]
 
 
+def all_items(pages):
+    """직접 고른 문항(quiz_items) + 교본 문장에서 자동으로 만든 문항(quiz_auto). 자동 문항은 'auto' 표시."""
+    vocab = Counter(re.findall(r"[가-힣]+", "\n".join(v for k, v in pages.items() if k[0].startswith("unit"))))
+    out = {}
+    for u, parts in QUIZ.items():
+        taken = set()
+        for part in parts.values():
+            for it in part:
+                texts = [it.get("s"), it.get("orig")] + [t for _, t in it.get("quotes", [])] + [t for _, t in it.get("rights", [])]
+                if it.get("wrong"):
+                    texts += list(it["wrong"][1:]) if isinstance(it["wrong"], tuple) else []
+                for t in texts:
+                    for seg in SEP.split(fill(t or "")):
+                        if len(seg) >= 12:
+                            taken.add(re.sub(r"\W", "", seg))
+        auto = items_for(u, pages, vocab, taken)
+        doc = f"unit{u:02d}"
+
+        def ok(it):
+            text = fill(it["s"]) if it["t"] in ("blank", "cl") else (it["orig"] or it["s"])
+            return not missing(pages, doc, it["p"], text)
+        # 자동 문항은 원문과 정확히 맞는 것만 씀(안 맞으면 버림) — 직접 고른 문항은 verify 에서 빌드를 멈춤
+        out[u] = {part: list(parts[part]) + [dict(it, auto=True) for it in auto[part] if ok(it)] for part in parts}
+    return out
+
+
 def verify(base: Path):
     pages, _ = load_sources(base)
     errors = []
-    for u, parts in QUIZ.items():
+    for u, parts in all_items(pages).items():
         doc = f"unit{u:02d}"
         for part, items in parts.items():
             for i, it in enumerate(items, 1):
@@ -157,6 +186,8 @@ def page_md(u, counts):
         "<li><b>O/X</b>: 교본 원문 그대로면 O, 한 곳이라도 바뀌었으면 X입니다.</li>"
         "<li><b>5지선다</b>: 근거는 모두 2026 교본 원문입니다. 오답 보기와 X 문장은 원문을 바꾼 것입니다.</li>"
         "<li>채점하면 문항마다 교본 원문과 쪽 번호가 나오고, 쪽 번호를 누르면 e-book 원본 지면이 열립니다.</li>"
+        "<li>문제은행의 상당수는 교본 문장을 그대로 가져와 자동으로 만든 문항입니다. 교본 글자 인식 과정에서 띄어쓰기·글자가 "
+        "틀린 곳이 있을 수 있으니, 이상한 문장은 쪽 번호를 눌러 원본 지면으로 확인하세요.</li>"
         "</ul></div>",
         "",
         '<div data-tabs="panels" hidden></div>',
@@ -174,10 +205,13 @@ def build(base: Path):
     errors = verify(base)
     if errors:
         raise SystemExit("❌ 단원평가 원문 대조 실패:\n  " + "\n  ".join(errors))
+    pages, _ = load_sources(base)
     out_dir = base / "quiz"
     out_dir.mkdir(exist_ok=True)
     total = 0
-    for u, parts in QUIZ.items():
+    n_auto = 0
+    for u, parts in all_items(pages).items():
+        n_auto += sum(1 for part in parts.values() for it in part if it.get("auto"))
         data = {"id": f"u{u:02d}", "title": f"제{u}강 {UNIT_TITLES[u]} 단원평가", "parts": {}}
         for part, _ in PARTS:
             qs = []
@@ -185,6 +219,8 @@ def build(base: Path):
                 q = to_json(u, part, it)
                 key = json.dumps([q["q"], q.get("passage", ""), q["quotes"][0]["text"]], ensure_ascii=False)
                 q = {"id": f"u{u:02d}-{part}-" + hashlib.md5(key.encode("utf-8")).hexdigest()[:8], **q}
+                if it.get("auto"):
+                    q["auto"] = True
                 qs.append(q)
             ids = [q["id"] for q in qs]
             assert len(ids) == len(set(ids)), f"{u}강 {part}: 같은 문항이 두 번 있음"
@@ -193,4 +229,4 @@ def build(base: Path):
         counts = {part: len(parts[part]) for part, _ in PARTS}
         (out_dir / PAGE_NAMES[u]).write_text(page_md(u, counts), encoding="utf-8")
         total += sum(counts.values())
-    print(f"✍️ 단원평가: 7개 단원 {total}문항 원문 대조 통과 → quiz/")
+    print(f"✍️ 단원평가: 7개 단원 {total}문항(자동 추출 {n_auto}) 원문 대조 통과 → quiz/")
