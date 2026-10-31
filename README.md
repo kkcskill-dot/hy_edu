@@ -1,6 +1,6 @@
 <div class="apple-hero">
   <div class="apple-hero-eyebrow">2026 연세대학교 의료원 일반직 간호사 3급 승진고시</div>
-  <h1 class="apple-hero-title">합격을 향한 가장 확실한 길.<br><span>교본 7대 단원 & 2026 소식지 전 권 완벽 마스터.</span></h1>
+  <h1 class="apple-hero-title">시험범위 핵심정리.<br><span>2026 교본 7개 단원 · 2026 소식지 18개 호 · 2023–2025 기출.</span></h1>
   <p class="apple-hero-desc">
     2026 3급 승진교육 교본 7개 단원과 2026년 연세의료원 소식지(제977호~제994호)를 한 곳에 정리했습니다. 2023–2025 기출 복원부터 실전 모의고사까지 원문 쪽 번호와 함께 학습하세요.
   </p>
@@ -8,8 +8,8 @@
 
 <div style="margin: 40px 0 20px;">
   <div style="font-size: 12.5px; font-weight: 700; color: var(--apple-blue); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">COURSE CATALOG</div>
-  <h2 style="margin: 0; border: none; font-size: 26px; font-weight: 700; letter-spacing: -0.025em;">2026 출제범위 전과정. <span style="color: var(--apple-subtext); font-weight: 500;">핵심 8대 코스 카탈로그.</span></h2>
-  <p style="color: var(--apple-subtext); margin-top: 8px; font-size: 15px; margin-bottom: 0;">아래 과목 카드를 클릭하시면 핵심 개념, 빈출 함정 분석, 실전 문제를 즉시 학습하실 수 있습니다.</p>
+  <h2 style="margin: 0; border: none; font-size: 26px; font-weight: 700; letter-spacing: -0.025em;">학습 메뉴. <span style="color: var(--apple-subtext); font-weight: 500;">교본 7개 단원과 연습 도구.</span></h2>
+  <p style="color: var(--apple-subtext); margin-top: 8px; font-size: 15px; margin-bottom: 0;">아래 카드를 누르면 핵심노트 · 슬라이드 강의 · 단원평가 · 모의고사 · 기출 복원으로 바로 이동합니다.</p>
 </div>
 
 <div class="course-grid">
@@ -186,14 +186,14 @@
 
 <div style="margin: 50px 0 20px;">
   <div style="font-size: 12.5px; font-weight: 700; color: var(--apple-blue); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">LEARNING ROADMAP</div>
-  <h2 style="margin: 0; border: none; font-size: 26px; font-weight: 700; letter-spacing: -0.025em;">3단계 초단기 합격 로드맵. <span style="color: var(--apple-subtext); font-weight: 500;">체계적인 고득점 완성.</span></h2>
+  <h2 style="margin: 0; border: none; font-size: 26px; font-weight: 700; letter-spacing: -0.025em;">학습 순서. <span style="color: var(--apple-subtext); font-weight: 500;">읽고 → 확인하고 → 풀어 보기.</span></h2>
 </div>
 
 <div class="step-container">
   <div class="step-card">
     <span class="step-num">STEP 1</span>
     <div class="step-title">정규 7대 코스 수강</div>
-    <div class="step-desc">2026 교본 핵심 완독 및 완벽한 개념 정립</div>
+    <div class="step-desc">핵심노트 · 슬라이드 강의로 7개 단원 학습</div>
   </div>
   <div class="step-arrow">➔</div>
   <div class="step-card">
@@ -211,23 +211,23 @@
 
 <div style="margin: 50px 0 20px;">
   <div style="font-size: 12.5px; font-weight: 700; color: var(--apple-blue); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">SMART LEARNING FEATURES</div>
-  <h2 style="margin: 0; border: none; font-size: 26px; font-weight: 700; letter-spacing: -0.025em;">수험생을 위한 스마트 학습 기능. <span style="color: var(--apple-subtext); font-weight: 500;">시간 대비 효율 극대화.</span></h2>
+  <h2 style="margin: 0; border: none; font-size: 26px; font-weight: 700; letter-spacing: -0.025em;">학습 기능. <span style="color: var(--apple-subtext); font-weight: 500;">아이폰·아이패드에서 쓰기 좋게.</span></h2>
 </div>
 
 <div class="step-container" style="margin-top: 20px;">
   <div class="step-card" style="text-align: left; padding: 24px 28px;">
     <div style="font-size: 24px; margin-bottom: 12px;">🔍</div>
     <div class="step-title" style="font-size: 17px; margin-bottom: 8px;">실시간 키워드 스마트 검색</div>
-    <div class="step-desc">상단 검색창에 <code>15%</code>, <code>70%</code>, <code>보존연한</code>, <code>정직</code>, <code>CCTV</code> 등 핵심 키워드를 입력하면 관련 조항으로 1초 만에 즉시 점프합니다.</div>
+    <div class="step-desc">상단 검색창에 <code>15%</code>, <code>70%</code>, <code>보존연한</code>, <code>정직</code>, <code>CCTV</code> 등 키워드를 입력하면 해당 내용이 있는 문서로 바로 이동합니다.</div>
   </div>
   <div class="step-card" style="text-align: left; padding: 24px 28px;">
     <div style="font-size: 24px; margin-bottom: 12px;">📱</div>
-    <div class="step-title" style="font-size: 17px; margin-bottom: 8px;">완벽한 모바일 최적화</div>
-    <div class="step-desc">출퇴근 셔틀버스나 병동 교대 근무 전후 휴게실에서 스마트폰으로 좌측 메뉴를 열고 닫으며 부담 없이 이동 중 암기가 가능합니다.</div>
+    <div class="step-title" style="font-size: 17px; margin-bottom: 8px;">아이폰·아이패드 우선 화면</div>
+    <div class="step-desc">☰ 메뉴에서 강의 목록과 진도를 보고, 긴 페이지는 상단 탭으로 원하는 부분에 바로 갑니다.</div>
   </div>
   <div class="step-card" style="text-align: left; padding: 24px 28px;">
     <div style="font-size: 24px; margin-bottom: 12px;">🛡️</div>
     <div class="step-title" style="font-size: 17px; margin-bottom: 8px;">원문 쪽 번호 표시</div>
-    <div class="step-desc">핵심노트·모의고사·기출 비교의 문장마다 교본·소식지 쪽 번호를 달았습니다. 쪽 번호를 누르면 e-book 원본 지면이 열립니다.</div>
+    <div class="step-desc">핵심노트·모의고사·기출 비교·단원평가에 교본·소식지 쪽 번호를 달았습니다. 쪽 번호를 누르면 e-book 원본 지면이 열립니다.</div>
   </div>
 </div>
