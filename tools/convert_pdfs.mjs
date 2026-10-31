@@ -12,7 +12,7 @@ const docs = [
   ["unit01", "/original/pdf/unit01_status.pdf"], ["unit02", "/original/pdf/unit02_history.pdf"],
   ["unit03", "/original/pdf/unit03_policy.pdf"], ["unit04", "/original/pdf/unit04_hr.pdf"],
   ["unit05", "/original/pdf/unit05_asset.pdf"], ["unit06", "/original/pdf/unit06_medical_law.pdf"],
-  ["unit07", "/original/pdf/unit07_nhis.pdf"],
+  ["unit07", "/original/pdf/unit07_nhis.pdf"], ["kichul", "/original/pdf/kichul_2023-2025.pdf"],
 ];
 for (const f of (await fs.readdir(REPO + "/data/2026_webzine/pdfs")).sort()) {
   const m = f.match(/^(\d+)호_/);

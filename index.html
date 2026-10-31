@@ -579,6 +579,79 @@
     .markdown-section .note-key li {
       font-size: 15.5px !important;
     }
+    /* 기출 복원 카드 (summary/08) — 메모 그대로 + 2026 교본·소식지 원문 */
+    .markdown-section .kc-list { margin: 10px 0 28px; }
+    .markdown-section .kc-sec {
+      margin: 22px 0 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--apple-subtext);
+    }
+    .markdown-section .kc-item {
+      background: #fff;
+      border: 1px solid var(--apple-border);
+      border-radius: 16px;
+      padding: 12px 14px 10px;
+      margin: 10px 0;
+      scroll-margin-top: 84px;
+    }
+    .markdown-section .kc-top {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px 8px;
+      margin-bottom: 6px;
+    }
+    .markdown-section .kc-no { font-size: 13px; font-weight: 800; color: var(--apple-text); }
+    .markdown-section .kc-area {
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 1px 8px;
+      border-radius: 999px;
+      background: rgba(0, 113, 227, 0.08);
+      color: var(--apple-blue);
+    }
+    .markdown-section .kc-area.news, .markdown-section .kc-area.hist, .markdown-section .kc-area.labor,
+    .markdown-section .kc-area.health, .markdown-section .kc-area.mgmt {
+      background: rgba(255, 149, 0, 0.12);
+      color: #a64b00;
+    }
+    .markdown-section .kc-area.etc { background: rgba(0, 0, 0, 0.05); color: var(--apple-subtext); }
+    .markdown-section a.kc-memo-src {
+      margin-left: auto;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--apple-subtext) !important;
+      text-decoration: none !important;
+      white-space: nowrap;
+    }
+    .markdown-section .kc-memo {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.5;
+      color: var(--apple-text);
+      overflow-wrap: anywhere;
+    }
+    .markdown-section .kc-ref {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: #f0f6ff;
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: var(--apple-text);
+      overflow-wrap: anywhere;
+    }
+    .markdown-section .kc-ref.rel { background: #f5f5f7; color: #3a3a3c; }
+    .markdown-section .kc-ref.none { background: transparent; padding: 2px 0 0; color: var(--apple-subtext); font-size: 13.5px; }
+    .markdown-section .kc-ref-tag {
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--apple-blue);
+      margin-bottom: 2px;
+    }
+    .markdown-section .kc-ref.rel .kc-ref-tag { color: var(--apple-subtext); }
     .markdown-section pre {
       max-width: 100%;
       overflow-x: auto;
@@ -1339,7 +1412,7 @@
 
   <script>
     // 배포 버전 (push 전에 web_builder.py가 갱신하고 version.json에도 같은 값을 씀)
-    var BUILD = '20261031-114458';
+    var BUILD = '20261101-000711';
 
     /* ---------- 배포 후 자동 갱신 (강제 새로고침 불필요) ----------
        GitHub Pages는 10분, nginx는 설정에 따라 그 이상 브라우저가 파일을 캐시할 수 있음.

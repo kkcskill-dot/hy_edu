@@ -2,7 +2,7 @@
   <div class="apple-hero-eyebrow">2026 연세대학교 의료원 일반직 간호사 3급 승진고시</div>
   <h1 class="apple-hero-title">합격을 향한 가장 확실한 길.<br><span>교본 7대 단원 & 2026 소식지 전 권 완벽 마스터.</span></h1>
   <p class="apple-hero-desc">
-    인사팀 출제 범위인 7대 교본과 2026년 연세의료원 소식지(제977호~제994호)의 모든 사실을 단 한 곳에 집약했습니다. 기출 패턴 분석부터 실전 모의고사까지 빈틈없이 학습하세요.
+    2026 3급 승진교육 교본 7개 단원과 2026년 연세의료원 소식지(제977호~제994호)를 한 곳에 정리했습니다. 2023–2025 기출 복원부터 실전 모의고사까지 원문 쪽 번호와 함께 학습하세요.
   </p>
 </div>
 
@@ -16,12 +16,12 @@
 
   <a class="course-card" href="#/summary/08_역대기출분석_및_실전합격가이드.md">
     <div>
-      <span class="card-tag">합격 오리엔테이션 • 필수</span>
-      <h4>🎯 역대 기출패턴 & 선배 합격후기</h4>
-      <p>선배 간호사들이 밝힌 5대 오답 함정(트랩), 1문항 45초 시간 배분법, 직전 10분 체크리스트 수록</p>
+      <span class="card-tag">오리엔테이션 • 기출 복원</span>
+      <h4>🎯 2023–2025 기출 × 2026 교본</h4>
+      <p>기출 복원 메모 149문항을 연도별로 그대로 옮기고, 문항마다 2026 교본·소식지 원문과 쪽 번호를 붙였습니다. 과거 기준과 달라진 내용도 2026 원문으로 확인합니다.</p>
     </div>
     <div class="card-footer">
-      <span>⏱️ 학습시간: 10분</span>
+      <span>📝 기출 149문항</span>
       <span>강의 시작 ➔</span>
     </div>
   </a>
@@ -174,14 +174,14 @@
   <div class="step-arrow">➔</div>
   <div class="step-card">
     <span class="step-num">STEP 2</span>
-    <div class="step-title">5대 빈출 트랩 숙지</div>
-    <div class="step-desc">선배 합격자가 꼽은 오답 함정 & 숫자비교표 암기</div>
+    <div class="step-title">기출 확인</div>
+    <div class="step-desc">2023–2025 기출과 2026 교본 원문 비교</div>
   </div>
   <div class="step-arrow">➔</div>
   <div class="step-card">
     <span class="step-num">STEP 3</span>
-    <div class="step-title">실전 모의고사 30제</div>
-    <div class="step-desc">실전 30문항 즉시 풀이 및 상세 해설 확인</div>
+    <div class="step-title">실전 모의고사 3회</div>
+    <div class="step-desc">60문항 즉시 채점, 근거 원문·쪽 확인</div>
   </div>
 </div>
 
@@ -203,7 +203,7 @@
   </div>
   <div class="step-card" style="text-align: left; padding: 24px 28px;">
     <div style="font-size: 24px; margin-bottom: 12px;">🛡️</div>
-    <div class="step-title" style="font-size: 17px; margin-bottom: 8px;">100% 출제 근거 공개</div>
-    <div class="step-desc">모든 요약 문항은 인사팀 교본 및 2026 소식지 원문에 기반하며, 좌측 원본 교재실에서 원문 전문 및 PDF를 직접 대조·확인할 수 있습니다.</div>
+    <div class="step-title" style="font-size: 17px; margin-bottom: 8px;">원문 쪽 번호 표시</div>
+    <div class="step-desc">핵심노트·모의고사·기출 비교의 문장마다 교본·소식지 쪽 번호를 달았습니다. 쪽 번호를 누르면 e-book 원본 지면이 열립니다.</div>
   </div>
 </div>

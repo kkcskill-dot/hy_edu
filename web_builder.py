@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import json
 import re
+import sys
 from datetime import datetime
 from pathlib import Path
 
@@ -33,6 +34,9 @@ def build_ebook_index():
         if doc_id in titles:
             title, sub = titles[doc_id]
             group = "승진교육 교본"
+        elif doc_id == "kichul":
+            title, sub = "2023–2025 기출 복원 메모", "연도별 기출 메모 원본"
+            group = "기출 복원 메모"
         elif doc_id in webzines:
             x = webzines[doc_id]
             title, sub = f"연세의료원소식 {x['issue']}호", f"{x['date']} 발행"
@@ -41,7 +45,7 @@ def build_ebook_index():
             continue
         docs.append({"id": doc_id, "title": title, "sub": sub, "group": group,
                      "pages": meta["pages"], "sizes": meta["sizes"]})
-    order = {"승진교육 교본": 0, "2026 연세의료원 소식지": 1}
+    order = {"승진교육 교본": 0, "기출 복원 메모": 1, "2026 연세의료원 소식지": 2}
     docs.sort(key=lambda d: (order[d["group"]], d["id"]))
     (EBOOK_DIR / "index.json").write_text(
         json.dumps({"groups": list(order), "docs": docs}, ensure_ascii=False, separators=(",", ":")),
@@ -66,6 +70,11 @@ def build():
             assert 1 <= q["answer"] <= 4, f"{path.name} 문{i}: 정답 번호 오류"
             assert q.get("quote") and q.get("source"), f"{path.name} 문{i}: 원문 근거 누락"
         print(f"   {path.name}: {len(data['questions'])}문항 확인")
+
+    # 1-1. 기출 페이지: 메모·2026 근거를 원문과 대조한 뒤 생성 (tools/kichul_items.py)
+    sys.path.insert(0, str(BASE_DIR / "tools"))
+    import kichul_build
+    kichul_build.build(BASE_DIR)
 
     # 1-2. 필수 기능 코드가 실수로 지워지지 않았는지 확인 (모바일 메뉴·진도·채점·자동 갱신)
     html = INDEX_HTML.read_text(encoding="utf-8")
