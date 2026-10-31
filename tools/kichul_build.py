@@ -108,9 +108,10 @@ def ref_html(doc, page, quote, kind):
             f'<a class="src" href="reader.html?doc={doc}&amp;p={page}">{label}</a></div>')
 
 
-def item_html(year, no, text, mpage, area, refs):
+def item_html(year, no, text, mpage, area, refs, with_year=False):
     cls = f"u{area}" if isinstance(area, int) else AREA_CLASS[area]
-    head = (f'<div class="kc-top"><span class="kc-no">{no_label(no)}</span>'
+    label = (f"{year} · " if with_year else "") + no_label(no)
+    head = (f'<div class="kc-top"><span class="kc-no">{label}</span>'
             f'<span class="kc-area {cls}">{esc(AREAS[area])}</span>'
             f'<a class="kc-memo-src" href="reader.html?doc=kichul&amp;p={mpage}">메모 p.{mpage}</a></div>')
     body = f'<div class="kc-memo">{esc(text)}</div>'
@@ -189,10 +190,45 @@ def render():
     return "\n".join(out)
 
 
+START, END = "<!-- kichul:start -->", "<!-- kichul:end -->"
+
+
+def unit_block(u):
+    """핵심노트 끝의 '기출 체크': 이 단원 주제이거나 이 단원 교본을 근거로 단 기출 문항."""
+    doc = f"unit{u:02d}"
+    its = [it for it in ITEMS if it[4] == u or any(r[0] == doc for r in it[5])]
+    rows = [START, "", f"## 🎯 기출 체크 (2023–2025 · {len(its)}문항)", "",
+            '<div class="kc-list kc-unit-block">'
+            '<p class="kc-intro">이 단원 주제로 나온 2023–2025 기출 메모입니다. 메모는 그대로 두고, 아래에 2026 교본 원문을 붙였습니다. '
+            '본문 쪽 번호 옆 <b>기출</b> 표시를 누르면 해당 문항으로 옵니다. '
+            f'<a href="#/{OUT_NAME}">기출 전체 보기</a></p>']
+    rows += [item_html(*it, with_year=True) for it in its]
+    rows += ["</div>", "", END]
+    return "\n".join(rows), len(its)
+
+
+def inject(base: Path):
+    total = 0
+    for u, rel in UNIT_PAGES.items():
+        path = base / rel
+        text = path.read_text(encoding="utf-8")
+        block, n = unit_block(u)
+        total += n
+        if START in text:
+            text = re.sub(re.escape(START) + r".*?" + re.escape(END), lambda m: block, text, flags=re.S)
+        else:
+            # 핵심노트 끝의 '🧠' 암기표 바로 앞에 넣음
+            assert "\n## 🧠" in text, rel
+            text = text.replace("\n## 🧠", "\n" + block + "\n\n## 🧠", 1)
+        path.write_text(text, encoding="utf-8")
+    return total
+
+
 def build(base: Path):
     errors = verify(base)
     if errors:
         raise SystemExit("❌ 기출 데이터 대조 실패:\n  " + "\n  ".join(errors))
     (base / OUT_NAME).write_text(render(), encoding="utf-8")
+    print(f"🎯 단원 핵심노트 '기출 체크': {inject(base)}문항 연결")
     n_ref = sum(len(it[5]) for it in ITEMS)
     print(f"🎯 기출 페이지: {len(ITEMS)}문항 · 2026 근거 {n_ref}개 원문 대조 통과 → {OUT_NAME}")

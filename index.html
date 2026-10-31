@@ -696,6 +696,29 @@
       margin-bottom: 2px;
     }
     .markdown-section .kc-ref.rel .kc-ref-tag { color: var(--apple-subtext); }
+    .markdown-section .kc-intro { font-size: 14.5px; color: var(--apple-subtext); margin: 0 0 10px; }
+    .markdown-section .kc-badge {
+      display: inline-block;
+      margin-left: 3px;
+      padding: 0 6px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255, 149, 0, 0.16);
+      color: #a64b00;
+      font: inherit;
+      font-size: 0.68em;
+      font-weight: 800;
+      line-height: 1.7;
+      vertical-align: 0.12em;
+      white-space: nowrap;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .markdown-section .kc-item.is-flash { animation: kc-flash 1.8s ease; }
+    @keyframes kc-flash {
+      0%, 45% { box-shadow: 0 0 0 3px rgba(255, 149, 0, 0.6); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 149, 0, 0); }
+    }
     .markdown-section pre {
       max-width: 100%;
       overflow-x: auto;
@@ -1504,7 +1527,7 @@
 
   <script>
     // 배포 버전 (push 전에 web_builder.py가 갱신하고 version.json에도 같은 값을 씀)
-    var BUILD = '20261101-003924';
+    var BUILD = '20261101-004044';
 
     /* ---------- 배포 후 자동 갱신 (강제 새로고침 불필요) ----------
        GitHub Pages는 10분, nginx는 설정에 따라 그 이상 브라우저가 파일을 캐시할 수 있음.
@@ -1922,6 +1945,37 @@
       Array.prototype.forEach.call(b.parentNode.querySelectorAll('button'), function (x) { x.classList.toggle('is-active', x === b); });
     });
 
+    /* ---------- 핵심노트: 기출이 나온 쪽 번호 옆에 '기출' 표시 ---------- */
+    function kichulBadges() {
+      var sec = document.querySelector('.markdown-section');
+      if (!sec || !sec.querySelector('.kc-unit-block')) return;
+      var map = {};
+      Array.prototype.forEach.call(sec.querySelectorAll('.kc-item'), function (card) {
+        Array.prototype.forEach.call(card.querySelectorAll('a.src'), function (a) {
+          var k = a.getAttribute('href');
+          if ((map[k] = map[k] || []).indexOf(card) < 0) map[k].push(card);
+        });
+      });
+      Array.prototype.forEach.call(sec.querySelectorAll('a.src'), function (a) {
+        var list = map[a.getAttribute('href')];
+        if (!list || a.closest('.kc-item') || (a.nextElementSibling && a.nextElementSibling.classList.contains('kc-badge'))) return;
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'kc-badge';
+        b.textContent = '기출' + (list.length > 1 ? ' ' + list.length : '');
+        b.setAttribute('aria-label', '이 쪽에서 나온 기출 ' + list.length + '문항 보기');
+        b.addEventListener('click', function () {
+          window.scrollTo(0, list[0].getBoundingClientRect().top + window.pageYOffset - headerHeight() - 64);
+          list.forEach(function (c) {
+            c.classList.remove('is-flash');
+            void c.offsetWidth;
+            c.classList.add('is-flash');
+          });
+        });
+        a.parentNode.insertBefore(b, a.nextSibling);
+      });
+    }
+
     /* ---------- 표: 좁은 화면에서 표만 가로 스크롤 ---------- */
     function layoutPlugin(hook) {
       // 자동 갱신으로 다시 열렸으면 읽던 위치로 복귀
@@ -1945,6 +1999,7 @@
           parent.insertBefore(wrap, table);
           wrap.appendChild(table);
         });
+        kichulBadges();
         pageTabs();
         window.hyeduSetDrawer(false);
       });

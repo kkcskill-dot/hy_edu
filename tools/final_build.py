@@ -48,7 +48,8 @@ def build(base: Path):
         if not table or not all("reader.html?doc=unit" in l for l in table[2:]):
             raise SystemExit(f"❌ 파이널 암기노트: {u}강 숫자 암기표를 찾지 못했거나 쪽 링크가 없는 줄이 있습니다")
         rows += len(table) - 2
-        out += ["", f"## {u}강 {UNIT_TITLES[u]}", "", *table, "",
+        short = {1: "현황", 2: "역사·가치", 3: "보건의료 정책", 4: "인사·상벌", 5: "자산관리", 6: "의료법", 7: "건강보험법"}[u]
+        out += ["", f"## {u}강 {short}", "", *table, "",
                 f'<p><a href="#/{UNIT_PAGES[u]}">📘 {u}강 핵심노트</a> · <a href="#/quiz/{PAGE_NAMES[u]}">✍️ {u}강 단원평가</a></p>']
     out += ["", '<div class="lesson-footer-nav">',
             '  <a class="complete-btn secondary" href="#/summary/08_역대기출분석_및_실전합격가이드.md">🎯 2023–2025 기출 복원</a>',
