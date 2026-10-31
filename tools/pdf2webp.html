@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>pdf2webp</title>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+</head>
+<body data-state="loading">
+<pre id="log"></pre>
+<script>
+(async function () {
+  var q = new URLSearchParams(location.search);
+  var src = q.get('pdf'), id = q.get('id');
+  var W = +(q.get('width') || 1400), Q = +(q.get('q') || 0.8);
+  var from = +(q.get('from') || 1), to = +(q.get('to') || 0);
+  var log = document.getElementById('log');
+  function say(s) { log.textContent += s + '\n'; }
+  try {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+    var pdf = await pdfjsLib.getDocument({ url: src, disableAutoFetch: false }).promise;
+    var n = pdf.numPages; if (!to || to > n) to = n;
+    document.body.dataset.state = 'running';
+    document.body.dataset.total = n;
+    var sizes = [];
+    for (var i = 1; i <= n; i++) {
+      var page = await pdf.getPage(i);
+      var vp1 = page.getViewport({ scale: 1 });
+      sizes.push([Math.round(vp1.width), Math.round(vp1.height)]);
+      if (i < from || i > to) { page.cleanup(); continue; }
+      var scale = W / vp1.width;
+      var vp = page.getViewport({ scale: scale });
+      var c = document.createElement('canvas');
+      c.width = Math.round(vp.width); c.height = Math.round(vp.height);
+      var ctx = c.getContext('2d');
+      ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, c.width, c.height);
+      await page.render({ canvasContext: ctx, viewport: vp }).promise;
+      var blob = await new Promise(function (r) { c.toBlob(r, 'image/webp', Q); });
+      var name = 'p' + String(i).padStart(3, '0') + '.webp';
+      var res = await fetch('/ebook/' + id + '/' + name, { method: 'PUT', body: blob });
+      if (!res.ok) throw new Error('PUT ' + name + ' ' + res.status);
+      say(name + ' ' + c.width + 'x' + c.height + ' ' + Math.round(blob.size / 1024) + 'KB');
+      document.body.dataset.done = i;
+      page.cleanup(); c.width = c.height = 0;
+    }
+    var meta = { id: id, pages: n, sizes: sizes };
+    await fetch('/ebook/' + id + '/meta.json', { method: 'PUT', body: JSON.stringify(meta) });
+    document.body.dataset.state = 'done';
+    say('DONE ' + n);
+  } catch (e) {
+    document.body.dataset.state = 'error';
+    say('ERROR ' + (e && e.message || e));
+  }
+})();
+</script>
+</body>
+</html>
