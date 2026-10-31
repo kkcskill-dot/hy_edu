@@ -81,6 +81,9 @@ def build():
     # 1-1c. 파이널 숫자 암기노트: 7개 핵심노트의 숫자 암기표(쪽 링크 포함)를 모음
     import final_build
     final_build.build(BASE_DIR)
+    # 1-1d. 슬라이드 강의 데이터: 교본 슬라이드 + 그 쪽 핵심노트 줄
+    import lecture_build
+    lecture_build.build(BASE_DIR)
 
     # 1-2. 필수 기능 코드가 실수로 지워지지 않았는지 확인 (모바일 메뉴·진도·채점·자동 갱신)
     html = INDEX_HTML.read_text(encoding="utf-8")

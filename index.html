@@ -580,7 +580,7 @@
       font-size: 15.5px !important;
     }
     /* ==================================================
-       슬라이드 강의 — 핵심노트를 한 장씩 · 음성 자동 재생 · 구간 확인 문제
+       슬라이드 강의 — 교본 슬라이드 + 핵심노트 자막 읽기 (어두운 강의 화면)
     ================================================== */
     .lec-entry {
       display: flex;
@@ -590,7 +590,7 @@
       margin: -6px 0 22px;
       padding: 12px 14px;
       border-radius: 16px;
-      background: linear-gradient(135deg, #0071e3, #4f46e5);
+      background: linear-gradient(135deg, #0b1220, #1d3b8a 60%, #0a84ff);
       color: #fff;
     }
     .lec-entry .lec-open-btn {
@@ -600,7 +600,7 @@
       border: none;
       border-radius: 999px;
       background: #fff;
-      color: #0040a0;
+      color: #0b1f4d;
       font: inherit;
       font-size: 15.5px;
       font-weight: 800;
@@ -614,121 +614,187 @@
       z-index: 3000;
       display: flex;
       flex-direction: column;
-      background: #f2f2f6;
-      color: var(--apple-text);
+      background: #0e0f12;
+      color: #f5f5f7;
       padding: var(--safe-top) var(--safe-right) 0 var(--safe-left);
+      -webkit-font-smoothing: antialiased;
     }
     .lec-top {
       display: flex;
       align-items: center;
-      gap: 4px;
-      min-height: 52px;
-      padding: 0 6px;
-      background: #fff;
-      border-bottom: 1px solid var(--apple-border);
+      gap: 2px;
+      min-height: 50px;
+      padding: 0 4px;
+      background: #16171b;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
     }
-    .lec-top .lec-close {
-      width: 44px;
+    .lec-top button {
+      flex: 0 0 auto;
+      min-width: 44px;
       height: 44px;
       border: none;
       background: none;
-      font-size: 20px;
-      color: var(--apple-text);
-      cursor: pointer;
-    }
-    .lec-title { flex: 1 1 auto; min-width: 0; font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .lec-count { flex: 0 0 auto; padding-right: 8px; font-size: 13px; font-weight: 700; color: var(--apple-subtext); }
-    .lec-bar { height: 3px; background: rgba(0, 0, 0, 0.06); }
-    .lec-bar i { display: block; width: 0; height: 100%; background: var(--apple-blue); transition: width 0.25s; }
-    .lec-body { flex: 1 1 auto; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 16px 12px 24px; }
-    .lec-card {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 20px 18px 22px;
-      border-radius: 20px;
-      background: #fff;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-    }
-    .markdown-section.lec-md {
-      padding: 0 !important;
-      overflow: visible;
-      font-size: 18px;
-    }
-    .markdown-section.lec-md p, .markdown-section.lec-md li { font-size: 18px !important; line-height: 1.72 !important; }
-    .markdown-section.lec-md li { margin: 7px 0; }
-    .markdown-section.lec-md table { font-size: 15px; }
-    .markdown-section.lec-md .kc-item { margin: 0; }
-    .lec-sec { margin-bottom: 6px; font-size: 13px; font-weight: 700; color: var(--apple-blue); }
-    .lec-sub { margin: 0 0 10px; font-size: 20.5px; font-weight: 800; line-height: 1.42; color: var(--apple-text); }
-    .lec-badge { display: inline-block; margin-bottom: 10px; padding: 3px 10px; border-radius: 999px; background: rgba(0, 113, 227, 0.1); color: var(--apple-blue); font-size: 13px; font-weight: 800; }
-    .lec-hero { margin: 0 0 10px; font-size: 26px; font-weight: 800; line-height: 1.3; letter-spacing: -0.02em; }
-    .markdown-section.lec-md .lec-desc, .markdown-section.lec-md .lec-meta { font-size: 15px !important; color: var(--apple-subtext); }
-    .lec-toc { display: flex; flex-direction: column; gap: 6px; margin: 14px 0; }
-    .lec-toc button, .lec-start button, .lec-links a {
-      display: block;
-      width: 100%;
-      min-height: 44px;
-      padding: 9px 14px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      border-radius: 12px;
-      background: #fff;
-      color: var(--apple-text) !important;
+      color: #f5f5f7;
       font: inherit;
       font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .lec-top .lec-close { font-size: 20px; }
+    .lec-title { flex: 1 1 auto; min-width: 0; font-size: 14.5px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .lec-count { flex: 0 0 auto; padding: 0 8px 0 4px; font-size: 12.5px; font-weight: 700; color: rgba(255, 255, 255, 0.55); }
+    .lec-bar { height: 3px; background: rgba(255, 255, 255, 0.08); }
+    .lec-bar i { display: block; width: 0; height: 100%; background: #0a84ff; transition: width 0.25s; }
+    .lec-body { flex: 1 1 auto; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 12px 12px 24px; }
+    .lv-wrap { max-width: 880px; margin: 0 auto; }
+    .lv-slide, .lv-pagebtn {
+      position: relative;
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: none;
+      border-radius: 12px;
+      background-color: #fff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      cursor: zoom-in;
+    }
+    .lv-slide { aspect-ratio: 1.4528; background-repeat: no-repeat; background-size: 136.99% auto; }
+    .lv-page { display: block; width: 100%; height: auto; }
+    .lv-cover .lv-pagebtn { width: 46%; max-width: 260px; margin: 0 auto; }
+    .lv-zoom {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.55);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .lv-sub {
+      position: absolute;
+      left: 8px;
+      right: 8px;
+      bottom: 8px;
+      padding: 7px 10px;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      font-size: 15px;
       font-weight: 600;
+      line-height: 1.45;
+      text-align: center;
+    }
+    .lv-panel { margin-top: 12px; padding: 14px 14px 16px; border-radius: 16px; background: #1b1c21; }
+    .lv-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-bottom: 10px; font-size: 13px; color: rgba(255, 255, 255, 0.6); }
+    .lv-meta .lv-pg { color: #64d2ff; font-weight: 700; }
+    .lv-kc, .lv-chip {
+      padding: 3px 10px;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255, 159, 10, 0.2);
+      color: #ffb340;
+      font: inherit;
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .lv-notes { margin: 0; padding-left: 1.2em; }
+    .lv-notes li { margin: 0 0 9px; font-size: 16.5px; line-height: 1.62; color: #e6e6eb; }
+    .lv-notes li::marker { color: rgba(255, 255, 255, 0.35); }
+    .lv-notes b { color: #fff; font-weight: 800; }
+    .lv-notes .lv-h { font-weight: 800; color: #64d2ff; }
+    .lv-notes .lv-k { font-weight: 800; color: #ffd60a; }
+    .lv-empty { margin: 0; font-size: 14px; color: rgba(255, 255, 255, 0.55); }
+    .lec .lec-speaking { background: rgba(255, 214, 10, 0.14); box-shadow: -6px 0 0 #ffd60a; border-radius: 4px; }
+    .lv-kicker { font-size: 13px; font-weight: 800; color: #64d2ff; }
+    .lv-title { margin: 4px 0 6px; font-size: 25px; font-weight: 800; line-height: 1.3; letter-spacing: -0.02em; }
+    .lv-desc { margin: 0 0 12px; font-size: 14px; color: rgba(255, 255, 255, 0.62); }
+    .lv-start { display: grid; gap: 8px; margin: 12px 0; }
+    .lv-toc { display: grid; gap: 6px; }
+    .lv-start button, .lv-toc button, .lv-links a, .lv-links button {
+      display: block;
+      width: 100%;
+      min-height: 46px;
+      padding: 10px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      background: #24252b;
+      color: #f5f5f7 !important;
+      font: inherit;
+      font-size: 15px;
+      font-weight: 650;
       text-align: left;
       text-decoration: none !important;
       cursor: pointer;
     }
-    .lec-start { display: grid; gap: 8px; margin-top: 14px; }
-    .lec-start button.primary, .lec-links a.primary { background: var(--apple-blue); border-color: var(--apple-blue); color: #fff !important; text-align: center; font-weight: 800; }
-    .lec-links { display: grid; gap: 8px; margin-top: 16px; }
-    .lec-choices { display: flex; flex-direction: column; gap: 8px; margin: 12px 0; }
-    .lec-choices.is-ox { display: grid; grid-template-columns: 1fr 1fr; }
-    .lec-choice {
+    .lv-start button.primary, .lv-links a.primary { background: #0a84ff; border-color: #0a84ff; text-align: center; font-weight: 800; }
+    .lv-toc button.is-current { border-color: #0a84ff; box-shadow: inset 4px 0 0 #0a84ff; }
+    .lv-links { display: grid; gap: 8px; margin-top: 14px; }
+    .lv-q { margin: 4px 0 12px; font-size: 19px; font-weight: 800; line-height: 1.45; }
+    .lv-passage { margin: 0 0 12px; padding: 10px 12px; border-left: 3px solid #0a84ff; border-radius: 8px; background: rgba(255, 255, 255, 0.05); font-size: 15.5px; line-height: 1.6; }
+    .lv-choices { display: flex; flex-direction: column; gap: 8px; }
+    .lv-choices.is-ox { display: grid; grid-template-columns: 1fr 1fr; }
+    .lv-choice {
       min-height: 50px;
       padding: 11px 14px;
-      border: 1.5px solid rgba(0, 0, 0, 0.12);
+      border: 1.5px solid rgba(255, 255, 255, 0.14);
       border-radius: 14px;
-      background: #fff;
-      color: var(--apple-text);
+      background: #24252b;
+      color: #f5f5f7;
       font: inherit;
-      font-size: 16.5px;
+      font-size: 16px;
       line-height: 1.5;
       text-align: left;
       cursor: pointer;
     }
-    .lec-choices.is-ox .lec-choice { text-align: center; font-size: 24px; font-weight: 800; }
-    .lec-choice.is-answer { border-color: var(--apple-green); background: rgba(26, 127, 55, 0.08); }
-    .lec-choice.is-wrong { border-color: var(--apple-red); background: rgba(215, 0, 21, 0.06); text-decoration: line-through; }
-    .lec-fb-head { font-size: 16px; font-weight: 800; }
-    .lec-fb-head.ok { color: var(--apple-green); }
-    .lec-fb-head.ng { color: var(--apple-red); }
-    .lec-speaking { background: rgba(255, 214, 10, 0.38); border-radius: 6px; box-shadow: 0 0 0 4px rgba(255, 214, 10, 0.38); }
+    .lv-choices.is-ox .lv-choice { text-align: center; font-size: 26px; font-weight: 800; }
+    .lv-choice.is-answer { border-color: #30d158; background: rgba(48, 209, 88, 0.14); }
+    .lv-choice.is-wrong { border-color: #ff453a; background: rgba(255, 69, 58, 0.12); text-decoration: line-through; }
+    .lv-fb { margin-top: 12px; }
+    .lv-fb-head { font-size: 16px; font-weight: 800; }
+    .lv-fb-head.ok { color: #30d158; }
+    .lv-fb-head.ng { color: #ff6961; }
+    .lec .mx-fb-quote { margin: 10px 0 0; padding: 10px 12px; border-left: 3px solid #0a84ff; border-radius: 8px; background: rgba(255, 255, 255, 0.05); }
+    .lec .mx-fb-quote p { margin: 0; font-size: 15px; line-height: 1.6; color: #e6e6eb; }
+    .lec .mx-fb-quote cite { display: block; margin-top: 6px; font-size: 12.5px; font-style: normal; color: rgba(255, 255, 255, 0.55); }
+    .lec a.src { padding: 0 6px; border-radius: 8px; background: rgba(100, 210, 255, 0.14); color: #64d2ff; font-weight: 700; text-decoration: none; }
     .lec-ctrl {
       display: grid;
-      grid-template-columns: 56px 1fr auto 56px;
+      grid-template-columns: 54px 1fr auto 54px;
       gap: 8px;
       padding: 10px 12px calc(10px + var(--safe-bottom));
-      background: #fff;
-      border-top: 1px solid var(--apple-border);
+      background: #16171b;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
     }
     .lec-ctrl button {
       min-height: 48px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
+      border: none;
       border-radius: 14px;
-      background: #fff;
-      color: var(--apple-text);
+      background: #2a2b31;
+      color: #f5f5f7;
       font: inherit;
       font-size: 16px;
       font-weight: 700;
       cursor: pointer;
     }
-    .lec-ctrl .lec-play { background: var(--apple-blue); border-color: var(--apple-blue); color: #fff; }
+    .lec-ctrl .lec-play { background: #0a84ff; }
     .lec-ctrl .lec-rate { padding: 0 12px; }
-    .lec-ctrl button:disabled { opacity: 0.35; }
+    .lec-ctrl button:disabled { opacity: 0.3; }
     .lec-note:empty { display: none; }
-    .lec-note { position: absolute; left: 50%; bottom: calc(80px + var(--safe-bottom)); transform: translateX(-50%); padding: 6px 12px; border-radius: 999px; background: rgba(29, 29, 31, 0.86); color: #fff; font-size: 13px; white-space: nowrap; }
+    .lec-note { position: absolute; left: 50%; bottom: calc(82px + var(--safe-bottom)); max-width: 92%; transform: translateX(-50%); padding: 7px 12px; border-radius: 999px; background: rgba(255, 255, 255, 0.92); color: #111; font-size: 13px; font-weight: 600; text-align: center; }
+    .lv-sheet { position: absolute; inset: 0; z-index: 5; display: flex; align-items: flex-end; background: rgba(0, 0, 0, 0.55); }
+    .lv-sheet[hidden] { display: none; }
+    .lv-sheet-in { width: 100%; max-height: 78%; overflow-y: auto; padding: 14px 14px calc(18px + var(--safe-bottom)); border-radius: 18px 18px 0 0; background: #1b1c21; }
+    .lv-sheet-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; font-size: 16px; font-weight: 800; }
+    .lv-sheet-head button { width: 40px; height: 40px; border: none; background: none; color: #f5f5f7; font-size: 18px; cursor: pointer; }
+    .lv-kc-item { padding: 10px 0; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+    .lv-kc-label { font-size: 12.5px; font-weight: 800; color: #ffb340; }
+    .lv-kc-memo { margin: 2px 0 6px; font-size: 16px; font-weight: 800; }
+    .lv-kc-q { font-size: 14.5px; line-height: 1.6; color: #d8d8de; }
+    .lv-kc-q span { display: block; font-size: 12px; font-weight: 800; color: #64d2ff; }
 
     /* 긴 페이지 상단 탭 — 스크롤해도 헤더 바로 아래에 고정 */
     .page-tabs-wrap {
@@ -1678,7 +1744,7 @@
 
   <script>
     // 배포 버전 (push 전에 web_builder.py가 갱신하고 version.json에도 같은 값을 씀)
-    var BUILD = '20261101-005603';
+    var BUILD = '20261101-011042';
 
     /* ---------- 배포 후 자동 갱신 (강제 새로고침 불필요) ----------
        GitHub Pages는 10분, nginx는 설정에 따라 그 이상 브라우저가 파일을 캐시할 수 있음.
@@ -2127,17 +2193,19 @@
       });
     }
 
-    /* ---------- 슬라이드 강의: 핵심노트를 한 장씩 · 음성 자동 재생 · 구간 확인 문제 ---------- */
+    /* ---------- 슬라이드 강의: 교본 슬라이드를 한 장씩 + 핵심노트 줄을 자막처럼 읽기 + 장마다 확인 문제 ---------- */
     var LEC_RATES = [[1, 1.0], [1.25, 1.18], [1.5, 1.36]];
+    // 교본 지면(1400×1965) 안 슬라이드 상자 위치 → 배경 위치(%) : 가로 13.05~86.05%, 위 12.58~48.38%, 아래 51.12~86.92%
+    var LEC_POS = { top: '48.33% 19.6%', bottom: '48.33% 79.63%' };
     var lec = null;
 
     function lecUnit() {
       var m = decodeURIComponent(location.hash).match(/#\/summary\/0([1-7])_/);
       return m ? Number(m[1]) : 0;
     }
-    function lecText(el) {
+    function lecPlain(el) {
       var c = el.cloneNode(true);
-      Array.prototype.forEach.call(c.querySelectorAll('a.src, .kc-badge, .kc-memo-src'), function (x) { x.parentNode.removeChild(x); });
+      Array.prototype.forEach.call(c.querySelectorAll('a.src, .lv-sub, .lv-zoom'), function (x) { x.parentNode.removeChild(x); });
       return c.textContent.replace(/\s+/g, ' ').trim();
     }
     // 음성으로 읽기 좋게: 쪽 표시·기호·이모지 정리 (내용은 그대로)
@@ -2154,139 +2222,53 @@
       var parts = t.match(/[^,.!?]+[,.!?]?/g) || [t];
       var out = [], cur = '';
       parts.forEach(function (p) {
-        if ((cur + p).length > 140 && cur) { out.push(cur); cur = ''; }
+        if ((cur + p).length > 120 && cur) { out.push(cur); cur = ''; }
         cur += p;
       });
       if (cur.trim()) out.push(cur);
       return out;
     }
-    function lecClone(el) {
-      var c = el.cloneNode(true);
-      Array.prototype.forEach.call(c.querySelectorAll('.kc-badge'), function (x) { x.parentNode.removeChild(x); });
-      Array.prototype.forEach.call(c.querySelectorAll('[id]'), function (x) { x.removeAttribute('id'); });
-      if (c.removeAttribute) c.removeAttribute('id');
-      Array.prototype.forEach.call(c.querySelectorAll('a.anchor'), function (a) {
-        while (a.firstChild) a.parentNode.insertBefore(a.firstChild, a);
-        a.parentNode.removeChild(a);
-      });
-      return c;
+    function lecSavedPos(unit) {
+      try { return Number(localStorage.getItem('hyedu.lec.u' + unit)) || 0; } catch (e) { return 0; }
     }
-    function lecPages(el, unit, into) {
-      Array.prototype.forEach.call(el.querySelectorAll ? el.querySelectorAll('a.src') : [], function (a) {
-        var m = (a.getAttribute('href') || '').match(/doc=unit0(\d)&p=(\d+)/);
-        if (m && Number(m[1]) === unit && into.indexOf(Number(m[2])) < 0) into.push(Number(m[2]));
-      });
+    function lecEntryLabel(unit) {
+      return lecSavedPos(unit) ? '▶ 슬라이드 강의 이어 보기' : '▶ 슬라이드 강의로 보기';
     }
+    function lecImg(doc, p) { return 'ebook/' + doc + '/p' + ('00' + p).slice(-3) + '.webp'; }
 
-    // 핵심노트 화면(이미 그려진 내용)을 장 단위로 나눔
-    function lecBuild(sec, unit, quiz) {
+    // 강의 데이터(lecture/uNN.json) + 단원평가 문제은행 → 장 목록(표지·슬라이드·쪽·확인 문제·끝)
+    function lecPrepare(data, quiz) {
       var slides = [];
-      var sections = [];
+      var toc = [];
       var used = {};
-      var cur = { name: '핵심 요약', pages: [], intro: true };
-      var sub = '';
-      var buf = [];
-      var bufLen = 0;
-      function flush() {
-        if (!buf.length) return;
-        slides.push({ type: 'content', sec: cur.name, sub: sub, nodes: buf });
-        buf = [];
-        bufLen = 0;
-      }
-      function add(node, len, alone) {
-        if (alone || bufLen + len > 320) flush();
-        buf.push(node);
-        bufLen += len;
-        if (alone) flush();
-      }
-      function questions() {
-        if (!quiz || cur.intro || cur.kc || !cur.pages.length) return;
+      var chs = data.chapters || [];
+      var chPage = chs.map(function (c) { return data.steps[c.step].p; });
+      function checks(k) {
+        if (!quiz || k < 0) return;
+        var from = chPage[k];
+        var to = k + 1 < chs.length ? Math.max(from, chPage[k + 1] - 1) : 999;
         var pool = (quiz.parts.ox || []).concat(quiz.parts.mc || []);
         pool.filter(function (q) {
-          return !used[q.id] && q.quotes && q.quotes.some(function (r) { return cur.pages.indexOf(r.p) >= 0; });
+          return !used[q.id] && q.quotes && q.quotes.some(function (r) { return r.p >= from && r.p <= to; });
         }).sort(function (a, b) { return (a.auto ? 1 : 0) - (b.auto ? 1 : 0); }).slice(0, 2).forEach(function (q) {
           used[q.id] = true;
-          slides.push({ type: 'quiz', sec: cur.name, q: q });
+          slides.push({ type: 'quiz', q: q, ch: k });
         });
       }
-      function chunkList(items, tag, wrapClass) {
-        var group = null;
-        var glen = 0;
-        function close() {
-          if (!group) return;
-          var node = group;
-          if (wrapClass) {
-            node = document.createElement('div');
-            node.className = wrapClass;
-            node.appendChild(group);
-          }
-          add(node, glen, true);
-          group = null;
+      var cur = -1;
+      data.steps.forEach(function (st, i) {
+        var k = -1;
+        chs.forEach(function (c, n) { if (c.step <= i) k = n; });
+        if (k !== cur) {
+          checks(cur);
+          for (var n = cur + 1; n <= k; n++) toc.push({ name: chs[n].name, at: slides.length, ch: n });
+          cur = k;
         }
-        Array.prototype.forEach.call(items, function (li) {
-          var len = lecText(li).length;
-          if (group && (group.children.length >= 4 || glen + len > 320)) close();
-          if (!group) { group = document.createElement(tag); glen = 0; }
-          group.appendChild(lecClone(li));
-          glen += len;
-        });
-        close();
-      }
-      Array.prototype.forEach.call(sec.children, function (el) {
-        if (el.matches('.lec-entry, .page-tabs-wrap, .lesson-footer-nav, .lecture-header-box, h1, hr, script, style, [data-tabs]')) return;
-        if (el.tagName === 'H2') {
-          flush();
-          questions();
-          var name = lecText(el);
-          cur = { name: name, pages: [], kc: /기출 체크/.test(name) };
-          lecPages(el, unit, cur.pages);
-          sections.push({ name: name, start: slides.length });
-          sub = '';
-          return;
-        }
-        lecPages(el, unit, cur.pages);
-        if (el.tagName === 'H3' || el.tagName === 'H4') { flush(); sub = lecText(el); return; }
-        if (el.classList.contains('kc-list')) {
-          Array.prototype.forEach.call(el.querySelectorAll('.kc-item'), function (card) { add(lecClone(card), 999, true); });
-          return;
-        }
-        if (el.tagName === 'UL' || el.tagName === 'OL') { chunkList(el.querySelectorAll(':scope > li'), el.tagName); return; }
-        if (el.classList.contains('note-key')) {
-          var lis = el.querySelectorAll('li');
-          if (lis.length) { chunkList(lis, 'UL', 'note-key'); return; }
-        }
-        var table = el.tagName === 'TABLE' ? el : (el.classList.contains('table-wrap') ? el.querySelector('table') : null);
-        if (table) {
-          var rows = table.querySelectorAll('tbody tr');
-          var head = table.querySelector('thead');
-          for (var i = 0; i < rows.length; i += 5) {
-            var w = document.createElement('div');
-            w.className = 'table-wrap';
-            var t = document.createElement('table');
-            if (head) t.appendChild(lecClone(head));
-            var tb = document.createElement('tbody');
-            Array.prototype.slice.call(rows, i, i + 5).forEach(function (r) { tb.appendChild(lecClone(r)); });
-            t.appendChild(tb);
-            w.appendChild(t);
-            add(w, 999, true);
-          }
-          return;
-        }
-        add(lecClone(el), lecText(el).length, el.tagName !== 'P');
+        slides.push({ type: st.part === 'cover' ? 'cover' : (st.part === 'page' ? 'page' : 'slide'), p: st.p, part: st.part, notes: st.notes, ch: cur });
       });
-      flush();
-      questions();
-      var header = sec.querySelector('.lecture-header-box');
-      var h1 = sec.querySelector('h1');
-      sections.forEach(function (x) { x.start += 1; });
-      slides.unshift({
-        type: 'title', sections: sections,
-        title: h1 ? lecText(h1) : '',
-        badge: header && header.querySelector('.lecture-badge') ? lecText(header.querySelector('.lecture-badge')) : '',
-        desc: header && header.querySelector('p') ? lecText(header.querySelector('p')) : ''
-      });
-      slides.push({ type: 'end' });
-      return slides;
+      checks(cur);
+      slides.push({ type: 'end', ch: cur });
+      return { slides: slides, toc: toc };
     }
 
     function lecVoice() {
@@ -2311,23 +2293,24 @@
       ov.querySelector('.lec-next').disabled = lec.i >= lec.slides.length - 1;
       ov.querySelector('.lec-note').textContent = msg || '';
     }
+    function lecSub(text) {
+      var sub = lec.body.querySelector('.lv-sub');
+      if (!sub) return;
+      sub.hidden = !text;
+      sub.textContent = text || '';
+    }
     function lecMark(el) {
       Array.prototype.forEach.call(lec.body.querySelectorAll('.lec-speaking'), function (x) { x.classList.remove('lec-speaking'); });
-      if (!el) return;
+      if (!el) { lecSub(''); return; }
       el.classList.add('lec-speaking');
       var r = el.getBoundingClientRect();
       var b = lec.body.getBoundingClientRect();
       if (r.top < b.top + 8 || r.bottom > b.bottom - 8) lec.body.scrollTop += r.top - b.top - (b.height - Math.min(r.height, b.height)) / 2;
     }
     function lecReadables() {
-      var md = lec.body.querySelector('.lec-md');
-      var picked = [];
-      Array.prototype.forEach.call(md.querySelectorAll('.lec-hero, .lec-sub, li, p, tbody tr, .kc-memo, .kc-q'), function (el) {
-        if (el.closest('.lec-toc, .lec-start, .lec-links, .lec-fb, .lec-choices, .lec-meta, .lec-badge')) return;
-        if (picked.some(function (p) { return p.contains(el) || el.contains(p); })) return;
-        if (lecSpeakable(lecText(el))) picked.push(el);
+      return Array.prototype.filter.call(lec.body.querySelectorAll('.lv-title, .lv-notes li, .lv-q'), function (el) {
+        return !!lecSpeakable(lecPlain(el));
       });
-      return picked;
     }
     function lecSpeak() {
       speechSynthesis.cancel();
@@ -2341,17 +2324,18 @@
           lecMark(null);
           if (s.type === 'quiz' && !s.picked) { lec.waitQuiz = true; lecPause('답을 고르면 이어서 재생합니다'); return; }
           if (lec.i >= lec.slides.length - 1) { lecPause(); return; }
-          lec.timer = setTimeout(function () { if (lec && lec.playing && token === lec.token) lecGo(lec.i + 1); }, 700);
+          lec.timer = setTimeout(function () { if (lec && lec.playing && token === lec.token) lecGo(lec.i + 1); }, els.length ? 700 : 2600);
           return;
         }
         var el = els[k++];
         lecMark(el);
-        var chunks = lecChunks(lecSpeakable(lecText(el)));
+        var chunks = lecChunks(lecSpeakable(lecPlain(el)));
         var c = 0;
         (function speakChunk() {
           if (!lec || !lec.playing || token !== lec.token) return;
           if (c >= chunks.length) { nextLine(); return; }
           var text = chunks[c++];
+          lecSub(text);
           var u = new SpeechSynthesisUtterance(text);
           u.lang = 'ko-KR';
           var v = lecVoice();
@@ -2369,7 +2353,6 @@
             speakChunk();
           };
           u.onerror = function (e) {
-            // 넘기기·정지로 끊긴 건 무시, 그 밖의 오류는 멈추고 알림(빠르게 넘어가지 않도록)
             if (e && (e.error === 'interrupted' || e.error === 'canceled')) return;
             if (lec && token === lec.token) lecPause('이 기기에서는 음성 재생이 되지 않습니다. ◀ ▶ 로 넘겨 보세요');
           };
@@ -2391,7 +2374,7 @@
       lec.playing = true;
       lec.waitQuiz = false;
       lecWake(true);
-      if (lec.slides[lec.i].type === 'title') { lecGo(lec.saved || 1); return; }
+      if (lec.slides[lec.i].type === 'cover') { lecGo(lec.saved || 1); return; }
       lecControls();
       lecSpeak();
     }
@@ -2405,71 +2388,78 @@
       lecWake(false);
       lecControls(msg);
     }
-    function lecAnswer(md, s) {
+    function lecChName(k) {
+      var t = lec.toc.filter(function (x) { return x.ch === k; })[0];
+      return t ? t.name : '들어가며';
+    }
+    function lecAnswer(s) {
       var q = s.q;
       var ok = s.picked === q.answer;
-      Array.prototype.forEach.call(md.querySelectorAll('.lec-choice'), function (b) {
+      Array.prototype.forEach.call(lec.body.querySelectorAll('.lv-choice'), function (b) {
         var v = Number(b.getAttribute('data-v'));
         b.classList.toggle('is-answer', v === q.answer);
         b.classList.toggle('is-wrong', v === s.picked && !ok);
         b.disabled = true;
       });
       var mark = function (v) { return q.type === 'ox' ? q.choices[v - 1] : MX_MARKS[v - 1]; };
-      var fb = md.querySelector('.lec-fb');
-      fb.innerHTML = '<div class="lec-fb-head ' + (ok ? 'ok' : 'ng') + '">' + (ok ? '⭕ 정답' : '❌ 오답 · 정답 ' + mark(q.answer)) + '</div>' + mxQuotes(q);
+      var fb = lec.body.querySelector('.lv-fb');
+      fb.innerHTML = '<div class="lv-fb-head ' + (ok ? 'ok' : 'ng') + '">' + (ok ? '⭕ 정답' : '❌ 오답 · 정답 ' + mark(q.answer)) + '</div>' + mxQuotes(q);
       fb.hidden = false;
     }
     function lecRender() {
       var s = lec.slides[lec.i];
-      var u = lec.unit;
-      var card = document.createElement('div');
-      card.className = 'lec-card';
-      var md = document.createElement('div');
-      md.className = 'markdown-section lec-md';
-      if (s.type === 'title') {
-        var nq = lec.slides.filter(function (x) { return x.type === 'quiz'; }).length;
-        md.innerHTML = '<span class="lec-badge">제' + u + '강 · 슬라이드 강의</span>' +
-          '<div class="lec-hero">' + mxEsc(s.title) + '</div>' +
-          (s.desc ? '<p class="lec-desc">' + mxEsc(s.desc) + '</p>' : '') +
-          '<p class="lec-meta">' + (lec.slides.length - 2) + '장 · 구간 확인 문제 ' + nq + '개 · 내용은 핵심노트(2026 교본 기준) 그대로</p>' +
-          '<div class="lec-start">' +
+      var d = lec.data;
+      var html = '';
+      if (s.type === 'cover') {
+        var nSlides = lec.slides.filter(function (x) { return x.type === 'slide' || x.type === 'page'; }).length;
+        var nNotes = lec.slides.reduce(function (a, x) { return a + (x.notes ? x.notes.length : 0); }, 0);
+        var nQuiz = lec.slides.filter(function (x) { return x.type === 'quiz'; }).length;
+        html = '<div class="lv-cover"><button type="button" class="lv-pagebtn" data-open="' + s.p + '"><img class="lv-page" src="' + lecImg(d.doc, s.p) + '" alt="제' + d.unit + '강 교본 표지"></button></div>' +
+          '<div class="lv-panel"><div class="lv-kicker">제' + d.unit + '강 · 슬라이드 강의</div><div class="lv-title">' + mxEsc(d.title.replace(/^\[제\d단원\]\s*/, '')) + '</div>' +
+          '<p class="lv-desc">교본 슬라이드 ' + nSlides + '장 · 핵심노트 ' + nNotes + '줄 · 확인 문제 ' + nQuiz + '개<br>슬라이드는 교본 원본, 아래 글은 핵심노트(2026 교본 기준) 그대로입니다.</p>' +
+          '<div class="lv-start">' +
           (lec.saved ? '<button type="button" class="primary" data-go="' + lec.saved + '">이어 보기 (' + lec.saved + ' / ' + (lec.slides.length - 1) + ')</button>' : '') +
           '<button type="button" class="' + (lec.saved ? '' : 'primary') + '" data-go="1" data-play="1">▶ 처음부터 강의 재생 (음성)</button>' +
           '<button type="button" data-go="1">한 장씩 넘겨 보기</button></div>' +
-          '<div class="lec-toc">' + s.sections.map(function (x) {
-            return '<button type="button" data-go="' + x.start + '">' + mxEsc(x.name) + '</button>';
-          }).join('') + '</div>';
-      } else if (s.type === 'content') {
-        md.innerHTML = '<div class="lec-sec">' + mxEsc(s.sec) + '</div>' + (s.sub ? '<div class="lec-sub">' + mxEsc(s.sub) + '</div>' : '');
-        s.nodes.forEach(function (n) { md.appendChild(n.cloneNode(true)); });
+          '<div class="lv-toc">' + lec.toc.map(function (x) { return '<button type="button" data-go="' + x.at + '">' + mxEsc(x.name) + '</button>'; }).join('') + '</div></div>';
+      } else if (s.type === 'slide' || s.type === 'page') {
+        var kc = d.kichul[String(s.p)];
+        var stage = s.type === 'slide'
+          ? '<button type="button" class="lv-slide" data-open="' + s.p + '" aria-label="교본 ' + s.p + '쪽 원본 크게 보기" style="background-image:url(' + lecImg(d.doc, s.p) + ');background-position:' + LEC_POS[s.part] + '"><span class="lv-zoom">원본 ⤢</span><span class="lv-sub" hidden></span></button>'
+          : '<button type="button" class="lv-pagebtn" data-open="' + s.p + '" aria-label="교본 ' + s.p + '쪽 원본 크게 보기"><img class="lv-page" src="' + lecImg(d.doc, s.p) + '" alt="교본 ' + s.p + '쪽"><span class="lv-zoom">원본 ⤢</span><span class="lv-sub" hidden></span></button>';
+        html = stage + '<div class="lv-panel"><div class="lv-meta"><span>' + mxEsc(lecChName(s.ch)) + '</span><span class="lv-pg">교본 p.' + s.p +
+          (s.part === 'top' ? ' · 위' : s.part === 'bottom' ? ' · 아래' : '') + '</span>' +
+          (kc ? '<button type="button" class="lv-kc">기출 ' + kc.length + '</button>' : '') + '</div>' +
+          (s.notes.length ? '<ol class="lv-notes">' + s.notes.map(function (n) { return '<li>' + n + '</li>'; }).join('') + '</ol>'
+            : '<p class="lv-empty">이 슬라이드는 핵심노트에 따로 정리한 줄이 없습니다. 슬라이드를 눌러 원본을 크게 볼 수 있습니다.</p>') + '</div>';
       } else if (s.type === 'quiz') {
         var q = s.q;
-        md.innerHTML = '<div class="lec-sec">' + mxEsc(s.sec) + ' · 확인 문제</div>' +
-          '<div class="lec-sub">' + mxEsc(q.q) + '</div>' +
-          (q.passage ? '<p class="mx-passage">' + mxEsc(q.passage) + '</p>' : '') +
-          '<div class="lec-choices' + (q.type === 'ox' ? ' is-ox' : '') + '">' + q.choices.map(function (c, j) {
-            return '<button type="button" class="lec-choice" data-v="' + (j + 1) + '">' +
-              (q.type === 'ox' ? mxEsc(c) : '<b>' + MX_MARKS[j] + '</b> ' + mxEsc(c)) + '</button>';
-          }).join('') + '</div><div class="lec-fb" hidden></div>';
-        if (s.picked) lecAnswer(md, s);
+        html = '<div class="lv-panel"><div class="lv-meta"><span>' + mxEsc(lecChName(s.ch)) + '</span><span class="lv-pg">확인 문제</span></div>' +
+          '<div class="lv-q">' + mxEsc(q.q) + '</div>' + (q.passage ? '<p class="lv-passage">' + mxEsc(q.passage) + '</p>' : '') +
+          '<div class="lv-choices' + (q.type === 'ox' ? ' is-ox' : '') + '">' + q.choices.map(function (c, j) {
+            return '<button type="button" class="lv-choice" data-v="' + (j + 1) + '">' + (q.type === 'ox' ? mxEsc(c) : '<b>' + MX_MARKS[j] + '</b> ' + mxEsc(c)) + '</button>';
+          }).join('') + '</div><div class="lv-fb" hidden></div></div>';
       } else {
+        var u = lec.unit;
         var nextLec = u < 7 ? document.querySelector('.sidebar-nav a[href*="summary/0' + (u + 1) + '_"]') : null;
         var quizLink = document.querySelector('.sidebar-nav a[href*="quiz/0' + u + '_"]');
-        md.innerHTML = '<span class="lec-badge">제' + u + '강 · 강의 끝</span><div class="lec-hero">수고했습니다 🎉</div>' +
-          '<p class="lec-desc">이 단원을 학습 완료로 표시했습니다. 문제로 확인해 보세요.</p><div class="lec-links">' +
+        html = '<div class="lv-panel"><div class="lv-kicker">제' + u + '강 · 강의 끝</div><div class="lv-title">수고했습니다 🎉</div>' +
+          '<p class="lv-desc">이 단원을 학습 완료로 표시했습니다. 문제로 확인해 보세요.</p><div class="lv-links">' +
           (quizLink ? '<a class="primary" href="' + quizLink.getAttribute('href') + '">✍️ 제' + u + '강 단원평가 풀기</a>' : '') +
           (nextLec ? '<a href="' + nextLec.getAttribute('href').split('?')[0] + '?lec=1">▶ 제' + (u + 1) + '강 강의 보기</a>' : '') +
-          '<button type="button" data-go="0">처음 화면으로</button></div>';
+          '<button type="button" data-go="0">처음 화면으로</button></div></div>';
         markDone(pathKey(location.hash));
         decorateNav();
       }
-      card.appendChild(md);
-      lec.body.innerHTML = '';
-      lec.body.appendChild(card);
+      lec.body.innerHTML = '<div class="lv-wrap">' + html + '</div>';
+      if (s.type === 'quiz' && s.picked) lecAnswer(s);
       lec.body.scrollTop = 0;
       var total = lec.slides.length - 1;
       lec.ov.querySelector('.lec-count').textContent = lec.i + ' / ' + total;
       lec.ov.querySelector('.lec-bar i').style.width = Math.round(lec.i / total * 100) + '%';
+      // 다음 장 이미지 미리 받기
+      var nx = lec.slides[lec.i + 1];
+      if (nx && nx.p) { var im = new Image(); im.src = lecImg(d.doc, nx.p); }
       lecControls();
     }
     function lecGo(n) {
@@ -2482,11 +2472,11 @@
       lecSave();
       if (lec.playing) lecSpeak();
     }
-    function lecSavedPos(unit) {
-      try { return Number(localStorage.getItem('hyedu.lec.u' + unit)) || 0; } catch (e) { return 0; }
-    }
-    function lecEntryLabel(unit) {
-      return lecSavedPos(unit) ? '▶ 슬라이드 강의 이어 보기' : '▶ 슬라이드 강의로 보기';
+    function lecSheet(title, html) {
+      var sh = lec.ov.querySelector('.lv-sheet');
+      sh.querySelector('.lv-sheet-head b').textContent = title;
+      sh.querySelector('.lv-sheet-body').innerHTML = html;
+      sh.hidden = false;
     }
     function lecClose() {
       if (!lec) return;
@@ -2497,50 +2487,54 @@
       lec = null;
       var entry = document.querySelector('.lec-entry .lec-open-btn');
       if (entry) entry.textContent = lecEntryLabel(unit);
-      if (/[?&]lec=1/.test(location.hash)) {
-        history.replaceState(null, '', location.href.replace(/\?lec=1$|lec=1&|&lec=1/, ''));
-      }
+      if (/[?&]lec=1/.test(location.hash)) history.replaceState(null, '', location.href.replace(/\?lec=1$|lec=1&|&lec=1/, ''));
     }
     function lecOpen(startAt) {
       var unit = lecUnit();
-      var sec = document.querySelector('.markdown-section');
-      if (!unit || !sec) return;
+      if (!unit) return;
       if (lec) lecClose();
       var ov = document.createElement('div');
       ov.className = 'lec';
       ov.setAttribute('role', 'dialog');
       ov.setAttribute('aria-label', '슬라이드 강의');
       ov.innerHTML = '<div class="lec-top"><button type="button" class="lec-close" aria-label="강의 닫기">✕</button>' +
-        '<div class="lec-title"></div><div class="lec-count"></div></div><div class="lec-bar"><i></i></div>' +
-        '<div class="lec-body"><p style="text-align:center;color:#6e6e73">강의를 준비하는 중…</p></div>' +
+        '<div class="lec-title"></div><button type="button" class="lec-tocbtn">목차</button><div class="lec-count"></div></div>' +
+        '<div class="lec-bar"><i></i></div><div class="lec-body"><p style="text-align:center;color:rgba(255,255,255,.6)">강의를 준비하는 중…</p></div>' +
         '<div class="lec-ctrl"><button type="button" class="lec-prev" aria-label="이전 장">◀</button>' +
         '<button type="button" class="lec-play">▶ 강의 재생</button><button type="button" class="lec-rate" aria-label="재생 속도">1×</button>' +
-        '<button type="button" class="lec-next" aria-label="다음 장">▶</button></div><div class="lec-note" aria-live="polite"></div>';
+        '<button type="button" class="lec-next" aria-label="다음 장">▶</button></div><div class="lec-note" aria-live="polite"></div>' +
+        '<div class="lv-sheet" hidden><div class="lv-sheet-in"><div class="lv-sheet-head"><b></b><button type="button" class="lv-sheet-close" aria-label="닫기">✕</button></div><div class="lv-sheet-body"></div></div></div>';
       document.body.appendChild(ov);
       document.body.classList.add('lec-on');
       var rateIdx = 0;
       try { rateIdx = Number(localStorage.getItem('hyedu.lec.rate')) || 0; } catch (e) {}
       lec = { ov: ov, body: ov.querySelector('.lec-body'), unit: unit, i: 0, playing: false, token: 0,
               rateIdx: Math.min(rateIdx, LEC_RATES.length - 1), route: location.hash.split('?')[0] };
-      ov.querySelector('.lec-title').textContent = '제' + unit + '강 · ' + (sec.querySelector('h1') ? lecText(sec.querySelector('h1')) : '');
-      fetch('quiz/u0' + unit + '.json?v=' + BUILD).then(function (r) { return r.ok ? r.json() : null; })
-        .catch(function () { return null; })
-        .then(function (quiz) {
-          if (!lec || lec.ov !== ov) return;
-          lec.slides = lecBuild(sec, unit, quiz);
-          var saved = 0;
-          try { saved = Number(localStorage.getItem('hyedu.lec.u' + unit)) || 0; } catch (e) {}
-          lec.saved = saved > 0 && saved < lec.slides.length - 1 ? saved : 0;
-          lecGo(startAt != null ? startAt : 0);
-        });
+      var get = function (url) { return fetch(url + '?v=' + BUILD).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }); };
+      Promise.all([get('lecture/u0' + unit + '.json'), get('quiz/u0' + unit + '.json')]).then(function (res) {
+        if (!lec || lec.ov !== ov) return;
+        if (!res[0]) { lec.body.innerHTML = '<p style="text-align:center">강의 자료를 불러오지 못했습니다. 새로고침 해 주세요.</p>'; return; }
+        lec.data = res[0];
+        var prep = lecPrepare(res[0], res[1]);
+        lec.slides = prep.slides;
+        lec.toc = prep.toc;
+        ov.querySelector('.lec-title').textContent = '제' + unit + '강 · ' + res[0].title.replace(/^\[제\d단원\]\s*/, '');
+        var saved = lecSavedPos(unit);
+        lec.saved = saved > 0 && saved < lec.slides.length - 1 ? saved : 0;
+        lecGo(startAt != null && startAt < lec.slides.length ? startAt : 0);
+      });
       ov.addEventListener('click', function (e) {
         if (!lec || !lec.slides) return;
         var t = e.target.closest ? e.target.closest('button, a') : null;
-        if (!t) return;
+        if (!t) {
+          if (e.target.classList && e.target.classList.contains('lv-sheet')) e.target.hidden = true;
+          return;
+        }
         if (t.classList.contains('lec-close')) { lecClose(); return; }
         if (t.classList.contains('lec-prev')) { lecGo(lec.i - 1); return; }
         if (t.classList.contains('lec-next')) { lecGo(lec.i + 1); return; }
         if (t.classList.contains('lec-play')) { if (lec.playing) lecPause(); else lecPlay(); return; }
+        if (t.classList.contains('lv-sheet-close')) { ov.querySelector('.lv-sheet').hidden = true; return; }
         if (t.classList.contains('lec-rate')) {
           lec.rateIdx = (lec.rateIdx + 1) % LEC_RATES.length;
           try { localStorage.setItem('hyedu.lec.rate', String(lec.rateIdx)); } catch (e2) {}
@@ -2548,15 +2542,36 @@
           if (lec.playing) lecSpeak();
           return;
         }
-        if (t.hasAttribute('data-go')) {
-          var go = Number(t.getAttribute('data-go'));
-          if (t.hasAttribute('data-play')) { lec.i = go; lecRender(); lecPlay(); } else lecGo(go);
+        if (t.classList.contains('lec-tocbtn')) {
+          var curCh = lec.slides[lec.i].ch;
+          lecSheet('목차', '<div class="lv-toc">' + lec.toc.map(function (x) {
+            return '<button type="button" data-go="' + x.at + '" class="' + (x.ch === curCh ? 'is-current' : '') + '">' + mxEsc(x.name) + '</button>';
+          }).join('') + '</div>');
           return;
         }
-        if (t.classList.contains('lec-choice')) {
+        if (t.classList.contains('lv-kc')) {
+          var items = lec.data.kichul[String(lec.slides[lec.i].p)] || [];
+          lecSheet('이 쪽에서 나온 2023–2025 기출', items.map(function (k) {
+            return '<div class="lv-kc-item"><div class="lv-kc-label">' + mxEsc(k.label) + '</div><div class="lv-kc-memo">' + mxEsc(k.memo) + '</div>' +
+              '<div class="lv-kc-q"><span>' + (k.kind === 'same' ? '📘 2026 교본' : '🔎 참고 · 2026 교본') + '</span>“' + mxEsc(k.quote) + '”</div></div>';
+          }).join('') + '<div class="lv-links"><a href="#/summary/08_역대기출분석_및_실전합격가이드.md">기출 전체 보기</a></div>');
+          return;
+        }
+        if (t.hasAttribute('data-open')) {
+          lecPause();
+          location.href = 'reader.html?doc=' + lec.data.doc + '&p=' + t.getAttribute('data-open');
+          return;
+        }
+        if (t.hasAttribute('data-go')) {
+          ov.querySelector('.lv-sheet').hidden = true;
+          var go = Number(t.getAttribute('data-go'));
+          if (t.hasAttribute('data-play')) { lec.i = go; lecRender(); lecSave(); lecPlay(); } else lecGo(go);
+          return;
+        }
+        if (t.classList.contains('lv-choice')) {
           var s = lec.slides[lec.i];
           s.picked = Number(t.getAttribute('data-v'));
-          lecAnswer(lec.body.querySelector('.lec-md'), s);
+          lecAnswer(s);
           if (lec.waitQuiz) {
             lec.waitQuiz = false;
             lec.timer = setTimeout(function () { if (lec) { lec.playing = true; lecWake(true); lecGo(lec.i + 1); } }, 1800);
@@ -2567,8 +2582,7 @@
       lec.body.addEventListener('touchstart', function (e) {
         var p = e.touches[0];
         sx = p.clientX; sy = p.clientY; st = Date.now();
-        var w = e.target.closest ? e.target.closest('.table-wrap, pre') : null;
-        skip = !!(w && w.scrollWidth > w.clientWidth + 2);
+        skip = false;
       }, { passive: true });
       lec.body.addEventListener('touchend', function (e) {
         if (skip || !lec || !lec.slides) return;
@@ -2594,7 +2608,7 @@
       var box = document.createElement('div');
       box.className = 'lec-entry';
       box.innerHTML = '<button type="button" class="lec-open-btn">' + lecEntryLabel(unit) + '</button>' +
-        '<span class="lec-entry-desc">한 장씩 넘기거나 음성으로 자동 재생 · 구간마다 확인 문제</span>';
+        '<span class="lec-entry-desc">교본 슬라이드를 한 장씩 넘겨 보거나, 핵심노트를 음성으로 읽어 주는 강의로 보기 · 장마다 확인 문제</span>';
       var header = sec.querySelector('.lecture-header-box');
       sec.insertBefore(box, header ? header.nextSibling : sec.firstChild);
       box.querySelector('button').addEventListener('click', function () { lecOpen(lecSavedPos(unit) || null); });
