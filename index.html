@@ -1339,7 +1339,7 @@
 
   <script>
     // 배포 버전 (push 전에 web_builder.py가 갱신하고 version.json에도 같은 값을 씀)
-    var BUILD = '20261031-113524';
+    var BUILD = '20261031-114458';
 
     /* ---------- 배포 후 자동 갱신 (강제 새로고침 불필요) ----------
        GitHub Pages는 10분, nginx는 설정에 따라 그 이상 브라우저가 파일을 캐시할 수 있음.
@@ -1399,6 +1399,51 @@
           if (k && k.indexOf('docsify.search.') === 0 && k.indexOf(keep) === -1) localStorage.removeItem(k);
         }
       } catch (e) {}
+    })();
+
+    /* ---------- 드로어(모바일·아이패드 세로 목차) ---------- */
+    (function () {
+      var desktop = window.matchMedia('(min-width: 1024px)');
+
+      function setDrawer(open) {
+        document.body.classList.toggle('drawer-open', open);
+        var btn = document.querySelector('.menu-btn');
+        if (btn) {
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+          btn.setAttribute('aria-label', open ? '목차 닫기' : '목차 열기');
+        }
+        if (open) {
+          // 지금 보고 있는 강의가 메뉴 화면 안에 보이도록 (페이지는 그대로 두고 메뉴만 스크롤)
+          var sidebar = document.querySelector('.sidebar');
+          var current = sidebar && sidebar.querySelector('.sidebar-nav > ul > li li.active > a');
+          if (current) {
+            var r = current.getBoundingClientRect();
+            var s = sidebar.getBoundingClientRect();
+            if (r.top < s.top + 80 || r.bottom > s.bottom - 40) {
+              sidebar.scrollTop += r.top - s.top - s.height / 3;
+            }
+          }
+        }
+      }
+      window.hyeduSetDrawer = setDrawer;
+
+      document.addEventListener('click', function (e) {
+        var t = e.target;
+        if (!t || !t.closest) return;
+        if (t.closest('.menu-btn')) {
+          setDrawer(!document.body.classList.contains('drawer-open'));
+        } else if (t.closest('.drawer-backdrop')) {
+          setDrawer(false);
+        } else if (!desktop.matches && t.closest('.sidebar a[href]')) {
+          setDrawer(false);
+        }
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setDrawer(false);
+      });
+      var onChange = function () { if (desktop.matches) setDrawer(false); };
+      if (desktop.addEventListener) desktop.addEventListener('change', onChange);
+      else if (desktop.addListener) desktop.addListener(onChange);
     })();
 
     /* ---------- 학습 진도 · 커리큘럼 메뉴 ---------- */

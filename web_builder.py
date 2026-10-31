@@ -67,6 +67,19 @@ def build():
             assert q.get("quote") and q.get("source"), f"{path.name} 문{i}: 원문 근거 누락"
         print(f"   {path.name}: {len(data['questions'])}문항 확인")
 
+    # 1-2. 필수 기능 코드가 실수로 지워지지 않았는지 확인 (모바일 메뉴·진도·채점·자동 갱신)
+    html = INDEX_HTML.read_text(encoding="utf-8")
+    required = {
+        "모바일 메뉴(드로어)": "window.hyeduSetDrawer = setDrawer;",
+        "메뉴 버튼 동작": "closest('.menu-btn')",
+        "학습 진도·메뉴 정리": "function decorateNav()",
+        "모의고사 채점": "function mxBuild(",
+        "배포 후 자동 갱신": "function checkForUpdate(",
+    }
+    missing = [name for name, marker in required.items() if marker not in html]
+    assert not missing, f"index.html에 필수 기능 코드가 없습니다: {', '.join(missing)}"
+    print("🧩 필수 기능 코드 확인: " + ", ".join(required))
+
     # 2. 배포 버전 갱신 → 열려 있는 화면이 version.json을 보고 자동으로 새 버전을 불러옴
     #    (문서·문항 요청에도 같은 값이 붙어 GitHub Pages·nginx 캐시를 건너뜀) — push 전에 꼭 실행
     stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
