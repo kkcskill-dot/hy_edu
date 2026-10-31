@@ -134,6 +134,18 @@
     </div>
   </a>
 
+  <a class="course-card" href="#/summary/01_연세대학교_의료원_현황_및_주요_현안.md?lec=1">
+    <div>
+      <span class="card-tag">슬라이드 강의 • 음성 재생</span>
+      <h4>▶ 한 장씩 넘겨 보는 슬라이드 강의</h4>
+      <p>7개 단원 핵심노트를 짧은 슬라이드로 나눠 한 장씩 넘겨 보거나, 음성으로 읽어 주는 강의처럼 자동 재생합니다. 구간마다 확인 문제가 나옵니다.</p>
+    </div>
+    <div class="card-footer">
+      <span>▶ 각 핵심노트 맨 위에서도 시작</span>
+      <span>강의 시작 ➔</span>
+    </div>
+  </a>
+
   <a class="course-card" href="#/quiz/01_의료원현황_단원평가.md">
     <div>
       <span class="card-tag">단원평가 • 문제은행</span>

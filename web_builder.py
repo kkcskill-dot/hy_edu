@@ -90,6 +90,8 @@ def build():
         "학습 진도·메뉴 정리": "function decorateNav()",
         "모의고사 채점": "function mxBuild(",
         "배포 후 자동 갱신": "function checkForUpdate(",
+        "슬라이드 강의": "function lecOpen(",
+        "상단 탭": "function pageTabs(",
     }
     missing = [name for name, marker in required.items() if marker not in html]
     assert not missing, f"index.html에 필수 기능 코드가 없습니다: {', '.join(missing)}"

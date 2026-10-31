@@ -579,6 +579,157 @@
     .markdown-section .note-key li {
       font-size: 15.5px !important;
     }
+    /* ==================================================
+       슬라이드 강의 — 핵심노트를 한 장씩 · 음성 자동 재생 · 구간 확인 문제
+    ================================================== */
+    .lec-entry {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+      margin: -6px 0 22px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #0071e3, #4f46e5);
+      color: #fff;
+    }
+    .lec-entry .lec-open-btn {
+      flex: 0 0 auto;
+      min-height: 44px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 999px;
+      background: #fff;
+      color: #0040a0;
+      font: inherit;
+      font-size: 15.5px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .lec-entry-desc { font-size: 13.5px; line-height: 1.4; opacity: 0.93; }
+    body.lec-on { overflow: hidden !important; }
+    .lec {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      display: flex;
+      flex-direction: column;
+      background: #f2f2f6;
+      color: var(--apple-text);
+      padding: var(--safe-top) var(--safe-right) 0 var(--safe-left);
+    }
+    .lec-top {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      min-height: 52px;
+      padding: 0 6px;
+      background: #fff;
+      border-bottom: 1px solid var(--apple-border);
+    }
+    .lec-top .lec-close {
+      width: 44px;
+      height: 44px;
+      border: none;
+      background: none;
+      font-size: 20px;
+      color: var(--apple-text);
+      cursor: pointer;
+    }
+    .lec-title { flex: 1 1 auto; min-width: 0; font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .lec-count { flex: 0 0 auto; padding-right: 8px; font-size: 13px; font-weight: 700; color: var(--apple-subtext); }
+    .lec-bar { height: 3px; background: rgba(0, 0, 0, 0.06); }
+    .lec-bar i { display: block; width: 0; height: 100%; background: var(--apple-blue); transition: width 0.25s; }
+    .lec-body { flex: 1 1 auto; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 16px 12px 24px; }
+    .lec-card {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 20px 18px 22px;
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    }
+    .markdown-section.lec-md {
+      padding: 0 !important;
+      overflow: visible;
+      font-size: 18px;
+    }
+    .markdown-section.lec-md p, .markdown-section.lec-md li { font-size: 18px !important; line-height: 1.72 !important; }
+    .markdown-section.lec-md li { margin: 7px 0; }
+    .markdown-section.lec-md table { font-size: 15px; }
+    .markdown-section.lec-md .kc-item { margin: 0; }
+    .lec-sec { margin-bottom: 6px; font-size: 13px; font-weight: 700; color: var(--apple-blue); }
+    .lec-sub { margin: 0 0 10px; font-size: 20.5px; font-weight: 800; line-height: 1.42; color: var(--apple-text); }
+    .lec-badge { display: inline-block; margin-bottom: 10px; padding: 3px 10px; border-radius: 999px; background: rgba(0, 113, 227, 0.1); color: var(--apple-blue); font-size: 13px; font-weight: 800; }
+    .lec-hero { margin: 0 0 10px; font-size: 26px; font-weight: 800; line-height: 1.3; letter-spacing: -0.02em; }
+    .markdown-section.lec-md .lec-desc, .markdown-section.lec-md .lec-meta { font-size: 15px !important; color: var(--apple-subtext); }
+    .lec-toc { display: flex; flex-direction: column; gap: 6px; margin: 14px 0; }
+    .lec-toc button, .lec-start button, .lec-links a {
+      display: block;
+      width: 100%;
+      min-height: 44px;
+      padding: 9px 14px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--apple-text) !important;
+      font: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      text-align: left;
+      text-decoration: none !important;
+      cursor: pointer;
+    }
+    .lec-start { display: grid; gap: 8px; margin-top: 14px; }
+    .lec-start button.primary, .lec-links a.primary { background: var(--apple-blue); border-color: var(--apple-blue); color: #fff !important; text-align: center; font-weight: 800; }
+    .lec-links { display: grid; gap: 8px; margin-top: 16px; }
+    .lec-choices { display: flex; flex-direction: column; gap: 8px; margin: 12px 0; }
+    .lec-choices.is-ox { display: grid; grid-template-columns: 1fr 1fr; }
+    .lec-choice {
+      min-height: 50px;
+      padding: 11px 14px;
+      border: 1.5px solid rgba(0, 0, 0, 0.12);
+      border-radius: 14px;
+      background: #fff;
+      color: var(--apple-text);
+      font: inherit;
+      font-size: 16.5px;
+      line-height: 1.5;
+      text-align: left;
+      cursor: pointer;
+    }
+    .lec-choices.is-ox .lec-choice { text-align: center; font-size: 24px; font-weight: 800; }
+    .lec-choice.is-answer { border-color: var(--apple-green); background: rgba(26, 127, 55, 0.08); }
+    .lec-choice.is-wrong { border-color: var(--apple-red); background: rgba(215, 0, 21, 0.06); text-decoration: line-through; }
+    .lec-fb-head { font-size: 16px; font-weight: 800; }
+    .lec-fb-head.ok { color: var(--apple-green); }
+    .lec-fb-head.ng { color: var(--apple-red); }
+    .lec-speaking { background: rgba(255, 214, 10, 0.38); border-radius: 6px; box-shadow: 0 0 0 4px rgba(255, 214, 10, 0.38); }
+    .lec-ctrl {
+      display: grid;
+      grid-template-columns: 56px 1fr auto 56px;
+      gap: 8px;
+      padding: 10px 12px calc(10px + var(--safe-bottom));
+      background: #fff;
+      border-top: 1px solid var(--apple-border);
+    }
+    .lec-ctrl button {
+      min-height: 48px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 14px;
+      background: #fff;
+      color: var(--apple-text);
+      font: inherit;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .lec-ctrl .lec-play { background: var(--apple-blue); border-color: var(--apple-blue); color: #fff; }
+    .lec-ctrl .lec-rate { padding: 0 12px; }
+    .lec-ctrl button:disabled { opacity: 0.35; }
+    .lec-note:empty { display: none; }
+    .lec-note { position: absolute; left: 50%; bottom: calc(80px + var(--safe-bottom)); transform: translateX(-50%); padding: 6px 12px; border-radius: 999px; background: rgba(29, 29, 31, 0.86); color: #fff; font-size: 13px; white-space: nowrap; }
+
     /* 긴 페이지 상단 탭 — 스크롤해도 헤더 바로 아래에 고정 */
     .page-tabs-wrap {
       position: sticky;
@@ -1527,7 +1678,7 @@
 
   <script>
     // 배포 버전 (push 전에 web_builder.py가 갱신하고 version.json에도 같은 값을 씀)
-    var BUILD = '20261101-004155';
+    var BUILD = '20261101-005603';
 
     /* ---------- 배포 후 자동 갱신 (강제 새로고침 불필요) ----------
        GitHub Pages는 10분, nginx는 설정에 따라 그 이상 브라우저가 파일을 캐시할 수 있음.
@@ -1976,6 +2127,480 @@
       });
     }
 
+    /* ---------- 슬라이드 강의: 핵심노트를 한 장씩 · 음성 자동 재생 · 구간 확인 문제 ---------- */
+    var LEC_RATES = [[1, 1.0], [1.25, 1.18], [1.5, 1.36]];
+    var lec = null;
+
+    function lecUnit() {
+      var m = decodeURIComponent(location.hash).match(/#\/summary\/0([1-7])_/);
+      return m ? Number(m[1]) : 0;
+    }
+    function lecText(el) {
+      var c = el.cloneNode(true);
+      Array.prototype.forEach.call(c.querySelectorAll('a.src, .kc-badge, .kc-memo-src'), function (x) { x.parentNode.removeChild(x); });
+      return c.textContent.replace(/\s+/g, ' ').trim();
+    }
+    // 음성으로 읽기 좋게: 쪽 표시·기호·이모지 정리 (내용은 그대로)
+    function lecSpeakable(t) {
+      return t.replace(/p\.\s?\d+/g, ' ')
+        .replace(/[☀-➿]|[\uD83C-\uDBFF][\uDC00-\uDFFF]|️/g, ' ')
+        .replace(/%p/g, ' 퍼센트포인트').replace(/%/g, ' 퍼센트')
+        .replace(/(\d)\s?~\s?(\d)/g, '$1에서 $2')
+        .replace(/[·•]/g, ', ').replace(/\s*\/\s*/g, ', ').replace(/→|➔|->|=>/g, ', ')
+        .replace(/[“”"‘’'「」『』\[\]<>|※✓]/g, ' ')
+        .replace(/\s+/g, ' ').trim();
+    }
+    function lecChunks(t) {
+      var parts = t.match(/[^,.!?]+[,.!?]?/g) || [t];
+      var out = [], cur = '';
+      parts.forEach(function (p) {
+        if ((cur + p).length > 140 && cur) { out.push(cur); cur = ''; }
+        cur += p;
+      });
+      if (cur.trim()) out.push(cur);
+      return out;
+    }
+    function lecClone(el) {
+      var c = el.cloneNode(true);
+      Array.prototype.forEach.call(c.querySelectorAll('.kc-badge'), function (x) { x.parentNode.removeChild(x); });
+      Array.prototype.forEach.call(c.querySelectorAll('[id]'), function (x) { x.removeAttribute('id'); });
+      if (c.removeAttribute) c.removeAttribute('id');
+      Array.prototype.forEach.call(c.querySelectorAll('a.anchor'), function (a) {
+        while (a.firstChild) a.parentNode.insertBefore(a.firstChild, a);
+        a.parentNode.removeChild(a);
+      });
+      return c;
+    }
+    function lecPages(el, unit, into) {
+      Array.prototype.forEach.call(el.querySelectorAll ? el.querySelectorAll('a.src') : [], function (a) {
+        var m = (a.getAttribute('href') || '').match(/doc=unit0(\d)&p=(\d+)/);
+        if (m && Number(m[1]) === unit && into.indexOf(Number(m[2])) < 0) into.push(Number(m[2]));
+      });
+    }
+
+    // 핵심노트 화면(이미 그려진 내용)을 장 단위로 나눔
+    function lecBuild(sec, unit, quiz) {
+      var slides = [];
+      var sections = [];
+      var used = {};
+      var cur = { name: '핵심 요약', pages: [], intro: true };
+      var sub = '';
+      var buf = [];
+      var bufLen = 0;
+      function flush() {
+        if (!buf.length) return;
+        slides.push({ type: 'content', sec: cur.name, sub: sub, nodes: buf });
+        buf = [];
+        bufLen = 0;
+      }
+      function add(node, len, alone) {
+        if (alone || bufLen + len > 320) flush();
+        buf.push(node);
+        bufLen += len;
+        if (alone) flush();
+      }
+      function questions() {
+        if (!quiz || cur.intro || cur.kc || !cur.pages.length) return;
+        var pool = (quiz.parts.ox || []).concat(quiz.parts.mc || []);
+        pool.filter(function (q) {
+          return !used[q.id] && q.quotes && q.quotes.some(function (r) { return cur.pages.indexOf(r.p) >= 0; });
+        }).sort(function (a, b) { return (a.auto ? 1 : 0) - (b.auto ? 1 : 0); }).slice(0, 2).forEach(function (q) {
+          used[q.id] = true;
+          slides.push({ type: 'quiz', sec: cur.name, q: q });
+        });
+      }
+      function chunkList(items, tag, wrapClass) {
+        var group = null;
+        var glen = 0;
+        function close() {
+          if (!group) return;
+          var node = group;
+          if (wrapClass) {
+            node = document.createElement('div');
+            node.className = wrapClass;
+            node.appendChild(group);
+          }
+          add(node, glen, true);
+          group = null;
+        }
+        Array.prototype.forEach.call(items, function (li) {
+          var len = lecText(li).length;
+          if (group && (group.children.length >= 4 || glen + len > 320)) close();
+          if (!group) { group = document.createElement(tag); glen = 0; }
+          group.appendChild(lecClone(li));
+          glen += len;
+        });
+        close();
+      }
+      Array.prototype.forEach.call(sec.children, function (el) {
+        if (el.matches('.lec-entry, .page-tabs-wrap, .lesson-footer-nav, .lecture-header-box, h1, hr, script, style, [data-tabs]')) return;
+        if (el.tagName === 'H2') {
+          flush();
+          questions();
+          var name = lecText(el);
+          cur = { name: name, pages: [], kc: /기출 체크/.test(name) };
+          lecPages(el, unit, cur.pages);
+          sections.push({ name: name, start: slides.length });
+          sub = '';
+          return;
+        }
+        lecPages(el, unit, cur.pages);
+        if (el.tagName === 'H3' || el.tagName === 'H4') { flush(); sub = lecText(el); return; }
+        if (el.classList.contains('kc-list')) {
+          Array.prototype.forEach.call(el.querySelectorAll('.kc-item'), function (card) { add(lecClone(card), 999, true); });
+          return;
+        }
+        if (el.tagName === 'UL' || el.tagName === 'OL') { chunkList(el.querySelectorAll(':scope > li'), el.tagName); return; }
+        if (el.classList.contains('note-key')) {
+          var lis = el.querySelectorAll('li');
+          if (lis.length) { chunkList(lis, 'UL', 'note-key'); return; }
+        }
+        var table = el.tagName === 'TABLE' ? el : (el.classList.contains('table-wrap') ? el.querySelector('table') : null);
+        if (table) {
+          var rows = table.querySelectorAll('tbody tr');
+          var head = table.querySelector('thead');
+          for (var i = 0; i < rows.length; i += 5) {
+            var w = document.createElement('div');
+            w.className = 'table-wrap';
+            var t = document.createElement('table');
+            if (head) t.appendChild(lecClone(head));
+            var tb = document.createElement('tbody');
+            Array.prototype.slice.call(rows, i, i + 5).forEach(function (r) { tb.appendChild(lecClone(r)); });
+            t.appendChild(tb);
+            w.appendChild(t);
+            add(w, 999, true);
+          }
+          return;
+        }
+        add(lecClone(el), lecText(el).length, el.tagName !== 'P');
+      });
+      flush();
+      questions();
+      var header = sec.querySelector('.lecture-header-box');
+      var h1 = sec.querySelector('h1');
+      sections.forEach(function (x) { x.start += 1; });
+      slides.unshift({
+        type: 'title', sections: sections,
+        title: h1 ? lecText(h1) : '',
+        badge: header && header.querySelector('.lecture-badge') ? lecText(header.querySelector('.lecture-badge')) : '',
+        desc: header && header.querySelector('p') ? lecText(header.querySelector('p')) : ''
+      });
+      slides.push({ type: 'end' });
+      return slides;
+    }
+
+    function lecVoice() {
+      var vs = speechSynthesis.getVoices().filter(function (v) { return /^ko/i.test(v.lang); });
+      var pref = vs.filter(function (v) { return /yuna|유나|sora|heami|google|siri/i.test(v.name); });
+      return pref[0] || vs[0] || null;
+    }
+    function lecSave() {
+      try {
+        var last = lec.slides.length - 1;
+        if (lec.i > 0 && lec.i < last) localStorage.setItem('hyedu.lec.u' + lec.unit, String(lec.i));
+        if (lec.i >= last) localStorage.removeItem('hyedu.lec.u' + lec.unit);
+      } catch (e) {}
+    }
+    function lecControls(msg) {
+      var ov = lec.ov;
+      var play = ov.querySelector('.lec-play');
+      play.hidden = !('speechSynthesis' in window);
+      play.textContent = lec.playing ? '⏸ 일시정지' : '▶ 강의 재생';
+      ov.querySelector('.lec-rate').textContent = LEC_RATES[lec.rateIdx][0] + '×';
+      ov.querySelector('.lec-prev').disabled = lec.i <= 0;
+      ov.querySelector('.lec-next').disabled = lec.i >= lec.slides.length - 1;
+      ov.querySelector('.lec-note').textContent = msg || '';
+    }
+    function lecMark(el) {
+      Array.prototype.forEach.call(lec.body.querySelectorAll('.lec-speaking'), function (x) { x.classList.remove('lec-speaking'); });
+      if (!el) return;
+      el.classList.add('lec-speaking');
+      var r = el.getBoundingClientRect();
+      var b = lec.body.getBoundingClientRect();
+      if (r.top < b.top + 8 || r.bottom > b.bottom - 8) lec.body.scrollTop += r.top - b.top - (b.height - Math.min(r.height, b.height)) / 2;
+    }
+    function lecReadables() {
+      var md = lec.body.querySelector('.lec-md');
+      var picked = [];
+      Array.prototype.forEach.call(md.querySelectorAll('.lec-hero, .lec-sub, li, p, tbody tr, .kc-memo, .kc-q'), function (el) {
+        if (el.closest('.lec-toc, .lec-start, .lec-links, .lec-fb, .lec-choices, .lec-meta, .lec-badge')) return;
+        if (picked.some(function (p) { return p.contains(el) || el.contains(p); })) return;
+        if (lecSpeakable(lecText(el))) picked.push(el);
+      });
+      return picked;
+    }
+    function lecSpeak() {
+      speechSynthesis.cancel();
+      var token = ++lec.token;
+      var s = lec.slides[lec.i];
+      var els = lecReadables();
+      var k = 0;
+      function nextLine() {
+        if (!lec || !lec.playing || token !== lec.token) return;
+        if (k >= els.length) {
+          lecMark(null);
+          if (s.type === 'quiz' && !s.picked) { lec.waitQuiz = true; lecPause('답을 고르면 이어서 재생합니다'); return; }
+          if (lec.i >= lec.slides.length - 1) { lecPause(); return; }
+          lec.timer = setTimeout(function () { if (lec && lec.playing && token === lec.token) lecGo(lec.i + 1); }, 700);
+          return;
+        }
+        var el = els[k++];
+        lecMark(el);
+        var chunks = lecChunks(lecSpeakable(lecText(el)));
+        var c = 0;
+        (function speakChunk() {
+          if (!lec || !lec.playing || token !== lec.token) return;
+          if (c >= chunks.length) { nextLine(); return; }
+          var text = chunks[c++];
+          var u = new SpeechSynthesisUtterance(text);
+          u.lang = 'ko-KR';
+          var v = lecVoice();
+          if (v) u.voice = v;
+          u.rate = LEC_RATES[lec.rateIdx][1];
+          var t0 = Date.now();
+          var started = false;
+          u.onstart = function () { started = true; };
+          u.onend = function () {
+            // 소리 없이 곧바로 끝나면(음성 출력 불가) 장을 마구 넘기지 않고 멈춤
+            if (!started && Date.now() - t0 < 250 && text.length > 8) {
+              if (lec && token === lec.token) lecPause('이 기기에서는 음성 재생이 되지 않습니다. ◀ ▶ 로 넘겨 보세요');
+              return;
+            }
+            speakChunk();
+          };
+          u.onerror = function (e) {
+            // 넘기기·정지로 끊긴 건 무시, 그 밖의 오류는 멈추고 알림(빠르게 넘어가지 않도록)
+            if (e && (e.error === 'interrupted' || e.error === 'canceled')) return;
+            if (lec && token === lec.token) lecPause('이 기기에서는 음성 재생이 되지 않습니다. ◀ ▶ 로 넘겨 보세요');
+          };
+          speechSynthesis.speak(u);
+        })();
+      }
+      nextLine();
+    }
+    function lecWake(on) {
+      try {
+        if (on && 'wakeLock' in navigator && !lec.wake) {
+          navigator.wakeLock.request('screen').then(function (w) { if (lec) lec.wake = w; else w.release(); }).catch(function () {});
+        }
+        if (!on && lec && lec.wake) { lec.wake.release(); lec.wake = null; }
+      } catch (e) {}
+    }
+    function lecPlay() {
+      if (!('speechSynthesis' in window)) return;
+      lec.playing = true;
+      lec.waitQuiz = false;
+      lecWake(true);
+      if (lec.slides[lec.i].type === 'title') { lecGo(lec.saved || 1); return; }
+      lecControls();
+      lecSpeak();
+    }
+    function lecPause(msg) {
+      if (!lec) return;
+      lec.playing = false;
+      lec.token++;
+      clearTimeout(lec.timer);
+      if ('speechSynthesis' in window) speechSynthesis.cancel();
+      lecMark(null);
+      lecWake(false);
+      lecControls(msg);
+    }
+    function lecAnswer(md, s) {
+      var q = s.q;
+      var ok = s.picked === q.answer;
+      Array.prototype.forEach.call(md.querySelectorAll('.lec-choice'), function (b) {
+        var v = Number(b.getAttribute('data-v'));
+        b.classList.toggle('is-answer', v === q.answer);
+        b.classList.toggle('is-wrong', v === s.picked && !ok);
+        b.disabled = true;
+      });
+      var mark = function (v) { return q.type === 'ox' ? q.choices[v - 1] : MX_MARKS[v - 1]; };
+      var fb = md.querySelector('.lec-fb');
+      fb.innerHTML = '<div class="lec-fb-head ' + (ok ? 'ok' : 'ng') + '">' + (ok ? '⭕ 정답' : '❌ 오답 · 정답 ' + mark(q.answer)) + '</div>' + mxQuotes(q);
+      fb.hidden = false;
+    }
+    function lecRender() {
+      var s = lec.slides[lec.i];
+      var u = lec.unit;
+      var card = document.createElement('div');
+      card.className = 'lec-card';
+      var md = document.createElement('div');
+      md.className = 'markdown-section lec-md';
+      if (s.type === 'title') {
+        var nq = lec.slides.filter(function (x) { return x.type === 'quiz'; }).length;
+        md.innerHTML = '<span class="lec-badge">제' + u + '강 · 슬라이드 강의</span>' +
+          '<div class="lec-hero">' + mxEsc(s.title) + '</div>' +
+          (s.desc ? '<p class="lec-desc">' + mxEsc(s.desc) + '</p>' : '') +
+          '<p class="lec-meta">' + (lec.slides.length - 2) + '장 · 구간 확인 문제 ' + nq + '개 · 내용은 핵심노트(2026 교본 기준) 그대로</p>' +
+          '<div class="lec-start">' +
+          (lec.saved ? '<button type="button" class="primary" data-go="' + lec.saved + '">이어 보기 (' + lec.saved + ' / ' + (lec.slides.length - 1) + ')</button>' : '') +
+          '<button type="button" class="' + (lec.saved ? '' : 'primary') + '" data-go="1" data-play="1">▶ 처음부터 강의 재생 (음성)</button>' +
+          '<button type="button" data-go="1">한 장씩 넘겨 보기</button></div>' +
+          '<div class="lec-toc">' + s.sections.map(function (x) {
+            return '<button type="button" data-go="' + x.start + '">' + mxEsc(x.name) + '</button>';
+          }).join('') + '</div>';
+      } else if (s.type === 'content') {
+        md.innerHTML = '<div class="lec-sec">' + mxEsc(s.sec) + '</div>' + (s.sub ? '<div class="lec-sub">' + mxEsc(s.sub) + '</div>' : '');
+        s.nodes.forEach(function (n) { md.appendChild(n.cloneNode(true)); });
+      } else if (s.type === 'quiz') {
+        var q = s.q;
+        md.innerHTML = '<div class="lec-sec">' + mxEsc(s.sec) + ' · 확인 문제</div>' +
+          '<div class="lec-sub">' + mxEsc(q.q) + '</div>' +
+          (q.passage ? '<p class="mx-passage">' + mxEsc(q.passage) + '</p>' : '') +
+          '<div class="lec-choices' + (q.type === 'ox' ? ' is-ox' : '') + '">' + q.choices.map(function (c, j) {
+            return '<button type="button" class="lec-choice" data-v="' + (j + 1) + '">' +
+              (q.type === 'ox' ? mxEsc(c) : '<b>' + MX_MARKS[j] + '</b> ' + mxEsc(c)) + '</button>';
+          }).join('') + '</div><div class="lec-fb" hidden></div>';
+        if (s.picked) lecAnswer(md, s);
+      } else {
+        var nextLec = u < 7 ? document.querySelector('.sidebar-nav a[href*="summary/0' + (u + 1) + '_"]') : null;
+        var quizLink = document.querySelector('.sidebar-nav a[href*="quiz/0' + u + '_"]');
+        md.innerHTML = '<span class="lec-badge">제' + u + '강 · 강의 끝</span><div class="lec-hero">수고했습니다 🎉</div>' +
+          '<p class="lec-desc">이 단원을 학습 완료로 표시했습니다. 문제로 확인해 보세요.</p><div class="lec-links">' +
+          (quizLink ? '<a class="primary" href="' + quizLink.getAttribute('href') + '">✍️ 제' + u + '강 단원평가 풀기</a>' : '') +
+          (nextLec ? '<a href="' + nextLec.getAttribute('href').split('?')[0] + '?lec=1">▶ 제' + (u + 1) + '강 강의 보기</a>' : '') +
+          '<button type="button" data-go="0">처음 화면으로</button></div>';
+        markDone(pathKey(location.hash));
+        decorateNav();
+      }
+      card.appendChild(md);
+      lec.body.innerHTML = '';
+      lec.body.appendChild(card);
+      lec.body.scrollTop = 0;
+      var total = lec.slides.length - 1;
+      lec.ov.querySelector('.lec-count').textContent = lec.i + ' / ' + total;
+      lec.ov.querySelector('.lec-bar i').style.width = Math.round(lec.i / total * 100) + '%';
+      lecControls();
+    }
+    function lecGo(n) {
+      if (!lec || !lec.slides) return;
+      n = Math.max(0, Math.min(lec.slides.length - 1, n));
+      lec.i = n;
+      clearTimeout(lec.timer);
+      lec.waitQuiz = false;
+      lecRender();
+      lecSave();
+      if (lec.playing) lecSpeak();
+    }
+    function lecSavedPos(unit) {
+      try { return Number(localStorage.getItem('hyedu.lec.u' + unit)) || 0; } catch (e) { return 0; }
+    }
+    function lecEntryLabel(unit) {
+      return lecSavedPos(unit) ? '▶ 슬라이드 강의 이어 보기' : '▶ 슬라이드 강의로 보기';
+    }
+    function lecClose() {
+      if (!lec) return;
+      var unit = lec.unit;
+      lecPause();
+      if (lec.ov.parentNode) lec.ov.parentNode.removeChild(lec.ov);
+      document.body.classList.remove('lec-on');
+      lec = null;
+      var entry = document.querySelector('.lec-entry .lec-open-btn');
+      if (entry) entry.textContent = lecEntryLabel(unit);
+      if (/[?&]lec=1/.test(location.hash)) {
+        history.replaceState(null, '', location.href.replace(/\?lec=1$|lec=1&|&lec=1/, ''));
+      }
+    }
+    function lecOpen(startAt) {
+      var unit = lecUnit();
+      var sec = document.querySelector('.markdown-section');
+      if (!unit || !sec) return;
+      if (lec) lecClose();
+      var ov = document.createElement('div');
+      ov.className = 'lec';
+      ov.setAttribute('role', 'dialog');
+      ov.setAttribute('aria-label', '슬라이드 강의');
+      ov.innerHTML = '<div class="lec-top"><button type="button" class="lec-close" aria-label="강의 닫기">✕</button>' +
+        '<div class="lec-title"></div><div class="lec-count"></div></div><div class="lec-bar"><i></i></div>' +
+        '<div class="lec-body"><p style="text-align:center;color:#6e6e73">강의를 준비하는 중…</p></div>' +
+        '<div class="lec-ctrl"><button type="button" class="lec-prev" aria-label="이전 장">◀</button>' +
+        '<button type="button" class="lec-play">▶ 강의 재생</button><button type="button" class="lec-rate" aria-label="재생 속도">1×</button>' +
+        '<button type="button" class="lec-next" aria-label="다음 장">▶</button></div><div class="lec-note" aria-live="polite"></div>';
+      document.body.appendChild(ov);
+      document.body.classList.add('lec-on');
+      var rateIdx = 0;
+      try { rateIdx = Number(localStorage.getItem('hyedu.lec.rate')) || 0; } catch (e) {}
+      lec = { ov: ov, body: ov.querySelector('.lec-body'), unit: unit, i: 0, playing: false, token: 0,
+              rateIdx: Math.min(rateIdx, LEC_RATES.length - 1), route: location.hash.split('?')[0] };
+      ov.querySelector('.lec-title').textContent = '제' + unit + '강 · ' + (sec.querySelector('h1') ? lecText(sec.querySelector('h1')) : '');
+      fetch('quiz/u0' + unit + '.json?v=' + BUILD).then(function (r) { return r.ok ? r.json() : null; })
+        .catch(function () { return null; })
+        .then(function (quiz) {
+          if (!lec || lec.ov !== ov) return;
+          lec.slides = lecBuild(sec, unit, quiz);
+          var saved = 0;
+          try { saved = Number(localStorage.getItem('hyedu.lec.u' + unit)) || 0; } catch (e) {}
+          lec.saved = saved > 0 && saved < lec.slides.length - 1 ? saved : 0;
+          lecGo(startAt != null ? startAt : 0);
+        });
+      ov.addEventListener('click', function (e) {
+        if (!lec || !lec.slides) return;
+        var t = e.target.closest ? e.target.closest('button, a') : null;
+        if (!t) return;
+        if (t.classList.contains('lec-close')) { lecClose(); return; }
+        if (t.classList.contains('lec-prev')) { lecGo(lec.i - 1); return; }
+        if (t.classList.contains('lec-next')) { lecGo(lec.i + 1); return; }
+        if (t.classList.contains('lec-play')) { if (lec.playing) lecPause(); else lecPlay(); return; }
+        if (t.classList.contains('lec-rate')) {
+          lec.rateIdx = (lec.rateIdx + 1) % LEC_RATES.length;
+          try { localStorage.setItem('hyedu.lec.rate', String(lec.rateIdx)); } catch (e2) {}
+          lecControls();
+          if (lec.playing) lecSpeak();
+          return;
+        }
+        if (t.hasAttribute('data-go')) {
+          var go = Number(t.getAttribute('data-go'));
+          if (t.hasAttribute('data-play')) { lec.i = go; lecRender(); lecPlay(); } else lecGo(go);
+          return;
+        }
+        if (t.classList.contains('lec-choice')) {
+          var s = lec.slides[lec.i];
+          s.picked = Number(t.getAttribute('data-v'));
+          lecAnswer(lec.body.querySelector('.lec-md'), s);
+          if (lec.waitQuiz) {
+            lec.waitQuiz = false;
+            lec.timer = setTimeout(function () { if (lec) { lec.playing = true; lecWake(true); lecGo(lec.i + 1); } }, 1800);
+          }
+        }
+      });
+      var sx = 0, sy = 0, st = 0, skip = false;
+      lec.body.addEventListener('touchstart', function (e) {
+        var p = e.touches[0];
+        sx = p.clientX; sy = p.clientY; st = Date.now();
+        var w = e.target.closest ? e.target.closest('.table-wrap, pre') : null;
+        skip = !!(w && w.scrollWidth > w.clientWidth + 2);
+      }, { passive: true });
+      lec.body.addEventListener('touchend', function (e) {
+        if (skip || !lec || !lec.slides) return;
+        var p = e.changedTouches[0];
+        var dx = p.clientX - sx, dy = p.clientY - sy;
+        if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5 && Date.now() - st < 800) lecGo(lec.i + (dx < 0 ? 1 : -1));
+      }, { passive: true });
+    }
+    document.addEventListener('keydown', function (e) {
+      if (!lec || !lec.slides) return;
+      if (e.key === 'ArrowRight') lecGo(lec.i + 1);
+      else if (e.key === 'ArrowLeft') lecGo(lec.i - 1);
+      else if (e.key === 'Escape') lecClose();
+      else if (e.key === ' ' && !/INPUT|TEXTAREA|BUTTON/.test(e.target.tagName)) { e.preventDefault(); if (lec.playing) lecPause(); else lecPlay(); }
+    });
+    document.addEventListener('visibilitychange', function () { if (document.hidden && lec && lec.playing) lecPause(); });
+    // 핵심노트 맨 위 '슬라이드 강의' 버튼 (주소에 ?lec=1 이 있으면 바로 열림)
+    function lectureEntry() {
+      if (lec && location.hash.split('?')[0] !== lec.route) lecClose();
+      var unit = lecUnit();
+      var sec = document.querySelector('.markdown-section');
+      if (!unit || !sec || sec.querySelector('.lec-entry')) return;
+      var box = document.createElement('div');
+      box.className = 'lec-entry';
+      box.innerHTML = '<button type="button" class="lec-open-btn">' + lecEntryLabel(unit) + '</button>' +
+        '<span class="lec-entry-desc">한 장씩 넘기거나 음성으로 자동 재생 · 구간마다 확인 문제</span>';
+      var header = sec.querySelector('.lecture-header-box');
+      sec.insertBefore(box, header ? header.nextSibling : sec.firstChild);
+      box.querySelector('button').addEventListener('click', function () { lecOpen(lecSavedPos(unit) || null); });
+      if (/[?&]lec=1/.test(location.hash) && !lec) lecOpen(lecSavedPos(unit) || null);
+    }
+
     /* ---------- 표: 좁은 화면에서 표만 가로 스크롤 ---------- */
     function layoutPlugin(hook) {
       // 자동 갱신으로 다시 열렸으면 읽던 위치로 복귀
@@ -2001,6 +2626,7 @@
         });
         kichulBadges();
         pageTabs();
+        lectureEntry();
         window.hyeduSetDrawer(false);
       });
     }
