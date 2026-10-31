@@ -5,6 +5,50 @@ nginx 서버에 아래 저장 공간을 만들면 **아이폰·아이패드가 �
 
 동작 방식: 서재 → `🔄 기기 간 동기화`에서 아이디·비밀번호 입력 → 책마다 `annot/<책>.json` 파일을 읽고(GET) 합쳐서 저장(PUT)합니다.
 
+## 지금 서버(http://13.209.76.33/, 사이트가 주소 맨 앞 `/`)에 그대로 쓰는 순서
+
+```bash
+# 1) WebDAV 모듈 확인 — with-http_dav_module 이 출력되어야 함
+nginx -V 2>&1 | grep -o with-http_dav_module
+
+# 2) 메모 저장 폴더(웹 루트 밖) + 동기화 아이디·비밀번호
+sudo mkdir -p /var/lib/hyedu-annot
+sudo chown www-data:www-data /var/lib/hyedu-annot      # nginx 실행 계정이 nginx 이면 nginx:nginx
+sudo htpasswd -c /etc/nginx/.htpasswd-hyedu 원하는아이디   # 없으면: sudo apt install apache2-utils
+```
+
+사이트 `server { … }` 블록 안에 추가:
+
+```nginx
+location /annot/ {
+    alias /var/lib/hyedu-annot/;
+    dav_methods PUT DELETE;
+    create_full_put_path on;
+    dav_access user:rw;
+    client_max_body_size 5m;
+    autoindex off;
+    auth_basic "hyedu notes";
+    auth_basic_user_file /etc/nginx/.htpasswd-hyedu;
+    add_header Cache-Control "no-store" always;
+}
+```
+
+```bash
+sudo nginx -t && sudo systemctl reload nginx
+# 확인: 201/204 → 다시 읽으면 {"items":{}}
+curl -u 아이디:비밀번호 -X PUT --data '{"items":{}}' http://13.209.76.33/annot/_check.json
+curl -u 아이디:비밀번호 http://13.209.76.33/annot/_check.json
+```
+
+그다음 아이폰·아이패드에서 `e-book 서재 → 🔄 기기 간 동기화`에 같은 아이디·비밀번호를 넣으면 됩니다.
+
+> ⚠️ 지금 주소는 http(암호화 없음)라 동기화 비밀번호가 네트워크에서 보일 수 있습니다. 다른 곳에 쓰지 않는 비밀번호를 쓰고,
+> 가능하면 도메인을 연결해 HTTPS(예: Let's Encrypt)로 바꾸세요.
+
+---
+
+아래는 사이트가 `https://도메인/hy_edu/` 같은 하위 경로에 있을 때의 일반 설명입니다.
+
 ## 1. 준비 (서버에서)
 
 ```bash
