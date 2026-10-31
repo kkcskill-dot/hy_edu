@@ -4,3 +4,4 @@ pdf_origin/
 dist/
 *.tar.gz
 __pycache__/
+annot/

@@ -553,6 +553,32 @@
     .markdown-section ul, .markdown-section ol {
       padding-left: 1.3em;
     }
+    /* 핵심노트의 교본 쪽수 표시 → 누르면 e-book 해당 쪽 */
+    .markdown-section a.src {
+      display: inline-block;
+      margin-left: 3px;
+      padding: 0 6px;
+      border-radius: 8px;
+      background: rgba(0, 113, 227, 0.08);
+      color: var(--apple-blue) !important;
+      font-size: 0.72em;
+      font-weight: 700 !important;
+      line-height: 1.7;
+      vertical-align: 0.12em;
+      text-decoration: none !important;
+      white-space: nowrap;
+    }
+    .markdown-section .note-key {
+      background: #fffbea;
+      border: 1px solid rgba(255, 204, 0, 0.45);
+      border-radius: 16px;
+      padding: 14px 18px;
+      margin: 18px 0 26px;
+    }
+    .markdown-section .note-key p,
+    .markdown-section .note-key li {
+      font-size: 15.5px !important;
+    }
     .markdown-section pre {
       max-width: 100%;
       overflow-x: auto;
@@ -1312,52 +1338,67 @@
   <div id="app">세브란스 간호사 승진시험 개인 학습노트를 불러오는 중입니다...</div>
 
   <script>
-    // 배포할 때마다 바꾸면 브라우저에 남은 이전 검색 색인이 무시됨 (web_builder.py가 자동 갱신)
-    var BUILD = '20261031-0038';
+    // 배포 버전 (push 전에 web_builder.py가 갱신하고 version.json에도 같은 값을 씀)
+    var BUILD = '20261031-112640';
 
-    /* ---------- 드로어(모바일·아이패드 세로 목차) ---------- */
+    /* ---------- 배포 후 자동 갱신 (강제 새로고침 불필요) ----------
+       GitHub Pages는 10분, nginx는 설정에 따라 그 이상 브라우저가 파일을 캐시할 수 있음.
+       1) 앱으로 돌아올 때·페이지 이동 때 version.json을 캐시 없이 확인
+       2) 지금 열린 화면(BUILD)보다 새 배포면 새 주소(?v=배포버전)로 다시 열어 캐시를 건너뜀 (읽던 위치 유지)
+       3) 문서(.md)·문항(.json) 요청에도 ?v=BUILD를 붙여, 배포가 바뀌면 이전 캐시를 쓰지 않음
+       → 서버(GitHub Pages / nginx) 종류나 캐시 설정과 관계없이 동작 */
     (function () {
-      var desktop = window.matchMedia('(min-width: 1024px)');
-
-      function setDrawer(open) {
-        document.body.classList.toggle('drawer-open', open);
-        var btn = document.querySelector('.menu-btn');
-        if (btn) {
-          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-          btn.setAttribute('aria-label', open ? '목차 닫기' : '목차 열기');
-        }
-        if (open) {
-          // 지금 보고 있는 강의가 메뉴 화면 안에 보이도록 (페이지는 그대로 두고 메뉴만 스크롤)
-          var sidebar = document.querySelector('.sidebar');
-          var current = sidebar && sidebar.querySelector('.sidebar-nav > ul > li li.active > a');
-          if (current) {
-            var r = current.getBoundingClientRect();
-            var s = sidebar.getBoundingClientRect();
-            if (r.top < s.top + 80 || r.bottom > s.bottom - 40) {
-              sidebar.scrollTop += r.top - s.top - s.height / 3;
-            }
-          }
-        }
+      var lastCheck = 0;
+      function checkForUpdate(force) {
+        if (!window.fetch) return;
+        var now = Date.now();
+        if (!force && now - lastCheck < 60000) return;
+        lastCheck = now;
+        fetch('version.json?t=' + now, { cache: 'no-store' })
+          .then(function (res) { return res.ok ? res.json() : null; })
+          .then(function (v) {
+            var latest = v && String(v.build || '');
+            // 더 새 배포일 때만 (같거나 예전 값이면 무시 → 새로고침 반복 방지)
+            if (!latest || latest <= BUILD) return;
+            var prev = {};
+            try { prev = JSON.parse(sessionStorage.getItem('hyedu.reloadFor')) || {}; } catch (e) {}
+            if (prev.v === latest && now - prev.t < 120000) return;
+            try {
+              sessionStorage.setItem('hyedu.reloadFor', JSON.stringify({ v: latest, t: now }));
+              sessionStorage.setItem('hyedu.scroll', JSON.stringify({ hash: location.hash, y: window.pageYOffset }));
+            } catch (e) {}
+            location.replace(location.pathname + '?v=' + encodeURIComponent(latest) + location.hash);
+          })
+          .catch(function () {});
       }
-      window.hyeduSetDrawer = setDrawer;
+      window.hyeduCheckUpdate = checkForUpdate;
+      document.addEventListener('visibilitychange', function () {
+        if (document.visibilityState === 'visible') checkForUpdate(true);
+      });
+      window.addEventListener('pageshow', function (e) { if (e.persisted) checkForUpdate(true); });
+      window.addEventListener('focus', function () { checkForUpdate(false); });
+      setInterval(function () {
+        if (document.visibilityState === 'visible') checkForUpdate(false);
+      }, 5 * 60000);
+      setTimeout(function () { checkForUpdate(true); }, 1500);
 
-      document.addEventListener('click', function (e) {
-        var t = e.target;
-        if (!t || !t.closest) return;
-        if (t.closest('.menu-btn')) {
-          setDrawer(!document.body.classList.contains('drawer-open'));
-        } else if (t.closest('.drawer-backdrop')) {
-          setDrawer(false);
-        } else if (!desktop.matches && t.closest('.sidebar a[href]')) {
-          setDrawer(false);
+      // 문서(.md) 요청에 배포 버전을 붙임 → 새 배포 후에는 이전 캐시를 쓰지 않고, 같은 배포 안에서는 캐시로 빠르게
+      var open = XMLHttpRequest.prototype.open;
+      XMLHttpRequest.prototype.open = function (method, url) {
+        if (typeof url === 'string' && url.indexOf('//') === -1 && /\.md($|\?)/.test(url)) {
+          arguments[1] = url + (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + BUILD;
         }
-      });
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') setDrawer(false);
-      });
-      var onChange = function () { if (desktop.matches) setDrawer(false); };
-      if (desktop.addEventListener) desktop.addEventListener('change', onChange);
-      else if (desktop.addListener) desktop.addListener(onChange);
+        return open.apply(this, arguments);
+      };
+
+      // 배포마다 쌓이는 이전 검색 색인을 지움 (localStorage 용량 보호)
+      try {
+        var keep = 'hy-edu-' + BUILD;
+        for (var i = localStorage.length - 1; i >= 0; i--) {
+          var k = localStorage.key(i);
+          if (k && k.indexOf('docsify.search.') === 0 && k.indexOf(keep) === -1) localStorage.removeItem(k);
+        }
+      } catch (e) {}
     })();
 
     /* ---------- 학습 진도 · 커리큘럼 메뉴 ---------- */
@@ -1519,7 +1560,18 @@
 
     /* ---------- 표: 좁은 화면에서 표만 가로 스크롤 ---------- */
     function layoutPlugin(hook) {
+      // 자동 갱신으로 다시 열렸으면 읽던 위치로 복귀
+      var restore = null;
+      try {
+        restore = JSON.parse(sessionStorage.getItem('hyedu.scroll'));
+        sessionStorage.removeItem('hyedu.scroll');
+      } catch (e) {}
       hook.doneEach(function () {
+        if (restore) {
+          var y = restore.hash === location.hash ? restore.y : 0;
+          restore = null;
+          if (y) setTimeout(function () { window.scrollTo(0, y); }, 60);
+        }
         var tables = document.querySelectorAll('.markdown-section table');
         Array.prototype.forEach.call(tables, function (table) {
           var parent = table.parentNode;
@@ -1745,7 +1797,7 @@
         var roots = document.querySelectorAll('.markdown-section .mock-exam[data-src]');
         Array.prototype.forEach.call(roots, function (root) {
           root.innerHTML = '<p class="mx-loading">문항을 불러오는 중입니다…</p>';
-          fetch(root.getAttribute('data-src') + '?v=' + BUILD, { cache: 'no-cache' })
+          fetch(root.getAttribute('data-src') + '?v=' + BUILD)
             .then(function (res) {
               if (!res.ok) throw new Error(res.status);
               return res.json();
@@ -1765,10 +1817,6 @@
       auto2top: true,
       topMargin: 68,
       homepage: 'README.md',
-      // GitHub Pages 캐시(최대 10분) 때문에 이전 문서가 보이는 것을 줄임
-      requestHeaders: {
-        'cache-control': 'max-age=0'
-      },
       search: {
         maxAge: 3600000,
         namespace: 'hy-edu-' + BUILD,

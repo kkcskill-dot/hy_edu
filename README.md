@@ -28,84 +28,84 @@
 
   <a class="course-card" href="#/summary/01_연세대학교_의료원_현황_및_주요_현안.md">
     <div>
-      <span class="card-tag">제1강 • 의료원 경영현황</span>
-      <h4>🏢 의료원 현황 & B to D 마스터플랜</h4>
-      <p>조직도 및 8대 산하기관, 3조 4,680억 예산, 중입자치료 3대 가동, 로봇 5만례, 6대 현안</p>
+      <span class="card-tag">제1강 • 교본 1단원</span>
+      <h4>🏢 연세대학교 의료원 현황 및 주요 현안</h4>
+      <p>조직도 · 인원(14,093명) · 병상(3,599병상) · 진료실적 · 예산(5조 1,029억원) / 중입자치료 · 로봇수술 · 세계대학평가 · 기술사업화 · AI / 마스터플랜 · 의과대학 신축 · 송도세브란스 등 주요 현안</p>
     </div>
     <div class="card-footer">
-      <span>⏱️ 학습시간: 15분</span>
+      <span>📄 교본 13쪽 핵심노트</span>
       <span>강의 시작 ➔</span>
     </div>
   </a>
 
   <a class="course-card" href="#/summary/02_연세대학교_의료원_역사_및_가치.md">
     <div>
-      <span class="card-tag">제2강 • 의료원 철학 & 역사</span>
-      <h4>⛪ SEVERANCE SPIRIT & 연세간호 120년</h4>
-      <p>3대 창립정신(알렌·세브란스·에비슨), 인재상 5대 가치, 윤리강령, 『해부학』 문화유산 예고, 흉판 제막</p>
+      <span class="card-tag">제2강 • 교본 2단원</span>
+      <h4>⛪ 연세대학교 의료원 역사 및 가치</h4>
+      <p>SEVERANCE SPIRIT · 제중원과 창립정신 · 미션과 비전 · 인재상과 핵심가치 5 · 윤리강령과 실천지침</p>
     </div>
     <div class="card-footer">
-      <span>⏱️ 학습시간: 15분</span>
+      <span>📄 교본 13쪽 핵심노트</span>
       <span>강의 시작 ➔</span>
     </div>
   </a>
 
   <a class="course-card" href="#/summary/03_보건의료_정책_변화.md">
     <div>
-      <span class="card-tag">제3강 • 정책 대변혁</span>
-      <h4>⚖️ 보건의료 정책 & 상급종합 구조전환</h4>
-      <p>의료개혁 1·2·3차 로드맵, 중증 70% 이상, 서울 대형 일반병상 15% 감축, 전문의 중심병원(전공의 0.5)</p>
+      <span class="card-tag">제3강 • 교본 3단원</span>
+      <h4>⚖️ 보건의료 정책 변화</h4>
+      <p>의료개혁 1·2차 실행방안 · 지불제도 개혁 · 전문의 중심병원 · 상급종합병원 구조전환(5대 혁신) · 국립대병원 · 새정부 정책</p>
     </div>
     <div class="card-footer">
-      <span>⏱️ 학습시간: 20분</span>
+      <span>📄 교본 18쪽 핵심노트</span>
       <span>강의 시작 ➔</span>
     </div>
   </a>
 
   <a class="course-card" href="#/summary/04_인사규정_및_상벌규정.md">
     <div>
-      <span class="card-tag">제4강 • 사내 규정 (출제비중 1위)</span>
-      <h4>📋 일반직 인사규정 & 상벌규정 족보</h4>
-      <p>승진결격(18-12-6개월), 질병휴직(3개월 100%+6개월 60%), 포상 4종, 징계 5종(출근정지 무급), 감경불가 5대비위</p>
+      <span class="card-tag">제4강 • 교본 4단원</span>
+      <h4>📋 인사규정 및 상벌규정</h4>
+      <p>용어 · 직급 · 채용 · 보직 · 승진 · 승급 · 복무 · 휴직 · 면직 · 정년 / 포상 4종 · 징계 5종과 징계 절차</p>
     </div>
     <div class="card-footer">
-      <span>⏱️ 학습시간: 25분</span>
+      <span>📄 교본 34쪽 핵심노트</span>
       <span>강의 시작 ➔</span>
     </div>
   </a>
 
   <a class="course-card" href="#/summary/05_자산관리규정.md">
     <div>
-      <span class="card-tag">제5강 • 실무 규정</span>
-      <h4>📦 자산관리규정 & 손망실 실무</h4>
-      <p>기본재산 vs 보통재산, 유형자산(100만원↑ & 1년↑), 정액법 상각, 단위기관 이동 제한 예외 3가지</p>
+      <span class="card-tag">제5강 • 교본 5단원</span>
+      <h4>📦 자산관리규정</h4>
+      <p>자산의 구분(유형·부외·재고) · 취득 · 자산 이동(2026.8.21. 개정) · 감가상각 · 실사 · 반납 · 처분 · 반출 · 손망실</p>
     </div>
     <div class="card-footer">
-      <span>⏱️ 학습시간: 15분</span>
+      <span>📄 교본 20쪽 핵심노트</span>
       <span>강의 시작 ➔</span>
     </div>
   </a>
 
   <a class="course-card" href="#/summary/06_의료법.md">
     <div>
-      <span class="card-tag">제6강 • 법률 필수</span>
-      <h4>🩺 의료법 핵심 & 수술실 CCTV</h4>
-      <p>의료인 5종 구분, 종합병원 요건, 의무기록 법정보존연한(2·3·5·10년), 설명의무 3대 행위, 수술실 CCTV 촬영/열람</p>
+      <span class="card-tag">제6강 • 교본 6단원</span>
+      <h4>🩺 의료법</h4>
+      <p>의료인·의료기관의 종류와 요건 · 면허·결격·자격정지 · 진료기록 보존연한 · 설명의무 · 수술실 CCTV · 개설 · 의료광고 · 감독</p>
     </div>
     <div class="card-footer">
-      <span>⏱️ 학습시간: 20분</span>
+      <span>📄 교본 33쪽 핵심노트</span>
       <span>강의 시작 ➔</span>
     </div>
   </a>
 
   <a class="course-card" href="#/summary/07_국민건강보험법_및_요양급여기준.md">
     <div>
-      <span class="card-tag">제7강 • 법률 필수</span>
-      <h4>📑 국민건강보험법 & 요양급여기준</h4>
-      <p>건정심(차관+25명), 공단 vs 심평원 업무 완벽 분담, 현황변경 신고(15일), 소멸시효(3년/10년), 상급종합 1단계 예외</p>
+      <span class="card-tag">제7강 • 교본 7단원</span>
+      <h4>📑 국민건강보험법 및 요양급여기준</h4>
+      <p>건강보험정책심의위원회 · 가입자와 피부양자 · 공단·심평원 업무 · 보험료 부담 · 이의신청·소멸시효 · 요양급여 2단계 · 비급여</p>
     </div>
     <div class="card-footer">
-      <span>⏱️ 학습시간: 20분</span>
+      <span>📄 교본 22쪽 핵심노트</span>
       <span>강의 시작 ➔</span>
     </div>
   </a>
@@ -143,6 +143,18 @@
     <div class="card-footer">
       <span>⏱️ 회당 20문항</span>
       <span>응시하기 ➔</span>
+    </div>
+  </a>
+
+  <a class="course-card" href="reader.html">
+    <div>
+      <span class="card-tag">e-book 서재 • 형광펜·밑줄·메모</span>
+      <h4>📖 교본 · 소식지 e-book</h4>
+      <p>교본 7권과 2026 연세의료원 소식지 18호를 원본 지면 그대로 넘겨 보며 형광펜·밑줄·메모 (기기 간 동기화 지원)</p>
+    </div>
+    <div class="card-footer">
+      <span>📖 25권 · 297쪽</span>
+      <span>서재 열기 ➔</span>
     </div>
   </a>
 

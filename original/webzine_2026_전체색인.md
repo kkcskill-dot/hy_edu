@@ -33,6 +33,7 @@
 ## Ⅱ. 호별 주요 수록 기사 상세 목차
 
 ### 📌 제977호 (2026-01-05)
+- **e-book**: <a href="reader.html?doc=webzine-977">977호 지면 보기 (형광펜·메모)</a>
 - **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=128251](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=128251)
 - **주요 기사 목록**:
   - 2026 의료원장 신년사 - NEXT SEVERANCE: 미래 100년을 여는 새로운 출발
@@ -50,6 +51,7 @@
   - *외 23건의 기사 및 후원 소식*
 
 ### 📌 제978호 (2026-01-19)
+- **e-book**: <a href="reader.html?doc=webzine-978">978호 지면 보기 (형광펜·메모)</a>
 - **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=128421](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=128421)
 - **주요 기사 목록**:
   - 난치성 IDH-돌연변이 신경교종, ‘정상 판정 뇌조직’에서 시작
@@ -67,6 +69,7 @@
   - *외 24건의 기사 및 후원 소식*
 
 ### 📌 제979호 (2026-02-09)
+- **e-book**: <a href="reader.html?doc=webzine-979">979호 지면 보기 (형광펜·메모)</a>
 - **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=128644](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=128644)
 - **주요 기사 목록**:
   - 의대 김승업 교수, 제19회 아산의학상 수상
@@ -84,6 +87,7 @@
   - *외 27건의 기사 및 후원 소식*
 
 ### 📌 제980호 (2026-03-02)
+- **e-book**: <a href="reader.html?doc=webzine-980">980호 지면 보기 (형광펜·메모)</a>
 - **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=128891](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=128891)
 - **주요 기사 목록**:
   - 최정상급 논문 발표 증가…의대 학술 경쟁력 ‘껑충’
@@ -101,6 +105,7 @@
   - *외 25건의 기사 및 후원 소식*
 
 ### 📌 제981호 (2026-03-23)
+- **e-book**: <a href="reader.html?doc=webzine-981">981호 지면 보기 (형광펜·메모)</a>
 - **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129094](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129094)
 - **주요 기사 목록**:
   - 김형범 교수, 임성기연구자상 대상 수상
@@ -118,6 +123,7 @@
   - *외 27건의 기사 및 후원 소식*
 
 ### 📌 제982호 (2026-04-06)
+- **e-book**: <a href="reader.html?doc=webzine-982">982호 지면 보기 (형광펜·메모)</a>
 - **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129245](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129245)
 - **주요 기사 목록**:
   - 2025년 기부금 830억원 돌파, 역대 최고액
@@ -135,6 +141,7 @@
   - *외 25건의 기사 및 후원 소식*
 
 ### 📌 제983호 (2026-04-20)
+- **e-book**: <a href="reader.html?doc=webzine-983">983호 지면 보기 (형광펜·메모)</a>
 - **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129373](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129373)
 - **주요 기사 목록**:
   - 제중원 141주년 기념 예배
@@ -152,6 +159,7 @@
   - *외 25건의 기사 및 후원 소식*
 
 ### 📌 제984호 (2026-05-04)
+- **e-book**: <a href="reader.html?doc=webzine-984">984호 지면 보기 (형광펜·메모)</a>
 - **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129556](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129556)
 - **주요 기사 목록**:
   - 세브란스병원, 세계 첫 로봇수술 5만례
@@ -169,6 +177,7 @@
   - *외 19건의 기사 및 후원 소식*
 
 ### 📌 제985호 (2026-05-18)
+- **e-book**: <a href="reader.html?doc=webzine-985">985호 지면 보기 (형광펜·메모)</a>
 - **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129689](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129689)
 - **주요 기사 목록**:
   - "변치 않는 사명으로 세상을 변화시킨다" 후원행사 'I AM SEVERANCE' 개최
@@ -186,6 +195,7 @@
   - *외 23건의 기사 및 후원 소식*
 
 ### 📌 제986호 (2026-06-01)
+- **e-book**: <a href="reader.html?doc=webzine-986">986호 지면 보기 (형광펜·메모)</a>
 - **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129799](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=129799)
 - **주요 기사 목록**:
   - 세브란스병원, 자체 평가팀 ‘세븐팀’ 운영
@@ -203,6 +213,7 @@
   - *외 28건의 기사 및 후원 소식*
 
 ### 📌 제987호 (2026-06-22)
+- **e-book**: <a href="reader.html?doc=webzine-987">987호 지면 보기 (형광펜·메모)</a>
 - **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130019](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130019)
 - **주요 기사 목록**:
   - 국산 수술로봇 글로벌 경쟁력 강화 나선다
@@ -220,6 +231,7 @@
   - *외 33건의 기사 및 후원 소식*
 
 ### 📌 제988호 (2026-07-06)
+- **e-book**: <a href="reader.html?doc=webzine-988">988호 지면 보기 (형광펜·메모)</a>
 - **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130148](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130148)
 - **주요 기사 목록**:
   - 전영한 하님 회장 7억원 기부, 누적 기부금 45억원 넘어서
@@ -237,6 +249,7 @@
   - *외 34건의 기사 및 후원 소식*
 
 ### 📌 제989호 (2026-07-20)
+- **e-book**: <a href="reader.html?doc=webzine-989">989호 지면 보기 (형광펜·메모)</a>
 - **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130271](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130271)
 - **주요 기사 목록**:
   - 생후 14일·3.14kg 신생아 ‘로봇 카사이 수술’ 성공
@@ -254,6 +267,7 @@
   - *외 31건의 기사 및 후원 소식*
 
 ### 📌 제990호 (2026-08-10)
+- **e-book**: <a href="reader.html?doc=webzine-990">990호 지면 보기 (형광펜·메모)</a>
 - **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130519](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130519)
 - **주요 기사 목록**:
   - 신종 감염병 치료제 개발 위한 AI 전임상 플랫폼 구축
@@ -271,6 +285,7 @@
   - *외 35건의 기사 및 후원 소식*
 
 ### 📌 제991호 (2026-09-07)
+- **e-book**: <a href="reader.html?doc=webzine-991">991호 지면 보기 (형광펜·메모)</a>
 - **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130794](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130794)
 - **주요 기사 목록**:
   - 중입자치료, 두경부암·육종·재발성 직장암까지 확대
@@ -288,6 +303,7 @@
   - *외 33건의 기사 및 후원 소식*
 
 ### 📌 제992호 (2026-09-21)
+- **e-book**: <a href="reader.html?doc=webzine-992">992호 지면 보기 (형광펜·메모)</a>
 - **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130911](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=130911)
 - **주요 기사 목록**:
   - 뇌졸중 위험 높지 않은 시망세동도 항응고제 치료가 합병증 낮춰
@@ -305,6 +321,7 @@
   - *외 32건의 기사 및 후원 소식*
 
 ### 📌 제993호 (2026-10-12)
+- **e-book**: <a href="reader.html?doc=webzine-993">993호 지면 보기 (형광펜·메모)</a>
 - **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=131065](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=131065)
 - **주요 기사 목록**:
   - 고위험 스텐트 환자, 항혈소판 치료 시 허혈·출혈 위험 함께 고려해야
@@ -322,6 +339,7 @@
   - *외 29건의 기사 및 후원 소식*
 
 ### 📌 제994호 (2026-10-26)
+- **e-book**: <a href="reader.html?doc=webzine-994">994호 지면 보기 (형광펜·메모)</a>
 - **온라인 웹진**: [https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=131186](https://yuhs.severance.healthcare/news/publish/webzine.do?mode=view&articleNo=131186)
 - **주요 기사 목록**:
   - 필라델피아에서 되새긴 세브란스 뿌리와 우정

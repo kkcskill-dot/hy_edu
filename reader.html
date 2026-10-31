@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>e-book 서재 · 세브란스 간호사 승진시험 개인 학습노트</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#f5f5f7">
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+  <style>
+    :root {
+      --bg: #f5f5f7;
+      --card: #ffffff;
+      --text: #1d1d1f;
+      --sub: #6e6e73;
+      --line: rgba(0, 0, 0, 0.08);
+      --blue: #0071e3;
+      --green: #1a7f37;
+      --red: #d70015;
+      --bar-h: 52px;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-left: env(safe-area-inset-left, 0px);
+      --safe-right: env(safe-area-inset-right, 0px);
+      --zoom: 1;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+      letter-spacing: -0.02em;
+    }
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+    button { font: inherit; color: inherit; -webkit-tap-highlight-color: transparent; cursor: pointer; }
+    a { color: var(--blue); -webkit-tap-highlight-color: transparent; }
+    [hidden] { display: none !important; }
+
+    /* 상단 바 */
+    .topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: calc(var(--bar-h) + var(--safe-top));
+      padding: var(--safe-top) calc(10px + var(--safe-right)) 0 calc(6px + var(--safe-left));
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--line);
+      z-index: 50;
+    }
+    .icon-btn {
+      flex: 0 0 auto;
+      min-width: 44px;
+      height: 44px;
+      padding: 0 10px;
+      border: 0;
+      border-radius: 12px;
+      background: transparent;
+      font-size: 15px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .icon-btn:active { background: rgba(0, 0, 0, 0.06); }
+    .top-title {
+      flex: 1 1 auto;
+      min-width: 0;
+      font-weight: 700;
+      font-size: 15px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .page-pill {
+      flex: 0 0 auto;
+      border: 0;
+      background: rgba(0, 0, 0, 0.06);
+      border-radius: 14px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .sync-dot {
+      flex: 0 0 auto;
+      font-size: 12px;
+      color: var(--sub);
+      white-space: nowrap;
+    }
+
+    /* 서재 */
+    .library {
+      padding: calc(var(--bar-h) + var(--safe-top) + 16px) calc(16px + var(--safe-right)) calc(40px + var(--safe-bottom)) calc(16px + var(--safe-left));
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .lib-head h1 { font-size: 24px; margin: 4px 0 6px; }
+    .lib-head p { margin: 0 0 14px; color: var(--sub); font-size: 14.5px; line-height: 1.6; }
+    .lib-tools { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+    .pill-btn {
+      min-height: 40px;
+      padding: 0 14px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .pill-btn.primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .lib-section { margin: 22px 0 8px; font-size: 13px; font-weight: 800; color: var(--sub); }
+    .shelf { display: grid; grid-template-columns: 1fr; gap: 10px; }
+    .book {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      padding: 12px;
+      border-radius: 16px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      text-decoration: none;
+      color: inherit;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .book:active { transform: scale(0.99); }
+    .book img {
+      flex: 0 0 auto;
+      width: 64px;
+      aspect-ratio: 1400 / 1965;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 6px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    .book-info { min-width: 0; }
+    .book-title { font-weight: 700; font-size: 15.5px; line-height: 1.4; }
+    .book-sub { margin-top: 3px; font-size: 13px; color: var(--sub); line-height: 1.45; }
+    .book-meta { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag { font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: rgba(0, 0, 0, 0.05); color: var(--sub); }
+    .tag.read { background: rgba(0, 113, 227, 0.1); color: var(--blue); }
+    .tag.notes { background: rgba(255, 204, 0, 0.25); color: #8a6d00; }
+
+    /* 읽기 화면 */
+    .viewer {
+      padding: calc(var(--bar-h) + var(--safe-top) + 10px) 0 calc(96px + var(--safe-bottom));
+      overflow-x: auto;
+    }
+    .pages {
+      width: calc(min(100vw - 16px, 920px) * var(--zoom));
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .pg {
+      position: relative;
+      width: 100%;
+      background: #fff;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      border-radius: 4px;
+      overflow: hidden;
+      touch-action: pan-x pan-y pinch-zoom;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
+    }
+    body.drawing .pg { touch-action: none; }
+    .pg img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      pointer-events: none;
+    }
+    .pg svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      mix-blend-mode: multiply;
+    }
+    .pg-num {
+      position: absolute;
+      right: 8px;
+      bottom: 6px;
+      font-size: 11px;
+      color: #8e8e93;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 1px 6px;
+      border-radius: 8px;
+      pointer-events: none;
+    }
+    .pin {
+      position: absolute;
+      transform: translate(-50%, -100%);
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 17px 17px 17px 4px;
+      background: #ffcc00;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+      font-size: 17px;
+      line-height: 34px;
+      text-align: center;
+      padding: 0;
+    }
+    .pin::after { content: '📝'; }
+
+    /* 하단 도구 막대 */
+    .toolbar {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: calc(10px + var(--safe-bottom));
+      display: flex;
+      gap: 2px;
+      align-items: center;
+      padding: 5px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.16);
+      z-index: 60;
+      max-width: calc(100vw - 16px);
+      overflow-x: auto;
+    }
+    .tool {
+      flex: 0 0 auto;
+      min-width: 42px;
+      height: 46px;
+      border: 0;
+      border-radius: 16px;
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      line-height: 1;
+      padding: 0 3px;
+    }
+    .tool small { font-size: 10.5px; font-weight: 700; color: var(--sub); margin-top: 3px; }
+    .tool.on { background: rgba(0, 113, 227, 0.12); }
+    .tool.on small { color: var(--blue); }
+    .tool:disabled { opacity: 0.35; }
+    .swatches {
+      display: flex;
+      gap: 6px;
+      padding: 0 6px;
+      border-left: 1px solid var(--line);
+      margin-left: 2px;
+    }
+    .sw {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 1px var(--line);
+      padding: 0;
+    }
+    .sw.on { box-shadow: 0 0 0 2px var(--blue); }
+
+    /* 시트(메모 편집 · 메모 목록 · 설정) */
+    .sheet-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 90;
+    }
+    .sheet {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      max-height: 80vh;
+      overflow-y: auto;
+      background: var(--card);
+      border-radius: 20px 20px 0 0;
+      padding: 16px calc(16px + var(--safe-right)) calc(18px + var(--safe-bottom)) calc(16px + var(--safe-left));
+      z-index: 100;
+      box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.15);
+    }
+    @media (min-width: 700px) {
+      .sheet { left: 50%; right: auto; width: 560px; transform: translateX(-50%); bottom: 24px; border-radius: 20px; }
+    }
+    .sheet h2 { font-size: 17px; margin: 0 0 10px; }
+    .sheet textarea, .sheet input {
+      width: 100%;
+      font-size: 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: #fafafa;
+    }
+    .sheet textarea { min-height: 140px; resize: vertical; line-height: 1.6; }
+    .sheet-actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+    .sheet-actions .pill-btn { flex: 1 1 auto; }
+    .pill-btn.danger { color: var(--red); }
+    .memo-item {
+      display: block;
+      width: 100%;
+      text-align: left;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      background: transparent;
+      padding: 12px 4px;
+    }
+    .memo-item b { color: var(--blue); font-size: 13px; }
+    .memo-item span { display: block; margin-top: 3px; font-size: 14.5px; line-height: 1.5; white-space: pre-wrap; }
+    .hint { color: var(--sub); font-size: 13px; line-height: 1.55; }
+    .toast {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: calc(80px + var(--safe-bottom));
+      background: rgba(29, 29, 31, 0.92);
+      color: #fff;
+      padding: 9px 16px;
+      border-radius: 18px;
+      font-size: 14px;
+      z-index: 120;
+      pointer-events: none;
+    }
+
+    @media (min-width: 640px) {
+      .shelf { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .viewer { padding-top: calc(var(--bar-h) + var(--safe-top) + 16px); }
+      .pages { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <button class="icon-btn" id="backBtn" type="button" aria-label="뒤로">‹ <span id="backLabel">학습노트</span></button>
+    <div class="top-title" id="topTitle">e-book 서재</div>
+    <span class="sync-dot" id="syncState"></span>
+    <button class="page-pill" id="pagePill" type="button" hidden>1 / 1</button>
+  </header>
+
+  <!-- 서재 -->
+  <main class="library" id="library" hidden>
+    <div class="lib-head">
+      <h1>📖 e-book 서재</h1>
+      <p>교본과 소식지(웹진)를 원본 지면 그대로 넘겨 보면서 형광펜·밑줄·메모를 남길 수 있습니다. 표시한 내용은 바로 저장됩니다.</p>
+    </div>
+    <div class="lib-tools">
+      <button class="pill-btn" id="syncBtn" type="button">🔄 기기 간 동기화</button>
+      <button class="pill-btn" id="exportBtn" type="button">⬇️ 메모 백업</button>
+      <button class="pill-btn" id="importBtn" type="button">⬆️ 백업 불러오기</button>
+      <input type="file" id="importFile" accept="application/json,.json" hidden>
+    </div>
+    <div id="shelves"></div>
+  </main>
+
+  <!-- 읽기 -->
+  <main class="viewer" id="viewer" hidden>
+    <div class="pages" id="pages"></div>
+  </main>
+
+  <nav class="toolbar" id="toolbar" hidden aria-label="도구">
+    <button class="tool on" data-tool="read" type="button" title="읽기">✋<small>읽기</small></button>
+    <button class="tool" data-tool="hl" type="button" title="형광펜">🖍️<small>형광펜</small></button>
+    <button class="tool" data-tool="pen" type="button" title="밑줄">✏️<small>밑줄</small></button>
+    <button class="tool" data-tool="erase" type="button" title="지우개">🧽<small>지우개</small></button>
+    <button class="tool" data-tool="memo" type="button" title="메모">📝<small>메모</small></button>
+    <button class="tool" id="undoBtn" type="button" title="되돌리기" disabled>↶<small>되돌리기</small></button>
+    <button class="tool" id="listBtn" type="button" title="메모 목록">📋<small>목록</small></button>
+    <button class="tool" id="zoomBtn" type="button" title="확대">🔍<small id="zoomLabel">100%</small></button>
+    <div class="swatches" id="swatches"></div>
+  </nav>
+
+  <div class="sheet-backdrop" id="sheetBackdrop" hidden></div>
+  <section class="sheet" id="sheet" hidden></section>
+  <div class="toast" id="toast" hidden></div>
+
+  <script>
+    // 배포 버전 (web_builder.py가 갱신) — index.html과 같은 값
+    var BUILD = '20261031-112640';
+
+    /* ---------- 배포 후 자동 갱신 (index.html과 같은 방식) ---------- */
+    (function () {
+      var lastCheck = 0;
+      function check(force) {
+        if (!window.fetch) return;
+        var now = Date.now();
+        if (!force && now - lastCheck < 60000) return;
+        lastCheck = now;
+        fetch('version.json?t=' + now, { cache: 'no-store' })
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (v) {
+            var latest = v && String(v.build || '');
+            if (!latest || latest <= BUILD) return;
+            var prev = {};
+            try { prev = JSON.parse(sessionStorage.getItem('hyedu.reloadFor')) || {}; } catch (e) {}
+            if (prev.v === latest && now - prev.t < 120000) return;
+            try { sessionStorage.setItem('hyedu.reloadFor', JSON.stringify({ v: latest, t: now })); } catch (e) {}
+            var q = new URLSearchParams(location.search);
+            q.set('v', latest);
+            location.replace(location.pathname + '?' + q.toString() + location.hash);
+          })
+          .catch(function () {});
+      }
+      document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible') check(true); });
+      window.addEventListener('pageshow', function (e) { if (e.persisted) check(true); });
+      setTimeout(function () { check(true); }, 1500);
+    })();
+
+    /* ---------- 공통 ---------- */
+    var $ = function (id) { return document.getElementById(id); };
+    function esc(s) {
+      return String(s).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+    function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 8); }
+    var toastTimer;
+    function toast(msg) {
+      var t = $('toast');
+      t.textContent = msg;
+      t.hidden = false;
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () { t.hidden = true; }, 2200);
+    }
+    function openSheet(html) {
+      $('sheet').innerHTML = html;
+      $('sheet').hidden = false;
+      $('sheetBackdrop').hidden = false;
+    }
+    function closeSheet() {
+      $('sheet').hidden = true;
+      $('sheetBackdrop').hidden = true;
+      $('sheet').innerHTML = '';
+    }
+    $('sheetBackdrop').addEventListener('click', closeSheet);
+
+    /* ---------- 저장 (이 기기) ---------- */
+    var NOTE_PREFIX = 'hyedu.annot.';
+    function loadNotes(doc) {
+      try { return JSON.parse(localStorage.getItem(NOTE_PREFIX + doc)) || { items: {} }; } catch (e) { return { items: {} }; }
+    }
+    function saveNotesLocal(doc, data) {
+      try {
+        localStorage.setItem(NOTE_PREFIX + doc, JSON.stringify(data));
+      } catch (e) {
+        toast('저장 공간이 부족합니다. 메모 백업 후 정리해 주세요.');
+      }
+    }
+    function liveItems(data) {
+      var out = [];
+      for (var k in data.items) if (!data.items[k].del) out.push(data.items[k]);
+      return out;
+    }
+    // 같은 id는 더 나중에 고친 쪽을 남김 (지운 것도 기록으로 남겨 다른 기기에 전달)
+    function mergeNotes(a, b) {
+      var out = { items: {}, last: a.last || b.last };
+      [a, b].forEach(function (src) {
+        for (var k in (src.items || {})) {
+          var it = src.items[k];
+          if (!out.items[k] || (it.u || 0) > (out.items[k].u || 0)) out.items[k] = it;
+        }
+      });
+      return out;
+    }
+    function sameNotes(a, b) {
+      var ka = Object.keys(a.items || {}), kb = Object.keys(b.items || {});
+      if (ka.length !== kb.length) return false;
+      for (var i = 0; i < ka.length; i++) {
+        var x = a.items[ka[i]], y = (b.items || {})[ka[i]];
+        if (!y || x.u !== y.u) return false;
+      }
+      return true;
+    }
+
+    /* ---------- 기기 간 동기화 (nginx WebDAV: annot/<문서>.json) ----------
+       credentials: 'omit' → 401 응답에도 브라우저 자체 로그인 창이 뜨지 않고, 아이디·비밀번호는 Authorization 헤더로 직접 보냄 */
+    var SYNC_KEY = 'hyedu.sync.auth';
+    var sync = {
+      auth: localStorage.getItem(SYNC_KEY) || '',
+      state: 'off',          // off | ok | busy | fail | unsupported
+      timer: null
+    };
+    function setSyncState(s, msg) {
+      sync.state = s;
+      var label = { off: '', ok: '☁️ 동기화됨', busy: '☁️ 동기화 중…', fail: '⚠️ 이 기기에만 저장', unsupported: '' }[s];
+      $('syncState').textContent = msg || label || '';
+    }
+    function syncHeaders(extra) {
+      var h = extra || {};
+      if (sync.auth) h.Authorization = 'Basic ' + sync.auth;
+      return h;
+    }
+    function remoteGet(doc) {
+      return fetch('annot/' + encodeURIComponent(doc) + '.json?t=' + Date.now(), { cache: 'no-store', credentials: 'omit', headers: syncHeaders() })
+        .then(function (r) {
+          if (r.status === 404) return { items: {} };
+          if (r.status === 401) throw new Error('auth');
+          if (!r.ok) throw new Error('http ' + r.status);
+          return r.json();
+        });
+    }
+    function remotePut(doc, data) {
+      return fetch('annot/' + encodeURIComponent(doc) + '.json', {
+        method: 'PUT',
+        credentials: 'omit',
+        headers: syncHeaders({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify(data)
+      }).then(function (r) {
+        if (r.status === 401) throw new Error('auth');
+        if (r.status === 405 || r.status === 403) throw new Error('unsupported');
+        if (!r.ok) throw new Error('http ' + r.status);
+      });
+    }
+    // 서버 것과 합쳐서 양쪽을 같게 맞춤
+    function syncDoc(doc) {
+      if (!sync.auth || sync.state === 'unsupported') return Promise.resolve(null);
+      setSyncState('busy');
+      return remoteGet(doc).then(function (remote) {
+        var local = loadNotes(doc);
+        var merged = mergeNotes(local, remote);
+        merged.last = local.last || remote.last;
+        saveNotesLocal(doc, merged);
+        var push = sameNotes(merged, remote) ? Promise.resolve() : remotePut(doc, merged);
+        return push.then(function () { setSyncState('ok'); return merged; });
+      }).catch(function (e) {
+        if (e.message === 'unsupported') {
+          setSyncState('unsupported');
+          toast('이 주소에서는 동기화를 지원하지 않습니다. 이 기기에만 저장됩니다.');
+        } else if (e.message === 'auth') {
+          setSyncState('fail', '⚠️ 동기화 로그인 필요');
+        } else {
+          setSyncState('fail');
+        }
+        return null;
+      });
+    }
+    function scheduleSync(doc) {
+      if (!sync.auth) return;
+      clearTimeout(sync.timer);
+      sync.timer = setTimeout(function () { syncDoc(doc); }, 1500);
+    }
+    function openSyncSettings() {
+      openSheet(
+        '<h2>🔄 기기 간 동기화</h2>' +
+        '<p class="hint">nginx 서버에 만든 메모 저장 공간의 아이디·비밀번호를 입력하면, 아이폰·아이패드가 같은 형광펜·밑줄·메모를 공유합니다. 동기화가 안 되는 주소에서는 이 기기에만 저장됩니다.</p>' +
+        '<input id="syncUser" placeholder="아이디" autocomplete="username" autocapitalize="off">' +
+        '<div style="height:8px"></div>' +
+        '<input id="syncPass" type="password" placeholder="비밀번호" autocomplete="current-password">' +
+        '<div class="sheet-actions">' +
+        '<button class="pill-btn primary" id="syncSave" type="button">연결</button>' +
+        (sync.auth ? '<button class="pill-btn danger" id="syncOff" type="button">연결 해제</button>' : '') +
+        '<button class="pill-btn" id="sheetClose" type="button">닫기</button></div>' +
+        '<p class="hint" id="syncMsg"></p>'
+      );
+      $('sheetClose').onclick = closeSheet;
+      if ($('syncOff')) $('syncOff').onclick = function () {
+        sync.auth = '';
+        localStorage.removeItem(SYNC_KEY);
+        setSyncState('off');
+        closeSheet();
+        toast('동기화 연결을 해제했습니다. 메모는 이 기기에 그대로 있습니다.');
+      };
+      $('syncSave').onclick = function () {
+        var u = $('syncUser').value.trim(), p = $('syncPass').value;
+        if (!u || !p) { $('syncMsg').textContent = '아이디와 비밀번호를 입력해 주세요.'; return; }
+        var token = btoa(unescape(encodeURIComponent(u + ':' + p)));
+        $('syncMsg').textContent = '연결 확인 중…';
+        fetch('annot/_check.json?t=' + Date.now(), { cache: 'no-store', credentials: 'omit', headers: { Authorization: 'Basic ' + token } })
+          .then(function (r) {
+            if (r.status === 401) { $('syncMsg').textContent = '아이디 또는 비밀번호가 맞지 않습니다.'; return; }
+            if (r.ok || r.status === 404) {
+              // 쓰기까지 되는지 확인
+              return fetch('annot/_check.json', { method: 'PUT', credentials: 'omit', headers: { Authorization: 'Basic ' + token, 'Content-Type': 'application/json' }, body: JSON.stringify({ t: Date.now() }) })
+                .then(function (w) {
+                  if (!w.ok) { $('syncMsg').textContent = '이 주소에서는 동기화 저장소를 찾을 수 없습니다(nginx 서버 주소로 열어 주세요).'; return; }
+                  sync.auth = token;
+                  localStorage.setItem(SYNC_KEY, token);
+                  sync.state = 'off';
+                  closeSheet();
+                  toast('동기화를 연결했습니다.');
+                  syncAll();
+                });
+            }
+            $('syncMsg').textContent = '동기화 저장소에 연결할 수 없습니다 (' + r.status + ').';
+          })
+          .catch(function () { $('syncMsg').textContent = '서버에 연결할 수 없습니다.'; });
+      };
+    }
+    function syncAll() {
+      if (!LIB) return Promise.resolve();
+      var chain = Promise.resolve();
+      LIB.docs.forEach(function (d) { chain = chain.then(function () { return syncDoc(d.id); }); });
+      return chain.then(function () { if (!currentDoc) renderLibrary(); });
+    }
+
+    /* ---------- 백업 ---------- */
+    function exportNotes() {
+      var all = {};
+      for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i);
+        if (k && k.indexOf(NOTE_PREFIX) === 0) all[k.slice(NOTE_PREFIX.length)] = loadNotes(k.slice(NOTE_PREFIX.length));
+      }
+      var blob = new Blob([JSON.stringify({ app: 'hy_edu-notes', at: Date.now(), docs: all })], { type: 'application/json' });
+      var a = document.createElement('a');
+      var d = new Date();
+      a.href = URL.createObjectURL(blob);
+      a.download = 'hyedu-notes-' + d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0') + '.json';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+    }
+    $('exportBtn').onclick = exportNotes;
+    $('importBtn').onclick = function () { $('importFile').click(); };
+    $('importFile').onchange = function (e) {
+      var f = e.target.files && e.target.files[0];
+      if (!f) return;
+      f.text().then(function (txt) {
+        var data = JSON.parse(txt);
+        if (!data || data.app !== 'hy_edu-notes') throw new Error('format');
+        var n = 0;
+        for (var doc in data.docs) {
+          saveNotesLocal(doc, mergeNotes(loadNotes(doc), data.docs[doc]));
+          n++;
+          scheduleSync(doc);
+        }
+        toast(n + '권의 메모를 합쳤습니다.');
+        renderLibrary();
+      }).catch(function () { toast('백업 파일을 읽을 수 없습니다.'); });
+      e.target.value = '';
+    };
+    $('syncBtn').onclick = openSyncSettings;
+
+    /* ---------- 서재 ---------- */
+    var LIB = null;
+    var currentDoc = null;
+    function renderLibrary() {
+      currentDoc = null;
+      document.title = 'e-book 서재 · 세브란스 간호사 승진시험 개인 학습노트';
+      $('topTitle').textContent = 'e-book 서재';
+      $('backLabel').textContent = '학습노트';
+      $('pagePill').hidden = true;
+      $('toolbar').hidden = true;
+      $('viewer').hidden = true;
+      $('library').hidden = false;
+      document.body.classList.remove('drawing');
+      var groups = {};
+      LIB.docs.forEach(function (d) { (groups[d.group] = groups[d.group] || []).push(d); });
+      var html = '';
+      LIB.groups.forEach(function (g) {
+        if (!groups[g]) return;
+        html += '<div class="lib-section">' + esc(g) + '</div><div class="shelf">';
+        groups[g].forEach(function (d) {
+          var notes = loadNotes(d.id);
+          var count = liveItems(notes).length;
+          html += '<a class="book" href="?doc=' + encodeURIComponent(d.id) + '">' +
+            '<img loading="lazy" src="ebook/' + d.id + '/p001.webp" alt="">' +
+            '<div class="book-info"><div class="book-title">' + esc(d.title) + '</div>' +
+            '<div class="book-sub">' + esc(d.sub || '') + '</div>' +
+            '<div class="book-meta"><span class="tag">' + d.pages + '쪽</span>' +
+            (notes.last ? '<span class="tag read">' + notes.last + '쪽까지 읽음</span>' : '') +
+            (count ? '<span class="tag notes">표시 ' + count + '개</span>' : '') +
+            '</div></div></a>';
+        });
+        html += '</div>';
+      });
+      $('shelves').innerHTML = html;
+      window.scrollTo(0, 0);
+    }
+    $('backBtn').onclick = function () {
+      if (currentDoc) {
+        history.pushState(null, '', location.pathname);
+        renderLibrary();
+      } else {
+        location.href = './';
+      }
+    };
+    window.addEventListener('popstate', route);
+
+    /* ---------- 읽기 ---------- */
+    var view = {
+      doc: null, meta: null, data: null,
+      tool: 'read', color: { hl: '#ffd60a', pen: '#d70015' },
+      undo: [], pageEls: [], current: 1, zoom: 1
+    };
+    var COLORS = { hl: ['#ffd60a', '#8ce99a', '#ffa8d5', '#91d5ff'], pen: ['#d70015', '#0071e3', '#1d1d1f'] };
+    var WIDTH = { hl: 22, pen: 3.5 };   // viewBox(가로 1000) 기준 굵기
+
+    function openDoc(id, page) {
+      var meta = LIB.docs.filter(function (d) { return d.id === id; })[0];
+      if (!meta) { renderLibrary(); return; }
+      currentDoc = id;
+      view.doc = id;
+      view.meta = meta;
+      view.data = loadNotes(id);
+      view.undo = [];
+      $('undoBtn').disabled = true;
+      document.title = meta.title + ' · e-book';
+      $('topTitle').textContent = meta.title;
+      $('backLabel').textContent = '서재';
+      $('library').hidden = true;
+      $('viewer').hidden = false;
+      $('toolbar').hidden = false;
+      $('pagePill').hidden = false;
+      buildPages();
+      var start = page || view.data.last || 1;
+      requestAnimationFrame(function () { scrollToPage(start, false); });
+      syncDoc(id).then(function (merged) {
+        if (merged && currentDoc === id) { view.data = merged; renderAllNotes(); }
+      });
+    }
+
+    function buildPages() {
+      var wrap = $('pages');
+      wrap.innerHTML = '';
+      view.pageEls = [];
+      for (var i = 1; i <= view.meta.pages; i++) {
+        var size = view.meta.sizes[i - 1] || view.meta.sizes[0];
+        var h = 1000 * size[1] / size[0];
+        var pg = document.createElement('div');
+        pg.className = 'pg';
+        pg.dataset.p = i;
+        pg.style.aspectRatio = size[0] + ' / ' + size[1];
+        pg.innerHTML = '<img alt="' + i + '쪽"><svg viewBox="0 0 1000 ' + h.toFixed(1) + '" preserveAspectRatio="none"></svg><span class="pg-num">' + i + '</span>';
+        wrap.appendChild(pg);
+        view.pageEls.push(pg);
+      }
+      observePages();
+      renderAllNotes();
+    }
+
+    // 화면 근처 쪽만 이미지를 불러오고, 멀어진 쪽은 비워 메모리를 아낌 (아이폰 대비)
+    var nearObs, curObs;
+    function observePages() {
+      if (nearObs) nearObs.disconnect();
+      if (curObs) curObs.disconnect();
+      nearObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          var img = e.target.querySelector('img');
+          if (e.isIntersecting) {
+            if (!img.getAttribute('src')) img.src = 'ebook/' + view.doc + '/p' + String(e.target.dataset.p).padStart(3, '0') + '.webp';
+          } else if (img.getAttribute('src')) {
+            img.removeAttribute('src');
+          }
+        });
+      }, { rootMargin: '250% 0px' });
+      curObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) setCurrent(+e.target.dataset.p);
+        });
+      }, { rootMargin: '-45% 0px -45% 0px' });
+      view.pageEls.forEach(function (el) { nearObs.observe(el); curObs.observe(el); });
+    }
+    var lastSaveTimer;
+    function setCurrent(p) {
+      view.current = p;
+      $('pagePill').textContent = p + ' / ' + view.meta.pages;
+      clearTimeout(lastSaveTimer);
+      lastSaveTimer = setTimeout(function () {
+        var d = loadNotes(view.doc);
+        d.last = p;
+        saveNotesLocal(view.doc, d);
+        view.data.last = p;
+      }, 600);
+    }
+    function scrollToPage(p, smooth) {
+      var el = view.pageEls[Math.max(1, Math.min(p, view.meta.pages)) - 1];
+      if (!el) return;
+      var top = el.getBoundingClientRect().top + window.pageYOffset - (document.querySelector('.topbar').offsetHeight + 8);
+      window.scrollTo({ top: Math.max(0, top), behavior: smooth ? 'smooth' : 'auto' });
+    }
+    $('pagePill').onclick = function () {
+      openSheet('<h2>쪽 이동</h2><input id="gotoInput" type="number" inputmode="numeric" min="1" max="' + view.meta.pages + '" placeholder="1 ~ ' + view.meta.pages + '">' +
+        '<div class="sheet-actions"><button class="pill-btn primary" id="gotoBtn" type="button">이동</button><button class="pill-btn" id="sheetClose" type="button">닫기</button></div>');
+      $('sheetClose').onclick = closeSheet;
+      $('gotoBtn').onclick = function () {
+        var p = parseInt($('gotoInput').value, 10);
+        closeSheet();
+        if (p) scrollToPage(p, false);
+      };
+    };
+
+    /* ---------- 표시(형광펜·밑줄·메모) 그리기 ---------- */
+    function pageSvg(p) { return view.pageEls[p - 1].querySelector('svg'); }
+    function pageH(p) {
+      var s = view.meta.sizes[p - 1] || view.meta.sizes[0];
+      return 1000 * s[1] / s[0];
+    }
+    function pathD(pts, p) {
+      var h = pageH(p);
+      if (!pts.length) return '';
+      var d = 'M' + (pts[0][0] * 1000).toFixed(1) + ' ' + (pts[0][1] * h).toFixed(1);
+      if (pts.length === 1) d += 'l0.1 0';
+      for (var i = 1; i < pts.length; i++) {
+        var x = pts[i][0] * 1000, y = pts[i][1] * h;
+        if (i < pts.length - 1) {
+          var nx = pts[i + 1][0] * 1000, ny = pts[i + 1][1] * h;
+          d += 'Q' + x.toFixed(1) + ' ' + y.toFixed(1) + ' ' + ((x + nx) / 2).toFixed(1) + ' ' + ((y + ny) / 2).toFixed(1);
+        } else {
+          d += 'L' + x.toFixed(1) + ' ' + y.toFixed(1);
+        }
+      }
+      return d;
+    }
+    function strokeEl(it) {
+      var el = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      el.setAttribute('d', pathD(it.pts, it.p));
+      el.setAttribute('fill', 'none');
+      el.setAttribute('stroke', it.c);
+      el.setAttribute('stroke-width', WIDTH[it.t] || 4);
+      el.setAttribute('stroke-linecap', 'round');
+      el.setAttribute('stroke-linejoin', 'round');
+      el.setAttribute('stroke-opacity', it.t === 'hl' ? '0.45' : '0.9');
+      el.dataset.id = it.id;
+      return el;
+    }
+    function renderAllNotes() {
+      if (!view.pageEls.length) return;
+      view.pageEls.forEach(function (pg) {
+        pg.querySelector('svg').innerHTML = '';
+        Array.prototype.forEach.call(pg.querySelectorAll('.pin'), function (n) { n.remove(); });
+      });
+      liveItems(view.data).forEach(drawItem);
+    }
+    function drawItem(it) {
+      if (!view.pageEls[it.p - 1]) return;
+      if (it.t === 'memo') {
+        var pin = document.createElement('button');
+        pin.type = 'button';
+        pin.className = 'pin';
+        pin.style.left = (it.x * 100) + '%';
+        pin.style.top = (it.y * 100) + '%';
+        pin.dataset.id = it.id;
+        pin.setAttribute('aria-label', '메모');
+        view.pageEls[it.p - 1].appendChild(pin);
+      } else {
+        pageSvg(it.p).appendChild(strokeEl(it));
+      }
+    }
+    function removeDrawn(id) {
+      var el = document.querySelector('[data-id="' + id + '"]');
+      if (el) el.remove();
+    }
+    function commit(it, undoEntry) {
+      it.u = Date.now();
+      view.data.items[it.id] = it;
+      var d = loadNotes(view.doc);
+      d.items[it.id] = it;
+      d.last = view.data.last;
+      saveNotesLocal(view.doc, d);
+      if (undoEntry) {
+        view.undo.push(undoEntry);
+        $('undoBtn').disabled = false;
+      }
+      scheduleSync(view.doc);
+    }
+
+    /* ---------- 도구 ---------- */
+    function setTool(t) {
+      view.tool = t;
+      Array.prototype.forEach.call(document.querySelectorAll('.tool[data-tool]'), function (b) {
+        b.classList.toggle('on', b.dataset.tool === t);
+      });
+      document.body.classList.toggle('drawing', t === 'hl' || t === 'pen' || t === 'erase');
+      renderSwatches();
+      if (t === 'memo') toast('메모를 남길 곳을 누르세요');
+      if (t === 'hl' || t === 'pen') toast('손가락으로 긋습니다 · 스크롤은 ✋읽기');
+    }
+    function renderSwatches() {
+      var t = view.tool === 'hl' || view.tool === 'pen' ? view.tool : null;
+      var box = $('swatches');
+      if (!t) { box.hidden = true; return; }
+      box.hidden = false;
+      box.innerHTML = COLORS[t].map(function (c) {
+        return '<button class="sw' + (view.color[t] === c ? ' on' : '') + '" data-c="' + c + '" type="button" style="background:' + c + '" aria-label="색"></button>';
+      }).join('');
+    }
+    $('swatches').addEventListener('click', function (e) {
+      var b = e.target.closest('.sw');
+      if (!b) return;
+      view.color[view.tool] = b.dataset.c;
+      renderSwatches();
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('.tool[data-tool]'), function (b) {
+      b.addEventListener('click', function () { setTool(b.dataset.tool); });
+    });
+    $('undoBtn').onclick = function () {
+      var u = view.undo.pop();
+      if (!u) return;
+      if (u.type === 'add') {
+        var it = view.data.items[u.id];
+        if (it) { it = Object.assign({}, it, { del: true }); commit(it); removeDrawn(u.id); }
+      } else if (u.type === 'restore') {
+        var back = Object.assign({}, u.item);
+        delete back.del;
+        commit(back);
+        drawItem(back);
+      }
+      $('undoBtn').disabled = !view.undo.length;
+    };
+    $('zoomBtn').onclick = function () {
+      var steps = [1, 1.5, 2];
+      var i = (steps.indexOf(view.zoom) + 1) % steps.length;
+      var p = view.current;
+      view.zoom = steps[i];
+      document.documentElement.style.setProperty('--zoom', view.zoom);
+      $('zoomLabel').textContent = Math.round(view.zoom * 100) + '%';
+      requestAnimationFrame(function () { scrollToPage(p, false); });
+    };
+
+    /* ---------- 그리기 입력 (손가락·마우스·애플펜슬) ---------- */
+    var drawing = null;
+    function localPoint(pg, e) {
+      var r = pg.getBoundingClientRect();
+      return [Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)), Math.min(1, Math.max(0, (e.clientY - r.top) / r.height))];
+    }
+    function toolFor(e) {
+      // 읽기 모드에서도 애플펜슬로는 바로 그림 (손가락은 스크롤)
+      if (view.tool === 'read' && e.pointerType === 'pen') return view.lastDrawTool || 'hl';
+      return view.tool;
+    }
+    // iPad Safari: 펜슬로 그을 때 화면이 스크롤되지 않게
+    document.addEventListener('touchstart', function (e) {
+      if (!currentDoc || view.tool !== 'read') return;
+      var t = e.touches[0];
+      if (t && t.touchType === 'stylus' && e.target.closest && e.target.closest('.pg')) e.preventDefault();
+    }, { passive: false });
+
+    $('pages').addEventListener('pointerdown', function (e) {
+      var pg = e.target.closest('.pg');
+      if (!pg) return;
+      var p = +pg.dataset.p;
+      if (e.target.closest('.pin')) { openMemo(e.target.closest('.pin').dataset.id); return; }
+      var tool = toolFor(e);
+      if (tool === 'memo') {
+        var pt = localPoint(pg, e);
+        newMemo(p, pt[0], pt[1]);
+        return;
+      }
+      if (tool !== 'hl' && tool !== 'pen' && tool !== 'erase') return;
+      e.preventDefault();
+      pg.setPointerCapture && pg.setPointerCapture(e.pointerId);
+      if (tool === 'erase') {
+        drawing = { erase: true, pg: pg, p: p };
+        eraseAt(p, localPoint(pg, e));
+        return;
+      }
+      if (tool !== 'read') view.lastDrawTool = tool;
+      var it = { id: uid(), t: tool, p: p, c: view.color[tool], pts: [localPoint(pg, e)] };
+      drawing = { it: it, pg: pg, el: strokeEl(it) };
+      pageSvg(p).appendChild(drawing.el);
+    });
+    $('pages').addEventListener('pointermove', function (e) {
+      if (!drawing) return;
+      e.preventDefault();
+      var evs = e.getCoalescedEvents ? e.getCoalescedEvents() : [e];
+      if (!evs.length) evs = [e];
+      if (drawing.erase) {
+        evs.forEach(function (ev) { eraseAt(drawing.p, localPoint(drawing.pg, ev)); });
+        return;
+      }
+      var pts = drawing.it.pts;
+      evs.forEach(function (ev) {
+        var pt = localPoint(drawing.pg, ev);
+        var last = pts[pts.length - 1];
+        if (Math.abs(pt[0] - last[0]) + Math.abs(pt[1] - last[1]) > 0.002) pts.push(pt);
+      });
+      drawing.el.setAttribute('d', pathD(pts, drawing.it.p));
+    });
+    function endDraw() {
+      if (!drawing) return;
+      var d = drawing;
+      drawing = null;
+      if (d.erase) return;
+      d.it.pts = d.it.pts.map(function (q) { return [+q[0].toFixed(4), +q[1].toFixed(4)]; });
+      commit(d.it, { type: 'add', id: d.it.id });
+    }
+    $('pages').addEventListener('pointerup', endDraw);
+    $('pages').addEventListener('pointercancel', endDraw);
+
+    function eraseAt(p, pt) {
+      var h = pageH(p) / 1000;
+      liveItems(view.data).forEach(function (it) {
+        if (it.p !== p || it.t === 'memo') return;
+        var hit = it.pts.some(function (q) {
+          var dx = q[0] - pt[0], dy = (q[1] - pt[1]) * h;
+          return dx * dx + dy * dy < 0.0004;   // 지름 약 4% 범위
+        });
+        if (hit) {
+          var before = Object.assign({}, it);
+          commit(Object.assign({}, it, { del: true }), { type: 'restore', item: before });
+          removeDrawn(it.id);
+        }
+      });
+    }
+
+    /* ---------- 메모 ---------- */
+    function newMemo(p, x, y) {
+      memoEditor({ id: uid(), t: 'memo', p: p, x: +x.toFixed(4), y: +y.toFixed(4), text: '' }, true);
+    }
+    function openMemo(id) {
+      var it = view.data.items[id];
+      if (it) memoEditor(Object.assign({}, it), false);
+    }
+    function memoEditor(it, isNew) {
+      openSheet('<h2>📝 ' + it.p + '쪽 메모</h2><textarea id="memoText" placeholder="메모를 입력하세요">' + esc(it.text || '') + '</textarea>' +
+        '<div class="sheet-actions"><button class="pill-btn primary" id="memoSave" type="button">저장</button>' +
+        (isNew ? '' : '<button class="pill-btn danger" id="memoDel" type="button">삭제</button>') +
+        '<button class="pill-btn" id="sheetClose" type="button">닫기</button></div>');
+      setTimeout(function () { $('memoText').focus(); }, 50);
+      $('sheetClose').onclick = closeSheet;
+      $('memoSave').onclick = function () {
+        var text = $('memoText').value.trim();
+        closeSheet();
+        if (!text) { if (!isNew) deleteMemo(it.id); return; }
+        var before = view.data.items[it.id] ? Object.assign({}, view.data.items[it.id]) : null;
+        it.text = text;
+        commit(it, isNew ? { type: 'add', id: it.id } : { type: 'restore', item: before });
+        removeDrawn(it.id);
+        drawItem(it);
+        if (view.tool === 'memo') setTool('read');
+      };
+      if ($('memoDel')) $('memoDel').onclick = function () { closeSheet(); deleteMemo(it.id); };
+    }
+    function deleteMemo(id) {
+      var it = view.data.items[id];
+      if (!it) return;
+      var before = Object.assign({}, it);
+      commit(Object.assign({}, it, { del: true }), { type: 'restore', item: before });
+      removeDrawn(id);
+    }
+    $('listBtn').onclick = function () {
+      var items = liveItems(view.data).sort(function (a, b) { return a.p - b.p || (a.y || 0) - (b.y || 0); });
+      var memos = items.filter(function (i) { return i.t === 'memo'; });
+      var marks = {};
+      items.forEach(function (i) { if (i.t !== 'memo') marks[i.p] = (marks[i.p] || 0) + 1; });
+      var html = '<h2>📋 이 책의 표시</h2>';
+      if (!items.length) html += '<p class="hint">아직 표시한 내용이 없습니다. 아래 도구에서 형광펜·밑줄·메모를 고르세요.</p>';
+      memos.forEach(function (m) {
+        html += '<button class="memo-item" data-p="' + m.p + '" type="button"><b>' + m.p + '쪽 메모</b><span>' + esc(m.text) + '</span></button>';
+      });
+      Object.keys(marks).forEach(function (p) {
+        html += '<button class="memo-item" data-p="' + p + '" type="button"><b>' + p + '쪽</b><span>형광펜·밑줄 ' + marks[p] + '개</span></button>';
+      });
+      html += '<div class="sheet-actions"><button class="pill-btn" id="sheetClose" type="button">닫기</button></div>';
+      openSheet(html);
+      $('sheetClose').onclick = closeSheet;
+      $('sheet').onclick = function (e) {
+        var b = e.target.closest('.memo-item');
+        if (!b) return;
+        closeSheet();
+        scrollToPage(+b.dataset.p, false);
+      };
+    };
+
+    // 앱으로 돌아오면 다른 기기에서 한 표시를 가져옴
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState !== 'visible' || !currentDoc) return;
+      var id = currentDoc;
+      syncDoc(id).then(function (merged) {
+        if (merged && currentDoc === id && !drawing) { view.data = merged; renderAllNotes(); }
+      });
+    });
+
+    /* ---------- 시작 ---------- */
+    function route() {
+      closeSheet();
+      var q = new URLSearchParams(location.search);
+      var doc = q.get('doc');
+      if (doc) openDoc(doc, parseInt(q.get('p'), 10) || 0);
+      else renderLibrary();
+    }
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a.book');
+      if (!a) return;
+      e.preventDefault();
+      history.pushState(null, '', a.getAttribute('href'));
+      route();
+    });
+    if (sync.auth) setSyncState('off');
+    fetch('ebook/index.json?v=' + BUILD)
+      .then(function (r) { return r.json(); })
+      .then(function (lib) {
+        LIB = lib;
+        route();
+        if (sync.auth && !currentDoc) syncAll();
+      })
+      .catch(function () {
+        $('library').hidden = false;
+        $('shelves').innerHTML = '<p class="hint">서재 목록을 불러오지 못했습니다. 새로고침해 주세요.</p>';
+      });
+  </script>
+</body>
+</html>
