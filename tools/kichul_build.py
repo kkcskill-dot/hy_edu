@@ -118,7 +118,8 @@ def item_html(year, no, text, mpage, area, refs):
         body += "".join(ref_html(*r) for r in refs)
     else:
         body += '<div class="kc-ref none">2026 교본·소식지에서 관련 내용을 찾지 못했습니다</div>'
-    return f'<div class="kc-item" id="{item_id(year, no)}">{head}{body}</div>'
+    kind = "is-unit" if isinstance(area, int) else ("is-etc" if area == "ETC" else "is-out")
+    return f'<div class="kc-item {kind}" id="{item_id(year, no)}">{head}{body}</div>'
 
 
 def render():
@@ -150,6 +151,13 @@ def render():
         "<li>교본·소식지에서 찾지 못한 문항은 그렇게 표시했습니다. 답을 지어 넣지 않았습니다.</li>"
         f"<li>메모 끝 문구: “{esc(MEMO_END[0])}” (메모 p.{MEMO_END[1]})</li>"
         "</ul></div>",
+        "",
+        '<div class="page-tabs-extra kc-filter" role="group" aria-label="영역 필터">'
+        '<button type="button" data-f="all" class="is-active">전체</button>'
+        '<button type="button" data-f="unit">교본 1~7강</button>'
+        '<button type="button" data-f="out">교본 밖</button>'
+        '<button type="button" data-f="etc">메모 불명확</button></div>',
+        '<div data-tabs="panels" hidden></div>',
         "",
         "## 한눈에 보기",
         "",

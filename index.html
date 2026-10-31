@@ -579,6 +579,50 @@
     .markdown-section .note-key li {
       font-size: 15.5px !important;
     }
+    /* 긴 페이지 상단 탭 — 스크롤해도 헤더 바로 아래에 고정 */
+    .page-tabs-wrap {
+      position: sticky;
+      top: calc(var(--header-h) + var(--safe-top));
+      z-index: 40;
+      margin: 0 calc(-18px - var(--safe-right)) 16px calc(-18px - var(--safe-left));
+      padding: 8px calc(18px + var(--safe-right)) 8px calc(18px + var(--safe-left));
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: saturate(180%) blur(16px);
+      -webkit-backdrop-filter: saturate(180%) blur(16px);
+      border-bottom: 1px solid var(--apple-border);
+    }
+    .page-tabs, .page-tabs-extra {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .page-tabs::-webkit-scrollbar, .page-tabs-extra::-webkit-scrollbar { display: none; }
+    .page-tabs-extra { margin-top: 6px; }
+    .page-tabs button, .page-tabs-extra button {
+      flex: 0 0 auto;
+      min-height: 36px;
+      padding: 6px 13px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--apple-text);
+      font: inherit;
+      font-size: 13.5px;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .page-tabs button.is-active { background: var(--apple-text); border-color: var(--apple-text); color: #fff; }
+    .page-tabs-extra button { min-height: 30px; padding: 4px 11px; font-size: 12.5px; }
+    .page-tabs-extra button.is-active { background: rgba(0, 113, 227, 0.1); border-color: rgba(0, 113, 227, 0.4); color: var(--apple-blue); }
+    .markdown-section .page-panel > h2:first-child { margin-top: 6px; }
+    .markdown-section[data-kc-filter="unit"] .kc-item:not(.is-unit),
+    .markdown-section[data-kc-filter="out"] .kc-item:not(.is-out),
+    .markdown-section[data-kc-filter="etc"] .kc-item:not(.is-etc) { display: none; }
+
     /* 기출 복원 카드 (summary/08) — 메모 그대로 + 2026 교본·소식지 원문 */
     .markdown-section .kc-list { margin: 10px 0 28px; }
     .markdown-section .kc-sec {
@@ -1115,6 +1159,54 @@
       text-decoration-color: rgba(215, 0, 21, 0.5);
     }
     .mx-choice.is-picked-wrong .mx-mark { color: var(--apple-red); }
+    /* 단원평가: 빈칸 채우기 · O/X · 지문 */
+    .markdown-section .mx-cloze { line-height: 2.2; }
+    .mx-blank {
+      font: inherit;
+      font-size: 16px;
+      font-weight: 700;
+      max-width: 100%;
+      margin: 0 3px;
+      padding: 1px 8px;
+      border: 1.5px solid rgba(0, 113, 227, 0.45);
+      border-radius: 8px;
+      background: #f5f9ff;
+      color: var(--apple-blue);
+      box-sizing: border-box;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .mx-blank:focus { outline: none; border-color: var(--apple-blue); background: #fff; box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15); }
+    .mx-blank.is-ok { border-color: var(--apple-green); background: rgba(26, 127, 55, 0.07); color: var(--apple-green); }
+    .mx-blank.is-ng { border-color: var(--apple-red); background: rgba(215, 0, 21, 0.05); color: var(--apple-red); text-decoration: line-through; }
+    .markdown-section .mx-passage {
+      margin: 4px 0 12px;
+      padding: 10px 12px;
+      border-left: 3px solid rgba(0, 113, 227, 0.35);
+      border-radius: 8px;
+      background: #f7f9fc;
+      font-size: 15.5px;
+      line-height: 1.6;
+    }
+    .mx-choices.mx-ox { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .markdown-section .mx-pool {
+      margin: 0 0 12px;
+      font-size: 13.5px;
+      color: var(--apple-subtext);
+    }
+    .mx-pool .mx-size {
+      margin-left: 4px;
+      padding: 3px 10px;
+      border: 1px solid rgba(0, 113, 227, 0.35);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--apple-blue);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .mx-ox .mx-choice { justify-content: center; align-items: center; min-height: 56px; }
+    .mx-ox .mx-mark { font-size: 24px; font-weight: 800; }
     .mx-fb {
       margin-top: 14px;
       padding-top: 12px;
@@ -1412,7 +1504,7 @@
 
   <script>
     // 배포 버전 (push 전에 web_builder.py가 갱신하고 version.json에도 같은 값을 씀)
-    var BUILD = '20261101-000711';
+    var BUILD = '20261101-003218';
 
     /* ---------- 배포 후 자동 갱신 (강제 새로고침 불필요) ----------
        GitHub Pages는 10분, nginx는 설정에 따라 그 이상 브라우저가 파일을 캐시할 수 있음.
@@ -1547,6 +1639,14 @@
       return h.length ? h[h.length - 1].score : null;
     }
 
+    function lastQuizScore(u) {
+      var scores = ['blank', 'ox', 'mc'].map(function (part) {
+        var h = mxLoad('u0' + u + '-' + part).history || [];
+        return h.length ? h[h.length - 1].score : null;
+      }).filter(function (x) { return x !== null; });
+      if (!scores.length) return null;
+      return Math.round(scores.reduce(function (a, b) { return a + b; }, 0) / scores.length);
+    }
     function decorateNav() {
       var nav = document.querySelector('.sidebar-nav');
       if (!nav) return;
@@ -1569,7 +1669,8 @@
         a.classList.toggle('is-done', isDone);
         if (m) { lectures++; if (isDone) lecturesDone++; }
         var mock = key.match(/^mock\/0(\d)_/);
-        var score = mock ? lastMockScore(mock[1]) : null;
+        var quiz = key.match(/^quiz\/0(\d)_/);
+        var score = mock ? lastMockScore(mock[1]) : quiz ? lastQuizScore(quiz[1]) : null;
         if (score !== null) html += '<span class="nav-badge score">' + score + '점</span>';
         else if (isDone) html += '<span class="nav-badge done" aria-label="학습 완료">✓</span>';
         a.innerHTML = html;
@@ -1676,6 +1777,151 @@
       hook.doneEach(decorateNav);
     }
 
+    /* ---------- 긴 페이지: 상단 탭 (섹션 바로가기 / 탭 전환) ---------- */
+    var tabsScroll = null;
+    function headerHeight() {
+      var h = document.querySelector('.global-header');
+      return h ? h.getBoundingClientRect().height : 56;
+    }
+    function tabLabel(h, keepParen) {
+      var c = h.cloneNode(true);
+      Array.prototype.forEach.call(c.querySelectorAll('a.src'), function (a) { a.parentNode.removeChild(a); });
+      var t = c.textContent.replace(/\s+/g, ' ').trim();
+      if (!keepParen) t = t.replace(/\s*\([^)]*\)/g, '').split(/ — | – |: /)[0].trim();
+      return t.length > 15 ? t.slice(0, 14) + '…' : t;
+    }
+    function idTarget() {
+      var m = decodeURIComponent(location.hash).match(/[?&]id=([^&]+)/);
+      return m ? document.getElementById(m[1]) : null;
+    }
+    function pageTabs() {
+      if (tabsScroll) { window.removeEventListener('scroll', tabsScroll); tabsScroll = null; }
+      var sec = document.querySelector('.markdown-section');
+      if (!sec || sec.querySelector('.page-tabs-wrap')) return;
+      var kids = Array.prototype.slice.call(sec.children);
+      var heads = kids.filter(function (el) { return el.tagName === 'H2'; });
+      if (heads.length < 3) {
+        var h3 = kids.filter(function (el) { return el.tagName === 'H3'; });
+        heads = h3.length >= 4 ? h3 : [];
+      }
+      if (!heads.length) return;
+      var panels = !!sec.querySelector('[data-tabs="panels"]');
+      var wrap = document.createElement('div');
+      wrap.className = 'page-tabs-wrap';
+      var bar = document.createElement('nav');
+      bar.className = 'page-tabs';
+      bar.setAttribute('aria-label', '이 페이지 바로가기');
+      heads.forEach(function (h, i) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('data-i', i);
+        b.textContent = tabLabel(h, panels);
+        bar.appendChild(b);
+      });
+      wrap.appendChild(bar);
+      var extra = sec.querySelector('.page-tabs-extra');
+      if (extra) wrap.appendChild(extra);
+      sec.insertBefore(wrap, heads[0]);
+      var buttons = bar.querySelectorAll('button');
+      function mark(i) {
+        Array.prototype.forEach.call(buttons, function (b, k) {
+          b.classList.toggle('is-active', k === i);
+          if (k === i) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current');
+        });
+        var b = buttons[i];
+        if (b && bar.scrollWidth > bar.clientWidth) bar.scrollLeft = b.offsetLeft - (bar.clientWidth - b.offsetWidth) / 2;
+      }
+      function offset() { return headerHeight() + wrap.getBoundingClientRect().height + 6; }
+
+      if (panels) {
+        // 탭 전환: 섹션을 하나씩만 보여 줌
+        var groups = heads.map(function (h) {
+          var panel = document.createElement('div');
+          panel.className = 'page-panel';
+          h.parentNode.insertBefore(panel, h);
+          var node = h;
+          while (node) {
+            var next = node.nextSibling;
+            panel.appendChild(node);
+            node = next;
+            if (!node || (node.nodeType === 1 && (heads.indexOf(node) >= 0 || node.tagName === 'HR' ||
+                (node.classList && node.classList.contains('lesson-footer-nav'))))) break;
+          }
+          return panel;
+        });
+        var key = 'hyedu.tab.' + location.hash.split('?')[0];
+        var show = function (i, scroll) {
+          groups.forEach(function (p, k) { p.hidden = k !== i; });
+          mark(i);
+          try { sessionStorage.setItem(key, String(i)); } catch (e) {}
+          if (scroll) {
+            var top = wrap.getBoundingClientRect().top + window.pageYOffset - headerHeight();
+            if (window.pageYOffset > top) window.scrollTo(0, top);
+          }
+        };
+        var start = 0;
+        try { start = Number(sessionStorage.getItem(key)) || 0; } catch (e) {}
+        var target = idTarget();
+        if (target) groups.forEach(function (p, k) { if (p.contains(target)) start = k; });
+        show(Math.min(start, groups.length - 1), false);
+        bar.addEventListener('click', function (e) {
+          var b = e.target.closest('button');
+          if (b) show(Number(b.getAttribute('data-i')), true);
+        });
+        sec.showPanelFor = function (el) {
+          groups.forEach(function (p, k) { if (p.contains(el)) show(k, false); });
+        };
+        return;
+      }
+
+      // 바로가기: 누르면 해당 섹션으로 이동, 스크롤하면 현재 섹션 표시
+      bar.addEventListener('click', function (e) {
+        var b = e.target.closest('button');
+        if (!b) return;
+        var i = Number(b.getAttribute('data-i'));
+        var h = heads[i];
+        // 긴 페이지는 부드러운 스크롤이 오래 걸려 바로 이동
+        window.scrollTo(0, h.getBoundingClientRect().top + window.pageYOffset - offset());
+        last = i;
+        mark(i);
+      });
+      var ticking = false;
+      var last = -1;
+      tabsScroll = function () {
+        if (ticking) return;
+        ticking = true;
+        setTimeout(function () {
+          ticking = false;
+          var lim = offset() + 12;
+          var cur = 0;
+          heads.forEach(function (h, i) { if (h.getBoundingClientRect().top <= lim) cur = i; });
+          if (cur !== last) { last = cur; mark(cur); }
+        }, 80);
+      };
+      window.addEventListener('scroll', tabsScroll, { passive: true });
+      tabsScroll();
+    }
+    // 메뉴의 소제목 링크로 숨은 탭 속 제목을 열 때
+    window.addEventListener('hashchange', function () {
+      var sec = document.querySelector('.markdown-section');
+      var t = idTarget();
+      if (sec && sec.showPanelFor && t) {
+        sec.showPanelFor(t);
+        setTimeout(function () {
+          window.scrollTo(0, t.getBoundingClientRect().top + window.pageYOffset - headerHeight() - 70);
+        }, 30);
+      }
+    });
+    // 기출 페이지 영역 필터
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest ? e.target.closest('.kc-filter button[data-f]') : null;
+      if (!b) return;
+      var sec = document.querySelector('.markdown-section');
+      var f = b.getAttribute('data-f');
+      if (f === 'all') sec.removeAttribute('data-kc-filter'); else sec.setAttribute('data-kc-filter', f);
+      Array.prototype.forEach.call(b.parentNode.querySelectorAll('button'), function (x) { x.classList.toggle('is-active', x === b); });
+    });
+
     /* ---------- 표: 좁은 화면에서 표만 가로 스크롤 ---------- */
     function layoutPlugin(hook) {
       // 자동 갱신으로 다시 열렸으면 읽던 위치로 복귀
@@ -1699,6 +1945,7 @@
           parent.insertBefore(wrap, table);
           wrap.appendChild(table);
         });
+        pageTabs();
         window.hyeduSetDrawer(false);
       });
     }
@@ -1730,34 +1977,123 @@
     function mxSave(id, state) {
       try { localStorage.setItem('hyedu.mock.' + id, JSON.stringify(state)); } catch (e) {}
     }
+    function mxQuotes(q) {
+      if (!q.quotes) {
+        var unit = MX_UNITS[q.unit];
+        return '<blockquote class="mx-fb-quote"><p>' + mxFmt(q.quote) + '</p>' +
+          '<cite>근거: ' + mxEsc(q.source) + ' · <a href="#/' + unit.doc + '">교본 원문 보기</a></cite></blockquote>';
+      }
+      return q.quotes.map(function (r) {
+        return '<blockquote class="mx-fb-quote"><p>' + mxFmt(r.text) + '</p><cite>' +
+          (r.label ? mxEsc(r.label) + ' · ' : '') + '근거: 제' + q.unit + '강 교본 ' +
+          '<a class="src" href="reader.html?doc=' + mxEsc(r.doc) + '&amp;p=' + r.p + '">p.' + r.p + '</a></cite></blockquote>';
+      }).join('');
+    }
+    function mxNorm(s) {
+      return String(s || '').toLowerCase().replace(/[\s,.·•‧∙・~()\[\]'"‘’“”「」『』-]/g, '');
+    }
+    function mxBlankOk(given, alts) {
+      var g = mxNorm(given);
+      return !!g && alts.some(function (a) { return mxNorm(a) === g; });
+    }
     function mxScrollTo(el) {
       var top = el.getBoundingClientRect().top + window.pageYOffset - 68;
       window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
     }
 
+    function mxShuffle(a) {
+      for (var i = a.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = a[i]; a[i] = a[j]; a[j] = t;
+      }
+      return a;
+    }
+    function mxStarted(state) {
+      if (state.graded) return true;
+      return Object.keys(state.answers).some(function (k) {
+        var a = state.answers[k];
+        return Array.isArray(a) ? a.some(function (x) { return x && String(x).trim(); }) : !!a;
+      });
+    }
+    // 문제은행: 안 푼 문제·틀린 문제부터 골라 새 순서로 출제
+    function mxPick(data, state) {
+      var byId = {};
+      data.pool.forEach(function (q) { byId[q.id] = q; });
+      var valid = state.order && state.order.length && state.order.every(function (k) { return byId[k]; });
+      if (!mxStarted(state) || !valid) {
+        var seen = state.seen || {};
+        var wrong = state.wrong || {};
+        var size = state.all ? data.pool.length : Math.min(data.size || 20, data.pool.length);
+        state.order = mxShuffle(data.pool.map(function (q) {
+          return { id: q.id, w: (seen[q.id] || 0) * 2 - (wrong[q.id] ? 3 : 0) + Math.random() * 1.5 };
+        }).sort(function (a, b) { return a.w - b.w; }).slice(0, size).map(function (x) { return x.id; }));
+        state.perm = {};
+        state.answers = {};
+        state.graded = false;
+      }
+      state.perm = state.perm || {};
+      return state.order.map(function (k, i) {
+        var q = byId[k];
+        if (q.type === 'ox' || !q.choices) return q;
+        var p = state.perm[i];
+        if (!p || p.length !== q.choices.length) p = state.perm[i] = mxShuffle(q.choices.map(function (_, j) { return j; }));
+        var view = {};
+        for (var key in q) view[key] = q[key];
+        view.choices = p.map(function (j) { return q.choices[j]; });
+        view.answer = p.indexOf(q.answer - 1) + 1;
+        return view;
+      });
+    }
+
     function mxBuild(root, data) {
       var id = data.id;
-      var qs = data.questions;
       var state = mxLoad(id);
       state.answers = state.answers || {};
       state.history = state.history || [];
+      var qs = data.pool ? mxPick(data, state) : data.questions;
+      if (data.pool) mxSave(id, state);
 
-      var html = '<div class="mx-result" hidden></div><ol class="mx-list">';
+      var html = '';
+      if (data.pool) {
+        var per = data.size || 20;
+        html += '<p class="mx-pool">문제은행 ' + data.pool.length + '문항 중 ' + qs.length + '문항 · 열 때마다 순서와 보기를 새로 섞습니다' +
+          (data.pool.length > per ? ' <button type="button" class="mx-size">' +
+            (state.all ? per + '문항씩 풀기' : '전체 ' + data.pool.length + '문항 풀기') + '</button>' : '') + '</p>';
+      }
+      html += '<div class="mx-result" hidden></div><ol class="mx-list">';
       qs.forEach(function (q, i) {
         var n = i + 1;
         html += '<li class="mx-q" data-n="' + n + '">' +
           '<div class="mx-q-meta"><span class="mx-num">문 ' + n + '</span>' +
-          '<span class="mx-unit">제' + q.unit + '단원</span><span class="mx-state"></span></div>' +
-          '<p class="mx-q-text">' + mxFmt(q.q) + '</p>' +
-          '<div class="mx-choices" role="radiogroup" aria-label="문 ' + n + ' 보기">';
-        q.choices.forEach(function (c, j) {
-          var v = j + 1;
-          var sel = state.answers[n] === v;
-          html += '<label class="mx-choice' + (sel ? ' is-selected' : '') + '">' +
-            '<input type="radio" name="' + id + '-q' + n + '" value="' + v + '"' + (sel ? ' checked' : '') + '>' +
-            '<span class="mx-mark">' + MX_MARKS[j] + '</span><span class="mx-text">' + mxFmt(c) + '</span></label>';
-        });
-        html += '</div><div class="mx-fb" hidden></div></li>';
+          '<span class="mx-unit">제' + q.unit + '단원</span><span class="mx-state"></span></div>';
+        if (q.type === 'blank') {
+          // 빈칸 채우기: 원문 문장 속 입력칸
+          var saved = state.answers[n] || [];
+          html += '<p class="mx-q-text mx-cloze">' + mxEsc(q.q).replace(/\{\{(\d+)\}\}/g, function (_, k) {
+            var b = Number(k);
+            var first = q.answers[b][0];
+            var w = Math.max(3, Math.min(12, first.length + 1));
+            return '<input class="mx-blank" type="text" data-b="' + b + '" style="width:' + (w + 1.2) + 'em"' +
+              ' inputmode="' + (/^[\d,.~\s]+$/.test(first) ? 'decimal' : 'text') + '"' +
+              ' autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="next"' +
+              ' aria-label="문 ' + n + ' 빈칸" value="' + mxEsc(saved[b] || '') + '">';
+          }) + '</p>';
+        } else {
+          var ox = q.type === 'ox';
+          html += '<p class="mx-q-text">' + mxFmt(q.q) + '</p>' +
+            (q.passage ? '<p class="mx-passage">' + mxFmt(q.passage) + '</p>' : '') +
+            '<div class="mx-choices' + (ox ? ' mx-ox' : '') + '" role="radiogroup" aria-label="문 ' + n + ' 보기">';
+          q.choices.forEach(function (c, j) {
+            var v = j + 1;
+            var sel = state.answers[n] === v;
+            html += '<label class="mx-choice' + (sel ? ' is-selected' : '') + '">' +
+              '<input type="radio" name="' + id + '-q' + n + '" value="' + v + '"' + (sel ? ' checked' : '') + '>' +
+              (ox ? '<span class="mx-mark">' + mxEsc(c) + '</span>'
+                  : '<span class="mx-mark">' + MX_MARKS[j] + '</span><span class="mx-text">' + mxFmt(c) + '</span>') + '</label>';
+          });
+          html += '</div>';
+        }
+        html += '<div class="mx-fb" hidden></div></li>';
       });
       html += '</ol><div class="mx-bar"><button type="button" class="mx-progress"></button>' +
         '<button type="button" class="mx-submit">채점하기</button></div>';
@@ -1767,13 +2103,18 @@
       var bar = root.querySelector('.mx-bar');
       var result = root.querySelector('.mx-result');
 
+      function isAnswered(i) {
+        var a = state.answers[i + 1];
+        if (qs[i].type !== 'blank') return !!a;
+        return !!a && qs[i].answers.every(function (_, b) { return a[b] && String(a[b]).trim(); });
+      }
       function answeredCount() {
         var c = 0;
-        for (var k in state.answers) if (state.answers[k]) c++;
+        for (var i = 0; i < qs.length; i++) if (isAnswered(i)) c++;
         return c;
       }
       function firstUnanswered() {
-        for (var i = 0; i < qs.length; i++) if (!state.answers[i + 1]) return items[i];
+        for (var i = 0; i < qs.length; i++) if (!isAnswered(i)) return items[i];
         return null;
       }
       function updateBar() {
@@ -1796,7 +2137,31 @@
           var n = i + 1;
           var li = items[i];
           var picked = state.answers[n];
-          var ok = picked === q.answer;
+          var ok, head;
+          if (q.type === 'blank') {
+            var given = picked || [];
+            var per = q.answers.map(function (alts, b) { return mxBlankOk(given[b], alts); });
+            ok = per.every(Boolean);
+            picked = given.some(function (x) { return x && String(x).trim(); }) ? given : null;
+            Array.prototype.forEach.call(li.querySelectorAll('.mx-blank'), function (inp) {
+              var b = Number(inp.getAttribute('data-b'));
+              inp.classList.toggle('is-ok', per[b]);
+              inp.classList.toggle('is-ng', !per[b]);
+              inp.disabled = true;
+            });
+            head = '정답 ' + q.answers.map(function (a) { return mxEsc(a[0]); }).join(' / ') +
+              (picked && !ok ? ' · 내 답 ' + given.map(function (x) { return mxEsc(x || '—'); }).join(' / ') : '');
+          } else {
+            ok = picked === q.answer;
+            var mark = function (v) { return q.type === 'ox' ? q.choices[v - 1] : MX_MARKS[v - 1]; };
+            Array.prototype.forEach.call(li.querySelectorAll('.mx-choice'), function (label, j) {
+              var v = j + 1;
+              label.classList.toggle('is-answer', v === q.answer);
+              label.classList.toggle('is-picked-wrong', v === picked && !ok);
+              label.querySelector('input').disabled = true;
+            });
+            head = '정답 ' + mark(q.answer) + (picked && !ok ? ' · 내 답 ' + mark(picked) : '');
+          }
           if (ok) correct++;
           var u = byUnit[q.unit] || (byUnit[q.unit] = { total: 0, ok: 0 });
           u.total++;
@@ -1804,19 +2169,9 @@
           li.classList.remove('is-correct', 'is-wrong');
           li.classList.add(ok ? 'is-correct' : 'is-wrong');
           li.querySelector('.mx-state').textContent = ok ? '⭕ 정답' : (picked ? '❌ 오답' : '⚠️ 미응답');
-          Array.prototype.forEach.call(li.querySelectorAll('.mx-choice'), function (label, j) {
-            var v = j + 1;
-            label.classList.toggle('is-answer', v === q.answer);
-            label.classList.toggle('is-picked-wrong', v === picked && !ok);
-            label.querySelector('input').disabled = true;
-          });
-          var unit = MX_UNITS[q.unit];
           var fb = li.querySelector('.mx-fb');
-          fb.innerHTML = '<div class="mx-fb-head ' + (ok ? 'ok' : 'ng') + '">정답 ' + MX_MARKS[q.answer - 1] +
-            (picked && !ok ? ' · 내 답 ' + MX_MARKS[picked - 1] : '') + '</div>' +
-            (q.explain ? '<p class="mx-fb-explain">' + mxFmt(q.explain) + '</p>' : '') +
-            '<blockquote class="mx-fb-quote"><p>' + mxFmt(q.quote) + '</p>' +
-            '<cite>근거: ' + mxEsc(q.source) + ' · <a href="#/' + unit.doc + '">교본 원문 보기</a></cite></blockquote>';
+          fb.innerHTML = '<div class="mx-fb-head ' + (ok ? 'ok' : 'ng') + '">' + head + '</div>' +
+            (q.explain ? '<p class="mx-fb-explain">' + mxFmt(q.explain) + '</p>' : '') + mxQuotes(q);
           fb.hidden = false;
         });
         root.classList.add('mx-graded');
@@ -1838,7 +2193,7 @@
         var wrong = qs.length - r.correct;
         result.innerHTML = '<div class="mx-score"><b>' + r.score + '<small style="font-size:22px">점</small></b>' +
           qs.length + '문항 중 ' + r.correct + '문항 정답</div>' +
-          '<ul class="mx-units">' + units + '</ul>' +
+          (Object.keys(r.byUnit).length > 1 ? '<ul class="mx-units">' + units + '</ul>' : '') +
           '<div class="mx-actions">' +
           (wrong ? '<button type="button" class="mx-only-wrong mx-primary">틀린 문제만 보기 (' + wrong + ')</button>' : '') +
           '<button type="button" class="mx-retry mx-secondary">다시 풀기</button></div>' +
@@ -1855,6 +2210,14 @@
         }
         var r = grade();
         state.graded = true;
+        if (data.pool) {
+          state.seen = state.seen || {};
+          state.wrong = state.wrong || {};
+          qs.forEach(function (q, i) {
+            state.seen[q.id] = (state.seen[q.id] || 0) + 1;
+            state.wrong[q.id] = !items[i].classList.contains('is-correct');
+          });
+        }
         state.history.push({ t: Date.now(), score: r.score, correct: r.correct, total: qs.length });
         state.history = state.history.slice(-20);
         mxSave(id, state);
@@ -1865,7 +2228,8 @@
       }
 
       function reset() {
-        if (!window.confirm('고른 답과 채점 결과를 지우고 처음부터 다시 풀까요? (점수 기록은 남습니다)')) return;
+        if (!window.confirm(data.pool ? '새로 섞은 문제로 다시 풀까요? (점수 기록은 남습니다)'
+          : '고른 답과 채점 결과를 지우고 처음부터 다시 풀까요? (점수 기록은 남습니다)')) return;
         state.answers = {};
         state.graded = false;
         mxSave(id, state);
@@ -1890,6 +2254,23 @@
         updateBar();
       });
 
+      root.addEventListener('input', function (e) {
+        var inp = e.target;
+        if (!inp.classList || !inp.classList.contains('mx-blank') || state.graded) return;
+        var n = Number(inp.closest('.mx-q').getAttribute('data-n'));
+        var arr = state.answers[n] || (state.answers[n] = []);
+        arr[Number(inp.getAttribute('data-b'))] = inp.value;
+        mxSave(id, state);
+        updateBar();
+      });
+      root.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter' || !e.target.classList || !e.target.classList.contains('mx-blank')) return;
+        e.preventDefault();
+        var all = Array.prototype.slice.call(root.querySelectorAll('.mx-blank:not([disabled])'));
+        var next = all[all.indexOf(e.target) + 1];
+        if (next) next.focus(); else e.target.blur();
+      });
+
       root.addEventListener('click', function (e) {
         var t = e.target.closest ? e.target.closest('button') : null;
         if (!t || !root.contains(t)) return;
@@ -1898,6 +2279,17 @@
         } else if (t.classList.contains('mx-progress')) {
           var target = state.graded ? result : firstUnanswered();
           if (target) mxScrollTo(target);
+        } else if (t.classList.contains('mx-size')) {
+          if (mxStarted(state) && !window.confirm('지금 풀던 답을 지우고 문항 수를 바꿀까요?')) return;
+          state.all = !state.all;
+          state.answers = {};
+          state.graded = false;
+          state.order = null;
+          mxSave(id, state);
+          var again = root.cloneNode(false);
+          again.classList.remove('mx-graded', 'mx-wrong-only');
+          root.parentNode.replaceChild(again, root);
+          mxBuild(again, data);
         } else if (t.classList.contains('mx-retry')) {
           reset();
         } else if (t.classList.contains('mx-only-wrong')) {
@@ -1920,7 +2312,11 @@
               if (!res.ok) throw new Error(res.status);
               return res.json();
             })
-            .then(function (data) { mxBuild(root, data); })
+            .then(function (data) {
+              var part = root.getAttribute('data-part');
+              if (part) data = { id: data.id + '-' + part, title: data.title, pool: data.parts[part], size: 20 };
+              mxBuild(root, data);
+            })
             .catch(function () {
               root.innerHTML = '<p class="mx-error">문항을 불러오지 못했습니다. 새로고침 해 주세요.</p>';
             });

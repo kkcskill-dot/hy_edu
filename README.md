@@ -134,6 +134,18 @@
     </div>
   </a>
 
+  <a class="course-card" href="#/quiz/01_의료원현황_단원평가.md">
+    <div>
+      <span class="card-tag">단원평가 • 문제은행</span>
+      <h4>✍️ 7개 단원 단원평가</h4>
+      <p>2026 교본 원문 문장으로 만든 빈칸 채우기 · O/X · 5지선다. 열 때마다 순서와 보기를 새로 섞고, 채점하면 교본 원문과 쪽 번호를 보여 줍니다.</p>
+    </div>
+    <div class="card-footer">
+      <span>✍️ 단원별 빈칸 · O/X · 5지선다</span>
+      <span>평가 시작 ➔</span>
+    </div>
+  </a>
+
   <a class="course-card" href="#/mock/01_실전모의고사_1회.md">
     <div>
       <span class="card-tag">실전 모의고사 • 채점</span>

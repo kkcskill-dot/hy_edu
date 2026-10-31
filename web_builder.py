@@ -75,6 +75,9 @@ def build():
     sys.path.insert(0, str(BASE_DIR / "tools"))
     import kichul_build
     kichul_build.build(BASE_DIR)
+    # 1-1b. 단원평가: 문장을 교본 원문과 대조한 뒤 생성 (tools/quiz_items.py)
+    import quiz_build
+    quiz_build.build(BASE_DIR)
 
     # 1-2. 필수 기능 코드가 실수로 지워지지 않았는지 확인 (모바일 메뉴·진도·채점·자동 갱신)
     html = INDEX_HTML.read_text(encoding="utf-8")
