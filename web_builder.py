@@ -84,6 +84,9 @@ def build():
     # 1-1d. 슬라이드 강의 데이터: 교본 슬라이드 + 그 쪽 핵심노트 줄
     import lecture_build
     lecture_build.build(BASE_DIR)
+    # 1-1e. 2026 소식지: 원문 대조 후 호별 핵심노트·주제별 모아보기·문제은행·전 권 색인
+    import webzine_build
+    webzine_build.build(BASE_DIR)
 
     # 1-2. 필수 기능 코드가 실수로 지워지지 않았는지 확인 (모바일 메뉴·진도·채점·자동 갱신)
     html = INDEX_HTML.read_text(encoding="utf-8")

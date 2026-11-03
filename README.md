@@ -110,15 +110,27 @@
     </div>
   </a>
 
-  <a class="course-card" href="#/original/webzine_2026_전체색인.md">
+  <a class="course-card" href="#/summary/09_2026_소식지_핵심노트.md">
     <div>
-      <span class="card-tag">특별 특강 • 킬러 문항 대비</span>
-      <h4>🗞️ 2026 연세의료원 소식지 전 권(18개 호) 색인</h4>
-      <p>977호~994호 발행일, 온라인 웹진 링크, 보도 기사 전수 색인 (중입자, 로봇수술, 간호사 주4일제 등)</p>
+      <span class="card-tag">특강 • 2026 소식지 18개 호</span>
+      <h4>📰 2026 소식지 핵심노트 (977~994호)</h4>
+      <p>호별 주요 기사 322건을 원문 그대로 정리하고, ‘다음 중 아닌 것은?’에 나오기 좋은 목록 93개를 따로 묶었습니다. 주제별 모아보기·전 권 색인·기출 연결까지 쪽 번호로 e-book 지면과 이어집니다.</p>
     </div>
     <div class="card-footer">
-      <span>⏱️ 학습시간: 20분</span>
+      <span>📋 목록 93개 · 기사 322건</span>
       <span>특강 보기 ➔</span>
+    </div>
+  </a>
+
+  <a class="course-card" href="#/quiz/08_2026_소식지_문제은행.md">
+    <div>
+      <span class="card-tag">문제은행 • 2026 소식지</span>
+      <h4>✍️ 2026 소식지 문제은행</h4>
+      <p>핵심 기출형(의료선교의 달 주제·기부금·연속 1위·기관장) · 목록 ‘아닌 것은?’ · 빈칸 · 숫자 5지선다 · O/X. 채점하면 소식지 원문과 호·쪽이 나옵니다.</p>
+    </div>
+    <div class="card-footer">
+      <span>✍️ 파트별 20문항씩 새로 섞기</span>
+      <span>풀어 보기 ➔</span>
     </div>
   </a>
 

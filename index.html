@@ -932,6 +932,32 @@
       -webkit-tap-highlight-color: transparent;
     }
     .markdown-section .kc-item.is-flash { animation: kc-flash 1.8s ease; }
+    /* ---------- 2026 소식지 핵심노트 ---------- */
+    .markdown-section h4 { margin-top: 26px; line-height: 1.45; }
+    .markdown-section .wz-item { margin: 6px 0 18px; }
+    .markdown-section .wz-meta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 4px; }
+    .markdown-section .wz-cat { font-size: 12px; font-weight: 700; padding: 2px 9px; border-radius: 999px; background: rgba(0, 113, 227, 0.08); color: var(--apple-blue); }
+    .markdown-section .wz-star { font-size: 12px; font-weight: 800; padding: 2px 9px; border-radius: 999px; background: rgba(255, 59, 48, 0.1); color: #c4161c; }
+    .markdown-section .wz-facts { margin: 4px 0 8px; }
+    .markdown-section .wz-facts li, .markdown-section .wz-flat li, .markdown-section .wz-toc li { margin: 4px 0; line-height: 1.65; }
+    .markdown-section .wz-facts b, .markdown-section .wz-flat b, .markdown-section .wz-c b { color: #0b4a9e; }
+    .markdown-section .wz-list { margin: 8px 0 12px; padding: 10px 14px 6px; border-radius: 14px; background: #fffbea; border: 1px solid rgba(255, 204, 0, 0.45); }
+    .markdown-section .wz-list-name { font-size: 14.5px; font-weight: 800; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+    .markdown-section .wz-n { font-size: 12px; font-weight: 800; padding: 1px 8px; border-radius: 999px; background: rgba(255, 149, 0, 0.16); color: #a64b00; }
+    .markdown-section .wz-list ol { margin: 6px 0 4px; padding-left: 1.4em; }
+    .markdown-section .wz-list li { margin: 2px 0; font-size: 15.5px; line-height: 1.55; }
+    .markdown-section .wz-intro { margin: 4px 0 6px; font-size: 13px; line-height: 1.5; color: var(--apple-subtext); }
+    .markdown-section .wz-from { margin: 14px 0 0; font-size: 13px; font-weight: 700; color: var(--apple-subtext); }
+    .markdown-section .wz-sub { margin: 10px 0 16px; padding: 10px 14px; border-radius: 14px; background: #f5f5f7; }
+    .markdown-section .wz-sub-name { font-size: 14px; font-weight: 800; margin-bottom: 4px; }
+    .markdown-section .wz-sub li { font-size: 15px; line-height: 1.55; margin: 3px 0; }
+    .markdown-section .wz-team { color: var(--apple-subtext); font-size: 13.5px; }
+    .markdown-section .wz-lead { color: var(--apple-subtext); font-size: 15px; }
+    .markdown-section .wz-compact { list-style: none; padding-left: 0; }
+    .markdown-section .wz-c { margin: 0 0 14px; padding: 10px 12px; border-radius: 14px; border: 1px solid var(--apple-border); background: var(--apple-card-bg); }
+    .markdown-section .wz-c-head { line-height: 1.5; margin-bottom: 2px; }
+    .markdown-section .wz-c .wz-facts { padding-left: 1.2em; }
+    .markdown-section a.wz-to-note { font-size: 12px; font-weight: 700; margin-left: 4px; padding: 1px 8px; border-radius: 999px; background: rgba(52, 199, 89, 0.14); color: #1d7a36; text-decoration: none; }
     @keyframes kc-flash {
       0%, 45% { box-shadow: 0 0 0 3px rgba(255, 149, 0, 0.6); }
       100% { box-shadow: 0 0 0 0 rgba(255, 149, 0, 0); }
@@ -1744,7 +1770,7 @@
 
   <script>
     // 배포 버전 (push 전에 web_builder.py가 갱신하고 version.json에도 같은 값을 씀)
-    var BUILD = '20261101-012109';
+    var BUILD = '20261103-231605';
 
     /* ---------- 배포 후 자동 갱신 (강제 새로고침 불필요) ----------
        GitHub Pages는 10분, nginx는 설정에 따라 그 이상 브라우저가 파일을 캐시할 수 있음.
@@ -2680,9 +2706,16 @@
       }
       return q.quotes.map(function (r) {
         return '<blockquote class="mx-fb-quote"><p>' + mxFmt(r.text) + '</p><cite>' +
-          (r.label ? mxEsc(r.label) + ' · ' : '') + '근거: 제' + q.unit + '강 교본 ' +
+          (r.label ? mxEsc(r.label) + ' · ' : '') + mxSrcName(q, r) +
           '<a class="src" href="reader.html?doc=' + mxEsc(r.doc) + '&amp;p=' + r.p + '">p.' + r.p + '</a></cite></blockquote>';
       }).join('');
+    }
+    // 근거 표시: 교본은 '제N강 교본', 소식지는 'NNN호 소식지', 기출 메모는 '기출 메모'
+    function mxSrcName(q, r) {
+      var w = /^webzine-(\d+)/.exec(r.doc || '');
+      if (w) return '근거: 2026 소식지 ' + w[1] + '호 ';
+      if (r.doc === 'kichul') return '근거: 기출 메모 ';
+      return '근거: 제' + q.unit + '강 교본 ';
     }
     function mxNorm(s) {
       return String(s || '').toLowerCase().replace(/[\s,.·•‧∙・~()\[\]'"‘’“”「」『』-]/g, '');
@@ -2760,7 +2793,7 @@
         var n = i + 1;
         html += '<li class="mx-q" data-n="' + n + '">' +
           '<div class="mx-q-meta"><span class="mx-num">문 ' + n + '</span>' +
-          '<span class="mx-unit">제' + q.unit + '단원</span><span class="mx-state"></span></div>';
+          '<span class="mx-unit">' + mxEsc(q.tag || ('제' + q.unit + '단원')) + '</span><span class="mx-state"></span></div>';
         if (q.type === 'blank') {
           // 빈칸 채우기: 원문 문장 속 입력칸
           var saved = state.answers[n] || [];
@@ -2877,7 +2910,7 @@
         var units = '';
         Object.keys(r.byUnit).sort().forEach(function (k) {
           var u = r.byUnit[k];
-          units += '<li><span>제' + k + '단원 ' + mxEsc(MX_UNITS[k].title) + '</span>' +
+          units += '<li><span>' + (MX_UNITS[k] ? '제' + k + '단원 ' + mxEsc(MX_UNITS[k].title) : '2026 소식지') + '</span>' +
             '<span class="mx-u-score">' + u.ok + ' / ' + u.total + '</span>' +
             '<span class="mx-u-bar"><i style="width:' + Math.round(u.ok / u.total * 100) + '%"></i></span></li>';
         });
