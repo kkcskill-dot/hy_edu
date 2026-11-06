@@ -1322,6 +1322,22 @@
       padding: 0 !important;
       margin: 0;
     }
+    .mx-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 18px;
+      margin: 0 0 12px;
+      border: 1px solid var(--apple-border);
+      border-radius: 16px;
+      background: #f5f7fb;
+    }
+    .mx-filters label { display: flex; flex: 1 1 180px; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px; min-width: 0; }
+    .mx-filters select { width: 100%; min-height: 44px; padding: 8px; border: 1px solid var(--apple-border); border-radius: 8px; background: white; color: var(--apple-text); font: inherit; font-size: 16px; }
+    .mx-filter-status { color: var(--apple-subtext); font-size: 14px; }
+    .mx-empty { padding: 28px 16px; text-align: center; background: #f5f7fb; border-radius: 16px; }
+    .mx-q-details { font-size: 12px; color: var(--apple-subtext); margin: 0 0 10px; }
+    .mx-passage { white-space: pre-line; }
     .mx-q {
       background: #fbfbfd;
       border: 1px solid var(--apple-border);
@@ -1770,7 +1786,7 @@
 
   <script>
     // 배포 버전 (push 전에 web_builder.py가 갱신하고 version.json에도 같은 값을 씀)
-    var BUILD = '20261103-231605';
+    var BUILD = '20261106-232308';
 
     /* ---------- 배포 후 자동 갱신 (강제 새로고침 불필요) ----------
        GitHub Pages는 10분, nginx는 설정에 따라 그 이상 브라우저가 파일을 캐시할 수 있음.
@@ -2773,6 +2789,61 @@
       });
     }
 
+    // 독립 문제은행: 선택 범위마다 응답·순서·점수 기록을 별도로 보존한다.
+    function mxFilteredData(data, selection) {
+      var view = {};
+      for (var key in data) view[key] = data[key];
+      var fields = ['topic', 'difficulty', 'format'];
+      view.id = data.id + '-' + fields.map(function (key) { return encodeURIComponent(selection[key] || 'all'); }).join('-');
+      view.pool = data.pool.filter(function (q) {
+        return fields.every(function (key) { return !selection[key] || selection[key] === 'all' || q[key] === selection[key]; });
+      });
+      return view;
+    }
+
+    function mxFilterBuild(root, data) {
+      var fields = [
+        { key: 'topic', label: '주제', values: Object.keys(data.topics), labels: data.topics },
+        { key: 'difficulty', label: '난이도', values: ['중', '상'] },
+        { key: 'format', label: '문항 유형', values: ['옳은 설명', '틀린 설명', '명칭·기능', '사례 적용', '비교·연결', '복합 보기'] }
+      ];
+      var prefKey = 'hyedu.news2026.filters.' + data.id;
+      var selected = {};
+      try { selected = JSON.parse(localStorage.getItem(prefKey)) || {}; } catch (e) {}
+      fields.forEach(function (field) {
+        if (field.values.indexOf(selected[field.key]) < 0) selected[field.key] = 'all';
+      });
+      root.innerHTML = '<div class="mx-filters" role="group" aria-label="심화 퀴즈 범위 선택">' + fields.map(function (field) {
+        return '<label>' + field.label + '<select data-filter="' + field.key + '">' +
+          ['all'].concat(field.values).map(function (value) {
+            return '<option value="' + mxEsc(value) + '"' + (selected[field.key] === value ? ' selected' : '') + '>' +
+              mxEsc(value === 'all' ? '전체 ' + field.label : (field.labels ? field.labels[value] : value)) + '</option>';
+          }).join('') + '</select></label>';
+      }).join('') + '</div><p class="mx-filter-status" role="status" aria-live="polite"></p><div class="mx-filter-body"></div>';
+      function render() {
+        var view = mxFilteredData(data, selected);
+        root.querySelector('.mx-filter-status').textContent = '선택 범위 ' + view.pool.length + '문항 · 범위별로 이어 풀기';
+        var body = root.querySelector('.mx-filter-body');
+        body.innerHTML = '';
+        if (!view.pool.length) {
+          body.innerHTML = '<p class="mx-empty">선택한 조건에 맞는 문항이 없습니다. 주제·난이도·유형 중 하나를 전체로 바꿔 주세요.</p>';
+          return;
+        }
+        var exam = document.createElement('div');
+        exam.className = 'mx-filter-exam';
+        body.appendChild(exam);
+        mxBuild(exam, view);
+      }
+      root.querySelector('.mx-filters').addEventListener('change', function (event) {
+        var key = event.target.getAttribute('data-filter');
+        if (!key) return;
+        selected[key] = event.target.value;
+        try { localStorage.setItem(prefKey, JSON.stringify(selected)); } catch (e) {}
+        render();
+      });
+      render();
+    }
+
     function mxBuild(root, data) {
       var id = data.id;
       var state = mxLoad(id);
@@ -2794,6 +2865,7 @@
         html += '<li class="mx-q" data-n="' + n + '">' +
           '<div class="mx-q-meta"><span class="mx-num">문 ' + n + '</span>' +
           '<span class="mx-unit">' + mxEsc(q.tag || ('제' + q.unit + '단원')) + '</span><span class="mx-state"></span></div>';
+        if (q.difficulty && q.format) html += '<div class="mx-q-details">난이도 ' + mxEsc(q.difficulty) + ' · ' + mxEsc(q.format) + '</div>';
         if (q.type === 'blank') {
           // 빈칸 채우기: 원문 문장 속 입력칸
           var saved = state.answers[n] || [];
@@ -2891,7 +2963,8 @@
             head = '정답 ' + mark(q.answer) + (picked && !ok ? ' · 내 답 ' + mark(picked) : '');
           }
           if (ok) correct++;
-          var u = byUnit[q.unit] || (byUnit[q.unit] = { total: 0, ok: 0 });
+          var group = data.topicLabels && q.topic ? q.topic : q.unit;
+          var u = byUnit[group] || (byUnit[group] = { total: 0, ok: 0 });
           u.total++;
           if (ok) u.ok++;
           li.classList.remove('is-correct', 'is-wrong');
@@ -2910,7 +2983,8 @@
         var units = '';
         Object.keys(r.byUnit).sort().forEach(function (k) {
           var u = r.byUnit[k];
-          units += '<li><span>' + (MX_UNITS[k] ? '제' + k + '단원 ' + mxEsc(MX_UNITS[k].title) : '2026 소식지') + '</span>' +
+          var label = data.topicLabels && data.topicLabels[k] ? mxEsc(data.topicLabels[k]) : (MX_UNITS[k] ? '제' + k + '단원 ' + mxEsc(MX_UNITS[k].title) : '2026 소식지');
+          units += '<li><span>' + label + '</span>' +
             '<span class="mx-u-score">' + u.ok + ' / ' + u.total + '</span>' +
             '<span class="mx-u-bar"><i style="width:' + Math.round(u.ok / u.total * 100) + '%"></i></span></li>';
         });
@@ -2921,7 +2995,7 @@
         var wrong = qs.length - r.correct;
         result.innerHTML = '<div class="mx-score"><b>' + r.score + '<small style="font-size:22px">점</small></b>' +
           qs.length + '문항 중 ' + r.correct + '문항 정답</div>' +
-          (Object.keys(r.byUnit).length > 1 ? '<ul class="mx-units">' + units + '</ul>' : '') +
+          (data.topicLabels || Object.keys(r.byUnit).length > 1 ? '<ul class="mx-units">' + units + '</ul>' : '') +
           '<div class="mx-actions">' +
           (wrong ? '<button type="button" class="mx-only-wrong mx-primary">틀린 문제만 보기 (' + wrong + ')</button>' : '') +
           '<button type="button" class="mx-retry mx-secondary">다시 풀기</button></div>' +
@@ -3043,7 +3117,8 @@
             .then(function (data) {
               var part = root.getAttribute('data-part');
               if (part) data = { id: data.id + '-' + part, title: data.title, pool: data.parts[part], size: 20 };
-              mxBuild(root, data);
+              if (data.filterable) mxFilterBuild(root, data);
+              else mxBuild(root, data);
             })
             .catch(function () {
               root.innerHTML = '<p class="mx-error">문항을 불러오지 못했습니다. 새로고침 해 주세요.</p>';

@@ -33,6 +33,15 @@
   * [실전 모의고사 2회 · 채점](mock/02_실전모의고사_2회.md)
   * [실전 모의고사 3회 · 채점](mock/03_실전모의고사_3회.md)
 
+* **🧠 신규 · 2026 소식지 심화문제**
+  * [심화문제 안내 · 12개 주제](practice/news2026/README.md)
+  * [주제별 퀴즈 · 난이도·유형 선택](practice/news2026/quiz.md)
+  * [심화 모의고사 1회 · 30문항](practice/news2026/mock1.md)
+  * [심화 모의고사 2회 · 30문항](practice/news2026/mock2.md)
+  * [심화 모의고사 3회 · 30문항](practice/news2026/mock3.md)
+  * [심화 모의고사 4회 · 30문항](practice/news2026/mock4.md)
+  * [18개 호별 출제 범위 · 근거](practice/news2026/coverage.md)
+
 * **📖 e-book 서재 (형광펜·밑줄·메모)**
   * [교본 7권 · 기출 메모 · 소식지 18호](reader.html ':ignore')
 

@@ -196,6 +196,18 @@
 
 </div>
 
+<div style="margin: 40px 0 20px;">
+  <h2>신규 · 2026 소식지 심화문제</h2>
+  <p>소식지 18개 호 전체에서 고른 120문항. 단순한 기관명·숫자 암기를 넘어 사업의 목적·조건·차이와 연구 결과의 의미를 판단합니다.</p>
+</div>
+
+<div class="course-grid">
+  <a class="course-card" href="#/practice/news2026/README.md">
+    <div><span class="card-tag">신규 문제 · 별도 메뉴</span><h4>🧠 소식지 전 범위 심화 학습</h4><p>AI·디지털, 진료·환자안전, 연구, 교육·간호, 운영, 협력, 제도까지 12개 주제. 옳은/틀린 설명, 사례 적용, 비교·연결, 복합 보기 등으로 학습합니다.</p></div>
+    <div class="card-footer"><span>주제별 퀴즈 · 30문항 모의고사 4회</span><span>심화문제 열기 ➔</span></div>
+  </a>
+</div>
+
 <div style="margin: 50px 0 20px;">
   <div style="font-size: 12.5px; font-weight: 700; color: var(--apple-blue); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">LEARNING ROADMAP</div>
   <h2 style="margin: 0; border: none; font-size: 26px; font-weight: 700; letter-spacing: -0.025em;">학습 순서. <span style="color: var(--apple-subtext); font-weight: 500;">읽고 → 확인하고 → 풀어 보기.</span></h2>
