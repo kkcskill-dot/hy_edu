@@ -1,11 +1,13 @@
 """단원평가 만들기 — web_builder.py 가 부릅니다.
 
 1) tools/quiz_items.py 의 문장·근거를 교본 텍스트와 대조합니다(하나라도 없으면 빌드 중단).
-2) quiz/uNN.json (빈칸·O/X·5지선다) 과 quiz/0N_…_단원평가.md 를 만듭니다.
+2) quiz/uNN.json에는 전체 문항과 기존 ID를 보존하고, quiz/0N_…_단원평가.md에는 5지선다만 표시합니다.
+   빈칸·O/X 화면은 별도 보관 메뉴에서 같은 데이터를 사용합니다.
 """
 import hashlib
 import json
 import re
+from practice_types import practice_type
 from pathlib import Path
 
 from kichul_build import UNIT_PAGES, load_sources, norm
@@ -176,25 +178,20 @@ def page_md(u, counts):
         '<div class="lecture-header-box">',
         f'  <span class="lecture-badge">단원평가 • 제{u}강</span>',
         f"  <h2>✍️ 제{u}강 {title}</h2>",
-        f"  <p>빈칸 채우기 {counts['blank']} · O/X {counts['ox']} · 5지선다 {counts['mc']}문항 · 열 때마다 순서와 보기를 새로 섞어 출제하고, 채점하면 정답과 2026 교본 원문·쪽이 표시됩니다. 푼 기록은 이 기기에 저장됩니다.</p>",
+        f"  <p>5지선다 {counts['mc']}문항 · 열 때마다 순서와 보기를 새로 섞어 출제하고, 채점하면 정답과 2026 교본 원문·쪽이 표시됩니다. 푼 기록은 이 기기에 저장됩니다.</p>",
         "</div>",
         "",
         f"# 제{u}강 단원평가",
         "",
         '<div class="note-key"><ul>'
-        "<li><b>빈칸 채우기</b>: 교본 원문 문장의 중요한 항목이 빈칸입니다. 직접 입력하세요. 띄어쓰기·쉼표는 채점에 영향을 주지 않습니다. 입력 후 Enter를 누르면 다음 빈칸으로 넘어갑니다.</li>"
-        "<li><b>O/X</b>: 교본 원문 그대로면 O, 한 곳이라도 바뀌었으면 X입니다.</li>"
-        "<li><b>5지선다</b>: 근거는 모두 2026 교본 원문입니다. 오답 보기와 X 문장은 원문을 바꾼 것입니다.</li>"
+        "<li><b>5지선다</b>: 보기 중 정답을 하나 고르세요. 근거는 모두 2026 교본 원문입니다.</li>"
         "<li>채점하면 문항마다 교본 원문과 쪽 번호가 나오고, 쪽 번호를 누르면 e-book 원본 지면이 열립니다.</li>"
-        "<li>문제은행의 상당수는 교본 문장을 그대로 가져와 자동으로 만든 문항입니다. 교본 글자 인식 과정에서 띄어쓰기·글자가 "
-        "틀린 곳이 있을 수 있으니, 이상한 문장은 쪽 번호를 눌러 원본 지면으로 확인하세요.</li>"
         "</ul></div>",
         "",
-        '<div data-tabs="panels" hidden></div>',
+        f"## 5지선다 ({counts['mc']}문항)",
+        "",
+        f'<div class="mock-exam" data-src="quiz/u{u:02d}.json" data-part="mc" data-type="mc"></div>',
     ]
-    for part, label in PARTS:
-        out += ["", f"## {label} ({counts[part]}문항)", "",
-                f'<div class="mock-exam" data-src="quiz/u{u:02d}.json" data-part="{part}"></div>']
     out += ["", '<div class="lesson-footer-nav">',
             f'  <a class="complete-btn secondary" href="#/{UNIT_PAGES[u]}">📘 제{u}강 핵심노트</a>',
             f"  {nxt}", "</div>", ""]
@@ -227,6 +224,7 @@ def build(base: Path):
             data["parts"][part] = qs
         (out_dir / f"u{u:02d}.json").write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
         counts = {part: len(parts[part]) for part, _ in PARTS}
-        (out_dir / PAGE_NAMES[u]).write_text(page_md(u, counts), encoding="utf-8")
+        main_counts = {**counts, "mc": sum(practice_type(q) == "mc" for q in data["parts"]["mc"])}
+        (out_dir / PAGE_NAMES[u]).write_text(page_md(u, main_counts), encoding="utf-8")
         total += sum(counts.values())
     print(f"✍️ 단원평가: 7개 단원 {total}문항(자동 추출 {n_auto}) 원문 대조 통과 → quiz/")

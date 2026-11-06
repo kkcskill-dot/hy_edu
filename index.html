@@ -1786,7 +1786,7 @@
 
   <script>
     // 배포 버전 (push 전에 web_builder.py가 갱신하고 version.json에도 같은 값을 씀)
-    var BUILD = '20261106-232308';
+    var BUILD = '20261106-234155';
 
     /* ---------- 배포 후 자동 갱신 (강제 새로고침 불필요) ----------
        GitHub Pages는 10분, nginx는 설정에 따라 그 이상 브라우저가 파일을 캐시할 수 있음.
@@ -1922,12 +1922,8 @@
     }
 
     function lastQuizScore(u) {
-      var scores = ['blank', 'ox', 'mc'].map(function (part) {
-        var h = mxLoad('u0' + u + '-' + part).history || [];
-        return h.length ? h[h.length - 1].score : null;
-      }).filter(function (x) { return x !== null; });
-      if (!scores.length) return null;
-      return Math.round(scores.reduce(function (a, b) { return a + b; }, 0) / scores.length);
+      var history = mxLoad('u0' + u + '-mc-mc').history || [];
+      return history.length ? history[history.length - 1].score : null;
     }
     function decorateNav() {
       var nav = document.querySelector('.sidebar-nav');
@@ -2289,7 +2285,7 @@
         if (!quiz || k < 0) return;
         var from = chPage[k];
         var to = k + 1 < chs.length ? Math.max(from, chPage[k + 1] - 1) : 999;
-        var pool = (quiz.parts.ox || []).concat(quiz.parts.mc || []);
+        var pool = (quiz.parts.mc || []).filter(function (q) { return mxPracticeType(q) === 'mc'; });
         pool.filter(function (q) {
           return !used[q.id] && q.quotes && q.quotes.some(function (r) { return r.p >= from && r.p <= to; });
         }).sort(function (a, b) { return (a.auto ? 1 : 0) - (b.auto ? 1 : 0); }).slice(0, 2).forEach(function (q) {
@@ -3104,6 +3100,18 @@
       updateBar();
     }
 
+    // 보기로 답하는 빈칸도 보관 문제로 분류한다. JSON의 기존 문항·ID는 그대로 둔다.
+    function mxPracticeType(q) {
+      if (q.type === 'ox') return 'ox';
+      if (q.type === 'blank' || /\(\s*\)|\{\{\d+\}\}|빈칸/.test((q.q || '') + ' ' + (q.passage || ''))) return 'blank';
+      return 'mc';
+    }
+    function mxPartData(data, part, kind) {
+      var pool = data.parts[part];
+      if (kind) pool = pool.filter(function (q) { return mxPracticeType(q) === kind; });
+      return { id: data.id + '-' + part + (kind ? '-' + kind : ''), title: data.title, pool: pool, size: 20 };
+    }
+
     function mockExamPlugin(hook) {
       hook.doneEach(function () {
         var roots = document.querySelectorAll('.markdown-section .mock-exam[data-src]');
@@ -3116,7 +3124,7 @@
             })
             .then(function (data) {
               var part = root.getAttribute('data-part');
-              if (part) data = { id: data.id + '-' + part, title: data.title, pool: data.parts[part], size: 20 };
+              if (part) data = mxPartData(data, part, root.getAttribute('data-type'));
               if (data.filterable) mxFilterBuild(root, data);
               else mxBuild(root, data);
             })

@@ -209,7 +209,7 @@ def render_note(base, meta):
            "<li><b>★ 핵심</b>: 1면 기사, 목록이 있는 기사, 간호 관련 기사입니다.</li>"
            "<li><b>📋 목록</b>: ‘다음 중 아닌 것은?’ 대비입니다. 항목과 개수를 함께 외우세요. 모든 목록은 "
            f'<a href="#/{THEME_PAGE}">주제별 모아보기 › 📋 목록 암기</a>에 모았습니다.</li>'
-           f'<li><b>굵은 글씨</b>는 <a href="#/{QUIZ_PAGE}">소식지 문제은행</a>의 빈칸으로 나오는 곳입니다.</li>'
+           '<li><b>굵은 글씨</b>는 기사에서 기억할 핵심 용어와 내용입니다.</li>'
            "<li>쪽 번호(예: 977호 p.1)를 누르면 e-book 원본 지면이 열립니다. 글자 인식 과정에서 띄어쓰기가 다른 곳이 있을 수 있으니 이상하면 지면으로 확인하세요.</li>"
            "</ul></div>", ""]
     months = defaultdict(list)
@@ -449,31 +449,33 @@ def build_quiz():
 
 PART_TITLES = [("core", "⓪ 핵심 기출형"), ("list", "① 목록 · ‘아닌 것은?’"), ("star", "② 빈칸 — ★ 핵심 기사"),
                ("num", "③ 5지선다 — 숫자·연도"), ("ox", "④ O/X"), ("blank", "⑤ 빈칸 — 전체 기사")]
+MAIN_PART_TITLES = [("core", "① 핵심 기출형"), ("list", "② 목록 · ‘아닌 것은?’")]
 
 
 def render_quiz(base):
     parts = build_quiz()
     data = {"id": "w01", "title": "2026 소식지 문제은행", "parts": parts}
     (base / QUIZ_JSON).write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    total = sum(len(v) for v in parts.values())
+    # 원본 파트와 문항 ID는 보관 학습·기존 기록을 위해 유지한다.
+    # 목록 파트에는 빈칸도 섞여 있으므로 기본 화면의 집계와 출제를 모두 객관식으로 제한한다.
+    counts = {key: sum(q["type"] == "mc" for q in parts[key]) for key, _ in MAIN_PART_TITLES}
+    total = sum(counts.values())
     out = [GEN,
            '<div class="lecture-header-box">',
            '  <span class="lecture-badge">문제은행 • 2026 소식지</span>',
            "  <h2>✍️ 2026 소식지 문제은행</h2>",
-           f"  <p>소식지 18개 호 원문으로 만든 {total}문항 · 파트마다 20문항씩 열 때마다 새로 섞어 내고, 채점하면 정답과 소식지 원문·쪽이 표시됩니다. 푼 기록은 이 기기에 저장됩니다.</p>",
+           f"  <p>소식지 18개 호 원문으로 만든 객관식 {total}문항 · 파트마다 20문항씩 열 때마다 새로 섞어 내고, 채점하면 정답과 소식지 원문·쪽이 표시됩니다. 푼 기록은 이 기기에 저장됩니다.</p>",
            "</div>", "",
            "# 2026 소식지 문제은행", "",
            '<div class="note-key"><ul>'
-           "<li><b>빈칸</b>: 소식지 원문 문장의 굵은 글씨(핵심노트와 같은 곳)가 빈칸입니다. 띄어쓰기·쉼표는 채점에 영향을 주지 않습니다.</li>"
            "<li><b>핵심 기출형</b>: 기출에 나온 주제(의료선교의 달 주제, 기부금, N년 연속 1위, 기관장 등)를 2026 소식지 기준으로 낸 문항입니다. 오답 보기에는 기출 메모의 옛 답도 섞었습니다.</li>"
            "<li><b>목록 · 아닌 것은?</b>: 보기 4개는 그 목록의 원문 항목이고, 오답 1개는 <b>헷갈리기 쉬운 다른 원문 항목</b>(같은 기사의 다른 목록, 비슷한 다른 기사)입니다. 채점하면 오답 보기의 출처가 나옵니다.</li>"
-           "<li><b>숫자·연도 5지선다</b>: 오답 보기는 다른 기사에 나온 같은 단위의 숫자입니다.</li>"
-           "<li><b>O/X</b>: 원문 그대로면 O, 숫자 하나를 다른 기사 숫자로 바꿨으면 X입니다.</li>"
            f'<li>내용은 <a href="#/{NOTE_PAGE}">소식지 핵심노트</a>에서 먼저 읽고 오세요. 쪽 번호를 누르면 e-book 지면이 열립니다.</li>'
            "</ul></div>", "",
            '<div data-tabs="panels" hidden></div>', ""]
-    for key, title in PART_TITLES:
-        out += [f"## {title} ({len(parts[key])})", "", f'<div class="mock-exam" data-src="{QUIZ_JSON}" data-part="{key}"></div>', ""]
+    for key, title in MAIN_PART_TITLES:
+        type_filter = ' data-type="mc"' if key == "list" else ""
+        out += [f"## {title} ({counts[key]}문항)", "", f'<div class="mock-exam" data-src="{QUIZ_JSON}" data-part="{key}"{type_filter}></div>', ""]
     out += ['<div class="lesson-footer-nav">',
             f'  <a class="complete-btn secondary" href="#/{NOTE_PAGE}">📰 소식지 핵심노트</a>',
             f'  <a class="complete-btn" href="#/{THEME_PAGE}">🗂️ 주제별 모아보기 ➔</a>',

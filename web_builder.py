@@ -87,6 +87,9 @@ def build():
     # 1-1e. 2026 소식지: 원문 대조 후 호별 핵심노트·주제별 모아보기·문제은행·전 권 색인
     import webzine_build
     webzine_build.build(BASE_DIR)
+    # O/X와 입력형·선택형 빈칸은 기본 문제에서 분리해 별도 보관 메뉴로 연결한다.
+    import recall_build
+    recall_build.build(BASE_DIR)
     # 1-1f. 별도 소식지 심화 퀴즈·모의고사: 18개 호 원문 대조 및 문항 구조 검증
     import news2026_build
     news2026_build.build(BASE_DIR)
