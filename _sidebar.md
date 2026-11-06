@@ -33,7 +33,21 @@
   * [실전 모의고사 2회 · 채점](mock/02_실전모의고사_2회.md)
   * [실전 모의고사 3회 · 채점](mock/03_실전모의고사_3회.md)
 
-* **🧠 신규 · 2026 소식지 심화문제**
+* **📝 소식지 기본 모의고사**
+  * [기본 모의고사 안내 · 총 270문항](practice/news-basic/README.md)
+  * [기본 모의고사 1회 · 30문항](practice/news-basic/mock1.md)
+  * [기본 모의고사 2회 · 30문항](practice/news-basic/mock2.md)
+  * [기본 모의고사 3회 · 30문항](practice/news-basic/mock3.md)
+  * [기본 모의고사 4회 · 30문항](practice/news-basic/mock4.md)
+  * [기본 모의고사 5회 · 30문항](practice/news-basic/mock5.md)
+  * [기본 모의고사 6회 · 30문항](practice/news-basic/mock6.md)
+  * [기본 모의고사 7회 · 30문항](practice/news-basic/mock7.md)
+  * [기본 모의고사 8회 · 30문항](practice/news-basic/mock8.md)
+  * [기본 모의고사 9회 · 30문항](practice/news-basic/mock9.md)
+  * [기본 문제 랜덤 연습](practice/news-basic/quiz.md)
+  * [18개 호별 출제 범위 · 근거](practice/news-basic/coverage.md)
+
+* **🧠 2026 소식지 심화문제**
   * [심화문제 안내 · 12개 주제](practice/news2026/README.md)
   * [주제별 퀴즈 · 난이도·유형 선택](practice/news2026/quiz.md)
   * [심화 모의고사 1회 · 30문항](practice/news2026/mock1.md)

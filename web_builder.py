@@ -93,6 +93,9 @@ def build():
     # 1-1f. 별도 소식지 심화 퀴즈·모의고사: 18개 호 원문 대조 및 문항 구조 검증
     import news2026_build
     news2026_build.build(BASE_DIR)
+    # 원문 표현 중심 기본 모의고사: 심화 학습과 독립된 270문항·9회차
+    import news_basic_build
+    news_basic_build.build(BASE_DIR)
 
     # 1-2. 필수 기능 코드가 실수로 지워지지 않았는지 확인 (모바일 메뉴·진도·채점·자동 갱신)
     html = INDEX_HTML.read_text(encoding="utf-8")

@@ -197,7 +197,23 @@
 </div>
 
 <div style="margin: 40px 0 20px;">
-  <h2>신규 · 2026 소식지 심화문제</h2>
+  <h2>소식지 기본 모의고사</h2>
+  <p>소식지 문구를 최대한 살린 기본 객관식 270문항. 기사에 나온 명칭·목적·기능·구성을 확인하세요.</p>
+</div>
+
+<div class="course-grid">
+  <a class="course-card" href="#/practice/news-basic/README.md">
+    <div><span class="card-tag">기본 · 소식지 원문 표현 중심</span><h4>📝 소식지 기본 모의고사 1~9회</h4><p>18개 호에서 각 15문항을 출제했습니다. 옳은 내용·틀린 내용·주요 기능을 묻는 5지선다로, 9회끼리는 문제가 겹치지 않습니다.</p></div>
+    <div class="card-footer"><span>총 270문항 · 회당 30문항</span><span>회차 선택 ➔</span></div>
+  </a>
+  <a class="course-card" href="#/practice/news-basic/mock1.md">
+    <div><span class="card-tag">기본 · 바로 시작</span><h4>소식지 기본 모의고사 1회</h4><p>18개 호의 주요 내용을 30문항으로 확인하세요. 채점 후 해설과 원문 지면을 볼 수 있으며, 고른 답과 기록이 저장됩니다.</p></div>
+    <div class="card-footer"><span>정답 하나 · 원문 근거 제공</span><span>1회 응시 ➔</span></div>
+  </a>
+</div>
+
+<div style="margin: 40px 0 20px;">
+  <h2>2026 소식지 심화문제</h2>
   <p>소식지 18개 호 전체에서 고른 120문항. 단순한 기관명·숫자 암기를 넘어 사업의 목적·조건·차이와 연구 결과의 의미를 판단합니다.</p>
 </div>
 
