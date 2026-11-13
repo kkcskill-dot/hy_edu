@@ -6,6 +6,20 @@
   </p>
 </div>
 
+<div class="course-grid" style="margin-top: 28px;">
+  <a class="course-card" href="exam/">
+    <div>
+      <span class="card-tag">문제풀이 공간 • 별도 화면</span>
+      <h4>🧪 단원별 문제만 풀기</h4>
+      <p>기본강의(교본 7개 단원)와 소식지(977~994호)를 단원·호별로 골라 풉니다. 한 문제씩 바로 확인하거나 시험처럼 끝에 채점하고, 틀린 문제와 ★ 표시한 문제만 다시 풀 수 있습니다.</p>
+    </div>
+    <div class="card-footer">
+      <span>✍️ 교본 · 소식지 단원별</span>
+      <span>문제풀이 열기 ➔</span>
+    </div>
+  </a>
+</div>
+
 <div style="margin: 40px 0 20px;">
   <div style="font-size: 12.5px; font-weight: 700; color: var(--apple-blue); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">COURSE CATALOG</div>
   <h2 style="margin: 0; border: none; font-size: 26px; font-weight: 700; letter-spacing: -0.025em;">학습 메뉴. <span style="color: var(--apple-subtext); font-weight: 500;">교본 7개 단원과 연습 도구.</span></h2>

@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="문제풀이">
+  <title>문제풀이 · 시험범위 핵심정리</title>
+  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <style>
+    :root {
+      --bg: #f5f5f7; --card: #ffffff; --text: #1d1d1f; --sub: #6e6e73; --line: rgba(0,0,0,.08);
+      --blue: #0071e3; --blue-soft: rgba(0,113,227,.09); --green: #1a7f37; --green-soft: rgba(26,127,55,.10);
+      --red: #d70015; --red-soft: rgba(215,0,21,.08); --amber: #b25000; --quote: #f2f2f5; --radius: 18px;
+      --shadow: 0 1px 2px rgba(0,0,0,.04), 0 4px 16px rgba(0,0,0,.04);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #000000; --card: #1c1c1e; --text: #f5f5f7; --sub: #a1a1a6; --line: rgba(255,255,255,.12);
+        --blue: #2997ff; --blue-soft: rgba(41,151,255,.16); --green: #30d158; --green-soft: rgba(48,209,88,.14);
+        --red: #ff453a; --red-soft: rgba(255,69,58,.14); --amber: #ff9f0a; --quote: #2c2c2e; --shadow: none;
+      }
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+      font-size: 16px; line-height: 1.6; letter-spacing: -0.01em; word-break: keep-all; overflow-wrap: anywhere;
+    }
+    button { font: inherit; color: inherit; }
+    a { color: var(--blue); text-decoration: none; }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 16px calc(120px + env(safe-area-inset-bottom)); }
+
+    /* 상단 */
+    .top {
+      position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 86%, transparent);
+      backdrop-filter: saturate(180%) blur(18px); -webkit-backdrop-filter: saturate(180%) blur(18px);
+      border-bottom: 1px solid var(--line); padding-top: env(safe-area-inset-top);
+    }
+    .top-in { max-width: 760px; margin: 0 auto; padding: 10px 16px; display: flex; align-items: center; gap: 10px; min-height: 52px; }
+    .top-title { flex: 1; min-width: 0; font-weight: 700; font-size: 17px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .top-title small { font-weight: 500; color: var(--sub); font-size: 13px; margin-left: 6px; }
+    .icon-btn {
+      border: 0; background: transparent; min-width: 44px; height: 44px; border-radius: 12px; cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center; font-size: 15px; color: var(--blue); padding: 0 8px;
+    }
+    .icon-btn:active { background: var(--blue-soft); }
+    .star-btn { font-size: 22px; color: var(--sub); }
+    .star-btn.on { color: #ffb800; }
+    .pbar { height: 3px; background: var(--line); }
+    .pbar > i { display: block; height: 100%; background: var(--blue); transition: width .25s; }
+
+    /* 공통 */
+    h1 { font-size: 28px; line-height: 1.25; letter-spacing: -0.03em; margin: 28px 0 6px; }
+    .lead { color: var(--sub); margin: 0 0 20px; font-size: 15px; }
+    .card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--line); }
+    .seg { display: flex; background: var(--line); border-radius: 12px; padding: 3px; margin: 0 0 18px; }
+    .seg button {
+      flex: 1; border: 0; background: transparent; padding: 9px 6px; border-radius: 10px; font-weight: 600; font-size: 15px; cursor: pointer; color: var(--sub);
+    }
+    .seg button.on { background: var(--card); color: var(--text); box-shadow: 0 1px 4px rgba(0,0,0,.12); }
+    .muted { color: var(--sub); }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 0; cursor: pointer;
+      background: var(--blue); color: #fff; font-weight: 700; font-size: 16px; min-height: 50px; padding: 0 20px; border-radius: 14px; width: 100%;
+    }
+    .btn:disabled { opacity: .4; cursor: default; }
+    .btn.ghost { background: var(--blue-soft); color: var(--blue); }
+    .btn.plain { background: var(--card); color: var(--text); border: 1px solid var(--line); }
+    .btn-row { display: flex; gap: 10px; }
+    .btn-row > * { flex: 1; }
+
+    /* 목록 */
+    .resume { padding: 16px 18px; margin-bottom: 18px; display: flex; gap: 14px; align-items: center; cursor: pointer; border-color: var(--blue); }
+    .resume b { display: block; }
+    .resume .go { margin-left: auto; color: var(--blue); font-weight: 700; white-space: nowrap; }
+    .group-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin: 6px 2px 10px; }
+    .group-head span { color: var(--sub); font-size: 14px; }
+    .list { display: grid; gap: 10px; }
+    @media (min-width: 700px) { .list { grid-template-columns: 1fr 1fr; } }
+    .set {
+      text-align: left; border: 1px solid var(--line); cursor: pointer; padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 6px; min-height: 112px;
+    }
+    .set:active { transform: scale(.99); }
+    .set-top { display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; font-weight: 700; color: var(--blue); background: var(--blue-soft); border-radius: 6px; padding: 2px 7px; white-space: nowrap; }
+    .set-top .muted { font-size: 13px; }
+    .set-title { font-weight: 700; font-size: 16.5px; line-height: 1.35; }
+    .set-meta { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; color: var(--sub); margin-top: auto; }
+    .meter { height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; display: flex; }
+    .meter i { display: block; height: 100%; }
+    .meter .ok { background: var(--green); }
+    .meter .ng { background: var(--red); }
+    .all-btn { margin: 0 0 14px; }
+
+    /* 설정 */
+    .opt { padding: 18px; margin-bottom: 12px; }
+    .opt h3 { margin: 0 0 10px; font-size: 15px; display: flex; justify-content: space-between; align-items: baseline; }
+    .opt h3 button { border: 0; background: none; color: var(--blue); font-size: 14px; cursor: pointer; padding: 4px 0; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      border: 1px solid var(--line); background: var(--bg); border-radius: 999px; padding: 8px 14px; min-height: 40px; cursor: pointer; font-size: 14.5px; font-weight: 500;
+    }
+    .chip.on { background: var(--blue); border-color: var(--blue); color: #fff; }
+    .chip small { opacity: .75; margin-left: 4px; }
+    .start-bar {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 9; padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+      background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-top: 1px solid var(--line);
+    }
+    .start-bar > div { max-width: 760px; margin: 0 auto; }
+
+    /* 문제 */
+    .q-meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 20px 0 10px; font-size: 13px; color: var(--sub); align-items: center; }
+    .q-meta .lv-심화 { color: var(--amber); background: color-mix(in srgb, var(--amber) 12%, transparent); }
+    .q-stem { font-size: 18.5px; font-weight: 600; line-height: 1.55; margin: 0 0 14px; letter-spacing: -0.02em; }
+    .q-stem b { color: var(--blue); }
+    .passage { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; margin: 0 0 14px; white-space: pre-line; font-size: 15.5px; }
+    .choices { display: grid; gap: 10px; }
+    .choice {
+      display: flex; gap: 12px; align-items: flex-start; text-align: left; width: 100%; cursor: pointer;
+      background: var(--card); border: 1.5px solid var(--line); border-radius: 14px; padding: 13px 14px; font-size: 16px; line-height: 1.5; min-height: 54px;
+    }
+    .choice .mk {
+      flex: none; width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--line); display: inline-flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; color: var(--sub); margin-top: -1px;
+    }
+    .choice.sel { border-color: var(--blue); background: var(--blue-soft); }
+    .choice.sel .mk { background: var(--blue); border-color: var(--blue); color: #fff; }
+    .choice.right { border-color: var(--green); background: var(--green-soft); }
+    .choice.right .mk { background: var(--green); border-color: var(--green); color: #fff; }
+    .choice.wrong { border-color: var(--red); background: var(--red-soft); }
+    .choice.wrong .mk { background: var(--red); border-color: var(--red); color: #fff; }
+    .choices.done .choice { cursor: default; }
+    .choices.done .choice:not(.right):not(.wrong) { opacity: .6; }
+    .fb { margin-top: 16px; padding: 16px 18px; }
+    .fb-head { font-weight: 800; font-size: 17px; margin-bottom: 6px; }
+    .fb-head.ok { color: var(--green); }
+    .fb-head.ng { color: var(--red); }
+    .fb p { margin: 0 0 10px; }
+    .src { margin-top: 10px; }
+    .src-item { background: var(--quote); border-radius: 12px; padding: 11px 13px; margin-top: 8px; font-size: 14.5px; line-height: 1.6; }
+    .src-item a { display: inline-block; font-size: 13px; font-weight: 700; margin-bottom: 3px; }
+    .src-item q { quotes: none; display: block; }
+    .play-bar {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 9; padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+      background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-top: 1px solid var(--line);
+    }
+    .play-bar > div { max-width: 760px; margin: 0 auto; display: flex; gap: 10px; }
+    .play-bar .btn.prev { flex: 0 0 96px; }
+
+    /* 결과 */
+    .score { padding: 24px 20px; text-align: center; margin-top: 20px; }
+    .score .big { font-size: 52px; font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; }
+    .score .big small { font-size: 20px; color: var(--sub); font-weight: 600; }
+    .bd { padding: 6px 18px; margin: 12px 0; }
+    .bd-row { display: flex; justify-content: space-between; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+    .bd-row:last-child { border-bottom: 0; }
+    .rv-list { display: grid; gap: 8px; margin: 12px 0 20px; }
+    .rv {
+      display: flex; gap: 10px; align-items: flex-start; text-align: left; width: 100%; padding: 12px 14px; cursor: pointer; font-size: 14.5px; line-height: 1.5;
+      background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    }
+    .rv .r { flex: none; font-weight: 800; width: 22px; }
+    .rv .r.ok { color: var(--green); }
+    .rv .r.ng { color: var(--red); }
+    .rv .r.na { color: var(--sub); }
+    .empty { padding: 28px 18px; text-align: center; color: var(--sub); }
+    .foot { text-align: center; font-size: 13px; color: var(--sub); margin: 30px 0 0; }
+    .loading { padding: 60px 0; text-align: center; color: var(--sub); }
+    .grid-nav { display: grid; grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); gap: 6px; margin: 10px 0 0; }
+    .grid-nav button { height: 44px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); cursor: pointer; font-weight: 600; font-size: 14px; }
+    .grid-nav button.ans { background: var(--blue-soft); color: var(--blue); border-color: transparent; }
+    .grid-nav button.cur { outline: 2px solid var(--blue); }
+    dialog { border: 0; border-radius: 18px; padding: 18px; background: var(--card); color: var(--text); width: min(92vw, 520px); }
+    dialog::backdrop { background: rgba(0,0,0,.35); }
+  </style>
+</head>
+<body>
+  <header class="top"><div class="top-in" id="top"></div><div class="pbar" id="pbar" hidden><i></i></div></header>
+  <main class="wrap" id="app"><div class="loading">불러오는 중…</div></main>
+  <div id="bar"></div>
+  <dialog id="dlg"></dialog>
+
+<script>
+(function () {
+  'use strict';
+  // 배포 버전 (push 전에 web_builder.py가 갱신 — 데이터 요청에 붙여 이전 캐시를 건너뜀)
+  var BUILD = '20261113-231404';
+  var KEY = 'hyexam:v1:';
+  var $app = document.getElementById('app'), $top = document.getElementById('top'),
+      $bar = document.getElementById('bar'), $pbar = document.getElementById('pbar'), $dlg = document.getElementById('dlg');
+  var MARKS = ['1', '2', '3', '4', '5'];
+  var catalog = null, sets = {}, session = null;
+
+  // ───────── 저장 (실패해도 동작) ─────────
+  function load(name, def) {
+    try { var v = localStorage.getItem(KEY + name); return v ? JSON.parse(v) : def; } catch (e) { return def; }
+  }
+  function save(name, v) {
+    try { if (v == null) localStorage.removeItem(KEY + name); else localStorage.setItem(KEY + name, JSON.stringify(v)); } catch (e) {}
+  }
+  var stats = load('stats', {});   // id → [맞힌 수, 틀린 수, 마지막(1 맞음/0 틀림)]
+  var stars = load('stars', {});   // id → 1
+  var prefs = load('prefs', { group: 'textbook', scope: 'all', size: 20, order: 'seq', mode: 'check' });
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function fmt(s) { return esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>'); }
+  function shuffle(a, rnd) {
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(rnd() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+
+  // ───────── 데이터 ─────────
+  function getJSON(url) {
+    return fetch(url + '?v=' + BUILD).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+  }
+  function loadCatalog() { return catalog ? Promise.resolve(catalog) : getJSON('data/index.json').then(function (c) { catalog = c; indexIds(); return c; }); }
+  function loadSet(id) {
+    if (sets[id]) return Promise.resolve(sets[id]);
+    return getJSON('data/' + id + '.json').then(function (s) {
+      s.byId = {};
+      s.questions.forEach(function (q) { q.set = id; s.byId[q.id] = q; });
+      sets[id] = s; return s;
+    });
+  }
+  function setMeta(id) {
+    var found = null;
+    catalog.groups.forEach(function (g) { g.sets.forEach(function (s) { if (s.id === id) found = s; }); });
+    return found;
+  }
+  function groupOf(id) {
+    var found = null;
+    catalog.groups.forEach(function (g) { if (g.key === id) found = g; });
+    return found;
+  }
+  function setName(meta) { return meta.kind === 'unit' ? meta.label + ' ' + meta.title : '소식지 ' + meta.title; }
+  function docName(doc) {
+    var m = /^unit0?(\d+)$/.exec(doc);
+    if (m) return '교본 제' + m[1] + '강';
+    m = /^webzine-(\d+)$/.exec(doc);
+    return m ? '소식지 ' + m[1] + '호' : doc;
+  }
+  function statOf(ids) {
+    var done = 0, ok = 0, ng = 0;
+    ids.forEach(function (id) { var s = stats[id]; if (s) { done++; if (s[2]) ok++; else ng++; } });
+    return { done: done, ok: ok, ng: ng };
+  }
+
+  // ───────── 화면 공통 ─────────
+  function topBar(left, title, right) {
+    $top.innerHTML = (left || '<a class="icon-btn" href="../" aria-label="학습노트 홈">‹ 홈</a>') +
+      '<div class="top-title">' + title + '</div>' + (right || '<span style="width:44px"></span>');
+  }
+  function progress(p) {
+    if (p == null) { $pbar.hidden = true; return; }
+    $pbar.hidden = false; $pbar.firstChild.style.width = (p * 100).toFixed(1) + '%';
+  }
+  function go(hash) { if (location.hash === hash) route(); else location.hash = hash; }
+
+  // ───────── 홈: 기본강의 / 소식지 ─────────
+  function viewHome() {
+    var g = groupOf(prefs.group) || catalog.groups[0];
+    topBar(null, '문제풀이 <small>시험범위 핵심정리</small>');
+    progress(null);
+    var html = '<h1>문제풀이</h1><p class="lead">2026 교본 단원과 2026 소식지 호별로 문제만 풀어 봅니다. 채점하면 해설과 원문 지면을 보여 줍니다.</p>';
+    var s = load('session', null);
+    if (s && s.items && s.items.length && !s.finished) {
+      var answered = Object.keys(s.answers || {}).length;
+      html += '<div class="card resume" data-act="resume"><div><b>이어 풀기 · ' + esc(s.title) + '</b><span class="muted">' +
+        answered + ' / ' + s.items.length + '문항 응답 · ' + (s.mode === 'exam' ? '시험 모드' : '바로 확인') + '</span></div><span class="go">계속 ›</span></div>';
+    }
+    html += '<div class="seg" role="tablist">' + catalog.groups.map(function (x) {
+      return '<button role="tab" data-group="' + x.key + '" class="' + (x.key === g.key ? 'on' : '') + '" aria-selected="' + (x.key === g.key) + '">' +
+        esc(x.title) + ' <span class="muted" style="font-weight:500">' + x.count + '</span></button>';
+    }).join('') + '</div>';
+    html += '<div class="group-head"><b>' + esc(g.sub) + '</b><span>' + g.sets.length + (g.key === 'news' ? '개 호' : '개 단원') + ' · ' + g.count + '문항</span></div>';
+    html += '<button class="btn ghost all-btn" data-set="all-' + g.key + '">' + esc(g.title) + ' 전체에서 골라 풀기 ›</button>';
+    html += '<div class="list">' + g.sets.map(function (m) {
+      var ids = [];
+      // 목록 화면은 세트 파일 없이 기록만으로 표시 (기록 키는 문항 ID)
+      Object.keys(stats).forEach(function (id) { if (idsBySet[m.id] && idsBySet[m.id][id]) ids.push(id); });
+      var st = statOf(ids), w = function (n) { return (n / m.count * 100).toFixed(1) + '%'; };
+      var sub = m.kind === 'unit' ? m.sections.map(function (x) { return x.name; }).join(' · ') : m.headline;
+      return '<button class="card set" data-set="' + m.id + '">' +
+        '<div class="set-top"><span class="badge">' + esc(m.kind === 'unit' ? m.label : m.title) + '</span><span class="muted">' +
+        esc(m.kind === 'unit' ? '' : m.label) + '</span></div>' +
+        '<div class="set-title">' + esc(m.kind === 'unit' ? m.title : sub) + '</div>' +
+        (m.kind === 'unit' ? '<div class="muted" style="font-size:13px;line-height:1.45">' + esc(sub) + '</div>' : '') +
+        '<div class="meter"><i class="ok" style="width:' + w(st.ok) + '"></i><i class="ng" style="width:' + w(st.ng) + '"></i></div>' +
+        '<div class="set-meta"><span>' + m.count + '문항' + (m.levels && m.levels['심화'] ? ' · 심화 ' + m.levels['심화'] : '') + '</span><span>' +
+        (st.done ? '푼 문제 ' + st.done + ' · 오답 ' + st.ng : '아직 안 풂') + '</span></div></button>';
+    }).join('') + '</div>';
+    html += '<p class="foot">기록은 이 기기에만 저장됩니다 · <button class="icon-btn" style="font-size:13px;height:auto;min-width:0" data-act="reset">기록 지우기</button></p>';
+    $app.innerHTML = html;
+    $bar.innerHTML = '';
+    $app.onclick = function (e) {
+      var t = e.target.closest('[data-group],[data-set],[data-act]');
+      if (!t) return;
+      if (t.dataset.group) { prefs.group = t.dataset.group; save('prefs', prefs); viewHome(); return; }
+      if (t.dataset.set) { go('#/set/' + t.dataset.set); return; }
+      if (t.dataset.act === 'resume') { go('#/play'); return; }
+      if (t.dataset.act === 'reset') confirmReset();
+    };
+  }
+  var idsBySet = {};   // 세트별 문항 ID (목록 화면에서 기록 표시용)
+  function indexIds() {
+    catalog.groups.forEach(function (g) { g.sets.forEach(function (m) {
+      idsBySet[m.id] = {}; m.ids.forEach(function (id) { idsBySet[m.id][id] = 1; });
+    }); });
+  }
+  function confirmReset() {
+    $dlg.innerHTML = '<p style="margin:0 0 6px;font-weight:700">기록을 지울까요?</p><p class="muted" style="margin:0 0 16px">맞힘·틀림 기록, ★ 표시, 이어 풀기가 모두 지워집니다.</p>' +
+      '<div class="btn-row"><button class="btn plain" data-x="no">취소</button><button class="btn" style="background:var(--red)" data-x="yes">지우기</button></div>';
+    $dlg.onclick = function (e) {
+      var t = e.target.closest('[data-x]'); if (!t) return;
+      if (t.dataset.x === 'yes') { stats = {}; stars = {}; save('stats', null); save('stars', null); save('session', null); }
+      $dlg.close(); viewHome();
+    };
+    $dlg.showModal();
+  }
+
+  // ───────── 설정: 범위·문항 수·순서·방식 ─────────
+  function viewSetup(target) {
+    var isAll = target.indexOf('all-') === 0;
+    var g = isAll ? groupOf(target.slice(4)) : null;
+    var meta = isAll ? null : setMeta(target);
+    if (!g && !meta) { go('#/'); return; }
+    var ids = isAll ? g.sets.map(function (m) { return m.id; }) : [target];
+    Promise.all(ids.map(loadSet)).then(function (list) {
+      var pool = [];
+      list.forEach(function (s) { pool = pool.concat(s.questions); });
+      // 칩: 단원/호(전체) 또는 소단원(단원) 또는 기본·심화(소식지 호)
+      var chips = isAll ? (g ? g.sets.map(function (m) { return { key: m.id, name: m.kind === 'unit' ? m.label : m.title, n: m.count }; }) : [])
+        : meta.sections.map(function (x) { return { key: x.name, name: x.name, n: x.count }; });
+      var chipKey = isAll ? function (q) { return q.set; } : function (q) { return q.section; };
+      var on = {}; chips.forEach(function (c) { on[c.key] = true; });
+      var title = isAll ? g.title + ' 전체' : setName(meta);
+      topBar('<a class="icon-btn" href="#/" aria-label="목록">‹ 목록</a>', esc(title));
+      progress(null);
+      var st = { scope: prefs.scope, size: prefs.size, order: prefs.order, mode: prefs.mode };
+
+      function filtered() {
+        return pool.filter(function (q) {
+          if (!on[chipKey(q)]) return false;
+          var s = stats[q.id];
+          if (st.scope === 'new') return !s;
+          if (st.scope === 'wrong') return s && !s[2];
+          if (st.scope === 'star') return stars[q.id];
+          return true;
+        });
+      }
+      function opt(name, key, values) {
+        return '<div class="card opt"><h3>' + name + '</h3><div class="chips">' + values.map(function (v) {
+          return '<button class="chip' + (String(st[key]) === String(v[0]) ? ' on' : '') + '" data-k="' + key + '" data-v="' + v[0] + '">' + v[1] + '</button>';
+        }).join('') + '</div></div>';
+      }
+      function render() {
+        var f = filtered();
+        var counts = { all: 0, new: 0, wrong: 0, star: 0 };
+        pool.forEach(function (q) {
+          if (!on[chipKey(q)]) return;
+          var s = stats[q.id]; counts.all++;
+          if (!s) counts.new++; else if (!s[2]) counts.wrong++;
+          if (stars[q.id]) counts.star++;
+        });
+        var html = '<h1 style="font-size:24px">' + esc(title) + '</h1><p class="lead">' +
+          (isAll ? esc(g.sub) : meta.kind === 'unit' ? '2026 교본 제' + meta.no + '단원' : esc(meta.label + ' · ' + meta.headline)) + ' · ' + pool.length + '문항</p>';
+        if (chips.length > 1) {
+          html += '<div class="card opt"><h3>' + (isAll ? (g.key === 'news' ? '호' : '단원') : meta.kind === 'news' ? '난이도' : '소단원') +
+            '<button data-all="1">' + (chips.every(function (c) { return on[c.key]; }) ? '모두 끄기' : '모두 선택') + '</button></h3><div class="chips">' +
+            chips.map(function (c) {
+              return '<button class="chip' + (on[c.key] ? ' on' : '') + '" data-chip="' + esc(c.key) + '">' + esc(c.name) + '<small>' + c.n + '</small></button>';
+            }).join('') + '</div></div>';
+        }
+        html += opt('범위', 'scope', [['all', '전체 ' + counts.all], ['new', '안 푼 문제 ' + counts.new], ['wrong', '틀린 문제 ' + counts.wrong], ['star', '★ 표시 ' + counts.star]]);
+        html += opt('문항 수', 'size', [[10, '10문항'], [20, '20문항'], [30, '30문항'], [0, '전부']]);
+        html += opt('순서', 'order', [['seq', '교본·지면 순서'], ['rand', '섞기 (보기도 섞음)']]);
+        html += opt('채점 방식', 'mode', [['check', '한 문제씩 바로 확인'], ['exam', '시험처럼 끝에 채점']]);
+        $app.innerHTML = html;
+        var n = st.size ? Math.min(st.size, f.length) : f.length;
+        $bar.innerHTML = '<div class="start-bar"><div><button class="btn" id="start"' + (n ? '' : ' disabled') + '>' +
+          (n ? n + '문항 풀기' : '해당하는 문제가 없습니다') + '</button></div></div>';
+        document.getElementById('start').onclick = function () {
+          prefs.scope = st.scope; prefs.size = st.size; prefs.order = st.order; prefs.mode = st.mode; save('prefs', prefs);
+          var picked = f.slice();
+          if (st.order === 'rand') shuffle(picked, Math.random);
+          else if (st.scope === 'all' && st.size && picked.length > st.size) {
+            // 순서대로 풀 때는 지난번에 이어서 다음 묶음부터 (끝나면 처음으로)
+            var cur = load('cursor', {}), key = target + '|' + Object.keys(on).filter(function (k) { return on[k]; }).join(',');
+            var start = (cur[key] || 0) % picked.length;
+            picked = picked.slice(start).concat(picked.slice(0, start));
+            cur[key] = (start + st.size) % f.length; save('cursor', cur);
+          }
+          if (st.size) picked = picked.slice(0, st.size);
+          startSession(title, target, picked, st);
+        };
+      }
+      $app.onclick = function (e) {
+        var t = e.target.closest('[data-chip],[data-k],[data-all]');
+        if (!t) return;
+        if (t.dataset.all) {
+          var allOn = chips.every(function (c) { return on[c.key]; });
+          chips.forEach(function (c) { on[c.key] = !allOn; });
+        } else if (t.dataset.chip) on[t.dataset.chip] = !on[t.dataset.chip];
+        else st[t.dataset.k] = t.dataset.k === 'size' ? Number(t.dataset.v) : t.dataset.v;
+        render();
+      };
+      render();
+      window.scrollTo(0, 0);
+    });
+  }
+
+  function startSession(title, target, qs, st) {
+    session = {
+      title: title, target: target, mode: st.mode, started: Date.now(), i: 0, answers: {}, checked: {},
+      items: qs.map(function (q) {
+        var order = [0, 1, 2, 3, 4].slice(0, q.choices.length);
+        if (st.order === 'rand') shuffle(order, Math.random);
+        return { set: q.set, id: q.id, order: order };
+      })
+    };
+    save('session', session);
+    go('#/play');
+  }
+  function sessionQuestions(s) {
+    var need = {};
+    s.items.forEach(function (it) { need[it.set] = 1; });
+    return Promise.all(Object.keys(need).map(loadSet)).then(function () {
+      return s.items.map(function (it) { return sets[it.set] && sets[it.set].byId[it.id]; });
+    });
+  }
+  function record(q, ok) {
+    var s = stats[q.id] || [0, 0, 0];
+    if (ok) s[0]++; else s[1]++;
+    s[2] = ok ? 1 : 0; stats[q.id] = s; save('stats', stats);
+  }
+
+  // ───────── 풀이 ─────────
+  function viewPlay() {
+    session = session || load('session', null);
+    if (!session || !session.items || !session.items.length) { go('#/'); return; }
+    if (session.finished) { go('#/result'); return; }
+    sessionQuestions(session).then(function (qs) {
+      if (qs.some(function (q) { return !q; })) {   // 배포로 문항이 바뀐 경우
+        save('session', null); session = null; go('#/'); return;
+      }
+      drawQuestion(qs);
+    });
+  }
+  function srcHTML(q) {
+    return '<div class="src">' + q.quotes.map(function (r) {
+      return '<div class="src-item"><a href="../reader.html?doc=' + encodeURIComponent(r.doc) + '&p=' + r.p + '" target="_blank" rel="noopener">' +
+        esc(docName(r.doc)) + ' p.' + r.p + (r.label ? ' · ' + esc(r.label) : '') + ' ↗</a><q>' + esc(r.text) + '</q></div>';
+    }).join('') + '</div>';
+  }
+  function drawQuestion(qs) {
+    var s = session, i = s.i, q = qs[i], it = s.items[i], n = qs.length;
+    var picked = s.answers[i], checked = s.mode === 'check' && s.checked[i], review = s.finished;
+    var meta = setMeta(q.set);
+    topBar('<button class="icon-btn" data-act="exit" aria-label="그만 풀기">✕</button>',
+      (i + 1) + ' / ' + n + ' <small>' + esc(s.title) + '</small>',
+      '<button class="icon-btn star-btn' + (stars[q.id] ? ' on' : '') + '" data-act="star" aria-label="표시">' + (stars[q.id] ? '★' : '☆') + '</button>');
+    progress((i + (checked || picked != null ? 1 : 0)) / n);
+    var show = checked || review;
+    var html = '<div class="q-meta"><span class="badge">' + esc(meta.kind === 'unit' ? meta.label : meta.title) + '</span>' +
+      (q.level === '심화' ? '<span class="badge lv-심화">심화</span>' : '') +
+      '<span>' + esc(q.tag || q.section) + ' · ' + esc(q.format) + '</span></div>' +
+      '<p class="q-stem">' + fmt(q.q) + '</p>' + (q.passage ? '<div class="passage">' + fmt(q.passage) + '</div>' : '') +
+      '<div class="choices' + (show ? ' done' : '') + '" role="radiogroup">' + it.order.map(function (orig, k) {
+        var cls = '';
+        if (show) { if (orig === q.answer - 1) cls = ' right'; else if (orig === picked) cls = ' wrong'; }
+        else if (orig === picked) cls = ' sel';
+        return '<button class="choice' + cls + '" role="radio" aria-checked="' + (orig === picked) + '" data-c="' + orig + '"><span class="mk">' + MARKS[k] + '</span><span>' + fmt(q.choices[orig]) + '</span></button>';
+      }).join('') + '</div>';
+    if (show) {
+      var ok = picked === q.answer - 1, pos = it.order.indexOf(q.answer - 1) + 1;
+      html += '<div class="card fb"><div class="fb-head ' + (ok ? 'ok' : 'ng') + '">' +
+        (picked == null ? '안 푼 문제 · 정답 ' + pos + '번' : ok ? '정답입니다' : '오답 · 정답 ' + pos + '번') + '</div>' +
+        '<p>' + fmt(q.explain) + '</p>' + srcHTML(q) + '</div>';
+    }
+    if (s.mode === 'exam' && !review) {
+      html += '<details style="margin-top:18px"><summary class="muted" style="cursor:pointer;padding:6px 0">문항 이동 · ' +
+        Object.keys(s.answers).length + ' / ' + n + ' 응답</summary><div class="grid-nav">' + qs.map(function (_, k) {
+          return '<button class="' + (s.answers[k] != null ? 'ans' : '') + (k === i ? ' cur' : '') + '" data-jump="' + k + '">' + (k + 1) + '</button>';
+        }).join('') + '</div></details>';
+    }
+    $app.innerHTML = html;
+    var last = i === n - 1, primary;
+    if (review) primary = last ? '<button class="btn" data-act="result">결과로</button>' : '<button class="btn" data-act="next">다음 ›</button>';
+    else if (s.mode === 'check') primary = !checked ? '<button class="btn" data-act="check"' + (picked == null ? ' disabled' : '') + '>정답 확인</button>'
+      : '<button class="btn" data-act="' + (last ? 'finish' : 'next') + '">' + (last ? '결과 보기' : '다음 문제 ›') + '</button>';
+    else primary = last ? '<button class="btn" data-act="finish">채점하기</button>' : '<button class="btn" data-act="next">다음 ›</button>';
+    $bar.innerHTML = '<div class="play-bar"><div>' + (i > 0 ? '<button class="btn plain prev" data-act="prev">‹ 이전</button>' : '') + primary + '</div></div>';
+    window.scrollTo(0, 0);
+
+    function act(a, extra) {
+      if (a === 'pick') {
+        if (show) return;
+        s.answers[i] = extra; save('session', s); drawQuestion(qs); return;
+      }
+      if (a === 'check') {
+        if (picked == null) return;
+        s.checked[i] = true; record(q, picked === q.answer - 1); save('session', s); drawQuestion(qs); return;
+      }
+      if (a === 'next') { s.i = Math.min(n - 1, i + 1); save('session', s); drawQuestion(qs); return; }
+      if (a === 'prev') { s.i = Math.max(0, i - 1); save('session', s); drawQuestion(qs); return; }
+      if (a === 'jump') { s.i = extra; save('session', s); drawQuestion(qs); return; }
+      if (a === 'star') {
+        if (stars[q.id]) delete stars[q.id]; else stars[q.id] = 1;
+        save('stars', stars); drawQuestion(qs); return;
+      }
+      if (a === 'result') { go('#/result'); return; }
+      if (a === 'exit') { if (review) go('#/result'); else go('#/set/' + s.target); return; }
+      if (a === 'finish') {
+        var blank = qs.filter(function (_, k) { return s.answers[k] == null; }).length;
+        if (s.mode === 'exam' && blank && !confirm('안 푼 문제가 ' + blank + '개 있습니다. 채점할까요?')) return;
+        if (s.mode === 'exam') qs.forEach(function (qq, k) { if (s.answers[k] != null) record(qq, s.answers[k] === qq.answer - 1); });
+        s.finished = Date.now(); save('session', s); go('#/result');
+      }
+    }
+    document.onkeydown = function (e) {
+      if (e.target.closest && e.target.closest('input,textarea') || e.metaKey || e.ctrlKey || e.altKey) return;
+      var k = Number(e.key);
+      if (k >= 1 && k <= it.order.length) act('pick', it.order[k - 1]);
+      else if (e.key === 'Enter') { var b = $bar.querySelector('.btn:not(.prev)'); if (b && !b.disabled) b.click(); }
+      else if (e.key === 'ArrowLeft' && i > 0) act('prev');
+      else if (e.key === 'ArrowRight' && (review || s.mode === 'exam') && !last) act('next');
+    };
+    $app.onclick = $bar.onclick = $top.onclick = function (e) {
+      var t = e.target.closest('[data-c],[data-act],[data-jump]');
+      if (!t) return;
+      if (t.dataset.c != null) act('pick', Number(t.dataset.c));
+      else if (t.dataset.jump != null) act('jump', Number(t.dataset.jump));
+      else act(t.dataset.act);
+    };
+  }
+
+  // ───────── 결과 ─────────
+  function viewResult() {
+    session = session || load('session', null);
+    if (!session || !session.finished) { go('#/'); return; }
+    var s = session;
+    sessionQuestions(s).then(function (qs) {
+      if (qs.some(function (q) { return !q; })) { save('session', null); session = null; go('#/'); return; }
+      document.onkeydown = null;
+      var ok = 0, by = {};
+      qs.forEach(function (q, k) {
+        var meta = setMeta(q.set), key = meta.kind === 'unit' && s.target.indexOf('all-') !== 0 ? q.section : (meta.kind === 'unit' ? meta.label : meta.title);
+        var b = by[key] = by[key] || [0, 0];
+        b[1]++;
+        if (s.answers[k] === q.answer - 1) { ok++; b[0]++; }
+      });
+      topBar('<a class="icon-btn" href="#/" aria-label="목록">‹ 목록</a>', '결과 <small>' + esc(s.title) + '</small>');
+      progress(null);
+      var wrong = qs.filter(function (q, k) { return s.answers[k] !== q.answer - 1; });
+      var html = '<div class="card score"><div class="muted">' + esc(s.title) + '</div><div class="big">' + ok + '<small> / ' + qs.length + '</small></div>' +
+        '<div class="muted">정답률 ' + Math.round(ok / qs.length * 100) + '%</div></div>';
+      var rank = [];
+      catalog.groups.forEach(function (g) { g.sets.forEach(function (m) {
+        rank.push(m.kind === 'unit' ? m.label : m.title);
+        m.sections.forEach(function (x) { rank.push(x.name); });
+      }); });
+      var keys = Object.keys(by).sort(function (a, b) { return rank.indexOf(a) - rank.indexOf(b); });
+      if (keys.length > 1) {
+        html += '<div class="card bd">' + keys.map(function (k) {
+          return '<div class="bd-row"><span>' + esc(k) + '</span><b>' + by[k][0] + ' / ' + by[k][1] + '</b></div>';
+        }).join('') + '</div>';
+      }
+      html += '<h3 style="margin:22px 2px 0">문항별 확인</h3><div class="rv-list">' + qs.map(function (q, k) {
+        var a = s.answers[k], r = a == null ? 'na' : a === q.answer - 1 ? 'ok' : 'ng';
+        return '<button class="rv" data-rv="' + k + '"><span class="r ' + r + '">' + (r === 'ok' ? '○' : r === 'ng' ? '✕' : '–') + '</span><span>' +
+          (k + 1) + '. ' + fmt(q.q) + '</span></button>';
+      }).join('') + '</div>';
+      $app.innerHTML = html;
+      $bar.innerHTML = '<div class="play-bar"><div>' +
+        (wrong.length ? '<button class="btn ghost" data-act="retry">틀린 ' + wrong.length + '문항 다시</button>' : '') +
+        '<button class="btn" data-act="again">새로 풀기</button></div></div>';
+      window.scrollTo(0, 0);
+      $app.onclick = $bar.onclick = function (e) {
+        var t = e.target.closest('[data-rv],[data-act]');
+        if (!t) return;
+        if (t.dataset.rv != null) { s.i = Number(t.dataset.rv); save('session', s); drawQuestion(qs); return; }
+        if (t.dataset.act === 'again') { go('#/set/' + s.target); return; }
+        if (t.dataset.act === 'retry') startSession(s.title + ' · 오답', s.target, wrong, { mode: s.mode, order: 'rand' });
+      };
+    });
+  }
+
+  // ───────── 라우팅 ─────────
+  function route() {
+    document.onkeydown = null;
+    $app.onclick = $bar.onclick = $top.onclick = null;
+    var h = location.hash.replace(/^#\/?/, '');
+    loadCatalog().then(function () {
+      if (h.indexOf('set/') === 0) viewSetup(decodeURIComponent(h.slice(4)));
+      else if (h === 'play') viewPlay();
+      else if (h === 'result') viewResult();
+      else viewHome();
+    }).catch(function () {
+      $app.innerHTML = '<div class="card empty">문제를 불러오지 못했습니다. 연결을 확인하고 다시 열어 주세요.</div>';
+    });
+  }
+  window.addEventListener('hashchange', route);
+
+  // ───────── 새 배포 확인 (학습노트와 같은 version.json) ─────────
+  function checkForUpdate() {
+    fetch('../version.json?t=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (v) {
+      var latest = v && v.build;
+      if (!latest || latest <= BUILD || BUILD === '0') return;
+      var u = new URL(location.href); u.searchParams.set('v', latest); location.replace(u.toString());
+    }).catch(function () {});
+  }
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) checkForUpdate(); });
+  checkForUpdate();
+  route();
+})();
+</script>
+</body>
+</html>

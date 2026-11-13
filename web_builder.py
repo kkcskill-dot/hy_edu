@@ -12,6 +12,7 @@ MOCK_DIR = BASE_DIR / "mock"
 INDEX_HTML = BASE_DIR / "index.html"
 VERSION_JSON = BASE_DIR / "version.json"
 READER_HTML = BASE_DIR / "reader.html"
+EXAM_HTML = BASE_DIR / "exam" / "index.html"
 EBOOK_DIR = BASE_DIR / "ebook"
 WEBZINE_META = BASE_DIR / "data" / "2026_webzine" / "metadata.json"
 
@@ -96,6 +97,13 @@ def build():
     # 원문 표현 중심 기본 모의고사: 심화 학습과 독립된 270문항·9회차
     import news_basic_build
     news_basic_build.build(BASE_DIR)
+    # 문제풀이 공간(/exam): 교본 단원별 새 문항(원문 대조) + 소식지 기본·심화 문항을 호별로 묶음
+    import exam_build
+    exam_build.build(BASE_DIR)
+    exam_html = EXAM_HTML.read_text(encoding="utf-8")
+    exam_missing = [m for m in ("function drawQuestion(", "function viewSetup(", "function viewResult(",
+                                "function checkForUpdate(", "env(safe-area-inset-bottom)") if m not in exam_html]
+    assert not exam_missing, f"exam/index.html에 필수 기능 코드가 없습니다: {exam_missing}"
 
     # 1-2. 필수 기능 코드가 실수로 지워지지 않았는지 확인 (모바일 메뉴·진도·채점·자동 갱신)
     html = INDEX_HTML.read_text(encoding="utf-8")
@@ -115,7 +123,7 @@ def build():
     # 2. 배포 버전 갱신 → 열려 있는 화면이 version.json을 보고 자동으로 새 버전을 불러옴
     #    (문서·문항 요청에도 같은 값이 붙어 GitHub Pages·nginx 캐시를 건너뜀) — push 전에 꼭 실행
     stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
-    for page in (INDEX_HTML, READER_HTML):
+    for page in (INDEX_HTML, READER_HTML, EXAM_HTML):
         html = page.read_text(encoding="utf-8")
         html, count = re.subn(r"var BUILD = '[^']*';", f"var BUILD = '{stamp}';", html)
         assert count == 1, f"{page.name}에서 BUILD 값을 찾지 못했습니다"
