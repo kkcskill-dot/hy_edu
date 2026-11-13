@@ -68,6 +68,12 @@ class ExamSpaceTests(unittest.TestCase):
         self.assertIn('href="exam/"', (BASE / "README.md").read_text())
         self.assertTrue(re.search(r"EXAM_HTML", (BASE / "web_builder.py").read_text()))
 
+    def test_published_files_are_not_gitignored(self):
+        import subprocess
+        files = ["exam/index.html", "exam/data/index.json"] + [f"exam/data/{k}.json" for k in self.sets]
+        ignored = subprocess.run(["git", "check-ignore", *files], cwd=BASE, capture_output=True, text=True).stdout
+        self.assertEqual(ignored.strip(), "")
+
 
 if __name__ == "__main__":
     unittest.main()
