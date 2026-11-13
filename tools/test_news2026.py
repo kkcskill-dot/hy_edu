@@ -24,12 +24,12 @@ class News2026ContentTests(unittest.TestCase):
                      for i in range(1, 5)]
 
     def test_substantive_coverage_and_difficulty(self):
-        self.assertEqual(len(self.items), 120)
+        self.assertEqual(len(self.items), 124)
         self.assertEqual(Counter(q["topic"] for q in self.items), {
             "prism": 12, "aicc": 12, "yaid": 12,
             "clinical": 8, "operations": 8, "strategy": 8,
-            "care": 10, "research": 10, "education": 10,
-            "projects": 10, "collaboration": 10, "values": 10,
+            "care": 11, "research": 11, "education": 11,
+            "projects": 11, "collaboration": 10, "values": 10,
         })
         self.assertGreaterEqual(sum(q["difficulty"] == "상" for q in self.items), 60)
         self.assertEqual(len({q["format"] for q in self.items}), 6)
@@ -40,15 +40,15 @@ class News2026ContentTests(unittest.TestCase):
             self.assertTrue(any(q["topic"] == topic and q["format"] == "틀린 설명"
                                 for q in self.items), topic)
 
-    def test_all_eighteen_newsletter_issues_have_multiple_questions(self):
+    def test_all_nineteen_newsletter_issues_have_multiple_questions(self):
         coverage = Counter(doc for q in self.items for doc in {r["doc"] for r in q["quotes"]})
-        self.assertEqual(set(coverage), {f"webzine-{i}" for i in range(977, 995)})
+        self.assertEqual(set(coverage), {f"webzine-{i}" for i in range(977, 996)})
         for doc, count in coverage.items():
             self.assertGreaterEqual(count, 2, f"{doc} needs at least two sourced questions")
         page = (OUT / "coverage.md").read_text(encoding="utf-8")
         rows = re.findall(r"^\| (\d{3})호 \| (.+?) \| (\d+) \| (.+?) \|$", page, re.M)
-        self.assertEqual(len(rows), 18)
-        self.assertEqual({int(row[0]) for row in rows}, set(range(977, 995)))
+        self.assertEqual(len(rows), 19)
+        self.assertEqual({int(row[0]) for row in rows}, set(range(977, 996)))
         for issue, topics, count, links in rows:
             self.assertTrue(topics.strip())
             self.assertEqual(int(count), coverage[f"webzine-{issue}"])
@@ -95,17 +95,18 @@ class News2026ContentTests(unittest.TestCase):
         topic_counts = []
         high_counts = []
         for data in self.mocks:
-            self.assertEqual(len(data["questions"]), 30)
+            self.assertEqual(len(data["questions"]), 31)
             topics = Counter(q["topic"] for q in data["questions"])
             self.assertEqual(set(topics), set(self.bank["topics"]))
             topic_counts.append(topics)
             high = sum(q["difficulty"] == "상" for q in data["questions"])
             self.assertGreaterEqual(high, 15)
             high_counts.append(high)
-            self.assertEqual(Counter(q["answer"] for q in data["questions"]),
-                             {answer: 6 for answer in range(1, 6)})
+            answers = Counter(q["answer"] for q in data["questions"])
+            self.assertEqual(set(answers), set(range(1, 6)))
+            self.assertLessEqual(max(answers.values()) - min(answers.values()), 1)
             ids = {q["id"] for q in data["questions"]}
-            self.assertEqual(len(ids), 30)
+            self.assertEqual(len(ids), 31)
             sets.append(ids)
             for q in data["questions"]:
                 original = bank_by_id[q["id"]]

@@ -22,7 +22,7 @@
   * [제6강 단원평가](quiz/06_의료법_단원평가.md)
   * [제7강 단원평가](quiz/07_국민건강보험법_단원평가.md)
 
-* **📰 2026 소식지 (977~994호 · 18개 호)**
+* **📰 2026 소식지 (977~995호 · 19개 호)**
   * [소식지 핵심노트 · 호별](summary/09_2026_소식지_핵심노트.md)
   * [소식지 주제별 모아보기 · 목록 암기](summary/10_2026_소식지_주제별_모아보기.md)
   * [소식지 문제은행 (객관식)](quiz/08_2026_소식지_문제은행.md)
@@ -35,30 +35,30 @@
   * [실전 모의고사 3회 · 채점](mock/03_실전모의고사_3회.md)
 
 * **📝 소식지 기본 모의고사**
-  * [기본 모의고사 안내 · 총 270문항](practice/news-basic/README.md)
-  * [기본 모의고사 1회 · 30문항](practice/news-basic/mock1.md)
-  * [기본 모의고사 2회 · 30문항](practice/news-basic/mock2.md)
-  * [기본 모의고사 3회 · 30문항](practice/news-basic/mock3.md)
-  * [기본 모의고사 4회 · 30문항](practice/news-basic/mock4.md)
-  * [기본 모의고사 5회 · 30문항](practice/news-basic/mock5.md)
-  * [기본 모의고사 6회 · 30문항](practice/news-basic/mock6.md)
-  * [기본 모의고사 7회 · 30문항](practice/news-basic/mock7.md)
-  * [기본 모의고사 8회 · 30문항](practice/news-basic/mock8.md)
-  * [기본 모의고사 9회 · 30문항](practice/news-basic/mock9.md)
+  * [기본 모의고사 안내 · 총 285문항](practice/news-basic/README.md)
+  * [기본 모의고사 1회 · 32문항](practice/news-basic/mock1.md)
+  * [기본 모의고사 2회 · 32문항](practice/news-basic/mock2.md)
+  * [기본 모의고사 3회 · 32문항](practice/news-basic/mock3.md)
+  * [기본 모의고사 4회 · 32문항](practice/news-basic/mock4.md)
+  * [기본 모의고사 5회 · 32문항](practice/news-basic/mock5.md)
+  * [기본 모의고사 6회 · 32문항](practice/news-basic/mock6.md)
+  * [기본 모의고사 7회 · 31문항](practice/news-basic/mock7.md)
+  * [기본 모의고사 8회 · 31문항](practice/news-basic/mock8.md)
+  * [기본 모의고사 9회 · 31문항](practice/news-basic/mock9.md)
   * [기본 문제 랜덤 연습](practice/news-basic/quiz.md)
-  * [18개 호별 출제 범위 · 근거](practice/news-basic/coverage.md)
+  * [19개 호별 출제 범위 · 근거](practice/news-basic/coverage.md)
 
 * **🧠 2026 소식지 심화문제**
   * [심화문제 안내 · 12개 주제](practice/news2026/README.md)
   * [주제별 퀴즈 · 난이도·유형 선택](practice/news2026/quiz.md)
-  * [심화 모의고사 1회 · 30문항](practice/news2026/mock1.md)
-  * [심화 모의고사 2회 · 30문항](practice/news2026/mock2.md)
-  * [심화 모의고사 3회 · 30문항](practice/news2026/mock3.md)
-  * [심화 모의고사 4회 · 30문항](practice/news2026/mock4.md)
-  * [18개 호별 출제 범위 · 근거](practice/news2026/coverage.md)
+  * [심화 모의고사 1회 · 31문항](practice/news2026/mock1.md)
+  * [심화 모의고사 2회 · 31문항](practice/news2026/mock2.md)
+  * [심화 모의고사 3회 · 31문항](practice/news2026/mock3.md)
+  * [심화 모의고사 4회 · 31문항](practice/news2026/mock4.md)
+  * [19개 호별 출제 범위 · 근거](practice/news2026/coverage.md)
 
 * **📖 e-book 서재 (형광펜·밑줄·메모)**
-  * [교본 7권 · 기출 메모 · 소식지 18호](reader.html ':ignore')
+  * [교본 7권 · 기출 메모 · 소식지 19호](reader.html ':ignore')
 
 * **🗃️ 보관 문제 · 필요할 때만**
   * [O/X · 빈칸채우기 보관함](practice/recall/README.md)

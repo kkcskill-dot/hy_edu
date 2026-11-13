@@ -21,12 +21,12 @@ class BasicNewsTests(unittest.TestCase):
 
     def test_all_questions_are_basic_mc_with_verified_source_pages(self):
         self.assertEqual(verify(BASE, self.items), [])
-        self.assertEqual(len(self.items), 270)
+        self.assertEqual(len(self.items), 285)
         self.assertEqual(self.bank["pool"], self.items)
         self.assertEqual({practice_type(q) for q in self.items}, {"mc"})
         self.assertEqual({q["difficulty"] for q in self.items}, {"기본"})
         self.assertEqual(Counter(q["quotes"][0]["doc"] for q in self.items),
-                         {f"webzine-{n}": 15 for n in range(977, 995)})
+                         {f"webzine-{n}": 15 for n in range(977, 996)})
         for q in self.items:
             self.assertNotIn(q["format"], ("복합 보기", "사례 적용", "비교·연결"))
             self.assertNotRegex(q["q"], r"ㄱ\.|ㄴ\.|ㄷ\.")
@@ -37,11 +37,13 @@ class BasicNewsTests(unittest.TestCase):
         for mock in self.mocks:
             with self.subTest(exam=mock["id"]):
                 qs = mock["questions"]
-                self.assertEqual(len(qs), 30)
-                self.assertEqual(len({q["id"] for q in qs}), 30)
+                self.assertIn(len(qs), (31, 32))
+                self.assertEqual(len({q["id"] for q in qs}), len(qs))
                 self.assertEqual({q["quotes"][0]["doc"] for q in qs},
-                                 {f"webzine-{n}" for n in range(977, 995)})
-                self.assertEqual(Counter(q["answer"] for q in qs), {n: 6 for n in range(1, 6)})
+                                 {f"webzine-{n}" for n in range(977, 996)})
+                answers = Counter(q["answer"] for q in qs)
+                self.assertEqual(set(answers), set(range(1, 6)))
+                self.assertLessEqual(max(answers.values()) - min(answers.values()), 1)
                 for q in qs:
                     old = originals[q["id"]]
                     self.assertEqual(set(q["choices"]), set(old["choices"]))
@@ -83,7 +85,7 @@ class BasicNewsTests(unittest.TestCase):
             for link in re.findall(r'(?:href="#/|data-src=")([^"?#]+)', page):
                 self.assertTrue((BASE / link).is_file(), (path.name, link))
         rows = re.findall(r"^\| (\d{3})호 \| (.+?) \| (\d+) \| (.+?) \|$", (OUT / "coverage.md").read_text(), re.M)
-        self.assertEqual(len(rows), 18)
+        self.assertEqual(len(rows), 19)
         for issue, topics, count, links in rows:
             self.assertEqual(int(count), 15)
             self.assertTrue(topics.strip())

@@ -1,4 +1,4 @@
-<!-- tools/news2026_build.py에서 생성. 문항 수정: tools/ai2026_core.py · tools/ai2026_expanded.py · tools/news2026_first_half.py · tools/news2026_second_half.py -->
+<!-- tools/news2026_build.py에서 생성. 문항 수정: tools/ai2026_core.py · tools/ai2026_expanded.py · tools/news2026_first_half.py · tools/news2026_second_half.py · tools/news2026_995.py -->
 <div class="lecture-header-box">
   <span class="lecture-badge">2026 소식지 · 주제별 심화 퀴즈</span>
   <h2>주제별 심화 퀴즈</h2>

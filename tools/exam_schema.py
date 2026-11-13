@@ -8,14 +8,17 @@ Q(단원, 번호, 소단원, 유형, 발문, [보기 5개], 정답번호(1~5), [
   - 해설에 보기 번호(①, 3번 보기 등)를 쓰지 않는다.
 """
 
-FORMATS = ("내용 확인", "옳은 설명", "틀린 설명", "숫자·기준", "용어·정의")
+FORMATS = ("내용 확인", "옳은 설명", "틀린 설명", "숫자·기준", "용어·정의", "복합 보기", "사례 적용", "비교·연결")
 
 
-def Q(unit, no, section, kind, question, choices, answer, quotes, explain):
-    return {
+def Q(unit, no, section, kind, question, choices, answer, quotes, explain, passage=None):
+    item = {
         "id": f"ex-u{unit:02d}-{no:03d}",
         "type": "mc", "unit": unit, "section": section, "format": kind,
         "q": question, "choices": list(choices), "answer": answer,
         "explain": explain,
         "quotes": [{"doc": f"unit{unit:02d}", "p": p, "text": t} for p, t in quotes],
     }
+    if passage:
+        item["passage"] = passage
+    return item

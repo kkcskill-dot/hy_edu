@@ -29,12 +29,11 @@ class ExamSpaceTests(unittest.TestCase):
         groups = {g["key"]: g for g in self.catalog["groups"]}
         self.assertEqual([g["key"] for g in self.catalog["groups"]], ["textbook", "news"])
         self.assertEqual([m["id"] for m in groups["textbook"]["sets"]], [f"unit{n:02d}" for n in range(1, 8)])
-        self.assertEqual([m["id"] for m in groups["news"]["sets"]], [f"news{n}" for n in range(977, 995)])
+        self.assertEqual([m["id"] for m in groups["news"]["sets"]], [f"news{n}" for n in range(977, 996)])
 
     def test_every_news_question_is_placed_once(self):
         expected = {q["id"] for q in basic_items()}
-        expected |= {q["id"] for q in news2026_build.CORE + news2026_build.EXPANDED
-                     + news2026_build.FIRST + news2026_build.SECOND}
+        expected |= {q["id"] for q in news2026_build.ITEMS}
         placed = Counter(q["id"] for k, s in self.sets.items() if k.startswith("news") for q in s["questions"])
         self.assertEqual(set(placed), expected)
         self.assertEqual(max(placed.values()), 1)

@@ -38,7 +38,7 @@ test('mixed pools separate regular MC and both forms of blank without changing o
   assert.equal(unitCloze.pool.length, 8);
   assert.equal(w.mxPartData(news, 'list', 'mc').pool.length, 48);
   assert.equal(w.mxPartData(news, 'list', 'blank').pool.length, 37);
-  assert.equal(w.mxPartData(news, 'num', 'blank').pool.length, 144);
+  assert.equal(w.mxPartData(news, 'num', 'blank').pool.length, 155);
   assert.notEqual(unitMain.id, unitCloze.id);
   assert.equal(w.mxPartData(unit, 'ox', null).id, 'u01-ox');
   assert.equal(w.mxPartData(unit, 'blank', null).id, 'u01-blank');

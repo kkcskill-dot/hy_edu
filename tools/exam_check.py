@@ -76,11 +76,13 @@ def verify(items, sections, pages=None):
             errors.append(f"{key}: SECTIONS에 없는 소단원 {q.get('section')}")
         if q.get("format") not in FORMATS:
             errors.append(f"{key}: 유형 오류 {q.get('format')}")
-        neg = re.search(r"틀린|옳지 않은|아닌 것|해당하지 않는|포함되지 않는|없는 것", q.get("q", ""))
-        if neg and q.get("format") != "틀린 설명":
+        neg = re.search(r"틀린|옳지 않은|아닌 것|해당하지 않는|포함되지 않는|없는 것|적절하지 않은", q.get("q", ""))
+        if neg and q.get("format") in ("내용 확인", "옳은 설명", "숫자·기준", "용어·정의"):
             errors.append(f"{key}: 부정형 발문은 유형 '틀린 설명'")
         if q.get("format") == "틀린 설명" and not neg:
             errors.append(f"{key}: '틀린 설명' 유형인데 발문에 부정어 없음")
+        if q.get("format") == "복합 보기" and not q.get("passage"):
+            errors.append(f"{key}: '복합 보기' 유형에는 passage 필요")
         choices = q.get("choices", [])
         if len(choices) != 5 or len(set(map(str.strip, choices))) != 5 or not all(isinstance(c, str) and c.strip() for c in choices):
             errors.append(f"{key}: 서로 다른 보기 5개 필요")

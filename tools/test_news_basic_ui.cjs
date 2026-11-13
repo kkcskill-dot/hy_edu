@@ -39,11 +39,14 @@ async function main() {
     load();
     await new Promise(resolve => setImmediate(resolve));
     assert.equal(root().querySelectorAll('.mx-error').length, 0);
-    assert.equal(root().querySelectorAll('.mx-q').length, 30);
-    assert.equal(root().querySelectorAll('.mx-blank, .mx-ox').length, 0);
-    assert.equal(root().querySelectorAll('input[type="radio"]').length, 150);
     const src = root().dataset.src;
-    return JSON.parse(fs.readFileSync(path.join(base, src), 'utf8'));
+    const data = JSON.parse(fs.readFileSync(path.join(base, src), 'utf8'));
+    // 고정 회차는 31~32문항 전부, 랜덤 연습은 30문항씩
+    const shown = data.questions ? data.questions.length : 30;
+    assert.equal(root().querySelectorAll('.mx-q').length, shown);
+    assert.equal(root().querySelectorAll('.mx-blank, .mx-ox').length, 0);
+    assert.equal(root().querySelectorAll('input[type="radio"]').length, shown * 5);
+    return data;
   }
   function answer(data, wrongAt = -1, leaveAt = -1) {
     const pool = data.questions || data.pool;
@@ -71,14 +74,15 @@ async function main() {
     assert.equal(root().querySelectorAll('input:checked').length, 0);
     answer(data);
     await mount(`mock${n}`);
-    assert.equal(root().querySelectorAll('input:checked').length, 30);
+    const total = data.questions.length;
+    assert.equal(root().querySelectorAll('input:checked').length, total);
     root().querySelector('.mx-submit').click();
-    checkResult(30);
+    checkResult(total, total);
     await mount(`mock${n}`);
-    checkResult(30);
+    checkResult(total, total);
     assert.equal(JSON.parse(w.localStorage.getItem(`hyedu.mock.${data.id}`)).history.length, 1);
   }
-  console.log('PASS all 9 basic exams load, grade, resume, and show 270 source links');
+  console.log('PASS all 9 basic exams load, grade, resume, and show 285 source links');
   const first = await mount('mock1');
   root().querySelector('.mx-retry').click();
   answer(first, 0, 1);
@@ -87,7 +91,7 @@ async function main() {
   assert.equal(root().querySelectorAll('.mx-q.is-correct').length, 0);
   w.confirm = () => true;
   root().querySelector('.mx-submit').click();
-  checkResult(28);
+  checkResult(first.questions.length - 2, first.questions.length);
   root().querySelector('.mx-only-wrong').click();
   assert.ok(root().classList.contains('mx-wrong-only'));
   assert.equal(JSON.parse(w.localStorage.getItem(`hyedu.mock.${first.id}`)).history.length, 2);
@@ -97,13 +101,13 @@ async function main() {
   root().querySelector('.mx-submit').click();
   checkResult(30);
   root().querySelector('.mx-size').click();
-  assert.equal(root().querySelectorAll('.mx-q').length, 270);
+  assert.equal(root().querySelectorAll('.mx-q').length, 285);
   answer(bank);
   root().querySelector('.mx-submit').click();
-  checkResult(270, 270);
+  checkResult(285, 285);
   sentinels.forEach(id => assert.equal(w.localStorage.getItem(`hyedu.mock.${id}`), '{"history":[{"score":73}]}'));
   assert.equal(JSON.parse(w.localStorage.getItem(`hyedu.mock.${first.id}`)).history.length, 2);
-  console.log('PASS random practice and all 270 questions grade with shuffled options; existing records unchanged');
+  console.log('PASS random practice and all 285 questions grade with shuffled options; existing records unchanged');
   assert.equal(new Set(fetched.map(url => url.split('?')[0])).size, 10);
   dom.window.close();
 }

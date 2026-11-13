@@ -91,10 +91,10 @@ def build():
     # O/X와 입력형·선택형 빈칸은 기본 문제에서 분리해 별도 보관 메뉴로 연결한다.
     import recall_build
     recall_build.build(BASE_DIR)
-    # 1-1f. 별도 소식지 심화 퀴즈·모의고사: 18개 호 원문 대조 및 문항 구조 검증
+    # 1-1f. 별도 소식지 심화 퀴즈·모의고사: 전 호 원문 대조 및 문항 구조 검증
     import news2026_build
     news2026_build.build(BASE_DIR)
-    # 원문 표현 중심 기본 모의고사: 심화 학습과 독립된 270문항·9회차
+    # 원문 표현 중심 기본 모의고사: 심화 학습과 독립된 호별 15문항·9회차
     import news_basic_build
     news_basic_build.build(BASE_DIR)
     # 문제풀이 공간(/exam): 교본 단원별 새 문항(원문 대조) + 소식지 기본·심화 문항을 호별로 묶음

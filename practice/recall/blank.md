@@ -75,21 +75,21 @@
 
 <div class="mock-exam" data-src="quiz/u07.json" data-part="mc" data-type="blank"></div>
 
-## 2026 소식지 · 977~994호
+## 2026 소식지 · 977~995호
 
-### 직접 입력 · 핵심 기사 (419문항)
+### 직접 입력 · 핵심 기사 (445문항)
 
 <div class="mock-exam" data-src="quiz/w01.json" data-part="star"></div>
 
-### 직접 입력 · 일반 기사 (438문항)
+### 직접 입력 · 일반 기사 (468문항)
 
 <div class="mock-exam" data-src="quiz/w01.json" data-part="blank"></div>
 
-### 직접 입력 · 목록 (37문항)
+### 직접 입력 · 목록 (39문항)
 
 <div class="mock-exam" data-src="quiz/w01.json" data-part="list" data-type="blank"></div>
 
-### 보기 선택 · 숫자·연도 (144문항)
+### 보기 선택 · 숫자·연도 (155문항)
 
 <div class="mock-exam" data-src="quiz/w01.json" data-part="num"></div>
 

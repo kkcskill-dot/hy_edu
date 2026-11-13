@@ -97,7 +97,7 @@ class RecallSeparationTests(unittest.TestCase):
             self.assertEqual(len(actual), len(set(actual)), "Archive question duplicated")
         # Regressions that type='mc' alone would silently miss.
         news = read(BASE / "quiz/w01.json")
-        self.assertEqual(len(news["parts"]["num"]), 144)
+        self.assertEqual(len(news["parts"]["num"]), 155)
         self.assertTrue(all(practice_type(q) == "blank" for q in news["parts"]["num"]))
         self.assertTrue(any(q["type"] == "blank" for q in news["parts"]["list"]))
 
@@ -106,7 +106,15 @@ class RecallSeparationTests(unittest.TestCase):
             rel = path.relative_to(BASE).as_posix()
             original = subprocess.run(["git", "show", f"HEAD:{rel}"], cwd=BASE,
                                       check=True, stdout=subprocess.PIPE).stdout
-            self.assertEqual(read(path), json.loads(original), rel)
+            before, after = json.loads(original), read(path)
+            if path.name != "w01.json":
+                self.assertEqual(after, before, rel)
+                continue
+            # 소식지 문제은행은 새 호가 더해지면 문항이 늘고, 자동으로 고르는 오답 보기가 달라질 수 있다.
+            # 기록이 이어지도록 기존 문항 ID는 같은 파트에 모두 남아 있어야 한다.
+            for part, questions in before["parts"].items():
+                kept = {q["id"] for q in after["parts"][part]}
+                self.assertFalse({q["id"] for q in questions} - kept, (rel, part))
 
     def test_primary_and_archived_sessions_have_distinct_ids(self):
         primary = [widget for page in (BASE / "quiz").glob("0*.md")

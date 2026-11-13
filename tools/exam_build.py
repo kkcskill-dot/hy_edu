@@ -15,7 +15,7 @@ from pathlib import Path
 import exam_check
 
 OUT = Path("exam/data")
-ISSUES = range(977, 995)
+ISSUES = range(977, 996)
 
 
 def unit_titles(base):
@@ -55,8 +55,7 @@ def news(base):
     from webzine_items import NEWS
 
     basic = copy.deepcopy(basic_items())
-    deep_items = copy.deepcopy(news2026_build.CORE + news2026_build.EXPANDED
-                               + news2026_build.FIRST + news2026_build.SECOND)
+    deep_items = copy.deepcopy(news2026_build.ITEMS)
     errors = basic_verify(base, basic) + news2026_build.verify(base, deep_items)
     if errors:
         raise ValueError("소식지 문항 검증 실패:\n" + "\n".join(errors))
@@ -86,7 +85,7 @@ def build(base):
     out = base / OUT
     out.mkdir(parents=True, exist_ok=True)
     groups = [("textbook", "기본강의", "2026 교본 7개 단원", textbook(base)),
-              ("news", "소식지", "2026 소식지 977~994호", news(base))]
+              ("news", "소식지", f"2026 소식지 {ISSUES.start}~{ISSUES.stop - 1}호", news(base))]
     catalog = {"groups": []}
     written = set()
     for key, title, sub, sets in groups:

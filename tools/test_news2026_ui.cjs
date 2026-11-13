@@ -201,10 +201,10 @@ test('whole-bank mode and nested retry retain working filter controls', () => {
   const t = setup();
   const root = t.mount(bank, true);
   root.querySelector('.mx-size').click();
-  assert.equal(root.querySelectorAll('.mx-q').length, 120);
+  assert.equal(root.querySelectorAll('.mx-q').length, 124);
   answer(root, bank);
   root.querySelector('.mx-submit').click();
-  result(root, 120, 120);
+  result(root, 124, 124);
   root.querySelector('.mx-retry').click();
   assert.equal(root.querySelectorAll('input:checked').length, 0);
   root.querySelector('.mx-size').click();
@@ -218,13 +218,13 @@ test('whole-bank mode and nested retry retain working filter controls', () => {
   t.dom.window.close();
 });
 
-test('all four fixed mock exams grade all 30 and report all twelve topics', () => {
+test('all four fixed mock exams grade all 31 and report all twelve topics', () => {
   for (const data of mocks) {
     const t = setup();
     const root = t.mount(data);
-    assert.equal(answer(root, data), 30);
+    assert.equal(answer(root, data), 31);
     root.querySelector('.mx-submit').click();
-    result(root, 30, 30);
+    result(root, 31, 31);
     assert.equal(root.querySelectorAll('.mx-units li').length, 12);
     assert.equal(JSON.parse(t.w.localStorage.getItem(`hyedu.mock.${data.id}`)).history[0].score, 100);
     t.dom.window.close();
