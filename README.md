@@ -18,6 +18,17 @@
       <span>문제풀이 열기 ➔</span>
     </div>
   </a>
+  <a class="course-card" href="exam/#/g/hard">
+    <div>
+      <span class="card-tag">문제풀이 공간 • 고난도</span>
+      <h4>🔥 고난도 문제 (중·상)</h4>
+      <p>교본 7개 단원과 소식지(977~995호)에서 보기마다 원문의 숫자·주체·목록을 바꿔 넣은 중·상 난이도 문제를 단원·호별로 골라 풉니다.</p>
+    </div>
+    <div class="card-footer">
+      <span>🔥 교본 · 소식지 중·상 난이도</span>
+      <span>고난도 열기 ➔</span>
+    </div>
+  </a>
 </div>
 
 <div style="margin: 40px 0 20px;">
