@@ -77,10 +77,13 @@
     .resume { padding: 16px 18px; margin-bottom: 18px; display: flex; gap: 14px; align-items: center; cursor: pointer; border-color: var(--blue); }
     .resume b { display: block; }
     .resume .go { margin-left: auto; color: var(--blue); font-weight: 700; white-space: nowrap; }
-    .group-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin: 6px 2px 10px; }
+    .group-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 8px; margin: 6px 2px 10px; }
     .group-head span { color: var(--sub); font-size: 14px; }
+    .group-lead { color: var(--sub); font-size: 14px; line-height: 1.5; margin: -4px 2px 12px; }
     .list { display: grid; gap: 10px; }
     @media (min-width: 700px) { .list { grid-template-columns: 1fr 1fr; } }
+    .list-sub { grid-column: 1 / -1; margin: 10px 2px 2px; font-size: 13px; font-weight: 700; line-height: 1.4; color: var(--sub); }
+    .list-sub:first-child { margin-top: 0; }
     .set {
       text-align: left; border: 1px solid var(--line); cursor: pointer; padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 6px; min-height: 112px;
     }
@@ -115,6 +118,7 @@
     /* 문제 */
     .q-meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 20px 0 10px; font-size: 13px; color: var(--sub); align-items: center; }
     .q-meta .lv-심화 { color: var(--amber); background: color-mix(in srgb, var(--amber) 12%, transparent); }
+    .q-meta .lv-고난도 { color: var(--red); background: color-mix(in srgb, var(--red) 12%, transparent); }
     .q-stem { font-size: 18.5px; font-weight: 600; line-height: 1.55; margin: 0 0 14px; letter-spacing: -0.02em; }
     .q-stem b { color: var(--blue); }
     .passage { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; margin: 0 0 14px; white-space: pre-line; font-size: 15.5px; }
@@ -193,6 +197,7 @@
   var $app = document.getElementById('app'), $top = document.getElementById('top'),
       $bar = document.getElementById('bar'), $pbar = document.getElementById('pbar'), $dlg = document.getElementById('dlg');
   var MARKS = ['1', '2', '3', '4', '5'];
+  var HARD_LEAD = '보기마다 원문의 숫자·주체·목록을 바꿔 넣은 중·상 난이도 문제입니다. 공부한 내용을 정확히 기억해야 풀 수 있습니다.';
   var catalog = null, sets = {}, session = null;
 
   // ───────── 저장 (실패해도 동작) ─────────
@@ -240,7 +245,20 @@
     catalog.groups.forEach(function (g) { if (g.key === id) found = g; });
     return found;
   }
-  function setName(meta) { return meta.kind === 'unit' ? meta.label + ' ' + meta.title : '소식지 ' + meta.title; }
+  // 고난도 세트는 같은 단원·호의 기본 세트와 이름이 겹치지 않게 앞에 표시 (설정·이어 풀기·결과 제목)
+  function setName(meta) {
+    var name = meta.kind === 'unit' ? meta.label + ' ' + meta.title : '소식지 ' + meta.title;
+    return meta.id.indexOf('hard-') === 0 ? '고난도 · ' + name : name;
+  }
+  // 묶음 안의 교본 단원·소식지 호 수 (고난도 묶음은 둘이 섞여 있음)
+  function kindCount(g) {
+    var c = { unit: 0, news: 0 };
+    g.sets.forEach(function (m) { if (m.kind === 'unit') c.unit++; else c.news++; });
+    return c;
+  }
+  function kindText(c) {
+    return c.unit && c.news ? c.unit + '개 단원 · ' + c.news + '개 호' : c.news ? c.news + '개 호' : c.unit + '개 단원';
+  }
   function docName(doc) {
     var m = /^unit0?(\d+)$/.exec(doc);
     if (m) return '교본 제' + m[1] + '강';
@@ -264,7 +282,7 @@
   }
   function go(hash) { if (location.hash === hash) route(); else location.hash = hash; }
 
-  // ───────── 홈: 기본강의 / 소식지 ─────────
+  // ───────── 홈: 기본강의 / 소식지 / 고난도 ─────────
   function viewHome() {
     var g = groupOf(prefs.group) || catalog.groups[0];
     topBar(null, '문제풀이 <small>시험범위 핵심정리</small>');
@@ -280,15 +298,20 @@
       return '<button role="tab" data-group="' + x.key + '" class="' + (x.key === g.key ? 'on' : '') + '" aria-selected="' + (x.key === g.key) + '">' +
         esc(x.title) + ' <span class="muted" style="font-weight:500">' + x.count + '</span></button>';
     }).join('') + '</div>';
-    html += '<div class="group-head"><b>' + esc(g.sub) + '</b><span>' + g.sets.length + (g.key === 'news' ? '개 호' : '개 단원') + ' · ' + g.count + '문항</span></div>';
+    var kc = kindCount(g), mixed = kc.unit && kc.news, seen = {};
+    html += '<div class="group-head"><b>' + esc(g.sub) + '</b><span>' + kindText(kc) + ' · ' + g.count + '문항</span></div>';
+    if (g.key === 'hard') html += '<p class="group-lead">' + esc(HARD_LEAD) + '</p>';
     html += '<button class="btn ghost all-btn" data-set="all-' + g.key + '">' + esc(g.title) + ' 전체에서 골라 풀기 ›</button>';
     html += '<div class="list">' + g.sets.map(function (m) {
+      // 교본 단원과 소식지 호가 섞인 묶음은 종류가 바뀌는 첫 세트 앞에 작은 제목
+      var head = '';
+      if (mixed && !seen[m.kind]) { seen[m.kind] = 1; head = '<h3 class="list-sub">' + (m.kind === 'unit' ? '교본 단원' : '소식지 호') + '</h3>'; }
       var ids = [];
       // 목록 화면은 세트 파일 없이 기록만으로 표시 (기록 키는 문항 ID)
       Object.keys(stats).forEach(function (id) { if (idsBySet[m.id] && idsBySet[m.id][id]) ids.push(id); });
       var st = statOf(ids), w = function (n) { return (n / m.count * 100).toFixed(1) + '%'; };
       var sub = m.kind === 'unit' ? m.sections.map(function (x) { return x.name; }).join(' · ') : m.headline;
-      return '<button class="card set" data-set="' + m.id + '">' +
+      return head + '<button class="card set" data-set="' + m.id + '">' +
         '<div class="set-top"><span class="badge">' + esc(m.kind === 'unit' ? m.label : m.title) + '</span><span class="muted">' +
         esc(m.kind === 'unit' ? '' : m.label) + '</span></div>' +
         '<div class="set-title">' + esc(m.kind === 'unit' ? m.title : sub) + '</div>' +
@@ -336,12 +359,13 @@
     Promise.all(ids.map(loadSet)).then(function (list) {
       var pool = [];
       list.forEach(function (s) { pool = pool.concat(s.questions); });
-      // 칩: 단원/호(전체) 또는 소단원(단원) 또는 기본·심화(소식지 호)
+      // 칩: 단원·호(전체) 또는 소단원(단원) 또는 기본·심화(소식지 호)
       var chips = isAll ? (g ? g.sets.map(function (m) { return { key: m.id, name: m.kind === 'unit' ? m.label : m.title, n: m.count }; }) : [])
         : meta.sections.map(function (x) { return { key: x.name, name: x.name, n: x.count }; });
       var chipKey = isAll ? function (q) { return q.set; } : function (q) { return q.section; };
       var on = {}; chips.forEach(function (c) { on[c.key] = true; });
       var title = isAll ? g.title + ' 전체' : setName(meta);
+      var kc = isAll ? kindCount(g) : null;
       topBar('<a class="icon-btn" href="#/" aria-label="목록">‹ 목록</a>', esc(title));
       progress(null);
       var st = { scope: prefs.scope, size: prefs.size, order: prefs.order, mode: prefs.mode };
@@ -373,7 +397,7 @@
         var html = '<h1 style="font-size:24px">' + esc(title) + '</h1><p class="lead">' +
           (isAll ? esc(g.sub) : meta.kind === 'unit' ? '2026 교본 제' + meta.no + '단원' : esc(meta.label + ' · ' + meta.headline)) + ' · ' + pool.length + '문항</p>';
         if (chips.length > 1) {
-          html += '<div class="card opt"><h3>' + (isAll ? (g.key === 'news' ? '호' : '단원') : meta.kind === 'news' ? '난이도' : '소단원') +
+          html += '<div class="card opt"><h3>' + (isAll ? (kc.unit && kc.news ? '단원·호' : kc.news ? '호' : '단원') : meta.kind === 'news' ? '난이도' : '소단원') +
             '<button data-all="1">' + (chips.every(function (c) { return on[c.key]; }) ? '모두 끄기' : '모두 선택') + '</button></h3><div class="chips">' +
             chips.map(function (c) {
               return '<button class="chip' + (on[c.key] ? ' on' : '') + '" data-chip="' + esc(c.key) + '">' + esc(c.name) + '<small>' + c.n + '</small></button>';
@@ -470,7 +494,7 @@
     progress((i + (checked || picked != null ? 1 : 0)) / n);
     var show = checked || review;
     var html = '<div class="q-meta"><span class="badge">' + esc(meta.kind === 'unit' ? meta.label : meta.title) + '</span>' +
-      (q.level === '심화' ? '<span class="badge lv-심화">심화</span>' : '') +
+      (q.level === '심화' || q.level === '고난도' ? '<span class="badge lv-' + q.level + '">' + q.level + '</span>' : '') +
       '<span>' + esc(q.tag || q.section) + ' · ' + esc(q.format) + '</span></div>' +
       '<p class="q-stem">' + fmt(q.q) + '</p>' + (q.passage ? '<div class="passage">' + fmt(q.passage) + '</div>' : '') +
       '<div class="choices' + (show ? ' done' : '') + '" role="radiogroup">' + it.order.map(function (orig, k) {
@@ -594,12 +618,20 @@
   }
 
   // ───────── 라우팅 ─────────
+  // #/g/<묶음>: 학습노트 메뉴에서 그 탭을 바로 열기 — 탭을 기억하고 주소는 #/로 되돌림 (없는 묶음이면 그냥 홈)
+  function openGroup(key) {
+    var g = groupOf(key);
+    if (g) { prefs.group = g.key; save('prefs', prefs); }
+    try { history.replaceState(null, '', '#/'); } catch (e) {}
+    viewHome();
+  }
   function route() {
     document.onkeydown = null;
     $app.onclick = $bar.onclick = $top.onclick = null;
     var h = location.hash.replace(/^#\/?/, '');
     loadCatalog().then(function () {
       if (h.indexOf('set/') === 0) viewSetup(decodeURIComponent(h.slice(4)));
+      else if (h.indexOf('g/') === 0) openGroup(h.slice(2));
       else if (h === 'play') viewPlay();
       else if (h === 'result') viewResult();
       else viewHome();

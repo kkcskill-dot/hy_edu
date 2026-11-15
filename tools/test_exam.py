@@ -6,6 +6,7 @@ from collections import Counter
 from pathlib import Path
 
 import exam_check
+import hard_check
 from news_basic_build import load_items as basic_items
 import news2026_build
 
@@ -27,9 +28,26 @@ class ExamSpaceTests(unittest.TestCase):
 
     def test_groups_are_units_and_issues(self):
         groups = {g["key"]: g for g in self.catalog["groups"]}
-        self.assertEqual([g["key"] for g in self.catalog["groups"]], ["textbook", "news"])
+        self.assertEqual([g["key"] for g in self.catalog["groups"]], ["textbook", "news", "hard"])
         self.assertEqual([m["id"] for m in groups["textbook"]["sets"]], [f"unit{n:02d}" for n in range(1, 8)])
         self.assertEqual([m["id"] for m in groups["news"]["sets"]], [f"news{n}" for n in range(977, 996)])
+        self.assertEqual([m["id"] for m in groups["hard"]["sets"]],
+                         [f"hard-unit{n:02d}" for n in range(1, 8)] + [f"hard-news{n}" for n in range(977, 996)])
+
+    def test_hard_items_verify_and_are_placed_once(self):
+        found = hard_check.load()
+        self.assertEqual(sorted(found), sorted(hard_check.MODULES))
+        self.assertEqual(hard_check.verify(found), [])
+        expected = {q["id"] for items in found.values() for q in items}
+        placed = Counter(q["id"] for k, s in self.sets.items() if k.startswith("hard-") for q in s["questions"])
+        self.assertEqual(set(placed), expected)
+        self.assertEqual([k for k, v in placed.items() if v > 1], [])
+        for k, s in self.sets.items():
+            for q in s["questions"]:
+                self.assertEqual(q["level"] == "고난도", k.startswith("hard-"), (k, q["id"]))
+                if k.startswith("hard-news"):
+                    self.assertEqual(q["section"], "고난도")
+                    self.assertTrue(q.get("tag"), q["id"])
 
     def test_every_news_question_is_placed_once(self):
         expected = {q["id"] for q in basic_items()}
@@ -50,7 +68,8 @@ class ExamSpaceTests(unittest.TestCase):
                 for q in qs:
                     ids[q["id"]] += 1
                     self.assertIn(q["section"], s["sections"])
-                    self.assertIn(q["level"], ("기본", "심화"))
+                    self.assertIn(q["level"], ("기본", "심화", "고난도"))
+                    self.assertFalse({"key", "truth"} & set(q), q["id"])
                     self.assertEqual(len(q["choices"]), 5)
                     self.assertIn(q["answer"], range(1, 6))
                     self.assertTrue(q["explain"] and q["quotes"])
@@ -65,6 +84,8 @@ class ExamSpaceTests(unittest.TestCase):
         self.assertIn("../reader.html?doc=", html)
         self.assertIn("exam/", (BASE / "_sidebar.md").read_text())
         self.assertIn('href="exam/"', (BASE / "README.md").read_text())
+        self.assertIn("(exam/#/g/hard ':ignore')", (BASE / "_sidebar.md").read_text())
+        self.assertIn('href="exam/#/g/hard"', (BASE / "README.md").read_text())
         self.assertTrue(re.search(r"EXAM_HTML", (BASE / "web_builder.py").read_text()))
 
     def test_published_files_are_not_gitignored(self):
