@@ -201,10 +201,10 @@ test('whole-bank mode and nested retry retain working filter controls', () => {
   const t = setup();
   const root = t.mount(bank, true);
   root.querySelector('.mx-size').click();
-  assert.equal(root.querySelectorAll('.mx-q').length, 124);
+  assert.equal(root.querySelectorAll('.mx-q').length, 128);
   answer(root, bank);
   root.querySelector('.mx-submit').click();
-  result(root, 124, 124);
+  result(root, 128, 128);
   root.querySelector('.mx-retry').click();
   assert.equal(root.querySelectorAll('input:checked').length, 0);
   root.querySelector('.mx-size').click();

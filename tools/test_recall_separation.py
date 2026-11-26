@@ -97,7 +97,7 @@ class RecallSeparationTests(unittest.TestCase):
             self.assertEqual(len(actual), len(set(actual)), "Archive question duplicated")
         # Regressions that type='mc' alone would silently miss.
         news = read(BASE / "quiz/w01.json")
-        self.assertEqual(len(news["parts"]["num"]), 155)
+        self.assertEqual(len(news["parts"]["num"]), 167)
         self.assertTrue(all(practice_type(q) == "blank" for q in news["parts"]["num"]))
         self.assertTrue(any(q["type"] == "blank" for q in news["parts"]["list"]))
 

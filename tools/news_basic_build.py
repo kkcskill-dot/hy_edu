@@ -1,4 +1,4 @@
-"""19개 호의 원문 표현 중심 기본 문제와 9회 모의고사를 발행한다."""
+"""20개 호의 원문 표현 중심 기본 문제와 9회 모의고사를 발행한다."""
 import copy
 import json
 import random
@@ -13,10 +13,10 @@ from practice_types import practice_type
 from webzine_build import missing
 
 OUT = Path("practice/news-basic")
-ISSUES = range(977, 996)
+ISSUES = range(977, 997)
 ROUNDS = 9
 SIZE = 30
-HEADER = "<!-- tools/news_basic_build.py에서 생성. 문항 수정: tools/news_basic_977_982.py · tools/news_basic_983_988.py · tools/news_basic_989_994.py · tools/news_basic_995.py -->\n"
+HEADER = "<!-- tools/news_basic_build.py에서 생성. 문항 수정: tools/news_basic_977_982.py · tools/news_basic_983_988.py · tools/news_basic_989_994.py · tools/news_basic_995.py · tools/news_basic_996.py -->\n"
 
 
 def load_items():
@@ -24,7 +24,8 @@ def load_items():
     from news_basic_983_988 import ITEMS as middle
     from news_basic_989_994 import ITEMS as last
     from news_basic_995 import ITEMS as added
-    return first + middle + last + added
+    from news_basic_996 import ITEMS as latest
+    return first + middle + last + added + latest
 
 
 def verify(base, items):
@@ -79,16 +80,20 @@ def verify(base, items):
 
 
 def mock_sets(items):
-    """회차마다 전 19개 호를 포함하며, 전체 문항을 한 번씩 배정한다."""
+    """회차마다 전 20개 호를 포함하며, 전체 문항을 한 번씩 배정한다."""
     groups = [[] for _ in range(ROUNDS)]
     topics = [Counter() for _ in groups]
     formats = [Counter() for _ in groups]
     rng = random.Random(20261106)
+    planned = [0] * ROUNDS
     for issue_index, issue in enumerate(ISSUES):
         questions = sorted((q for q in items if q["id"].startswith(f"basic26-{issue}-")), key=lambda q: q["id"])
         rng.shuffle(questions)
-        # 각 호는 6회차에 두 문항, 3회차에 한 문항. 19개 호를 돌면 1~6회는 32문항, 7~9회는 31문항.
-        quotas = [2 if (n - issue_index) % ROUNDS < 6 else 1 for n in range(ROUNDS)]
+        # 각 호는 6회차에 두 문항, 3회차에 한 문항. 지금까지 적게 배정된 회차부터 두 문항을 준다.
+        doubles = sorted(range(ROUNDS), key=lambda n: (planned[n], (n - issue_index) % ROUNDS))[:6]
+        quotas = [2 if n in doubles else 1 for n in range(ROUNDS)]
+        for n in range(ROUNDS):
+            planned[n] += quotas[n]
         for q in questions:
             candidates = [n for n in range(ROUNDS) if quotas[n]]
             chosen = min(candidates, key=lambda n: (topics[n][q["topic"]], formats[n][q["format"]], len(groups[n]), n))
@@ -96,10 +101,10 @@ def mock_sets(items):
             topics[chosen][q["topic"]] += 1
             formats[chosen][q["format"]] += 1
             quotas[chosen] -= 1
+    sizes = [len(g) for g in groups]
+    if sum(sizes) != len(items) or max(sizes) - min(sizes) > 1:
+        raise ValueError(f"기본 모의고사 문항 수 불균형: {sizes}")
     for n, questions in enumerate(groups, 1):
-        expected = len(items) // ROUNDS + (1 if n <= len(items) % ROUNDS else 0)
-        if len(questions) != expected:
-            raise ValueError(f"기본 {n}회 문항 수 오류: {len(questions)} != {expected}")
         rng = random.Random(2026270 + n)
         rng.shuffle(questions)
         extra = list(range(5))
@@ -137,7 +142,7 @@ def build(base):
     write("README.md", f'''<div class="lecture-header-box">
   <span class="lecture-badge">2026 소식지 · 원문 표현 중심</span>
   <h2>소식지 기본 모의고사</h2>
-  <p>제{ISSUES.start}~{ISSUES.stop - 1}호 전체 · {len(items)}문항 · 회당 31~32문항 9회. 소식지에 나온 명칭·목적·기능·구성을 익히는 기본 객관식입니다.</p>
+  <p>제{ISSUES.start}~{ISSUES.stop - 1}호 전체 · {len(items)}문항 · 회당 {min(len(m) for m in mocks)}~{max(len(m) for m in mocks)}문항 9회. 소식지에 나온 명칭·목적·기능·구성을 익히는 기본 객관식입니다.</p>
 </div>
 
 <div class="note-key"><p>소식지 문구를 최대한 살려 <b>옳은 내용, 틀린 내용, 주요 기능과 명칭</b>을 묻습니다. 한 기사에 나온 내용을 직접 확인하는 수준이며, 채점 후 해설과 소식지 원문·호수·쪽수를 볼 수 있습니다.</p></div>
@@ -210,7 +215,7 @@ def build(base):
 | 소식지 | 출제 주제 | 문항 수 | 원문 지면 |
 | --- | --- | ---: | --- |
 ''' + "\n".join(coverage) + '\n\n[기본 모의고사 메뉴](#/practice/news-basic/README.md) · [소식지 전 권 색인](#/original/webzine_2026_전체색인.md)\n')
-    print(f"📝 소식지 기본: {issue_count}개 호 · 원문 검증 {len(items)}문항 · 모의고사 {ROUNDS}회 (회당 31~32문항)")
+    print(f"📝 소식지 기본: {issue_count}개 호 · 원문 검증 {len(items)}문항 · 모의고사 {ROUNDS}회 (회당 {min(len(m) for m in mocks)}~{max(len(m) for m in mocks)}문항)")
 
 
 if __name__ == "__main__":

@@ -57,7 +57,7 @@ def build(base):
                 lines += [f"### 직접 입력 ({len(parts['blank'])}문항)", '', widget(f'quiz/u{u:02d}.json', 'blank'), '']
                 if n:
                     lines += [f'### 보기 선택 ({n}문항)', '', widget(f'quiz/u{u:02d}.json', 'mc', 'blank'), '']
-        lines += ['## 2026 소식지 · 977~995호', '']
+        lines += ['## 2026 소식지 · 977~996호', '']
         groups = [('ox', 'O/X', None)] if kind == 'ox' else [
             ('star', '직접 입력 · 핵심 기사', None), ('blank', '직접 입력 · 일반 기사', None),
             ('list', '직접 입력 · 목록', 'blank'), ('num', '보기 선택 · 숫자·연도', None)]

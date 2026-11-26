@@ -199,9 +199,9 @@ def render_note(base, meta):
     n_list = sum(len(a["lists"]) for a in NEWS)
     out = [GEN,
            '<div class="lecture-header-box">',
-           '  <span class="lecture-badge">특강 • 2026 소식지 19개 호</span>',
+           '  <span class="lecture-badge">특강 • 2026 소식지 20개 호</span>',
            "  <h2>📰 2026 연세의료원 소식지 핵심노트</h2>",
-           f"  <p>제977호(2026.1.5.)~제995호(2026.11.9.) · 주요 기사 {len(NEWS)}건 · 목록 {n_list}개 · 연구 성과 {len(RESEARCH)}건 · 기부 {len(DONATIONS)}건 — "
+           f"  <p>제977호(2026.1.5.)~제996호(2026.11.23.) · 주요 기사 {len(NEWS)}건 · 목록 {n_list}개 · 연구 성과 {len(RESEARCH)}건 · 기부 {len(DONATIONS)}건 — "
            "문장은 모두 소식지 원문 그대로이며, 쪽 번호를 누르면 e-book 원본 지면이 열립니다.</p>",
            "</div>", "",
            "# 2026 소식지 핵심노트 (호별)", "",
@@ -252,7 +252,7 @@ def render_theme(base, meta):
            '<div class="lecture-header-box">',
            '  <span class="lecture-badge">특강 • 2026 소식지 주제별</span>',
            "  <h2>🗂️ 2026 소식지 주제별 모아보기</h2>",
-           "  <p>19개 호의 기사를 주제별로 다시 모았습니다. ‘다음 중 아닌 것은?’에 대비한 목록 암기, 연속·최초 기록, 연구 성과·기부 표를 탭으로 나눠 봅니다.</p>",
+           "  <p>20개 호의 기사를 주제별로 다시 모았습니다. ‘다음 중 아닌 것은?’에 대비한 목록 암기, 연속·최초 기록, 연구 성과·기부 표를 탭으로 나눠 봅니다.</p>",
            "</div>", "",
            "# 2026 소식지 주제별 모아보기", "",
            '<div data-tabs="panels" hidden></div>', ""]
@@ -464,7 +464,7 @@ def render_quiz(base):
            '<div class="lecture-header-box">',
            '  <span class="lecture-badge">문제은행 • 2026 소식지</span>',
            "  <h2>✍️ 2026 소식지 문제은행</h2>",
-           f"  <p>소식지 19개 호 원문으로 만든 객관식 {total}문항 · 파트마다 20문항씩 열 때마다 새로 섞어 내고, 채점하면 정답과 소식지 원문·쪽이 표시됩니다. 푼 기록은 이 기기에 저장됩니다.</p>",
+           f"  <p>소식지 20개 호 원문으로 만든 객관식 {total}문항 · 파트마다 20문항씩 열 때마다 새로 섞어 내고, 채점하면 정답과 소식지 원문·쪽이 표시됩니다. 푼 기록은 이 기기에 저장됩니다.</p>",
            "</div>", "",
            "# 2026 소식지 문제은행", "",
            '<div class="note-key"><ul>'
@@ -492,9 +492,9 @@ def render_index(base, meta):
     pages, _ = load_sources(base)
     heads = {(a["no"], wnorm(re.sub(r" \([^()]*\)$", "", a["head"]))[:10]): a for a in NEWS}
     out = [GEN,
-           "# 📰 2026 연세의료원 소식지 전 권 색인 (제977호~제995호)", "",
+           "# 📰 2026 연세의료원 소식지 전 권 색인 (제977호~제996호)", "",
            '<div class="note-key"><ul>'
-           "<li>19개 호의 기사 제목(세브란스 뉴스 웹진 목차 기준)을 호별로 모았습니다. <b>쪽 번호</b>를 누르면 e-book 지면이, <b>핵심노트</b>를 누르면 정리해 둔 기사가 열립니다.</li>"
+           "<li>20개 호의 기사 제목(세브란스 뉴스 웹진 목차 기준)을 호별로 모았습니다. <b>쪽 번호</b>를 누르면 e-book 지면이, <b>핵심노트</b>를 누르면 정리해 둔 기사가 열립니다.</li>"
            f'<li>내용 정리는 <a href="#/{NOTE_PAGE}">소식지 핵심노트(호별)</a> · <a href="#/{THEME_PAGE}">주제별 모아보기</a> · <a href="#/{QUIZ_PAGE}">문제은행</a>에 있습니다.</li>'
            "</ul></div>", "",
            "## Ⅰ. 호별 일람", "",

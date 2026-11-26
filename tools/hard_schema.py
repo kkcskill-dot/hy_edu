@@ -2,7 +2,7 @@
 
 H(key, no, section, kind, question, choices, answer, quotes, explain, passage=None, truth=None)
 
-key      교본 "u01"~"u07" · 소식지 "n977"~"n995"  → ID hd-u01-001 · hd-n977-001
+key      교본 "u01"~"u07" · 소식지 "n977"~"n996"  → ID hd-u01-001 · hd-n977-001
 section  교본: 그 단원 SECTIONS(tools/exam_u0N*.py)의 이름 · 소식지: 기사 제목을 줄인 꼬리표(원문 표현)
 kind     FORMATS 중 하나
 choices  보기 5개 (개수 판단은 ["1개", "2개", "3개", "4개", "5개"] 또는 ["0개", "1개", "2개", "3개", "4개"])

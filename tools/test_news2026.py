@@ -24,12 +24,12 @@ class News2026ContentTests(unittest.TestCase):
                      for i in range(1, 5)]
 
     def test_substantive_coverage_and_difficulty(self):
-        self.assertEqual(len(self.items), 124)
+        self.assertEqual(len(self.items), 128)
         self.assertEqual(Counter(q["topic"] for q in self.items), {
             "prism": 12, "aicc": 12, "yaid": 12,
             "clinical": 8, "operations": 8, "strategy": 8,
-            "care": 11, "research": 11, "education": 11,
-            "projects": 11, "collaboration": 10, "values": 10,
+            "care": 11, "research": 13, "education": 11,
+            "projects": 12, "collaboration": 10, "values": 11,
         })
         self.assertGreaterEqual(sum(q["difficulty"] == "상" for q in self.items), 60)
         self.assertEqual(len({q["format"] for q in self.items}), 6)
@@ -42,13 +42,13 @@ class News2026ContentTests(unittest.TestCase):
 
     def test_all_nineteen_newsletter_issues_have_multiple_questions(self):
         coverage = Counter(doc for q in self.items for doc in {r["doc"] for r in q["quotes"]})
-        self.assertEqual(set(coverage), {f"webzine-{i}" for i in range(977, 996)})
+        self.assertEqual(set(coverage), {f"webzine-{i}" for i in range(977, 997)})
         for doc, count in coverage.items():
             self.assertGreaterEqual(count, 2, f"{doc} needs at least two sourced questions")
         page = (OUT / "coverage.md").read_text(encoding="utf-8")
         rows = re.findall(r"^\| (\d{3})호 \| (.+?) \| (\d+) \| (.+?) \|$", page, re.M)
-        self.assertEqual(len(rows), 19)
-        self.assertEqual({int(row[0]) for row in rows}, set(range(977, 996)))
+        self.assertEqual(len(rows), 20)
+        self.assertEqual({int(row[0]) for row in rows}, set(range(977, 997)))
         for issue, topics, count, links in rows:
             self.assertTrue(topics.strip())
             self.assertEqual(int(count), coverage[f"webzine-{issue}"])
@@ -95,7 +95,7 @@ class News2026ContentTests(unittest.TestCase):
         topic_counts = []
         high_counts = []
         for data in self.mocks:
-            self.assertEqual(len(data["questions"]), 31)
+            self.assertEqual(len(data["questions"]), 32)
             topics = Counter(q["topic"] for q in data["questions"])
             self.assertEqual(set(topics), set(self.bank["topics"]))
             topic_counts.append(topics)
@@ -106,7 +106,7 @@ class News2026ContentTests(unittest.TestCase):
             self.assertEqual(set(answers), set(range(1, 6)))
             self.assertLessEqual(max(answers.values()) - min(answers.values()), 1)
             ids = {q["id"] for q in data["questions"]}
-            self.assertEqual(len(ids), 31)
+            self.assertEqual(len(ids), 32)
             sets.append(ids)
             for q in data["questions"]:
                 original = bank_by_id[q["id"]]

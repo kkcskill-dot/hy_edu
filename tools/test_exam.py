@@ -30,9 +30,9 @@ class ExamSpaceTests(unittest.TestCase):
         groups = {g["key"]: g for g in self.catalog["groups"]}
         self.assertEqual([g["key"] for g in self.catalog["groups"]], ["textbook", "news", "hard"])
         self.assertEqual([m["id"] for m in groups["textbook"]["sets"]], [f"unit{n:02d}" for n in range(1, 8)])
-        self.assertEqual([m["id"] for m in groups["news"]["sets"]], [f"news{n}" for n in range(977, 996)])
+        self.assertEqual([m["id"] for m in groups["news"]["sets"]], [f"news{n}" for n in range(977, 997)])
         self.assertEqual([m["id"] for m in groups["hard"]["sets"]],
-                         [f"hard-unit{n:02d}" for n in range(1, 8)] + [f"hard-news{n}" for n in range(977, 996)])
+                         [f"hard-unit{n:02d}" for n in range(1, 8)] + [f"hard-news{n}" for n in range(977, 997)])
 
     def test_hard_items_verify_and_are_placed_once(self):
         found = hard_check.load()

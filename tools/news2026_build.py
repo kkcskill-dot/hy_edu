@@ -11,7 +11,8 @@ from ai2026_core import ITEMS as CORE
 from ai2026_expanded import ITEMS as EXPANDED
 from news2026_first_half import ITEMS as FIRST, COVERAGE as FIRST_COVERAGE
 from news2026_second_half import ITEMS as SECOND, COVERAGE as SECOND_COVERAGE
-from news2026_995 import ITEMS as LATEST, COVERAGE as LATEST_COVERAGE
+from news2026_995 import ITEMS as N995, COVERAGE as N995_COVERAGE
+from news2026_996 import ITEMS as N996, COVERAGE as N996_COVERAGE
 from kichul_build import load_sources
 from webzine_build import missing
 
@@ -31,13 +32,14 @@ TOPICS = {
 }
 FORMATS = ("옳은 설명", "틀린 설명", "명칭·기능", "사례 적용", "비교·연결", "복합 보기")
 OUT = Path("practice/news2026")
-ISSUES = range(977, 996)
+ISSUES = range(977, 997)
 ROUNDS = 4
+LATEST = N995 + N996
 ITEMS = CORE + EXPANDED + FIRST + SECOND + LATEST
-COVERAGE = FIRST_COVERAGE + SECOND_COVERAGE + LATEST_COVERAGE
-# 995호에서 더한 문항의 주제(각 1문항)
+COVERAGE = FIRST_COVERAGE + SECOND_COVERAGE + N995_COVERAGE + N996_COVERAGE
+# 995·996호에서 더한 문항의 주제
 EXTRA_TOPICS = Counter(q["topic"] for q in LATEST)
-HEADER = "<!-- tools/news2026_build.py에서 생성. 문항 수정: tools/ai2026_core.py · tools/ai2026_expanded.py · tools/news2026_first_half.py · tools/news2026_second_half.py · tools/news2026_995.py -->\n"
+HEADER = "<!-- tools/news2026_build.py에서 생성. 문항 수정: tools/ai2026_core.py · tools/ai2026_expanded.py · tools/news2026_first_half.py · tools/news2026_second_half.py · tools/news2026_995.py · tools/news2026_996.py -->\n"
 
 
 def verify(base, items):
@@ -76,7 +78,7 @@ def verify(base, items):
                 errors.append(f"{key}: e-book 근거 페이지 없음")
     expected = {k: (12 if k in ("prism", "aicc", "yaid") else 8 if k in ("clinical", "operations", "strategy") else 10) + EXTRA_TOPICS[k] for k in TOPICS}
     if Counter(q.get("topic") for q in items) != expected:
-        errors.append("주제별 문항 수: AI 핵심 3주제 각 12개, AI 확장 3주제 각 8개, 소식지 6주제 각 10개 + 995호 추가 문항 필요")
+        errors.append("주제별 문항 수: AI 핵심 3주제 각 12개, AI 확장 3주제 각 8개, 소식지 6주제 각 10개 + 995·996호 추가 문항 필요")
     if sum(q.get("difficulty") == "상" for q in items) < len(items) // 2:
         errors.append("상 난이도 문항이 절반 이상이어야 함")
     if set(q.get("format") for q in items) != set(FORMATS):

@@ -41,6 +41,7 @@ NEWS = {
     "hard_n986_988": ([f"n{i}" for i in range(986, 989)], 8, range(1, 100)),
     "hard_n989_991": ([f"n{i}" for i in range(989, 992)], 8, range(1, 100)),
     "hard_n992_995": ([f"n{i}" for i in range(992, 996)], 8, range(1, 100)),
+    "hard_n996": (["n996"], 8, range(1, 100)),
 }
 MODULES = {**TEXT, **NEWS}
 
