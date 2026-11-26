@@ -49,7 +49,7 @@ O/X 16문항
 
 ## 2026 소식지 · 977~996호
 
-### O/X (1122문항)
+### O/X (1136문항)
 
 <div class="mock-exam" data-src="quiz/w01.json" data-part="ox"></div>
 

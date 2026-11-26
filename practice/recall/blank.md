@@ -77,15 +77,15 @@
 
 ## 2026 소식지 · 977~996호
 
-### 직접 입력 · 핵심 기사 (480문항)
+### 직접 입력 · 핵심 기사 (486문항)
 
 <div class="mock-exam" data-src="quiz/w01.json" data-part="star"></div>
 
-### 직접 입력 · 일반 기사 (503문항)
+### 직접 입력 · 일반 기사 (511문항)
 
 <div class="mock-exam" data-src="quiz/w01.json" data-part="blank"></div>
 
-### 직접 입력 · 목록 (43문항)
+### 직접 입력 · 목록 (44문항)
 
 <div class="mock-exam" data-src="quiz/w01.json" data-part="list" data-type="blank"></div>
 
